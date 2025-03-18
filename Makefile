@@ -1,6 +1,6 @@
 # Build, package, test, and clean
 PROJECT=bordado
-CHECK_STYLE=src/$(PROJECT) doc
+CHECK_STYLE=src/$(PROJECT) doc test
 GITHUB_ACTIONS=.github/workflows
 
 .PHONY: build install test format check check-format check_style check-actions clean
