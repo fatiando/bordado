@@ -1,4 +1,4 @@
-# Bordado
+<h1 align="center">Bordado</h1>
 
 <h2 align="center">Create, manipulate, and split geographic coordinates</h2>
 
