@@ -1,6 +1,6 @@
 <h1 align="center">Bordado</h1>
 
-<h2 align="center">Create, manipulate, and split geographic coordinates</h2>
+<p align="center"><strong>Create, manipulate, and split geographic coordinates</strong></p>
 
 <p align="center">
 <a href="https://www.fatiando.org/bordado"><strong>Documentation</strong> (latest)</a> •
