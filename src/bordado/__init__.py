@@ -5,5 +5,10 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-Import functions/classes to make the public API.
+These are the functions and classes that make up the Bordado API.
 """
+
+from ._version import __version__
+
+# Append a leading "v" to the generated version by setuptools_scm
+__version__ = f"v{__version__}"
