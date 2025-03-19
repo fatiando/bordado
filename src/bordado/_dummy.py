@@ -12,4 +12,3 @@ Dummy module so tests don't fail.
 def dummy():
     """Calculate nothing."""
     return "bla"
-
