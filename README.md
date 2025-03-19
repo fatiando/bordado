@@ -20,7 +20,7 @@ project.
 <a href="https://pypi.python.org/pypi/bordado"><img src="http://img.shields.io/pypi/v/bordado.svg?style=flat-square" alt="Latest version on PyPI"></a>
 <a href="https://github.com/conda-forge/bordado-feedstock"><img src="https://img.shields.io/conda/vn/conda-forge/bordado.svg?style=flat-square" alt="Latest version on conda-forge"></a>
 <a href="https://pypi.python.org/pypi/bordado"><img src="https://img.shields.io/pypi/pyversions/bordado.svg?style=flat-square" alt="Compatible Python versions."></a>
-<a href="https://doi.org/10.5281/zenodo.15051756"><img src="https://img.shields.io/badge/doi-10.5281%2Fzenodo.15051756-blue?style=flat-square" alt="DOI used to cite bordado"></a>
+<a href="https://doi.org/10.5281/zenodo.15051755"><img src="https://img.shields.io/badge/doi-10.5281%2Fzenodo.15051755-blue?style=flat-square" alt="DOI used to cite bordado"></a>
 </p>
 
 ## About
