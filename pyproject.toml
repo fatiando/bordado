@@ -120,9 +120,8 @@ omit = [
     "**/_version.py",
     "**/__init__.py",
 ]
+# Needed to combine coverage data from multiple OSs on CI
+relative_files = true
 
 [tool.coverage.report]
 show_missing = true
-
-[tool.pytest.ini_options]
-addopts = "--cov-report=term-missing --cov=bordado --doctest-modules --verbose"
