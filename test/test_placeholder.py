@@ -12,4 +12,5 @@ import bordado
 
 
 def test_nothing():
+    """Docstring."""
     assert bordado.__name__ == "bordado"
