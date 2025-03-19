@@ -5,12 +5,11 @@
 # This code is part of the Fatiando a Terra project (https://www.fatiando.org)
 #
 """
-A placeholder file until we have tests.
+Dummy module so tests don't fail.
 """
 
-from bordado._dummy import dummy
 
+def dummy():
+    """Calculate nothing."""
+    return "bla"
 
-def test_nothing():
-    """Docstring."""
-    assert dummy() == "bla"
