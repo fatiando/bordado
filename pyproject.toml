@@ -123,6 +123,3 @@ omit = [
 
 [tool.coverage.report]
 show_missing = true
-
-[tool.pytest.ini_options]
-addopts = "--cov-report=term-missing --cov=bordado --doctest-modules --verbose"

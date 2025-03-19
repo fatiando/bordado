@@ -20,10 +20,10 @@ build:
 	python -m build .
 
 install:
-	python -m pip install --no-deps -e .
+	python -m pip install --no-deps --editable .
 
 test:
-	pytest test
+	pytest --cov-report=term-missing --cov=$(PROJECT) --doctest-modules --verbose test $(PROJECT)
 
 format:
 	ruff check --select I --fix $(CHECK_STYLE) # fix isort errors
