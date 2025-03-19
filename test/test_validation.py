@@ -7,13 +7,14 @@
 """
 Test the input and output validation functions.
 """
+
 import pytest
 
 from bordado._validation import check_region
 
 
 @pytest.mark.parametrize(
-    ["region", "message"],
+    ("region", "message"),
     [
         ([], "Invalid region .* Only 4 values"),
         ([1, 2, 3, 4, 5], "Invalid region .* Only 4 values"),
@@ -22,7 +23,7 @@ from bordado._validation import check_region
         ([2, 1, 3, 4], "Invalid region .* W <= E"),
         ([-1, -2, -4, -3], "Invalid region .* W <= E"),
         ([-2, -1, -2, -3], "Invalid region .* S <= N"),
-    ]
+    ],
 )
 def test_check_region_raises(region, message):
     """Make sure an exception is raised for bad regions."""
@@ -31,11 +32,11 @@ def test_check_region_raises(region, message):
 
 
 @pytest.mark.parametrize(
-    ["region"],
+    "region",
     [
-        ([1, 2, 3, 4],),
-        ([-2, -1, -5, -4],),
-    ]
+        [1, 2, 3, 4],
+        [-2, -1, -5, -4],
+    ],
 )
 def test_check_region_passes(region):
     """Check that valid regions don't cause exceptions."""
