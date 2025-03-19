@@ -178,7 +178,7 @@ jobs:
         run: python -m coverage combine
 
       - name: Make an HTML report
-        run: python -m coverage html
+        run: python -m coverage html --skip-empty
 
       - name: Report coverage on the job summary
         run: python -m coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
