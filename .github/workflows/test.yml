@@ -145,7 +145,7 @@ jobs:
   #
   # Inspired by: https://hynek.me/articles/ditch-codecov-python/
   coverage:
-    name: Combine & check coverage
+    name: check test coverage == 100%
     if: always()
     needs: test
     runs-on: ubuntu-latest
@@ -175,8 +175,9 @@ jobs:
       - name: Combine coverage
         run: |
           python -m coverage combine
-          # Make an HTML report for uploading in case of failure
-          python -m coverage html --skip-covered --skip-empty
+
+      - name: Make an HTML report
+        run: python -m coverage html
 
       - name: Report coverage on the job summary
         run: python -m coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
