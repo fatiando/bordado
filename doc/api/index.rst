@@ -7,3 +7,7 @@ List of functions and classes (API)
 
 .. currentmodule:: bordado
 
+.. autosummary::
+   :toctree: generated/
+
+   line_coordinates
