@@ -97,15 +97,14 @@ ignore = [
   "ISC001",   # Conflicts with formatter
   "PLR09",    # Too many <...>
   "PLR2004",  # Magic value used in comparison
-  "RET504",   # allow variable assignment only for return
-  "PT001",    # conventions for parenthesis on pytest.fixture
-  "D200",     # allow single line docstrings in their own line
+  "RET504",   # Allow variable assignment only for return
+  "PT001",    # Conventions for parenthesis on pytest.fixture
+  "D200",     # Allow single line docstrings in their own line
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # disable unused-imports errors on __init__.py
-"_kernels.py" = ["ARG001"]  # disable unused arguments in kernel files
-"bordado/tests/**" = [
+"test/**" = [
     "T20", # allow print statements in tests
     "D",   # ignore pydocstyle warnings in tests
 ]
