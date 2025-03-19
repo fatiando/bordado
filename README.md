@@ -19,16 +19,30 @@ project.
 <p align="center">
 <a href="https://pypi.python.org/pypi/bordado"><img src="http://img.shields.io/pypi/v/bordado.svg?style=flat-square" alt="Latest version on PyPI"></a>
 <a href="https://github.com/conda-forge/bordado-feedstock"><img src="https://img.shields.io/conda/vn/conda-forge/bordado.svg?style=flat-square" alt="Latest version on conda-forge"></a>
-<a href="https://codecov.io/gh/fatiando/bordado"><img src="https://img.shields.io/codecov/c/github/fatiando/bordado/main.svg?style=flat-square" alt="Test coverage status"></a>
 <a href="https://pypi.python.org/pypi/bordado"><img src="https://img.shields.io/pypi/pyversions/bordado.svg?style=flat-square" alt="Compatible Python versions."></a>
-<!-- <a href="https://doi.org/10.5281/zenodo.7851747"><img src="https://img.shields.io/badge/doi-10.5281%2Fzenodo.7851747-blue?style=flat-square" alt="DOI used to cite bordado"></a> -->
+<a href="https://doi.org/10.5281/zenodo.15051756"><img src="https://img.shields.io/badge/doi-10.5281%2Fzenodo.15051756-blue?style=flat-square" alt="DOI used to cite bordado"></a>
 </p>
 
 ## About
 
+**Bordado**  (Portuguese for "embroidery") is a Python package for creating,
+manipulating, and splitting geographic and Cartesian coordinates.
+It can generate coordinates at regular intervals by specifying the number of
+points or the spacing between points. Bordado takes care of adjusting the
+spacing to make sure it matches the specified domain/region. It also contains
+functions for splitting coordinates into spatial blocks and more.
+
+> Many of these functions used to be in
+> [Verde](https://www.fatiando.org/verde/) but were moved to Bordado to make
+> them more accessible without all of the extra dependencies that Verde
+> requires.
 
 ## Project goals
 
+* Generate regular point distributions in grids, profiles, lines, etc.
+* Provide functions for fast spatial blocking and coordinates manipulation.
+* Have minimal dependencies to make it easy to install and light to pick up for
+  other projects.
 
 ## Project status
 
