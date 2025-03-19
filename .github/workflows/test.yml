@@ -148,6 +148,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The GitHub token is preserved by default but this job doesn't need
+          # to be able to push to GitHub.
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
