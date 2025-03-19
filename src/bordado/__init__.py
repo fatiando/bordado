@@ -8,6 +8,7 @@
 These are the functions and classes that make up the Bordado API.
 """
 
+from ._line import line_coordinates
 from ._version import __version__
 
 # Append a leading "v" to the generated version by setuptools_scm
