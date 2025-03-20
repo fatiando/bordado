@@ -12,3 +12,4 @@ List of functions and classes (API)
 
    line_coordinates
    check_region
+   pad_region
