@@ -52,3 +52,52 @@ def check_region(region):
             f"in dimension(s): {'; '.join(bad_bounds)}"
         )
         raise ValueError(message)
+
+
+def pad_region(region, pad):
+    """
+    Extend the borders of a region by the given amount.
+
+    Parameters
+    ----------
+    region : list = [W, E, S, N, ...]
+        The boundaries of a given region in Cartesian or geographic
+        coordinates. Should have a lower and an upper boundary for each
+        dimension of the coordinate system.
+    pad : float or tuple = (pad_WE, pad_SN, ...)
+        The amount of padding to add to the region. If it's a single number,
+        add this to all boundaries of region equally. If it's a tuple of
+        numbers, then will add different padding to each dimension of the
+        region respectively. If a tuple, the number of elements should be half
+        of the number of elements in *region*.
+
+    Returns
+    -------
+    padded_region : tuple = (W, E, S, N, ...)
+        The padded region.
+
+    Examples
+    --------
+    >>> pad_region((0, 1, -5, -3), 1)
+    (-1, 2, -6, -2)
+    >>> pad_region((0, 1, -5, -3, 6, 7), 1)
+    (-1, 2, -6, -2, 5, 8)
+    >>> pad_region((0, 1, -5, -3), (2, 3))
+    (-2, 3, -8, 0)
+    >>> pad_region((0, 1, -5, -3, 6, 7), (2, 3, 1))
+    (-2, 3, -8, 0, 5, 8)
+
+    """
+    check_region(region)
+    ndims = len(region) // 2
+    if np.isscalar(pad):
+        pad = tuple(pad for _ in range(ndims))
+    if len(pad) != ndims:
+        message = (
+            f"Invalid padding '{pad}'. "
+            f"Should have {ndims} elements for region '{region}'."
+        )
+        raise ValueError(message)
+    region_pairs = np.reshape(region, (len(region) // 2, 2))
+    padded = [[lower - p, upper + p] for p, (lower, upper) in zip(pad, region_pairs)]
+    return tuple(np.ravel(padded).tolist())

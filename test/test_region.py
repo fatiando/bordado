@@ -10,7 +10,7 @@ Test the input and output validation functions.
 
 import pytest
 
-from bordado._region import check_region
+from bordado._region import check_region, pad_region
 
 
 @pytest.mark.parametrize(
@@ -25,7 +25,7 @@ from bordado._region import check_region
     ],
 )
 def test_check_region_raises(region, message):
-    """Make sure an exception is raised for bad regions."""
+    "Make sure an exception is raised for bad regions."
     with pytest.raises(ValueError, match=message):
         check_region(region)
 
@@ -40,5 +40,25 @@ def test_check_region_raises(region, message):
     ],
 )
 def test_check_region_passes(region):
-    """Check that valid regions don't cause exceptions."""
+    "Check that valid regions don't cause exceptions."
     check_region(region)
+
+
+@pytest.mark.parametrize(
+    ("region", "pad"),
+    [
+        ([1, 2, 3, 4], (1,)),
+        ([1, 2, 3, 4], (1, 2, 3)),
+        ([-2, -1, -5, -4, 0, 1], (1,)),
+        ([-2, -1, -5, -4, 0, 1], (1, 2)),
+        ([-2, -1, -5, -4, 0, 1], (1, 2, 3, 4)),
+        ([-2, -1, -5, -4, 0, 1, 10, 20], (1,)),
+        ([-2, -1, -5, -4, 0, 1, 10, 20], (1, 2)),
+        ([-2, -1, -5, -4, 0, 1, 10, 20], (1, 2, 3)),
+        ([-2, -1, -5, -4, 0, 1, 10, 20], (1, 2, 3, 4, 5)),
+    ],
+)
+def test_pad_region_fails(region, pad):
+    "Check if an exception is raised for invalid padding."
+    with pytest.raises(ValueError, match="Invalid padding"):
+        pad_region(region, pad)
