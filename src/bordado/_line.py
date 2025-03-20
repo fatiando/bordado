@@ -12,7 +12,7 @@ import numpy as np
 
 
 def line_coordinates(
-    start, stop, size=None, spacing=None, adjust="spacing", pixel_register=False
+    start, stop, *, size=None, spacing=None, adjust="spacing", pixel_register=False
 ):
     """
     Generate evenly spaced points between two values.
