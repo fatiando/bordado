@@ -15,6 +15,7 @@ Coordinate generation
 
    line_coordinates
    grid_coordinates
+   scatter_points
 
 Regions and bounding boxes
 --------------------------
@@ -22,6 +23,7 @@ Regions and bounding boxes
 .. autosummary::
    :toctree: generated/
 
+   inside
    get_region
    pad_region
    check_region

@@ -10,7 +10,7 @@ Test the input and output validation functions.
 
 import pytest
 
-from bordado._region import check_region, pad_region
+from bordado._region import check_region, inside, pad_region
 
 
 @pytest.mark.parametrize(
@@ -62,3 +62,20 @@ def test_pad_region_fails(region, pad):
     "Check if an exception is raised for invalid padding."
     with pytest.raises(ValueError, match="Invalid padding"):
         pad_region(region, pad)
+
+
+@pytest.mark.parametrize(
+    ("region", "coordinates"),
+    [
+        ([1, 2, 3, 4], ([1, 2],)),
+        ([1, 2, 3, 4], ([1, 2], [1, 2], [1, 2])),
+        ([-2, -1, -5, -4, 0, 1], ([1, 2],)),
+        ([-2, -1, -5, -4, 0, 1], ([1, 2], [1, 2])),
+        ([-2, -1, -5, -4, 0, 1], ([1, 2], [1, 2], [1, 2], [1, 2])),
+    ],
+)
+def test_inside_fails_len_coordinates(region, coordinates):
+    "Check if an exception is raised when there are too few coordinates"
+    match = f"Expected {len(region) // 2} .* got {len(coordinates)} .*"
+    with pytest.raises(ValueError, match=match):
+        inside(coordinates, region)

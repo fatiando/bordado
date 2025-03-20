@@ -15,21 +15,24 @@ from bordado._line import _spacing_to_size, line_coordinates
 
 
 @pytest.mark.parametrize(
-    ("spacing", "adjust", "expected_stop", "expected_size"),
+    ("spacing", "adjust", "expected_start", "expected_stop", "expected_size"),
     [
-        (2.5, "spacing", 0, 5),
-        (2, "spacing", 0, 6),
-        (2.6, "spacing", 0, 5),
-        (2.4, "spacing", 0, 5),
-        (2.6, "region", 0.4, 5),
-        (2.4, "region", -0.4, 5),
+        (2.5, "spacing", -10, 0, 5),
+        (2, "spacing", -10, 0, 6),
+        (2.6, "spacing", -10, 0, 5),
+        (2.4, "spacing", -10, 0, 5),
+        (2.6, "region", -10.2, 0.2, 5),
+        (2.4, "region", -9.8, -0.2, 5),
     ],
 )
-def test_spacing_to_size(spacing, adjust, expected_stop, expected_size):
+def test_spacing_to_size(spacing, adjust, expected_start, expected_stop, expected_size):
     "Check that correct size and stop are returned"
     start, stop = -10, 0
-    size, new_stop = _spacing_to_size(start, stop, spacing=spacing, adjust=adjust)
+    size, new_start, new_stop = _spacing_to_size(
+        start, stop, spacing=spacing, adjust=adjust
+    )
     npt.assert_allclose(size, expected_size)
+    npt.assert_allclose(new_start, expected_start)
     npt.assert_allclose(new_stop, expected_stop)
 
 
@@ -53,17 +56,20 @@ def test_line_coordinates_fails():
         line_coordinates(start, stop, size=size, spacing=spacing)
 
 
-def test_line_coordinates_spacing_larger_than_twice_interval():
+@pytest.mark.parametrize(
+    ("pixel_register", "adjust", "expected_coordinates"),
+    [
+        (False, "spacing", [0, 1]),
+        (True, "spacing", [0.5]),
+        (False, "region", [-1, 2]),
+        (True, "region", [0.5]),
+    ],
+)
+def test_line_coordinates_spacing_larger_than_twice_interval(
+    pixel_register, adjust, expected_coordinates
+):
     "Check if pixel_register works when the spacing is greater than the limits"
-    start, stop = 0, 1
-    spacing = 3
-    coordinates = line_coordinates(start, stop, spacing=spacing)
-    npt.assert_allclose(coordinates, [0, 1])
-    coordinates = line_coordinates(start, stop, spacing=spacing, pixel_register=True)
-    npt.assert_allclose(coordinates, [0.5])
-    coordinates = line_coordinates(start, stop, spacing=spacing, adjust="region")
-    npt.assert_allclose(coordinates, [0, 3])
     coordinates = line_coordinates(
-        start, stop, spacing=spacing, pixel_register=True, adjust="region"
+        0, 1, spacing=3, pixel_register=pixel_register, adjust=adjust
     )
-    npt.assert_allclose(coordinates, [1.5])
+    npt.assert_allclose(coordinates, expected_coordinates)

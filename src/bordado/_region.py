@@ -21,7 +21,7 @@ def check_region(region):
 
     Parameters
     ----------
-    region : list = [W, E, S, N, ...]
+    region : tuple = (W, E, S, N, ...)
         The boundaries of a given region in Cartesian or geographic
         coordinates. Should have a lower and an upper boundary for each
         dimension of the coordinate system.
@@ -60,7 +60,7 @@ def pad_region(region, pad):
 
     Parameters
     ----------
-    region : list = [W, E, S, N, ...]
+    region : tuple = (W, E, S, N, ...)
         The boundaries of a given region in Cartesian or geographic
         coordinates. Should have a lower and an upper boundary for each
         dimension of the coordinate system.
@@ -116,8 +116,8 @@ def get_region(coordinates):
     Returns
     -------
     region : tuple = (W, E, S, N, ...)
-        The boundaries of a given region in Cartesian or geographic
-        coordinates.
+        The boundaries that contain the coordinates. The order of lower and
+        upper boundaries returned follows the order of *coordinates*.
 
     Examples
     --------
@@ -129,3 +129,102 @@ def get_region(coordinates):
     """
     region = tuple(np.ravel([[np.min(c), np.max(c)] for c in coordinates]).tolist())
     return region
+
+
+def inside(coordinates, region):
+    """
+    Determine which points fall inside a given region.
+
+    Points at the boundaries are counted as being inside the region.
+
+    Parameters
+    ----------
+    coordinates : tuple of arrays
+        Arrays with the coordinates of each data point. Should be in an order
+        compatible with the order of boundaries in *region*.
+    region : tuple = (W, E, S, N, ...)
+        The boundaries of a given region in Cartesian or geographic
+        coordinates. Should have a lower and an upper boundary for each
+        dimension of the coordinate system.
+
+    Returns
+    -------
+    are_inside : array of booleans
+        An array of booleans with the same shape as the input coordinate
+        arrays. Will be ``True`` if the respective coordinates fall inside the
+        area, ``False`` otherwise.
+
+    Examples
+    --------
+    >>> east = [1, 2, 3, 4, 5, 6]
+    >>> north = [10, 11, 12, 13, 14, 15]
+    >>> region = (2.5, 5.5, 12, 15)
+    >>> print(inside((east, north), region))
+    [False False  True  True  True False]
+    >>> # This also works for 2D-arrays
+    >>> east = [[1, 2, 3],
+    ...         [1, 2, 3],
+    ...         [1, 2, 3]]
+    >>> north = [[5, 5, 5],
+    ...          [7, 7, 7],
+    ...          [9, 9, 9]]
+    >>> region = (0.5, 2.5, 7, 9)
+    >>> print(inside((east, north), region))
+    [[False False False]
+     [ True  True False]
+     [ True  True False]]
+    >>> # and 3D-arrays or higher dimensions
+    >>> east = [[[1, 2, 3],
+    ...          [1, 2, 3],
+    ...          [1, 2, 3]],
+    ...         [[1, 2, 3],
+    ...          [1, 2, 3],
+    ...          [1, 2, 3]]]
+    >>> north = [[[5, 5, 5],
+    ...           [7, 7, 7],
+    ...           [9, 9, 9]],
+    ...          [[5, 5, 5],
+    ...           [7, 7, 7],
+    ...           [9, 9, 9]]]
+    >>> up = [[[4, 4, 4],
+    ...        [4, 4, 4],
+    ...        [4, 4, 4]],
+    ...       [[6, 6, 6],
+    ...        [6, 6, 6],
+    ...        [6, 6, 6]]]
+    >>> region = (0.5, 2.5, 7, 9, 4.5, 7)
+    >>> print(inside((east, north, up), region))
+    [[[False False False]
+      [False False False]
+      [False False False]]
+    <BLANKLINE>
+     [[False False False]
+      [ True  True False]
+      [ True  True False]]]
+
+    """
+    check_region(region)
+    ndims = len(region) // 2
+    if len(coordinates) != ndims:
+        message = (
+            f"Invalid coordinates. Expected {ndims} coordinates for region '{region}' "
+            f"but got {len(coordinates)} instead."
+        )
+        raise ValueError(message)
+    coordinates = [np.asarray(c) for c in coordinates]
+    region_pairs = np.reshape(region, (ndims, 2))
+    shape = coordinates[0].shape
+    # Allocate temporary arrays to minimize memory allocation overhead
+    tmp = tuple(np.empty(shape, dtype=bool) for i in range(2))
+    are_inside = np.full(shape, True)
+    for coordinate, (lower, upper) in zip(coordinates, region_pairs):
+        # Using the logical functions is a lot faster than & > < for some reason.
+        # Plus, this way avoids repeated allocation of intermediate arrays by using
+        # the "out" argument.
+        in_dimension = np.logical_and(
+            np.greater_equal(coordinate, lower, out=tmp[0]),
+            np.less_equal(coordinate, upper, out=tmp[1]),
+            out=tmp[0],
+        )
+        are_inside = np.logical_and(are_inside, in_dimension, out=are_inside)
+    return are_inside
