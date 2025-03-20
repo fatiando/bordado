@@ -22,8 +22,9 @@ def line_coordinates(
     output will be similar to using :func:`numpy.linspace`. When using
     *spacing*, if the interval is not divisible by the desired spacing, either
     the interval or the spacing will have to be adjusted. By default, the
-    spacing will be rounded to the nearest multiple. Optionally, the *stop*
-    value can be adjusted to fit the exact spacing given.
+    spacing will be rounded to the nearest multiple. Optionally, the *start*
+    and *stop* values (the region) can be adjusted to fit the exact spacing
+    given.
 
     Parameters
     ----------
@@ -31,7 +32,7 @@ def line_coordinates(
         The starting value of the sequence.
     stop : float
         The end value of the sequence.
-    num : int or None
+    size : int or None
         The number of points in the sequence. If None, *spacing* must be
         provided.
     spacing : float or None
@@ -71,11 +72,11 @@ def line_coordinates(
     >>> print(line_coordinates(0, 10, spacing=2.4))
     [ 0.   2.5  5.   7.5 10. ]
     >>> print(line_coordinates(0, 10, spacing=2.4, adjust="region"))
-    [0.  2.4 4.8 7.2 9.6]
+    [0.2 2.6 5.  7.4 9.8]
     >>> print(line_coordinates(0, 10, spacing=2.6))
     [ 0.   2.5  5.   7.5 10. ]
     >>> print(line_coordinates(0, 10, spacing=2.6, adjust="region"))
-    [ 0.   2.6  5.2  7.8 10.4]
+    [-0.2  2.4  5.   7.6 10.2]
 
     Optionally, return values at the center of the intervals instead of their
     boundaries:
@@ -99,7 +100,7 @@ def line_coordinates(
         message = "Either a size or a spacing must be provided."
         raise ValueError(message)
     if spacing is not None:
-        size, stop = _spacing_to_size(start, stop, spacing, adjust)
+        size, start, stop = _spacing_to_size(start, stop, spacing, adjust)
     elif pixel_register and size is not None:
         # Starts by generating grid-line registered coordinates and shifting
         # them to the center of the pixel. Need 1 more point if given a size
@@ -134,6 +135,8 @@ def _spacing_to_size(start, stop, spacing, adjust):
     -------
     size : int
         The number of points between start and stop.
+    start : float
+        The end of the interval, which may or may not have been adjusted.
     stop : float
         The end of the interval, which may or may not have been adjusted.
 
@@ -157,5 +160,9 @@ def _spacing_to_size(start, stop, spacing, adjust):
     if adjust == "region":
         # The size is the same but we adjust the interval so that the spacing
         # isn't altered when we do the linspace.
-        stop = start + (size - 1) * spacing
-    return size, stop
+        required_length = (size - 1) * spacing
+        given_length = stop - start
+        pad = (required_length - given_length) / 2
+        stop = stop + pad
+        start = start - pad
+    return size, start, stop
