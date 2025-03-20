@@ -10,19 +10,18 @@ Test the input and output validation functions.
 
 import pytest
 
-from bordado._validation import check_region
+from bordado._region import check_region
 
 
 @pytest.mark.parametrize(
     ("region", "message"),
     [
-        ([], "Invalid region .* Only 4 values"),
-        ([1, 2, 3, 4, 5], "Invalid region .* Only 4 values"),
-        ([1, 2, 3], "Invalid region .* Only 4 values"),
-        ([1, 2, 3, 1], "Invalid region .* S <= N"),
-        ([2, 1, 3, 4], "Invalid region .* W <= E"),
-        ([-1, -2, -4, -3], "Invalid region .* W <= E"),
-        ([-2, -1, -2, -3], "Invalid region .* S <= N"),
+        ([], "Invalid region .* Must have an even"),
+        ([1, 2, 3, 4, 5], "Invalid region .* Must have an even"),
+        ([1, 2, 3], "Invalid region .* Must have an even"),
+        ([1, 2, 3, 1], r"Invalid region .*: 1 \(3 > 1\)"),
+        ([2, 1, 3, 4], r"Invalid region .*: 0 \(2 > 1\)"),
+        ([2, 1, 3, 4, 7, 6], r"Invalid region .*: 0 \(2 > 1\); 2 \(7 > 6\)"),
     ],
 )
 def test_check_region_raises(region, message):
@@ -36,6 +35,8 @@ def test_check_region_raises(region, message):
     [
         [1, 2, 3, 4],
         [-2, -1, -5, -4],
+        [-2, -1, -5, -4, 0, 1],
+        [-2, -1, -5, -4, 0, 1, 10, 20],
     ],
 )
 def test_check_region_passes(region):

@@ -1,0 +1,54 @@
+# Copyright (c) 2025 The Bordado Developers.
+# Distributed under the terms of the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# This code is part of the Fatiando a Terra project (https://www.fatiando.org)
+#
+"""
+Functions for dealing with regions and bounding boxes.
+"""
+
+import numpy as np
+
+
+def check_region(region):
+    """
+    Check that the given region is valid.
+
+    A region is a bounding box for n-dimensional coordinates. There should be
+    an even number of elements and lower boundaries should not be larger than
+    upper boundaries.
+
+    Parameters
+    ----------
+    region : list = [W, E, S, N, ...]
+        The boundaries of a given region in Cartesian or geographic
+        coordinates. Should have a lower and an upper boundary for each
+        dimension of the coordinate system.
+
+    Raises
+    ------
+    ValueError
+        If the region doesn't have even number of entries and any lower
+        boundary is larger than the upper boundary.
+
+    """
+    if not region or len(region) % 2 != 0:
+        message = (
+            f"Invalid region '{region}'. Must have an even number of elements, "
+            "a lower and an upper boundary for each dimension."
+        )
+        raise ValueError(message)
+    region_pairs = np.reshape(region, (len(region) // 2, 2))
+    offending = [lower > upper for lower, upper in region_pairs]
+    if any(offending):
+        bad_bounds = []
+        for dimension, is_bad in enumerate(offending):
+            if is_bad:
+                lower, upper = region_pairs[dimension]
+                bad_bounds.append(f"{dimension} ({lower} > {upper})")
+        message = (
+            f"Invalid region '{region}'. Lower boundary larger than upper boundary "
+            f"in dimension(s): {'; '.join(bad_bounds)}"
+        )
+        raise ValueError(message)
