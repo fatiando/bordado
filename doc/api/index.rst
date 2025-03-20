@@ -7,9 +7,20 @@ List of functions and classes (API)
 
 .. currentmodule:: bordado
 
+Coordinate generation
+---------------------
+
 .. autosummary::
    :toctree: generated/
 
    line_coordinates
-   check_region
+
+Regions and bounding boxes
+--------------------------
+
+.. autosummary::
+   :toctree: generated/
+
+   get_region
    pad_region
+   check_region

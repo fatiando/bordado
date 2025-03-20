@@ -101,3 +101,31 @@ def pad_region(region, pad):
     region_pairs = np.reshape(region, (len(region) // 2, 2))
     padded = [[lower - p, upper + p] for p, (lower, upper) in zip(pad, region_pairs)]
     return tuple(np.ravel(padded).tolist())
+
+
+def get_region(coordinates):
+    """
+    Get the bounding region of the given coordinates.
+
+    Parameters
+    ----------
+    coordinates : tuple of arrays
+        Arrays with the coordinates of each data point. Should be in the
+        following order: (easting, northing, vertical, ...).
+
+    Returns
+    -------
+    region : tuple = (W, E, S, N, ...)
+        The boundaries of a given region in Cartesian or geographic
+        coordinates.
+
+    Examples
+    --------
+    >>> get_region(([0, 0.5, 1], [-10, -8, -6]))
+    (0.0, 1.0, -10.0, -6.0)
+    >>> get_region(([0, 0.5, 1], [-10, -8, -6], [4, 10, 16]))
+    (0.0, 1.0, -10.0, -6.0, 4.0, 16.0)
+
+    """
+    region = tuple(np.ravel([[np.min(c), np.max(c)] for c in coordinates]).tolist())
+    return region
