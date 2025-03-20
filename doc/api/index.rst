@@ -21,6 +21,7 @@ Regions and bounding boxes
 .. autosummary::
    :toctree: generated/
 
+   inside
    get_region
    pad_region
    check_region
