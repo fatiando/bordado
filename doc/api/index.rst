@@ -11,3 +11,4 @@ List of functions and classes (API)
    :toctree: generated/
 
    line_coordinates
+   check_region

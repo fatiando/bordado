@@ -7,22 +7,24 @@
 """
 Functions for dealing with regions and bounding boxes.
 """
+
 import numpy as np
 
 
 def check_region(region):
     """
-    Check that the given region dimensions are valid.
+    Check that the given region is valid.
 
-    There should be an even number of elements and lower boundaries should not
-    be larger than upper boundaries.
+    A region is a bounding box for n-dimensional coordinates. There should be
+    an even number of elements and lower boundaries should not be larger than
+    upper boundaries.
 
     Parameters
     ----------
     region : list = [W, E, S, N, ...]
         The boundaries of a given region in Cartesian or geographic
-        coordinates. Can contain more than 4 boundaries if the coordinates have
-        more than 2 dimensions. Should have an even number of elements.
+        coordinates. Should have a lower and an upper boundary for each
+        dimension of the coordinate system.
 
     Raises
     ------
@@ -31,11 +33,22 @@ def check_region(region):
         boundary is larger than the upper boundary.
 
     """
-    if len(region) % 2 != 0:
+    if not region or len(region) % 2 != 0:
         message = (
-        f"Invalid region '{region}'. Must have an even number of elements."
+            f"Invalid region '{region}'. Must have an even number of elements, "
+            "a lower and an upper boundary for each dimension."
         )
         raise ValueError(message)
-    offending = [lower > upper for lower, upper in np.reshape(region,
-                                                              (len(region) //
-                                                               2, 2))]
+    region_pairs = np.reshape(region, (len(region) // 2, 2))
+    offending = [lower > upper for lower, upper in region_pairs]
+    if any(offending):
+        bad_bounds = []
+        for dimension, is_bad in enumerate(offending):
+            if is_bad:
+                lower, upper = region_pairs[dimension]
+                bad_bounds.append(f"{dimension} ({lower} > {upper})")
+        message = (
+            f"Invalid region '{region}'. Lower boundary larger than upper boundary "
+            f"in dimension(s): {'; '.join(bad_bounds)}"
+        )
+        raise ValueError(message)
