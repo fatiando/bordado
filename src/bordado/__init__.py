@@ -9,6 +9,7 @@ These are the functions and classes that make up the Bordado API.
 """
 
 from ._line import line_coordinates
+from ._random import scatter_points
 from ._region import check_region, get_region, inside, pad_region
 from ._version import __version__
 
