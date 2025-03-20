@@ -14,6 +14,7 @@ Coordinate generation
    :toctree: generated/
 
    line_coordinates
+   grid_coordinates
 
 Regions and bounding boxes
 --------------------------

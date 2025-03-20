@@ -8,6 +8,7 @@
 These are the functions and classes that make up the Bordado API.
 """
 
+from ._grid import grid_coordinates
 from ._line import line_coordinates
 from ._region import check_region, get_region, pad_region
 from ._version import __version__
