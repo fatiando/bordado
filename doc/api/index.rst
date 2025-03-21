@@ -16,7 +16,6 @@ Coordinate generation
    line_coordinates
    random_coordinates
    grid_coordinates
-   scatter_points
 
 Regions and bounding boxes
 --------------------------
