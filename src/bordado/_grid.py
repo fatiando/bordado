@@ -27,7 +27,7 @@ def grid_coordinates(
     Generate evenly spaced points on an n-dimensional grid.
 
     The grid can be specified by either the number of points in each dimension
-    (the *shape*) or by the grid node spacing in each dimension.
+    (the *shape*) or by the grid node *spacing* in each dimension.
 
     If the given region is not divisible by the desired spacing, either the
     region or the spacing will have to be adjusted. By default, the spacing
@@ -35,20 +35,29 @@ def grid_coordinates(
     region can be adjusted to fit the exact spacing given. See the examples
     below.
 
+    Supports laying out points on a grid-node registration or a pixel
+    registration. See examples below for more information.
+
     Parameters
     ----------
     region : list = [W, E, S, N, ...]
         The boundaries of a given region in Cartesian or geographic
         coordinates. Should have a lower and an upper boundary for each
         dimension of the coordinate system.
-    shape : tuple = (size_WE, size_SN, ...) or None
-        The number of points in each direction of the given region,
-        respectively. Must have one integer value per dimension of the region.
-    spacing : float, tuple = (space_WE, space_SN, ...), or None
-        The grid spacing in each direction of the given region, respectively.
-        A single value means that the spacing is equal in all directions. If
-        a tuple, must have one value per dimension of the region.
-    adjust : {'spacing', 'region'}
+    shape : tuple = (..., size_SN, size_WE) or None
+        The number of points in each direction of the given region, in reverse
+        order. Must have one integer value per dimension of the region. The
+        order of arguments is the opposite of the order of the region for
+        compatibility with numpy's ``.shape`` attribute. If None, *spacing*
+        must be provided. Default is None.
+    spacing : float, tuple = (..., space_SN, space_WE), or None
+        The grid spacing in each direction of the given region, in reverse
+        order. A single value means that the spacing is equal in all
+        directions. If a tuple, must have one value per dimension of the
+        region. The order of arguments is the opposite of the order of the
+        region for compatibility with *shape*. If None, *shape* must be
+        provided. Default is None.
+    adjust : str = "spacing" or "region"
         Whether to adjust the spacing or the region if the spacing is not
         a multiple of the region. Ignored if *shape* is given instead of
         *spacing*. Defaults to adjusting the spacing.

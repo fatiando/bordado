@@ -38,10 +38,10 @@ def line_coordinates(
     spacing : float or None
         The step size (interval) between points in the sequence. If None,
         *size* must be provided.
-    adjust : {'spacing', 'region'}
+    adjust : str = "spacing" or "region"
         Whether to adjust the spacing or the interval/region if required.
-        Ignored if *size* is given instead of *spacing*. Defaults to adjusting
-        the spacing.
+        Ignored if *size* is given instead of *spacing*. Default is
+        ``"spacing"``
     pixel_register : bool
         If True, the points will refer to the center of each interval (pixel)
         instead of the boundaries. In practice, this means that there will be
