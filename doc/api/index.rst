@@ -14,7 +14,7 @@ Coordinate generation
    :toctree: generated/
 
    line_coordinates
-   scatter_points
+   random_coordinates
 
 Regions and bounding boxes
 --------------------------
