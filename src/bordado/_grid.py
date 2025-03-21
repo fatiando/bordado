@@ -60,7 +60,7 @@ def grid_coordinates(
     adjust : str = "spacing" or "region"
         Whether to adjust the spacing or the region if the spacing is not
         a multiple of the region. Ignored if *shape* is given instead of
-        *spacing*. Defaults to adjusting the spacing.
+        *spacing*. Default is ``"spacing"``.
     pixel_register : bool
         If True, the coordinates will refer to the center of each grid pixel
         instead of the grid lines. In practice, this means that there will be
@@ -218,26 +218,26 @@ def grid_coordinates(
     >>> print(east.shape, north.shape)
     (3, 3) (3, 3)
     >>> print(east)
-    [[-5.  -2.4  0.2]
-     [-5.  -2.4  0.2]
-     [-5.  -2.4  0.2]]
+    [[-5.1 -2.5  0.1]
+     [-5.1 -2.5  0.1]
+     [-5.1 -2.5  0.1]]
     >>> print(north)
-    [[0.  0.  0. ]
-     [2.6 2.6 2.6]
-     [5.2 5.2 5.2]]
+    [[-0.1 -0.1 -0.1]
+     [ 2.5  2.5  2.5]
+     [ 5.1  5.1  5.1]]
     >>> east, north = grid_coordinates(
     ...     region=(-5, 0, 0, 5), spacing=2.4, adjust='region',
     ... )
     >>> print(east.shape, north.shape)
     (3, 3) (3, 3)
     >>> print(east)
-    [[-5.  -2.6 -0.2]
-     [-5.  -2.6 -0.2]
-     [-5.  -2.6 -0.2]]
+    [[-4.9 -2.5 -0.1]
+     [-4.9 -2.5 -0.1]
+     [-4.9 -2.5 -0.1]]
     >>> print(north)
-    [[0.  0.  0. ]
-     [2.4 2.4 2.4]
-     [4.8 4.8 4.8]]
+    [[0.1 0.1 0.1]
+     [2.5 2.5 2.5]
+     [4.9 4.9 4.9]]
 
     We can optionally generate coordinates for the center of each grid pixel
     instead of the corner (default):
