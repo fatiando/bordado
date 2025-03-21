@@ -10,6 +10,8 @@ Functions for dealing with regions and bounding boxes.
 
 import numpy as np
 
+from ._coordinates import check_coordinates
+
 
 def check_region(region):
     """
@@ -109,9 +111,10 @@ def get_region(coordinates):
 
     Parameters
     ----------
-    coordinates : tuple of arrays
-        Arrays with the coordinates of each data point. Should be in the
-        following order: (easting, northing, vertical, ...).
+    coordinates : tuple = (easting, northing, ...)
+        Tuple of arrays with the coordinates of each point. Arrays can be
+        Python lists. Arrays can be of any shape but must all have the same
+        shape.
 
     Returns
     -------
@@ -127,6 +130,7 @@ def get_region(coordinates):
     (0.0, 1.0, -10.0, -6.0, 4.0, 16.0)
 
     """
+    coordinates = check_coordinates(coordinates)
     region = tuple(np.ravel([[np.min(c), np.max(c)] for c in coordinates]).tolist())
     return region
 
@@ -139,9 +143,11 @@ def inside(coordinates, region):
 
     Parameters
     ----------
-    coordinates : tuple of arrays
-        Arrays with the coordinates of each data point. Should be in an order
-        compatible with the order of boundaries in *region*.
+    coordinates : tuple = (easting, northing, ...)
+        Tuple of arrays with the coordinates of each point. Should be in an
+        order compatible with the order of boundaries in *region*. Arrays can
+        be Python lists. Arrays can be of any shape but must all have the same
+        shape.
     region : tuple = (W, E, S, N, ...)
         The boundaries of a given region in Cartesian or geographic
         coordinates. Should have a lower and an upper boundary for each
@@ -204,6 +210,7 @@ def inside(coordinates, region):
 
     """
     check_region(region)
+    coordinates = check_coordinates(coordinates)
     ndims = len(region) // 2
     if len(coordinates) != ndims:
         message = (
@@ -211,7 +218,6 @@ def inside(coordinates, region):
             f"but got {len(coordinates)} instead."
         )
         raise ValueError(message)
-    coordinates = [np.asarray(c) for c in coordinates]
     region_pairs = np.reshape(region, (ndims, 2))
     shape = coordinates[0].shape
     # Allocate temporary arrays to minimize memory allocation overhead

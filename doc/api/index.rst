@@ -27,3 +27,11 @@ Regions and bounding boxes
    get_region
    pad_region
    check_region
+
+Coordinate manipulation
+-----------------------
+
+.. autosummary::
+   :toctree: generated/
+
+   check_coordinates
