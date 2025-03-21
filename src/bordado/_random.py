@@ -13,39 +13,41 @@ import numpy as np
 from ._region import check_region
 
 
-def get_rng(random_state):
+def get_rng(rng):
     """
-    Produce a random number generator based on the random state given.
+    Produce a random number generator (RNG) based on the random state given.
 
     Parameters
     ----------
-    random_state : numpy.random.Generator or int
-        A random number generator used to generate the coordinates. If an
-        integer, will be used as a seed for :func:`numpy.random.default_rng`.
-        Use a seed to make sure computations are reproducible. If
-        a :class:`numpy.random.Generator` is given, it will be used. Use
-        ``None`` to use :func:`~numpy.random.default_rng` with no seed
-        (resulting in different numbers with each run).
+    rng : numpy.random.Generator or int
+        A random number generator (RNG) used to generate the coordinates. If an
+        integer is given, it will be used as a seed for
+        :func:`numpy.random.default_rng` which will then be used as the
+        generator. If a :class:`numpy.random.Generator` is given, it will be
+        used. If ``None`` is given, :func:`~numpy.random.default_rng` will be
+        used with no seed to create a generator (resulting in different numbers
+        with each run). Use a seed to make sure computations are reproducible.
 
     Returns
     -------
-    random : numpy.random.Generator
+    rng : numpy.random.Generator
         The random number generator.
     """
-    if random_state is None:
+    if rng is None:
         random = np.random.default_rng()
-    elif isinstance(random_state, int):
-        random = np.random.default_rng(random_state)
+    elif isinstance(rng, int):
+        random = np.random.default_rng(rng)
     else:
-        random = random_state
+        random = rng
     return random
 
 
-def scatter_points(region, size, *, random_state=None, non_dimensional_coords=None):
+def random_coordinates(region, size, *, rng=None, non_dimensional_coords=None):
     """
-    Generate the coordinates for a random scatter of points.
+    Generate the coordinates for a uniformly random scatter of points.
 
-    The points are drawn from a uniform distribution.
+    The points are drawn from a uniform distribution, independently for each
+    dimension of the given region.
 
     Parameters
     ----------
@@ -55,13 +57,15 @@ def scatter_points(region, size, *, random_state=None, non_dimensional_coords=No
         dimension of the coordinate system.
     size : int
         The number of points to generate.
-    random_state : numpy.random.Generator or int
-        A random number generator used to generate the coordinates. If an
-        integer, will be used as a seed for :func:`numpy.random.default_rng`.
-        Use a seed to make sure computations are reproducible. If
-        a :class:`numpy.random.Generator` is given, it will be used. Use
-        ``None`` to use :func:`~numpy.random.default_rng` with no seed
-        (resulting in different numbers with each run). Default is None.
+    rng : numpy.random.Generator or int
+        A random number generator (RNG) used to generate the coordinates. If an
+        integer is given, it will be used as a seed for
+        :func:`numpy.random.default_rng` which will then be used as the
+        generator. If a :class:`numpy.random.Generator` is given, it will be
+        used. If ``None`` is given, :func:`~numpy.random.default_rng` will be
+        used with no seed to create a generator (resulting in different numbers
+        with each run). Use a seed to make sure computations are reproducible.
+        Default is None.
     non_dimensional_coords : None, scalar, or tuple of scalars
         If not None, then value(s) of extra non-dimensional coordinates
         (coordinates that aren't part of the sample dimensions, like height for
@@ -83,18 +87,18 @@ def scatter_points(region, size, *, random_state=None, non_dimensional_coords=No
     We'll use a seed value to ensure that the same will be generated every
     time:
 
-    >>> easting, northing = scatter_points((0, 10, -2, -1), 4, random_state=0)
+    >>> easting, northing = random_coordinates((0, 10, -2, -1), 4, rng=0)
     >>> print(', '.join(['{:.4f}'.format(i) for i in easting]))
     6.3696, 2.6979, 0.4097, 0.1653
     >>> print(', '.join(['{:.4f}'.format(i) for i in northing]))
     -1.1867, -1.0872, -1.3934, -1.2705
-    >>> easting, northing, height = scatter_points(
-    ...     (0, 10, -2, -1), 4, random_state=0, non_dimensional_coords=12
+    >>> easting, northing, height = random_coordinates(
+    ...     (0, 10, -2, -1), 4, rng=0, non_dimensional_coords=12
     ... )
     >>> print(height)
     [12. 12. 12. 12.]
-    >>> easting, northing, height, time = scatter_points(
-    ...     (0, 10, -2, -1), 4, random_state=0, non_dimensional_coords=[12, 1986])
+    >>> easting, northing, height, time = random_coordinates(
+    ...     (0, 10, -2, -1), 4, rng=0, non_dimensional_coords=[12, 1986])
     >>> print(height)
     [12. 12. 12. 12.]
     >>> print(time)
@@ -102,8 +106,8 @@ def scatter_points(region, size, *, random_state=None, non_dimensional_coords=No
 
     We're not limited to 2 dimensions:
 
-    >>> easting, northing, up = scatter_points(
-    ...     (0, 10, -2, -1, 0.1, 0.2), 4, random_state=0,
+    >>> easting, northing, up = random_coordinates(
+    ...     (0, 10, -2, -1, 0.1, 0.2), 4, rng=0,
     ... )
     >>> print(', '.join(['{:.4f}'.format(i) for i in easting]))
     6.3696, 2.6979, 0.4097, 0.1653
@@ -114,7 +118,7 @@ def scatter_points(region, size, *, random_state=None, non_dimensional_coords=No
 
     """
     check_region(region)
-    random = get_rng(random_state)
+    random = get_rng(rng)
     coordinates = []
     for lower, upper in np.reshape(region, (len(region) // 2, 2)):
         coordinates.append(random.uniform(lower, upper, size))
