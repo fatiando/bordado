@@ -141,12 +141,7 @@ def _spacing_to_size(start, stop, spacing, adjust):
         The end of the interval, which may or may not have been adjusted.
 
     """
-    if adjust not in ["spacing", "region"]:
-        message = (
-            f"Invalid value for 'adjust' argument '{adjust}'. "
-            "Should be 'spacing' or 'region'"
-        )
-        raise ValueError(message)
+    check_adjust(adjust)
     # Add 1 to get the number of nodes, not segments
     size = int(round((stop - start) / spacing) + 1)
     # If the spacing >= 2 * (stop - start), it rounds to zero so we'd be
@@ -166,3 +161,26 @@ def _spacing_to_size(start, stop, spacing, adjust):
         stop = stop + pad
         start = start - pad
     return size, start, stop
+
+
+def check_adjust(adjust, valid=("spacing", "region")):
+    """
+    Check if the adjust argument is valid.
+
+    Parameters
+    ----------
+    adjust : str
+        The value of the adjust argument given to a function.
+    valid : list or tuple
+        The list of valid values for the argument.
+
+    Raises
+    ------
+    ValueError
+        In case the argument is not in the list of valid values.
+    """
+    if adjust not in valid:
+        message = (
+            f"Invalid value for 'adjust' argument '{adjust}'. Should be one of {valid}."
+        )
+        raise ValueError(message)

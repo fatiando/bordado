@@ -1,11 +1,25 @@
+# Copyright (c) 2025 The Bordado Developers.
+# Distributed under the terms of the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# This code is part of the Fatiando a Terra project (https://www.fatiando.org)
+#
 """
 Functions to split points into blocks and windows.
 """
+
 import numpy as np
 from scipy.spatial import KDTree
 
+from ._coordinates import check_coordinates
+from ._grid import grid_coordinates
+from ._line import check_adjust
+from ._region import check_region, get_region
 
-def block_split(coordinates, *, block_shape=None, block_size=None, adjust="spacing", region=None):
+
+def block_split(
+    coordinates, *, region=None, block_shape=None, block_size=None, adjust="block_size"
+):
     """
     Split a region into blocks and label points according to where they fall.
 
@@ -21,41 +35,52 @@ def block_split(coordinates, *, block_shape=None, block_size=None, adjust="spaci
     coordinates : tuple = (easting, northing, ...)
         Tuple of arrays with the coordinates of each point. The arrays can be
         n-dimensional.
-    shape : tuple = (..., n_north, n_east) or None
-        The number of blocks in the South-North and West-East directions,
-        respectively.
-    spacing : float, tuple = (..., space_north, space_east), or None
-        The block size in the South-North and West-East directions,
-        respectively. A single value means that the size is equal in both
-        directions.
-    adjust : {'spacing', 'region'}
-        Whether to adjust the spacing or the region if required. Ignored if
-        *shape* is given instead of *spacing*. Defaults to adjusting the
-        spacing.
-    region : list = [W, E, S, N]
+    region : tuple = (W, E, S, N, ...)
         The boundaries of a given region in Cartesian or geographic
         coordinates. If not region is given, will use the bounding region of
-        the given points.
+        the given coordinates.
+    block_shape : tuple = (..., n_north, n_east) or None
+        The number of blocks in each direction, in reverse order. Must have one
+        integer value per coordinate dimension. The order of arguments is the
+        opposite of the order of the region for compatibility with numpy's
+        ``.shape`` attribute. If None, *block_size* must be provided. Default
+        is None.
+    block_size : float, tuple = (..., size_north, size_east), or None
+        The block size in each direction, in reverse order. A single value
+        means that the block size is equal in all directions. If a tuple, must
+        have one value per dimension of the coordinates. The order of arguments
+        is the opposite of the order of the coordinates for compatibility with
+        *block_shape*. If None, *block_shape* must be provided. Default is
+        None.
+    adjust : str = "block_size" or "region"
+        Whether to adjust the block size or the region, if required. Adjusting
+        the size or region is required when the block size is not a multiple of
+        the region. Ignored if *block_shape* is given instead of *block_size*.
+        Defaults to adjusting the block size.
 
     Returns
     -------
-    block_coordinates : tuple of arrays
-        (easting, northing) arrays with the coordinates of the center of each
-        block.
+    block_coordinates : tuple = (easting, northing, ...)
+        ND arrays with the coordinates of the center of each block.
     labels : array
+        Array with the same shape as the block coordinates. Contains the
         integer label for each data point. The label is the index of the block
         to which that point belongs.
 
     Examples
     --------
-    >>> from verde import grid_coordinates
-    >>> coords = grid_coordinates((-5, 0, 5, 10), spacing=1)
-    >>> block_coords, labels = block_split(coords, spacing=2.5)
-    >>> for coord in block_coords:
-    ...     print(', '.join(['{:.2f}'.format(i) for i in coord]))
-    -3.75, -1.25, -3.75, -1.25
-    6.25, 6.25, 8.75, 8.75
-    >>> print(labels.reshape(coords[0].shape))
+    >>> import bordado as bd
+    >>> coordinates = bd.grid_coordinates((-5, 0, 5, 10), spacing=1)
+    >>> block_coords, labels = block_split(coordinates, block_size=2.5)
+    >>> print(len(block_coords))
+    2
+    >>> print(block_coords[0])
+    [[-3.75 -1.25]
+     [-3.75 -1.25]]
+    >>> print(block_coords[1])
+    [[6.25 6.25]
+     [8.75 8.75]]
+    >>> print(labels)
     [[0 0 0 1 1 1]
      [0 0 0 1 1 1]
      [0 0 0 1 1 1]
@@ -63,12 +88,20 @@ def block_split(coordinates, *, block_shape=None, block_size=None, adjust="spaci
      [2 2 2 3 3 3]
      [2 2 2 3 3 3]]
     >>> # Use the shape instead of the block size
-    >>> block_coords, labels = block_split(coords, shape=(4, 2))
-    >>> for coord in block_coords:
-    ...     print(', '.join(['{:.3f}'.format(i) for i in coord]))
-    -3.750, -1.250, -3.750, -1.250, -3.750, -1.250, -3.750, -1.250
-    5.625, 5.625, 6.875, 6.875, 8.125, 8.125, 9.375, 9.375
-    >>> print(labels.reshape(coords[0].shape))
+    >>> block_coords, labels = block_split(coordinates, block_shape=(4, 2))
+    >>> print(len(block_coords))
+    2
+    >>> print(block_coords[0])
+    [[-3.75 -1.25]
+     [-3.75 -1.25]
+     [-3.75 -1.25]
+     [-3.75 -1.25]]
+    >>> print(block_coords[1])
+    [[5.625 5.625]
+     [6.875 6.875]
+     [8.125 8.125]
+     [9.375 9.375]]
+    >>> print(labels)
     [[0 0 0 1 1 1]
      [0 0 0 1 1 1]
      [2 2 2 3 3 3]
@@ -77,19 +110,20 @@ def block_split(coordinates, *, block_shape=None, block_size=None, adjust="spaci
      [6 6 6 7 7 7]]
 
     """
-    # Select the coordinates after checking to make sure indexing will still
-    # work on the ignored coordinates.
-    coordinates = check_coordinates(coordinates)[:2]
+    coordinates = check_coordinates(coordinates)
+    adjust_translation = {"block_size": "spacing", "region": "region"}
+    check_adjust(adjust, valid=adjust_translation.keys())
     if region is None:
         region = get_region(coordinates)
-    block_coords = grid_coordinates(
-        region, spacing=spacing, shape=shape, adjust=adjust, pixel_register=True
+    else:
+        check_region(region)
+    block_coordinates = grid_coordinates(
+        region,
+        spacing=block_size,
+        shape=block_shape,
+        adjust=adjust_translation[adjust],
+        pixel_register=True,
     )
-
-    points = np.transpose(n_1d_arrays(coordinates, len(coordinates)))
-    tree = cKDTree(points, **kwargs)
-
-    tree = kdtree(block_coords)
-
-    labels = tree.query(np.transpose(n_1d_arrays(coordinates, 2)))[1]
-    return n_1d_arrays(block_coords, len(block_coords)), labels
+    tree = KDTree(np.transpose([c.ravel() for c in block_coordinates]))
+    labels = tree.query(np.transpose([c.ravel() for c in coordinates]))[1]
+    return block_coordinates, labels.reshape(coordinates[0].shape)
