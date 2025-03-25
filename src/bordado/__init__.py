@@ -14,6 +14,7 @@ from ._line import line_coordinates
 from ._random import random_coordinates
 from ._region import check_region, get_region, inside, pad_region
 from ._version import __version__
+from ._split import block_split
 
 # Append a leading "v" to the generated version by setuptools_scm
 __version__ = f"v{__version__}"

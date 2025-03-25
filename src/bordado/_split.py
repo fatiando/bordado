@@ -25,10 +25,11 @@ def block_split(
 
     The labels are integers corresponding to the index of the block. Also
     returns the coordinates of the center of each block (following the same
-    index as the labels).
+    index as the labels). Blocks can be specified by their size or the number
+    of blocks in each dimension (the shape).
 
-    Blocks can be specified by their size or the number of blocks in each
-    dimension (the shape).
+    Uses :class:`scipy.spatial.KDTree` to nearest neighbor lookup during the
+    splitting process.
 
     Parameters
     ----------
@@ -69,9 +70,34 @@ def block_split(
 
     Examples
     --------
+    Let's make some points along a 2D grid to try splitting (the points don't
+    have to be on a grid but this makes it easier to explain):
+
     >>> import bordado as bd
     >>> coordinates = bd.grid_coordinates((-5, 0, 5, 10), spacing=1)
+    >>> print(coordinates[0].shape)
+    (6, 6)
+    >>> print(coordinates[0])
+    [[-5. -4. -3. -2. -1.  0.]
+     [-5. -4. -3. -2. -1.  0.]
+     [-5. -4. -3. -2. -1.  0.]
+     [-5. -4. -3. -2. -1.  0.]
+     [-5. -4. -3. -2. -1.  0.]
+     [-5. -4. -3. -2. -1.  0.]]
+    >>> print(coordinates[1])
+    [[ 5.  5.  5.  5.  5.  5.]
+     [ 6.  6.  6.  6.  6.  6.]
+     [ 7.  7.  7.  7.  7.  7.]
+     [ 8.  8.  8.  8.  8.  8.]
+     [ 9.  9.  9.  9.  9.  9.]
+     [10. 10. 10. 10. 10. 10.]]
+
+    We can split into blocks by specifying the block size:
+
     >>> block_coords, labels = block_split(coordinates, block_size=2.5)
+
+    The first argument is a tuple of coordinates for the center of each block:
+
     >>> print(len(block_coords))
     2
     >>> print(block_coords[0])
@@ -80,6 +106,10 @@ def block_split(
     >>> print(block_coords[1])
     [[6.25 6.25]
      [8.75 8.75]]
+
+    The labels are an array of the same shape as the coordinates and has the
+    index of the block each point belongs to:
+
     >>> print(labels)
     [[0 0 0 1 1 1]
      [0 0 0 1 1 1]
@@ -87,7 +117,19 @@ def block_split(
      [2 2 2 3 3 3]
      [2 2 2 3 3 3]
      [2 2 2 3 3 3]]
-    >>> # Use the shape instead of the block size
+
+    Use this to index the coordinates, for example to get all points that fall
+    inside the first block:
+
+    >>> block_0 = [c[labels == 0] for c in coordinates]
+    >>> print(block_0[0])
+    [-5. -4. -3. -5. -4. -3. -5. -4. -3.]
+    >>> print(block_0[1])
+    [5. 5. 5. 6. 6. 6. 7. 7. 7.]
+
+    You can also specify the number of blocks along each direction instead of
+    their size:
+
     >>> block_coords, labels = block_split(coordinates, block_shape=(4, 2))
     >>> print(len(block_coords))
     2
@@ -108,6 +150,94 @@ def block_split(
      [4 4 4 5 5 5]
      [6 6 6 7 7 7]
      [6 6 6 7 7 7]]
+
+    By default, the region (bounding box of the points) will be derived from
+    the coordinates. You can also specify a custom region for the splitting if
+    desired:
+
+    >>> block_coords, labels = block_split(
+    ...     coordinates, block_size=2, region=(-5.5, 0.5, 4.5, 10.5),
+    ... )
+    >>> print(block_coords[0])
+    [[-4.5 -2.5 -0.5]
+     [-4.5 -2.5 -0.5]
+     [-4.5 -2.5 -0.5]]
+    >>> print(block_coords[1])
+    [[5.5 5.5 5.5]
+     [7.5 7.5 7.5]
+     [9.5 9.5 9.5]]
+    >>> print(labels)
+    [[0 0 1 1 2 2]
+     [0 0 1 1 2 2]
+     [3 3 4 4 5 5]
+     [3 3 4 4 5 5]
+     [6 6 7 7 8 8]
+     [6 6 7 7 8 8]]
+
+    Coordinates can be more than 2-dimensional as well:
+
+    >>> coordinates = bd.grid_coordinates((-5, 0, 5, 10, 1, 2), spacing=1)
+    >>> print(coordinates[0].shape)
+    (2, 6, 6)
+    >>> print(coordinates[0])
+    [[[-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]]
+    <BLANKLINE>
+     [[-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]]]
+    >>> print(coordinates[1])
+    [[[ 5.  5.  5.  5.  5.  5.]
+      [ 6.  6.  6.  6.  6.  6.]
+      [ 7.  7.  7.  7.  7.  7.]
+      [ 8.  8.  8.  8.  8.  8.]
+      [ 9.  9.  9.  9.  9.  9.]
+      [10. 10. 10. 10. 10. 10.]]
+    <BLANKLINE>
+     [[ 5.  5.  5.  5.  5.  5.]
+      [ 6.  6.  6.  6.  6.  6.]
+      [ 7.  7.  7.  7.  7.  7.]
+      [ 8.  8.  8.  8.  8.  8.]
+      [ 9.  9.  9.  9.  9.  9.]
+      [10. 10. 10. 10. 10. 10.]]]
+    >>> print(coordinates[2])
+    [[[1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]]
+    <BLANKLINE>
+     [[2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]]]
+    >>> block_coords, labels = block_split(
+    ...     coordinates, block_size=2.5, adjust="region",
+    ... )
+    >>> print(labels)
+    [[[0 0 0 1 1 1]
+      [0 0 0 1 1 1]
+      [0 0 0 1 1 1]
+      [2 2 2 3 3 3]
+      [2 2 2 3 3 3]
+      [2 2 2 3 3 3]]
+    <BLANKLINE>
+     [[0 0 0 1 1 1]
+      [0 0 0 1 1 1]
+      [0 0 0 1 1 1]
+      [2 2 2 3 3 3]
+      [2 2 2 3 3 3]
+      [2 2 2 3 3 3]]]
 
     """
     coordinates = check_coordinates(coordinates)
