@@ -28,6 +28,14 @@ Regions and bounding boxes
    pad_region
    check_region
 
+Splitting points into blocks and windows
+----------------------------------------
+
+.. autosummary::
+   :toctree: generated/
+
+   block_split
+
 Coordinate manipulation
 -----------------------
 
