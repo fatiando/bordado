@@ -19,9 +19,11 @@ functions for splitting coordinates into spatial blocks and more.
 
 .. seealso::
 
-   Many of these functions used to be in `Verde
-   <https://www.fatiando.org/verde/>`__ but were moved to Bordado to make them
-   more accessible without all of the extra dependencies that Verde requires.
+   Many of the functions here used to be in
+   `Verde <https://www.fatiando.org/verde/>`__. They were moved to Bordado to
+   make them more accessible without all of the extra dependencies that Verde
+   requires. We have also improved and expanded most of the functions ported
+   from Verde.
 
 .. grid:: 1 2 1 2
     :margin: 5 5 0 0
