@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>bordado._grid | Bordado dev</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12168cd1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/bordado/_grid';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bordado <span class="project-version">dev</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.inside.html">bordado.inside</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_region.html">bordado.get_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.check_region.html">bordado.check_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.check_coordinates.html">bordado.check_coordinates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2F_modules/bordado/_grid.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for bordado._grid</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2025 The Bordado Developers.</span>
+<span class="c1"># Distributed under the terms of the BSD 3-Clause License.</span>
+<span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
+<span class="c1">#</span>
+<span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Generate coordinates for regular n-dimensional grids.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._line</span><span class="w"> </span><span class="kn">import</span> <span class="n">line_coordinates</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._region</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_region</span>
+
+
+<div class="viewcode-block" id="grid_coordinates">
+<a class="viewcode-back" href="../../api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">grid_coordinates</span><span class="p">(</span>
+    <span class="n">region</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">spacing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;spacing&quot;</span><span class="p">,</span>
+    <span class="n">pixel_register</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate evenly spaced points on an n-dimensional grid.</span>
+
+<span class="sd">    The grid can be specified by either the number of points in each dimension</span>
+<span class="sd">    (the *shape*) or by the grid node *spacing* in each dimension.</span>
+
+<span class="sd">    If the given region is not divisible by the desired spacing, either the</span>
+<span class="sd">    region or the spacing will have to be adjusted. By default, the spacing</span>
+<span class="sd">    will be rounded to the nearest multiple. Optionally, the boundaries of the</span>
+<span class="sd">    region can be adjusted to fit the exact spacing given. See the examples</span>
+<span class="sd">    below.</span>
+
+<span class="sd">    Supports laying out points on a grid-node registration or a pixel</span>
+<span class="sd">    registration. See examples below for more information.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    region : list = [W, E, S, N, ...]</span>
+<span class="sd">        The boundaries of a given region in Cartesian or geographic</span>
+<span class="sd">        coordinates. Should have a lower and an upper boundary for each</span>
+<span class="sd">        dimension of the coordinate system.</span>
+<span class="sd">    shape : tuple = (..., size_SN, size_WE) or None</span>
+<span class="sd">        The number of points in each direction of the given region, in reverse</span>
+<span class="sd">        order. Must have one integer value per dimension of the region. The</span>
+<span class="sd">        order of arguments is the opposite of the order of the region for</span>
+<span class="sd">        compatibility with numpy&#39;s ``.shape`` attribute. If None, *spacing*</span>
+<span class="sd">        must be provided. Default is None.</span>
+<span class="sd">    spacing : float, tuple = (..., space_SN, space_WE), or None</span>
+<span class="sd">        The grid spacing in each direction of the given region, in reverse</span>
+<span class="sd">        order. A single value means that the spacing is equal in all</span>
+<span class="sd">        directions. If a tuple, must have one value per dimension of the</span>
+<span class="sd">        region. The order of arguments is the opposite of the order of the</span>
+<span class="sd">        region for compatibility with *shape*. If None, *shape* must be</span>
+<span class="sd">        provided. Default is None.</span>
+<span class="sd">    adjust : str = &quot;spacing&quot; or &quot;region&quot;</span>
+<span class="sd">        Whether to adjust the spacing or the region if the spacing is not</span>
+<span class="sd">        a multiple of the region. Ignored if *shape* is given instead of</span>
+<span class="sd">        *spacing*. Default is ``&quot;spacing&quot;``.</span>
+<span class="sd">    pixel_register : bool</span>
+<span class="sd">        If True, the coordinates will refer to the center of each grid pixel</span>
+<span class="sd">        instead of the grid lines. In practice, this means that there will be</span>
+<span class="sd">        one less element per dimension of the grid when compared to grid line</span>
+<span class="sd">        registered (only if given *spacing* and not *shape*). Default is False.</span>
+<span class="sd">    non_dimensional_coords : None, scalar, or tuple of scalars</span>
+<span class="sd">        If not None, then value(s) of extra non-dimensional coordinates</span>
+<span class="sd">        (coordinates that aren&#39;t part of the grid dimensions, like height for</span>
+<span class="sd">        a lat/lon grid). Will generate extra coordinate arrays from these</span>
+<span class="sd">        values with the same shape of the final grid coordinates and the</span>
+<span class="sd">        constant value given here. Use this to generate arrays of constant</span>
+<span class="sd">        heights or times, for example, which might be needed to accompany</span>
+<span class="sd">        a grid.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    coordinates : tuple of arrays</span>
+<span class="sd">        Arrays with coordinates of each point in the grid. Each array contains</span>
+<span class="sd">        values for a dimension in the order of the given region, and any extra</span>
+<span class="sd">        values given in *non_dimensional_coords*. All arrays will have the same</span>
+<span class="sd">        shape.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(region=(0, 5, 0, 10), shape=(5, 3))</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (5, 3) (5, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[ 0.   0.   0. ]</span>
+<span class="sd">     [ 2.5  2.5  2.5]</span>
+<span class="sd">     [ 5.   5.   5. ]</span>
+<span class="sd">     [ 7.5  7.5  7.5]</span>
+<span class="sd">     [10.  10.  10. ]]</span>
+
+<span class="sd">    The grid can also be specified using the spacing between points instead of</span>
+<span class="sd">    the shape:</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(region=(0, 5, 0, 10), spacing=2.5)</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (5, 3) (5, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]</span>
+<span class="sd">     [0.  2.5 5. ]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[ 0.   0.   0. ]</span>
+<span class="sd">     [ 2.5  2.5  2.5]</span>
+<span class="sd">     [ 5.   5.   5. ]</span>
+<span class="sd">     [ 7.5  7.5  7.5]</span>
+<span class="sd">     [10.  10.  10. ]]</span>
+
+<span class="sd">    The spacing can be different for northing and easting, respectively:</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(region=(-5, 1, 0, 10), spacing=(2.5, 1))</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (5, 7) (5, 7)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[-5. -4. -3. -2. -1.  0.  1.]</span>
+<span class="sd">     [-5. -4. -3. -2. -1.  0.  1.]</span>
+<span class="sd">     [-5. -4. -3. -2. -1.  0.  1.]</span>
+<span class="sd">     [-5. -4. -3. -2. -1.  0.  1.]</span>
+<span class="sd">     [-5. -4. -3. -2. -1.  0.  1.]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[ 0.   0.   0.   0.   0.   0.   0. ]</span>
+<span class="sd">     [ 2.5  2.5  2.5  2.5  2.5  2.5  2.5]</span>
+<span class="sd">     [ 5.   5.   5.   5.   5.   5.   5. ]</span>
+<span class="sd">     [ 7.5  7.5  7.5  7.5  7.5  7.5  7.5]</span>
+<span class="sd">     [10.  10.  10.  10.  10.  10.  10. ]]</span>
+
+<span class="sd">    Grids of more dimensions can be generated by specifying more elements in</span>
+<span class="sd">    ``region`` and ``shape``/``spacing``:</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north, up = grid_coordinates(</span>
+<span class="sd">    ...     region=(0, 5, 0, 10, -4, 0), shape=(2, 5, 3)</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape, up.shape)</span>
+<span class="sd">    (2, 5, 3) (2, 5, 3) (2, 5, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[[0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]]</span>
+<span class="sd">    &lt;BLANKLINE&gt;</span>
+<span class="sd">     [[0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]</span>
+<span class="sd">      [0.  2.5 5. ]]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[[ 0.   0.   0. ]</span>
+<span class="sd">      [ 2.5  2.5  2.5]</span>
+<span class="sd">      [ 5.   5.   5. ]</span>
+<span class="sd">      [ 7.5  7.5  7.5]</span>
+<span class="sd">      [10.  10.  10. ]]</span>
+<span class="sd">    &lt;BLANKLINE&gt;</span>
+<span class="sd">     [[ 0.   0.   0. ]</span>
+<span class="sd">      [ 2.5  2.5  2.5]</span>
+<span class="sd">      [ 5.   5.   5. ]</span>
+<span class="sd">      [ 7.5  7.5  7.5]</span>
+<span class="sd">      [10.  10.  10. ]]]</span>
+<span class="sd">    &gt;&gt;&gt; print(up)</span>
+<span class="sd">    [[[-4. -4. -4.]</span>
+<span class="sd">      [-4. -4. -4.]</span>
+<span class="sd">      [-4. -4. -4.]</span>
+<span class="sd">      [-4. -4. -4.]</span>
+<span class="sd">      [-4. -4. -4.]]</span>
+<span class="sd">    &lt;BLANKLINE&gt;</span>
+<span class="sd">     [[ 0.  0.  0.]</span>
+<span class="sd">      [ 0.  0.  0.]</span>
+<span class="sd">      [ 0.  0.  0.]</span>
+<span class="sd">      [ 0.  0.  0.]</span>
+<span class="sd">      [ 0.  0.  0.]]]</span>
+
+<span class="sd">    If the region can&#39;t be divided into the desired spacing, the spacing will</span>
+<span class="sd">    be adjusted to conform to the region:</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(region=(-5, 0, 0, 5), spacing=2.6)</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (3, 3) (3, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[-5.  -2.5  0. ]</span>
+<span class="sd">     [-5.  -2.5  0. ]</span>
+<span class="sd">     [-5.  -2.5  0. ]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[0.  0.  0. ]</span>
+<span class="sd">     [2.5 2.5 2.5]</span>
+<span class="sd">     [5.  5.  5. ]]</span>
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(region=(-5, 0, 0, 5), spacing=2.4)</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (3, 3) (3, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[-5.  -2.5  0. ]</span>
+<span class="sd">     [-5.  -2.5  0. ]</span>
+<span class="sd">     [-5.  -2.5  0. ]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[0.  0.  0. ]</span>
+<span class="sd">     [2.5 2.5 2.5]</span>
+<span class="sd">     [5.  5.  5. ]]</span>
+
+<span class="sd">    You can choose to adjust the East and North boundaries of the region</span>
+<span class="sd">    instead:</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(</span>
+<span class="sd">    ...     region=(-5, 0, 0, 5), spacing=2.6, adjust=&#39;region&#39;,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (3, 3) (3, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[-5.1 -2.5  0.1]</span>
+<span class="sd">     [-5.1 -2.5  0.1]</span>
+<span class="sd">     [-5.1 -2.5  0.1]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[-0.1 -0.1 -0.1]</span>
+<span class="sd">     [ 2.5  2.5  2.5]</span>
+<span class="sd">     [ 5.1  5.1  5.1]]</span>
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(</span>
+<span class="sd">    ...     region=(-5, 0, 0, 5), spacing=2.4, adjust=&#39;region&#39;,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (3, 3) (3, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[-4.9 -2.5 -0.1]</span>
+<span class="sd">     [-4.9 -2.5 -0.1]</span>
+<span class="sd">     [-4.9 -2.5 -0.1]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[0.1 0.1 0.1]</span>
+<span class="sd">     [2.5 2.5 2.5]</span>
+<span class="sd">     [4.9 4.9 4.9]]</span>
+
+<span class="sd">    We can optionally generate coordinates for the center of each grid pixel</span>
+<span class="sd">    instead of the corner (default):</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(</span>
+<span class="sd">    ...     region=(0, 5, 0, 10), spacing=2.5, pixel_register=True,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; # Notice that the shape is 1 less than when pixel_register=False</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape)</span>
+<span class="sd">    (4, 2) (4, 2)</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[1.25 3.75]</span>
+<span class="sd">     [1.25 3.75]</span>
+<span class="sd">     [1.25 3.75]</span>
+<span class="sd">     [1.25 3.75]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[1.25 1.25]</span>
+<span class="sd">     [3.75 3.75]</span>
+<span class="sd">     [6.25 6.25]</span>
+<span class="sd">     [8.75 8.75]]</span>
+<span class="sd">    &gt;&gt;&gt; east, north = grid_coordinates(</span>
+<span class="sd">    ...     region=(0, 5, 0, 10), shape=(4, 2), pixel_register=True,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(east)</span>
+<span class="sd">    [[1.25 3.75]</span>
+<span class="sd">     [1.25 3.75]</span>
+<span class="sd">     [1.25 3.75]</span>
+<span class="sd">     [1.25 3.75]]</span>
+<span class="sd">    &gt;&gt;&gt; print(north)</span>
+<span class="sd">    [[1.25 1.25]</span>
+<span class="sd">     [3.75 3.75]</span>
+<span class="sd">     [6.25 6.25]</span>
+<span class="sd">     [8.75 8.75]]</span>
+
+<span class="sd">    Generate arrays for other coordinates that have a constant value:</span>
+
+<span class="sd">    &gt;&gt;&gt; east, north, height = grid_coordinates(</span>
+<span class="sd">    ...     region=(0, 5, 0, 10), spacing=2.5, non_dimensional_coords=57</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape, height.shape)</span>
+<span class="sd">    (5, 3) (5, 3) (5, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(height)</span>
+<span class="sd">    [[57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]]</span>
+<span class="sd">    &gt;&gt;&gt; east, north, height, time = grid_coordinates(</span>
+<span class="sd">    ...     region=(0, 5, 0, 10), spacing=2.5, non_dimensional_coords=[57, 0.1]</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(east.shape, north.shape, height.shape, time.shape)</span>
+<span class="sd">    (5, 3) (5, 3) (5, 3) (5, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(height)</span>
+<span class="sd">    [[57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]</span>
+<span class="sd">     [57. 57. 57.]]</span>
+<span class="sd">    &gt;&gt;&gt; print(time)</span>
+<span class="sd">    [[0.1 0.1 0.1]</span>
+<span class="sd">     [0.1 0.1 0.1]</span>
+<span class="sd">     [0.1 0.1 0.1]</span>
+<span class="sd">     [0.1 0.1 0.1]</span>
+<span class="sd">     [0.1 0.1 0.1]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_region</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+    <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">spacing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Both grid shape (&#39;</span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">&#39;) and spacing (&#39;</span><span class="si">{</span><span class="n">spacing</span><span class="si">}</span><span class="s2">&#39;) were provided. &quot;</span>
+            <span class="s2">&quot;Only one is allowed.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">spacing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Either a grid shape or a spacing must be provided.&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">spacing</span><span class="p">):</span>
+            <span class="n">spacing</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">spacing</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">spacing</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ndims</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid spacing &#39;</span><span class="si">{</span><span class="n">spacing</span><span class="si">}</span><span class="s2">&#39;. Should have </span><span class="si">{</span><span class="n">ndims</span><span class="si">}</span><span class="s2"> values, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;one value per dimension of the region &#39;</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">spacing</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="p">))</span>
+    <span class="n">region_pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">coordinates_1d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">size</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">up</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">spacing</span><span class="p">),</span> <span class="n">region_pairs</span><span class="p">):</span>
+        <span class="n">coordinates_1d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">line_coordinates</span><span class="p">(</span>
+                <span class="n">low</span><span class="p">,</span>
+                <span class="n">up</span><span class="p">,</span>
+                <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                <span class="n">spacing</span><span class="o">=</span><span class="n">space</span><span class="p">,</span>
+                <span class="n">adjust</span><span class="o">=</span><span class="n">adjust</span><span class="p">,</span>
+                <span class="n">pixel_register</span><span class="o">=</span><span class="n">pixel_register</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="c1"># Use the ij indexing in meshgrid because the default xy works for 2D</span>
+    <span class="c1"># arrays fine but mixes the order of coordinates for 3D and beyond. But</span>
+    <span class="c1"># this means we have to reverse the list going in to get the right shape</span>
+    <span class="c1"># and reverse it coming out to get the right order of coordinates.</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">coordinates_1d</span><span class="p">),</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">&quot;ij&quot;</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">non_dimensional_coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">non_dimensional_coords</span><span class="p">):</span>
+            <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">value</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The Bordado Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Mar 28, 2025.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
