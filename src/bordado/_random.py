@@ -13,36 +13,7 @@ import numpy as np
 from ._region import check_region
 
 
-def get_rng(rng):
-    """
-    Produce a random number generator (RNG) based on the random state given.
-
-    Parameters
-    ----------
-    rng : numpy.random.Generator or int
-        A random number generator (RNG) used to generate the coordinates. If an
-        integer is given, it will be used as a seed for
-        :func:`numpy.random.default_rng` which will then be used as the
-        generator. If a :class:`numpy.random.Generator` is given, it will be
-        used. If ``None`` is given, :func:`~numpy.random.default_rng` will be
-        used with no seed to create a generator (resulting in different numbers
-        with each run). Use a seed to make sure computations are reproducible.
-
-    Returns
-    -------
-    rng : numpy.random.Generator
-        The random number generator.
-    """
-    if rng is None:
-        random = np.random.default_rng()
-    elif isinstance(rng, int):
-        random = np.random.default_rng(rng)
-    else:
-        random = rng
-    return random
-
-
-def random_coordinates(region, size, *, rng=None, non_dimensional_coords=None):
+def random_coordinates(region, size, *, random_seed=None, non_dimensional_coords=None):
     """
     Generate the coordinates for a uniformly random scatter of points.
 
@@ -57,9 +28,9 @@ def random_coordinates(region, size, *, rng=None, non_dimensional_coords=None):
         dimension of the coordinate system.
     size : int
         The number of points to generate.
-    rng : numpy.random.Generator or int
-        A random number generator (RNG) used to generate the coordinates. If an
-        integer is given, it will be used as a seed for
+    random_seed : None or int or numpy.random.Generator
+        A seed for a random number generator (RNG) used to generate the
+        coordinates. If an integer is given, it will be used as a seed for
         :func:`numpy.random.default_rng` which will then be used as the
         generator. If a :class:`numpy.random.Generator` is given, it will be
         used. If ``None`` is given, :func:`~numpy.random.default_rng` will be
@@ -87,18 +58,24 @@ def random_coordinates(region, size, *, rng=None, non_dimensional_coords=None):
     We'll use a seed value to ensure that the same will be generated every
     time:
 
-    >>> easting, northing = random_coordinates((0, 10, -2, -1), 4, rng=0)
+    >>> easting, northing = random_coordinates(
+    ...     (0, 10, -2, -1), size=4, random_seed=0,
+    ... )
     >>> print(', '.join(['{:.4f}'.format(i) for i in easting]))
     6.3696, 2.6979, 0.4097, 0.1653
     >>> print(', '.join(['{:.4f}'.format(i) for i in northing]))
     -1.1867, -1.0872, -1.3934, -1.2705
     >>> easting, northing, height = random_coordinates(
-    ...     (0, 10, -2, -1), 4, rng=0, non_dimensional_coords=12
+    ...     (0, 10, -2, -1), 4, random_seed=0, non_dimensional_coords=12
     ... )
     >>> print(height)
     [12. 12. 12. 12.]
     >>> easting, northing, height, time = random_coordinates(
-    ...     (0, 10, -2, -1), 4, rng=0, non_dimensional_coords=[12, 1986])
+    ...     (0, 10, -2, -1),
+    ...     size=4,
+    ...     random_seed=0,
+    ...     non_dimensional_coords=[12, 1986],
+    ... )
     >>> print(height)
     [12. 12. 12. 12.]
     >>> print(time)
@@ -107,7 +84,7 @@ def random_coordinates(region, size, *, rng=None, non_dimensional_coords=None):
     We're not limited to 2 dimensions:
 
     >>> easting, northing, up = random_coordinates(
-    ...     (0, 10, -2, -1, 0.1, 0.2), 4, rng=0,
+    ...     (0, 10, -2, -1, 0.1, 0.2), 4, random_seed=0,
     ... )
     >>> print(', '.join(['{:.4f}'.format(i) for i in easting]))
     6.3696, 2.6979, 0.4097, 0.1653
@@ -118,7 +95,7 @@ def random_coordinates(region, size, *, rng=None, non_dimensional_coords=None):
 
     """
     check_region(region)
-    random = get_rng(rng)
+    random = np.random.default_rng(random_seed)
     coordinates = []
     for lower, upper in np.reshape(region, (len(region) // 2, 2)):
         coordinates.append(random.uniform(lower, upper, size))
