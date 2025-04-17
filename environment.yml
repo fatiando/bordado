@@ -16,6 +16,8 @@ dependencies:
   - pytest
   - pytest-cov
   - coverage
+  - pandas
+  - xarray
   # Documentation
   - sphinx==7.2.*
   - numpydoc==1.7.*

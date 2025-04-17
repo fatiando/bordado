@@ -8,9 +8,12 @@
 Test the input and output validation functions.
 """
 
+import numpy as np
+import pandas as pd
 import pytest
+import xarray as xr
 
-from bordado._region import check_region, inside, pad_region
+from bordado._region import check_region, get_region, inside, pad_region
 
 
 @pytest.mark.parametrize(
@@ -79,3 +82,17 @@ def test_inside_fails_len_coordinates(region, coordinates):
     match = f"Expected {len(region) // 2} .* got {len(coordinates)} .*"
     with pytest.raises(ValueError, match=match):
         inside(coordinates, region)
+
+
+@pytest.mark.parametrize(
+    "coordinates",
+    [
+        (np.array([1.0, 2.0, 3.0]), np.array([1.0, 2.0, 3.0])),
+        (pd.Series([1.0, 2.0, 3.0]), pd.Series([1.0, 2.0, 3.0])),
+        (xr.DataArray([1.0, 2.0, 3.0]), xr.DataArray([1.0, 2.0, 3.0])),
+    ],
+)
+def test_get_region_array_dtypes(coordinates):
+    "Make sure the region has floats and not arrays or numpy dtypes"
+    region = get_region(coordinates)
+    assert all(isinstance(i, float) for i in region)
