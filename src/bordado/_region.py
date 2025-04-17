@@ -113,8 +113,8 @@ def get_region(coordinates):
     ----------
     coordinates : tuple = (easting, northing, ...)
         Tuple of arrays with the coordinates of each point. Arrays can be
-        Python lists. Arrays can be of any shape but must all have the same
-        shape.
+        Python lists or any numpy-compatible array type. Arrays can be of any
+        shape but must all have the same shape.
 
     Returns
     -------
