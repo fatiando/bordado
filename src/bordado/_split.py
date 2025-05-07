@@ -548,15 +548,17 @@ def expanding_window(coordinates, center, sizes):
     coordinates that fall inside each window. For example, this is the index of
     the first window (with size 1):
 
-    >>> print(indices[0])
-    (array([2]), array([2]))
+    >>> print(len(indices[0]))
+    2
+    >>> print(indices[0][0], indices[0][1])
+    [2] [2]
 
     The index have 2 values because the coordinate arrays are 2D, so we need an
     index of the rows and of the columns. We can use them to select points from
     the coordinates that fall inside the first window:
 
-    >>> print([c[indices[0]] for c in coordinates])
-    [array([-3.]), array([8.])]
+    >>> print(coordinates[0][indices[0]], coordinates[1][indices[0]])
+    [-3.] [8.]
 
     For the other windows, it works the same:
 
@@ -579,18 +581,21 @@ def expanding_window(coordinates, center, sizes):
     >>> print(len(indices))
     2
 
-    But since coordinates are 1D, there is only one index per window:
+    But since coordinates are 1D, there is only one index per window (it's
+    still in a tuple, though):
 
-    >>> print(indices[0])
-    (array([12]),)
+    >>> print(len(indices[0]))
+    1
+    >>> print(indices[0][0])
+    [12]
 
-    >>> print(indices[1])
-    (array([ 6,  7,  8, 11, 12, 13, 16, 17, 18]),)
+    >>> print(indices[1][0])
+    [ 6  7  8 11 12 13 16 17 18]
 
     The returned indices can be used in the same way as before:
 
-    >>> print([c[indices[0]] for c in coordinates1d])
-    [array([-3.]), array([8.])]
+    >>> print(coordinates1d[0][indices[0]], coordinates1d[1][indices[0]])
+    [-3.] [8.]
 
     Coordinates can be more than 2-dimensional as well:
 
