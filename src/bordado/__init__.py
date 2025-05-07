@@ -13,7 +13,7 @@ from ._grid import grid_coordinates
 from ._line import line_coordinates
 from ._random import random_coordinates
 from ._region import check_region, get_region, inside, pad_region
-from ._split import block_split, rolling_window
+from ._split import block_split, expanding_window, rolling_window
 from ._version import __version__
 
 # Append a leading "v" to the generated version by setuptools_scm
