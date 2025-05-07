@@ -486,3 +486,204 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
         for i in indices1d
     ]
     return centers, indices
+
+
+def expanding_window(coordinates, center, sizes):
+    """
+    Select points on windows of expanding size around a center point.
+
+    Produces arrays for indexing the given coordinates to obtain points falling
+    inside each window (see examples below). The windows do not necessarily
+    have to be expanding in size (the sizes can be in any order).
+
+    Parameters
+    ----------
+    coordinates : tuple = (easting, northing, ...)
+        Tuple of arrays with the coordinates of each point. The arrays can be
+        n-dimensional.
+    center : tuple = (easting, northing, ...)
+        The coordinates of the center of the window. Must have the same number
+        of elements as *coordinates*. Coordinates **cannot be arrays**.
+    sizes : array
+        The sizes of the windows. Does not have to be in any particular order.
+        The order of indices returned will match the order of window sizes
+        given. Units should match the units of *coordinates* and *center*.
+
+    Returns
+    -------
+    indices : list
+        Each element of the list corresponds to the indices of points falling
+        inside a window. Use them to index the coordinates for each window. The
+        indices will depend on the number of dimensions in the input
+        coordinates. For example, if the coordinates are 2D arrays, each window
+        will contain indices for 2 dimensions (row, column).
+
+    Examples
+    --------
+    Generate a set of sample coordinates on a grid to make it easier to
+    visualize:
+
+    >>> import bordado as bd
+    >>> coordinates = bd.grid_coordinates((-5, -1, 6, 10), spacing=1)
+    >>> print(coordinates[0])
+    [[-5. -4. -3. -2. -1.]
+     [-5. -4. -3. -2. -1.]
+     [-5. -4. -3. -2. -1.]
+     [-5. -4. -3. -2. -1.]
+     [-5. -4. -3. -2. -1.]]
+    >>> print(coordinates[1])
+    [[ 6.  6.  6.  6.  6.]
+     [ 7.  7.  7.  7.  7.]
+     [ 8.  8.  8.  8.  8.]
+     [ 9.  9.  9.  9.  9.]
+     [10. 10. 10. 10. 10.]]
+
+    Get the expanding window indices (there should be one index per window):
+
+    >>> indices = expanding_window(coordinates, center=(-3, 8), sizes=[1, 2])
+    >>> print(len(indices))
+    2
+
+    Each element of the indices is a tuple with the arrays that index the
+    coordinates that fall inside each window. For example, this is the index of
+    the first window (with size 1):
+
+    >>> print(len(indices[0]))
+    2
+    >>> print(indices[0][0], indices[0][1])
+    [2] [2]
+
+    The index have 2 values because the coordinate arrays are 2D, so we need an
+    index of the rows and of the columns. We can use them to select points from
+    the coordinates that fall inside the first window:
+
+    >>> print(coordinates[0][indices[0]], coordinates[1][indices[0]])
+    [-3.] [8.]
+
+    For the other windows, it works the same:
+
+    >>> for index in indices[1]:
+    ...     print(index)
+    [1 1 1 2 2 2 3 3 3]
+    [1 2 3 1 2 3 1 2 3]
+    >>> print(coordinates[0][indices[1]])
+    [-4. -3. -2. -4. -3. -2. -4. -3. -2.]
+    >>> print(coordinates[1][indices[1]])
+    [7. 7. 7. 8. 8. 8. 9. 9. 9.]
+
+    Let's make some 1D coordinates to show how this works in that case:
+
+    >>> coordinates1d = tuple(c.ravel() for c in coordinates)
+
+    Getting the indices is the same and there will still be 1 entry per window:
+
+    >>> indices = expanding_window(coordinates1d, center=(-3, 8), sizes=[1, 2])
+    >>> print(len(indices))
+    2
+
+    But since coordinates are 1D, there is only one index per window (it's
+    still in a tuple, though):
+
+    >>> print(len(indices[0]))
+    1
+    >>> print(indices[0][0])
+    [12]
+
+    >>> print(indices[1][0])
+    [ 6  7  8 11 12 13 16 17 18]
+
+    The returned indices can be used in the same way as before:
+
+    >>> print(coordinates1d[0][indices[0]], coordinates1d[1][indices[0]])
+    [-3.] [8.]
+
+    Coordinates can be more than 2-dimensional as well:
+
+    >>> coordinates3d = bd.grid_coordinates((-5, 0, 5, 10, 1, 2), spacing=1)
+    >>> print(coordinates3d[0].shape)
+    (2, 6, 6)
+    >>> print(coordinates3d[0])
+    [[[-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]]
+    <BLANKLINE>
+     [[-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]
+      [-5. -4. -3. -2. -1.  0.]]]
+    >>> print(coordinates3d[1])
+    [[[ 5.  5.  5.  5.  5.  5.]
+      [ 6.  6.  6.  6.  6.  6.]
+      [ 7.  7.  7.  7.  7.  7.]
+      [ 8.  8.  8.  8.  8.  8.]
+      [ 9.  9.  9.  9.  9.  9.]
+      [10. 10. 10. 10. 10. 10.]]
+    <BLANKLINE>
+     [[ 5.  5.  5.  5.  5.  5.]
+      [ 6.  6.  6.  6.  6.  6.]
+      [ 7.  7.  7.  7.  7.  7.]
+      [ 8.  8.  8.  8.  8.  8.]
+      [ 9.  9.  9.  9.  9.  9.]
+      [10. 10. 10. 10. 10. 10.]]]
+    >>> print(coordinates3d[2])
+    [[[1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]
+      [1. 1. 1. 1. 1. 1.]]
+    <BLANKLINE>
+     [[2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]
+      [2. 2. 2. 2. 2. 2.]]]
+
+    The only difference is that the center coordinates also need to be in
+    3-dimensional space (the size of the windows is uniform in all directions):
+
+    >>> indices = expanding_window(
+    ...     coordinates3d, center=(-2.5, 8.5, 1.5), sizes=[1, 2],
+    ... )
+    >>> print(len(indices))
+    2
+
+    Each index will have 3 elements, one for each dimension:
+
+    >>> print(len(indices[0]))
+    3
+    >>> print(indices[0][0])
+    [0 0 0 0 1 1 1 1]
+    >>> print(indices[0][1])
+    [3 3 4 4 3 3 4 4]
+    >>> print(indices[0][2])
+    [2 3 2 3 2 3 2 3]
+
+    And extracting coordinates for each window also works the same:
+
+    >>> print(coordinates3d[0][indices[0]])
+    [-3. -2. -3. -2. -3. -2. -3. -2.]
+    >>> print(coordinates3d[1][indices[0]])
+    [8. 8. 9. 9. 8. 8. 9. 9.]
+    >>> print(coordinates3d[2][indices[0]])
+    [1. 1. 1. 1. 2. 2. 2. 2.]
+
+    """
+    coordinates = check_coordinates(coordinates)
+    shape = coordinates[0].shape
+    center = np.atleast_2d(center)
+    tree = KDTree(np.transpose([c.ravel() for c in coordinates]))
+    indices = []
+    for size in sizes:
+        # Use p=inf (infinity norm) to get square windows instead of circular
+        index1d = tree.query_ball_point(center, r=size / 2, p=np.inf)[0]
+        # Convert indices to an array to avoid errors when the index is empty
+        # (no points in the window). unravel_index doesn't like empty lists.
+        indices.append(np.unravel_index(np.array(index1d, dtype="int"), shape=shape))
+    return indices
