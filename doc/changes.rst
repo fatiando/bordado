@@ -3,6 +3,34 @@
 Changelog
 =========
 
+Version 0.2.0
+-------------
+
+Released on: 2025/05/08
+
+doi: https://doi.org/10.5281/zenodo.15360679
+
+**Breaking changes:**
+
+- Rename the ``rng`` argument of ``bordado.random_coordinates`` to ``random_seed``, which is more explicit and won’t be confused with “range” (`#34 <https://github.com/fatiando/bordado/pull/34>`__)
+
+New functions ported from `Verde <https://www.fatiando.org/verde>`__ and improved:
+
+- New function ``bordado.expanding_window`` to split points with n dimensions on windows that share a common center but expand in size (`#37 <https://github.com/fatiando/bordado/pull/37>`__)
+
+Enhancements:
+
+- Make sure ``bordado.get_region`` works with pandas and xarray inputs (`#36 <https://github.com/fatiando/bordado/pull/36>`__)
+
+Maintenance:
+
+- Pin third-party Actions using commit hashes instead of tags for security (`#39 <https://github.com/fatiando/bordado/pull/39>`__)
+
+This release contains contributions from:
+
+- Santiago Soler
+- Leonardo Uieda
+
 Version 0.1.0
 -------------
 
