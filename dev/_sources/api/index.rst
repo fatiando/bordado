@@ -35,6 +35,7 @@ Splitting points into blocks and windows
    :toctree: generated/
 
    block_split
+   expanding_window
    rolling_window
 
 Coordinate manipulation
