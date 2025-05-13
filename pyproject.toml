@@ -113,13 +113,21 @@ ignore = [
 convention = "numpy"
 
 [tool.coverage.run]
-branch = true
+source = ["bordado"]
 omit = [
     "**/_version.py",
     "**/__init__.py",
 ]
+branch = true
 # Needed to combine coverage data from multiple OSs on CI
 relative_files = true
+
+[tool.coverage.paths]
+source = [
+    "src/bordado",
+    "*/bordado",
+    "*\\bordado",
+]
 
 [tool.coverage.report]
 show_missing = true
