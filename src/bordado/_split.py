@@ -11,10 +11,9 @@ Functions to split points into blocks and windows.
 import numpy as np
 from scipy.spatial import KDTree
 
-from ._coordinates import check_coordinates
 from ._grid import grid_coordinates
-from ._line import check_adjust
-from ._region import check_region, get_region, pad_region
+from ._region import get_region, pad_region
+from ._validation import check_adjust, check_coordinates, check_region
 
 
 def block_split(

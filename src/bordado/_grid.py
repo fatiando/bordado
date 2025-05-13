@@ -11,7 +11,7 @@ Generate coordinates for regular n-dimensional grids.
 import numpy as np
 
 from ._line import line_coordinates
-from ._region import check_region
+from ._validation import check_region, check_shape
 
 
 def grid_coordinates(
@@ -40,7 +40,7 @@ def grid_coordinates(
 
     Parameters
     ----------
-    region : list = [W, E, S, N, ...]
+    region : tuple = (W, E, S, N, ...)
         The boundaries of a given region in Cartesian or geographic
         coordinates. Should have a lower and an upper boundary for each
         dimension of the coordinate system.
@@ -327,6 +327,8 @@ def grid_coordinates(
             raise ValueError(message)
     else:
         spacing = tuple(None for _ in range(ndims))
+    # Must check the shape after so that it's guaranteed to be a tuple.
+    check_shape(shape, region)
     region_pairs = np.reshape(region, (len(region) // 2, 2))
     coordinates_1d = []
     for size, space, (low, up) in zip(reversed(shape), reversed(spacing), region_pairs):

@@ -26,7 +26,6 @@ Regions and bounding boxes
    inside
    get_region
    pad_region
-   check_region
 
 Splitting points into blocks and windows
 ----------------------------------------
@@ -44,5 +43,15 @@ Other utilities
 .. autosummary::
    :toctree: generated/
 
-   check_coordinates
    spacing_to_size
+   shape_to_spacing
+
+Validation of inputs
+--------------------
+
+.. autosummary::
+   :toctree: generated/
+
+   check_coordinates
+   check_region
+   check_shape

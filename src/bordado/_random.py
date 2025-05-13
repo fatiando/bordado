@@ -10,7 +10,7 @@ Functions for generating random point spreads.
 
 import numpy as np
 
-from ._region import check_region
+from ._validation import check_region
 
 
 def random_coordinates(region, size, *, random_seed=None, non_dimensional_coords=None):

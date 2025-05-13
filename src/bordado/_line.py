@@ -10,6 +10,8 @@ Generate regular coordinates along lines and grids.
 
 import numpy as np
 
+from ._utils import spacing_to_size
+
 
 def line_coordinates(
     start, stop, *, size=None, spacing=None, adjust="spacing", pixel_register=False
@@ -111,100 +113,3 @@ def line_coordinates(
     if pixel_register:
         values = values[:-1] + (values[1] - values[0]) / 2
     return values
-
-
-def spacing_to_size(start, stop, spacing, *, adjust="spacing"):
-    """
-    Convert a spacing to the number of points between start and stop.
-
-    Takes into account if the spacing or the interval needs to be adjusted in
-    order to fit exactly. This is needed when the interval is not a multiple of
-    the spacing.
-
-    Parameters
-    ----------
-    start : float
-        The starting value of the sequence.
-    stop : float
-        The end value of the sequence.
-    spacing : float
-        The step size (interval) between points in the sequence.
-    adjust : {'spacing', 'region'}
-        Whether to adjust the spacing or the interval/region if required.
-        Defaults to adjusting the spacing.
-
-    Returns
-    -------
-    size : int
-        The number of points between start and stop.
-    start : float
-        The end of the interval, which may or may not have been adjusted.
-    stop : float
-        The end of the interval, which may or may not have been adjusted.
-
-    Examples
-    --------
-    If the spacing is a multiple of the interval, then the size is how many
-    points fit in the interval and the start and stop values are maintained:
-
-    >>> size, start, stop = spacing_to_size(0, 1, 0.5)
-    >>> print(size, start, stop)
-    3 0 1
-
-    If the spacing is not a multiple, then it will be adjusted to fit the
-    interval by default. In this case, then number of points remains the same:
-
-    >>> size, start, stop = spacing_to_size(0, 1, 0.6)
-    >>> print(size, start, stop)
-    3 0 1
-
-    Alternatively, we can ask it to adjust the region instead of the spacing
-    between points:
-
-    >>> size, start, stop = spacing_to_size(0, 1, 0.6, adjust="region")
-    >>> print(f"{size} {start:.1f} {stop:.1f}")
-    3 -0.1 1.1
-    """
-    check_adjust(adjust)
-    # Add 1 to get the number of nodes, not segments
-    size = int(round((stop - start) / spacing) + 1)
-    # If the spacing >= 2 * (stop - start), it rounds to zero so we'd be
-    # generating a single point, which isn't equivalent to adjusting the
-    # spacing or the region. To get the appropriate behaviour of decreasing the
-    # spacing until it fits the region or increasing the region until it fits
-    # at least 1 spacing, we need to always round to at least 1 in the code
-    # above.
-    if size == 1:
-        size += 1
-    if adjust == "region":
-        # The size is the same but we adjust the interval so that the spacing
-        # isn't altered when we do the linspace.
-        required_length = (size - 1) * spacing
-        given_length = stop - start
-        pad = (required_length - given_length) / 2
-        stop = stop + pad
-        start = start - pad
-    return size, start, stop
-
-
-def check_adjust(adjust, valid=("spacing", "region")):
-    """
-    Check if the adjust argument is valid.
-
-    Parameters
-    ----------
-    adjust : str
-        The value of the adjust argument given to a function.
-    valid : list or tuple
-        The list of valid values for the argument.
-
-    Raises
-    ------
-    ValueError
-        In case the argument is not in the list of valid values.
-    """
-    if adjust not in valid:
-        message = (
-            f"Invalid value for 'adjust' argument '{adjust}'. Should be one of {valid}."
-        )
-        raise ValueError(message)

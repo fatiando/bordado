@@ -10,50 +10,7 @@ Functions for dealing with regions and bounding boxes.
 
 import numpy as np
 
-from ._coordinates import check_coordinates
-
-
-def check_region(region):
-    """
-    Check that the given region is valid.
-
-    A region is a bounding box for n-dimensional coordinates. There should be
-    an even number of elements and lower boundaries should not be larger than
-    upper boundaries.
-
-    Parameters
-    ----------
-    region : tuple = (W, E, S, N, ...)
-        The boundaries of a given region in Cartesian or geographic
-        coordinates. Should have a lower and an upper boundary for each
-        dimension of the coordinate system.
-
-    Raises
-    ------
-    ValueError
-        If the region doesn't have even number of entries and any lower
-        boundary is larger than the upper boundary.
-
-    """
-    if not region or len(region) % 2 != 0:
-        message = (
-            f"Invalid region '{region}'. Must have an even number of elements, "
-            "a lower and an upper boundary for each dimension."
-        )
-        raise ValueError(message)
-    region_pairs = np.reshape(region, (len(region) // 2, 2))
-    offending = [lower > upper for lower, upper in region_pairs]
-    if any(offending):
-        bad_bounds = []
-        for dimension, is_bad in enumerate(offending):
-            if is_bad:
-                lower, upper = region_pairs[dimension]
-                bad_bounds.append(f"{dimension} ({lower} > {upper})")
-        message = (
-            f"Invalid region '{region}'. Lower boundary larger than upper boundary "
-            f"in dimension(s): {'; '.join(bad_bounds)}"
-        )
-        raise ValueError(message)
+from ._validation import check_coordinates, check_region
 
 
 def pad_region(region, pad):
