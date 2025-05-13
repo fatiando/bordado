@@ -11,7 +11,7 @@ Test the coordinate generation functions.
 import numpy.testing as npt
 import pytest
 
-from bordado._line import _spacing_to_size, line_coordinates
+from bordado._line import line_coordinates, spacing_to_size
 
 
 @pytest.mark.parametrize(
@@ -28,7 +28,7 @@ from bordado._line import _spacing_to_size, line_coordinates
 def test_spacing_to_size(spacing, adjust, expected_start, expected_stop, expected_size):
     "Check that correct size and stop are returned"
     start, stop = -10, 0
-    size, new_start, new_stop = _spacing_to_size(
+    size, new_start, new_stop = spacing_to_size(
         start, stop, spacing=spacing, adjust=adjust
     )
     npt.assert_allclose(size, expected_size)
@@ -39,7 +39,7 @@ def test_spacing_to_size(spacing, adjust, expected_start, expected_stop, expecte
 def test_spacing_to_size_fails():
     "Check that invalid adjust causes an exception"
     with pytest.raises(ValueError, match="Invalid value for 'adjust'"):
-        _spacing_to_size(0, 1, spacing=0.1, adjust="invalid adjust value")
+        spacing_to_size(0, 1, spacing=0.1, adjust="invalid adjust value")
 
 
 def test_line_coordinates_fails():

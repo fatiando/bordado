@@ -100,7 +100,7 @@ def line_coordinates(
         message = "Either a size or a spacing must be provided."
         raise ValueError(message)
     if spacing is not None:
-        size, start, stop = _spacing_to_size(start, stop, spacing, adjust)
+        size, start, stop = spacing_to_size(start, stop, spacing, adjust=adjust)
     elif pixel_register and size is not None:
         # Starts by generating grid-line registered coordinates and shifting
         # them to the center of the pixel. Need 1 more point if given a size
@@ -113,11 +113,13 @@ def line_coordinates(
     return values
 
 
-def _spacing_to_size(start, stop, spacing, adjust):
+def spacing_to_size(start, stop, spacing, *, adjust="spacing"):
     """
     Convert a spacing to the number of points between start and stop.
 
-    Takes into account if the spacing or the interval needs to be adjusted.
+    Takes into account if the spacing or the interval needs to be adjusted in
+    order to fit exactly. This is needed when the interval is not a multiple of
+    the spacing.
 
     Parameters
     ----------
@@ -140,6 +142,28 @@ def _spacing_to_size(start, stop, spacing, adjust):
     stop : float
         The end of the interval, which may or may not have been adjusted.
 
+    Examples
+    --------
+    If the spacing is a multiple of the interval, then the size is how many
+    points fit in the interval and the start and stop values are maintained:
+
+    >>> size, start, stop = spacing_to_size(0, 1, 0.5)
+    >>> print(size, start, stop)
+    3 0 1
+
+    If the spacing is not a multiple, then it will be adjusted to fit the
+    interval by default. In this case, then number of points remains the same:
+
+    >>> size, start, stop = spacing_to_size(0, 1, 0.6)
+    >>> print(size, start, stop)
+    3 0 1
+
+    Alternatively, we can ask it to adjust the region instead of the spacing
+    between points:
+
+    >>> size, start, stop = spacing_to_size(0, 1, 0.6, adjust="region")
+    >>> print(f"{size} {start:.1f} {stop:.1f}")
+    3 -0.1 1.1
     """
     check_adjust(adjust)
     # Add 1 to get the number of nodes, not segments

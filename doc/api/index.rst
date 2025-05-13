@@ -38,10 +38,11 @@ Splitting points into blocks and windows
    expanding_window
    rolling_window
 
-Coordinate manipulation
------------------------
+Other utilities
+---------------
 
 .. autosummary::
    :toctree: generated/
 
    check_coordinates
+   spacing_to_size
