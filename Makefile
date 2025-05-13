@@ -3,7 +3,7 @@ PROJECT=bordado
 CHECK_STYLE=src/$(PROJECT) doc test
 GITHUB_ACTIONS=.github/workflows
 
-.PHONY: build install test format check check-format check_style check-actions clean
+.PHONY: help build install test format check check-format check-style check-actions clean
 
 help:
 	@echo "Commands:"
@@ -23,7 +23,7 @@ install:
 	python -m pip install --no-deps --editable .
 
 test:
-	pytest --cov-report=term-missing --cov=$(PROJECT) --doctest-modules --verbose test src/$(PROJECT)
+	pytest --cov-report=term-missing --cov --doctest-modules --verbose test src/$(PROJECT)
 
 format:
 	ruff check --select I --fix $(CHECK_STYLE) # fix isort errors
@@ -46,4 +46,6 @@ clean:
 	find . -name "*.pyc" -exec rm -v {} \;
 	find . -name "*.orig" -exec rm -v {} \;
 	find . -name ".coverage.*" -exec rm -v {} \;
-	rm -rvf build dist MANIFEST *.egg-info __pycache__ .coverage .cache .pytest_cache src/$(PROJECT)/_version.py
+	find . -name "__pycache__" -exec rm -v {} \;
+	find . -name "*.egg-info " -exec rm -v {} \;
+	rm -rvf build dist MANIFEST .coverage .cache .pytest_cache src/$(PROJECT)/_version.py
