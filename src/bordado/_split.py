@@ -33,8 +33,9 @@ def block_split(
     Parameters
     ----------
     coordinates : tuple = (easting, northing, ...)
-        Tuple of arrays with the coordinates of each point. The arrays can be
-        n-dimensional.
+        Tuple of arrays with the coordinates of each point. Arrays can be
+        Python lists or any numpy-compatible array type. Arrays can be of any
+        shape but must all have the same shape.
     region : tuple = (W, E, S, N, ...)
         The boundaries of a given region in Cartesian or geographic
         coordinates. If region is not given, will use the bounding region of
@@ -270,8 +271,9 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
     Parameters
     ----------
     coordinates : tuple = (easting, northing, ...)
-        Tuple of arrays with the coordinates of each point. The arrays can be
-        n-dimensional.
+        Tuple of arrays with the coordinates of each point. Arrays can be
+        Python lists or any numpy-compatible array type. Arrays can be of any
+        shape but must all have the same shape.
     window_size : float
         The size of the windows. Units should match the units of *coordinates*.
         In case the window size is not a multiple of the region, either of them
@@ -498,8 +500,9 @@ def expanding_window(coordinates, center, sizes):
     Parameters
     ----------
     coordinates : tuple = (easting, northing, ...)
-        Tuple of arrays with the coordinates of each point. The arrays can be
-        n-dimensional.
+        Tuple of arrays with the coordinates of each point. Arrays can be
+        Python lists or any numpy-compatible array type. Arrays can be of any
+        shape but must all have the same shape.
     center : tuple = (easting, northing, ...)
         The coordinates of the center of the window. Must have the same number
         of elements as *coordinates*. Coordinates **cannot be arrays**.
