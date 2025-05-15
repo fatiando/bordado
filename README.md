@@ -46,7 +46,9 @@ functions for splitting coordinates into spatial blocks and more.
 
 ## Project status
 
-**Bordado is in very early stages of development.**
+**Bordado is in early stages of development** but is already functional. We
+only caution that we may still make changes to the API so things may break
+between releases.
 
 **We welcome feedback and ideas!** This is a great time to bring new ideas on
 how we can improve the project.
