@@ -17,6 +17,7 @@ Coordinate generation
    random_coordinates
    grid_coordinates
    profile_coordinates
+   great_circle_coordinates
 
 Regions and bounding boxes
 --------------------------
