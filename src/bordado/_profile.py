@@ -17,7 +17,13 @@ def profile_coordinates(
     beginning, end, *, size=None, spacing=None, non_dimensional_coords=None
 ):
     """
-    Coordinates for a profile along a straight line between two points.
+    Generate evenly spaced coordinates along a straight line between points.
+
+    The generated coordinates specify points along a straight line in Cartesian
+    space. The points are evenly spaced and can be specified by *size* (number
+    of points) or their *spacing*. The points can be n-dimensional.
+
+    Use this function to generates coordinates for sampling along a profile.
 
     Parameters
     ----------
@@ -72,6 +78,21 @@ def profile_coordinates(
     easting: 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0
     >>> print('northing:', ', '.join(f'{i:.1f}' for i in north))
     northing: 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0
+    >>> print('distance:', ', '.join(f'{i:.1f}' for i in dist))
+    distance: 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0
+
+    The points can also be more than 2-dimensional. The number of returned
+    coordinates is the same as the number of input coordinates:
+
+    >>> (east, north, up), dist = profile_coordinates(
+    ...     (1, 10, 5), (1, 20, 5), spacing=1,
+    ... )
+    >>> print('easting:', ', '.join(f'{i:.1f}' for i in east))
+    easting: 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0
+    >>> print('northing:', ', '.join(f'{i:.1f}' for i in north))
+    northing: 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0
+    >>> print('upward:', ', '.join(f'{i:.1f}' for i in up))
+    upward: 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0
     >>> print('distance:', ', '.join(f'{i:.1f}' for i in dist))
     distance: 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0
 
