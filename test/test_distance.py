@@ -8,48 +8,30 @@
 Test distance calculation functions for nearest neighbors.
 """
 
-import numpy as np
-import numpy.testing as npt
+import pytest
 
-from bordado._distance import median_distance
+from bordado._distance import neighbor_distance_statistics
 from bordado._grid import grid_coordinates
 
 
-def test_distance_nearest():
-    "On a regular grid, distances should be straight forward for 1st neighbor"
-    spacing = 0.5
-    coords = grid_coordinates((5, 10, -20, -17), spacing=spacing)
-
-    distance = median_distance(coords, k_nearest=1)
-    # The nearest neighbor distance should be the grid spacing
-    npt.assert_allclose(distance, spacing)
-    assert distance.shape == coords[0].shape
-
-    # The shape should be the same even if we ravel the coordinates
-    coords = tuple(coord.ravel() for coord in coords)
-    distance = median_distance(coords, k_nearest=1)
-    # The nearest neighbor distance should be the grid spacing
-    npt.assert_allclose(distance, spacing)
-    assert distance.shape == coords[0].shape
+@pytest.mark.parametrize("k", [0, -1])
+def test_neighbor_distance_statistics_raises_invalid_k(k):
+    "Check that an exception is raised for invalid inputs"
+    coordinates = grid_coordinates((5, 10, -20, -17), spacing=1)
+    with pytest.raises(ValueError, match="Invalid number of neighbors"):
+        neighbor_distance_statistics(coordinates, statistic="mean", k=k)
 
 
-def test_distance_k_nearest():
-    "Check the median results for k nearest neighbors"
-    coords = grid_coordinates((5, 10, -20, -17), spacing=1)
+@pytest.mark.parametrize("statistic", ["bla", "mena"])
+def test_neighbor_distance_statistics_raises_invalid_statistic(statistic):
+    "Check that an exception is raised for invalid inputs"
+    coordinates = grid_coordinates((5, 10, -20, -17), spacing=1)
+    with pytest.raises(ValueError, match="Invalid statistic"):
+        neighbor_distance_statistics(coordinates, statistic, k=4)
 
-    # The 2 nearest points should also all be at a distance of 1 spacing
-    distance = median_distance(coords, k_nearest=2)
-    npt.assert_allclose(distance, 1)
 
-    # The 3 nearest points are at a distance of 1 but on the corners they are
-    # [1, 1, sqrt(2)] away. The median for these points is also 1.
-    distance = median_distance(coords, k_nearest=3)
-    npt.assert_allclose(distance, np.median([1, 1, np.sqrt(2)]))
-
-    # The 4 nearest points are at a distance of 1 but on the corners they are
-    # [1, 1, sqrt(2), 2] away.
-    distance = median_distance(coords, k_nearest=4)
-    true = np.ones_like(coords[0])
-    corners = np.median([1, 1, np.sqrt(2), 2])
-    true[0, 0] = true[0, -1] = true[-1, 0] = true[-1, -1] = corners
-    npt.assert_allclose(distance, true)
+@pytest.mark.parametrize("statistic", ["mean", "median", "std", "var", "ptp"])
+def test_neighbor_distance_statistics_valid_statistic(statistic):
+    "Check that an exception is not raised for valid inputs"
+    coordinates = grid_coordinates((5, 10, -20, -17), spacing=1)
+    neighbor_distance_statistics(coordinates, statistic, k=5)

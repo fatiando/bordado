@@ -14,13 +14,13 @@ import scipy.spatial
 from ._validation import check_coordinates
 
 
-def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
+def neighbor_distance_statistics(coordinates, statistic, *, k=1):
     """
     Calculate statistics of the distances to the k-nearest neighbors of points.
 
     For each point specified in *coordinates*, calculate the given statistic on
-    the Cartesian distance to its *k_nearest* neighbors among the other points
-    in the dataset.
+    the Cartesian distance to its *k* neighbors among the other points in the
+    dataset.
 
     Useful for finding mean/median distances between points, general point
     spread (standard deviation), variability of neighboring distances
@@ -38,7 +38,7 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
         neighbors of each point. Valid values are: ``"mean"``,  ``"median"``,
         ``"std"`` (standard deviation),  ``"var"`` (variance),  ``"ptp"``
         (peak-to-peak amplitude).
-    k_nearest : int
+    k : int
         Will calculate the median of the *k* nearest neighbors of each point. A
         value of 1 will result in the distance to nearest neighbor of each data
         point. Must be >= 1. Default is 1.
@@ -50,12 +50,18 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
         point. The array will have the same shape as the input coordinate
         arrays.
 
+    Raises
+    ------
+    ValueError
+        If *k* is less than 1, if the *statistic* is invalid, or if coordinate
+        arrays have different shapes.
+
     Notes
     -----
     To get the average point spacing for sparse uniformly spaced datasets,
-    calculating the mean/median using *k_nearest* of 1 is reasonable. Datasets
-    with points clustered into tight groups (e.g., densely sampled along
-    a flight line or ship track) will have very small distances to the closest
+    calculating the mean/median using *k* of 1 is reasonable. Datasets with
+    points clustered into tight groups (e.g., densely sampled along a flight
+    line or ship track) will have very small distances to the closest
     neighbors, which is not representative of the actual median spacing of
     points because it doesn't take the spacing between lines into account. In
     these cases, a median of the 10-20 or more nearest neighbors might be more
@@ -80,7 +86,7 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
 
     The mean of the distance to 1 nearest neighbor should be the grid spacing:
 
-    >>> mean_distances = neighbor_distance_statistics(coordinates, "mean", k_nearest=1)
+    >>> mean_distances = neighbor_distance_statistics(coordinates, "mean", k=1)
     >>> print(mean_distances)
     [[1. 1. 1. 1. 1. 1.]
      [1. 1. 1. 1. 1. 1.]
@@ -91,11 +97,16 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
 
     >>> print(mean_distances.shape, coordinates[0].shape)
     (4, 6) (4, 6)
+    >>> mean_distances = neighbor_distance_statistics(
+    ...     [c.ravel() for c in coordinates], "mean", k=1,
+    ... )
+    >>> print(mean_distances.shape)
+    (24,)
 
     The mean distance to the 2 nearest points should also all be 1 since they
     are the neighbors along the rows and columns of the matrix:
 
-    >>> mean_distances = neighbor_distance_statistics(coordinates, "mean", k_nearest=2)
+    >>> mean_distances = neighbor_distance_statistics(coordinates, "mean", k=2)
     >>> print(mean_distances)
     [[1. 1. 1. 1. 1. 1.]
      [1. 1. 1. 1. 1. 1.]
@@ -106,7 +117,7 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
     the distances are [1, 1, sqrt(2)] which leads to a median of 1:
 
     >>> median_distances = neighbor_distance_statistics(
-    ...     coordinates, "median", k_nearest=3,
+    ...     coordinates, "median", k=3,
     ... )
     >>> print(median_distances)
     [[1. 1. 1. 1. 1. 1.]
@@ -118,7 +129,7 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
     corners, which results in a median of 1.21.
 
     >>> median_distances = neighbor_distance_statistics(
-    ...     coordinates, "median", k_nearest=4,
+    ...     coordinates, "median", k=4,
     ... )
     >>> for line in median_distances:
     ...     print(" ".join([f"{i:.2f}" for i in line]))
@@ -129,8 +140,8 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
 
     """
     coordinates = check_coordinates(coordinates)
-    if k_nearest < 1:
-        message = f"Invalid number of neighbors 'k_nearest={k_nearest}'. Must be >= 1."
+    if k < 1:
+        message = f"Invalid number of neighbors 'k={k}'. Must be >= 1."
         raise ValueError(message)
     statistics = {
         "mean": np.mean,
@@ -152,6 +163,6 @@ def neighbor_distance_statistics(coordinates, statistic, *, k_nearest=1):
     # don't care about that distance so start with the second closest. Only get
     # the first element returned (the distance) and ignore the rest (the
     # neighbor indices).
-    k_distances = tree.query(transposed_coordinates, k=k_nearest + 1)[0][:, 1:]
+    k_distances = tree.query(transposed_coordinates, k=k + 1)[0][:, 1:]
     result = statistics[statistic](k_distances, axis=1)
     return result.reshape(shape)
