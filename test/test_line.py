@@ -42,17 +42,29 @@ def test_spacing_to_size_fails():
         spacing_to_size(0, 1, spacing=0.1, adjust="invalid adjust value")
 
 
-def test_line_coordinates_fails():
+@pytest.mark.parametrize(
+    ("size", "spacing"),
+    [(10, None), (None, 0.1)],
+)
+def test_line_coordinates_passes(size, spacing):
+    "Make sure no exceptions are raised for valid arguments"
+    start, stop = 0, 1
+    line_coordinates(start, stop, size=size, spacing=spacing)
+
+
+@pytest.mark.parametrize(
+    ("size", "spacing", "match"),
+    [
+        (None, None, "Either a size or a spacing"),
+        (10, 0.1, "Both size and spacing"),
+        (-1, None, "Invalid size"),
+        (0, None, "Invalid size"),
+    ],
+)
+def test_line_coordinates_fails(size, spacing, match):
     "Check failures for invalid arguments"
     start, stop = 0, 1
-    size = 10
-    spacing = 0.1
-    # Make sure it doesn't fail for these parameters
-    line_coordinates(start, stop, size=size)
-    line_coordinates(start, stop, spacing=spacing)
-    with pytest.raises(ValueError, match="Either a size or a spacing"):
-        line_coordinates(start, stop)
-    with pytest.raises(ValueError, match="Both size and spacing"):
+    with pytest.raises(ValueError, match=match):
         line_coordinates(start, stop, size=size, spacing=spacing)
 
 
