@@ -109,6 +109,9 @@ def line_coordinates(
         # instead of spacing so that we can do that because we discard the last
         # point when shifting the coordinates.
         size = size + 1
+    if size < 1:
+        message = f"Invalid size '{size}'. Must be >= 1."
+        raise ValueError(message)
     values = np.linspace(start, stop, size)
     if pixel_register:
         values = values[:-1] + (values[1] - values[0]) / 2
