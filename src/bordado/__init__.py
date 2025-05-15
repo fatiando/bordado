@@ -11,6 +11,7 @@ These are the functions and classes that make up the Bordado API.
 from ._distance import neighbor_distance_statistics
 from ._grid import grid_coordinates
 from ._line import line_coordinates
+from ._profile import profile_coordinates
 from ._random import random_coordinates
 from ._region import get_region, inside, pad_region
 from ._split import block_split, expanding_window, rolling_window

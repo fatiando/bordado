@@ -16,6 +16,7 @@ Coordinate generation
    line_coordinates
    random_coordinates
    grid_coordinates
+   profile_coordinates
 
 Regions and bounding boxes
 --------------------------
