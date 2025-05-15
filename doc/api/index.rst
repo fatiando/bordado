@@ -47,13 +47,3 @@ Other utilities
    neighbor_distance_statistics
    spacing_to_size
    shape_to_spacing
-
-Validation of inputs
---------------------
-
-.. autosummary::
-   :toctree: generated/
-
-   check_coordinates
-   check_region
-   check_shape
