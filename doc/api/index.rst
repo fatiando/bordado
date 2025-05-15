@@ -43,6 +43,7 @@ Other utilities
 .. autosummary::
    :toctree: generated/
 
+   neighbor_distance_statistics
    spacing_to_size
    shape_to_spacing
 
