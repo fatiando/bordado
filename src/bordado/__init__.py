@@ -15,7 +15,6 @@ from ._random import random_coordinates
 from ._region import get_region, inside, pad_region
 from ._split import block_split, expanding_window, rolling_window
 from ._utils import shape_to_spacing, spacing_to_size
-from ._validation import check_coordinates, check_region, check_shape
 from ._version import __version__
 
 # Append a leading "v" to the generated version by setuptools_scm
