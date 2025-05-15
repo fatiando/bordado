@@ -176,14 +176,17 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.pad_region.html">bordado.pad_region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/bordado.check_region.html">bordado.check_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/bordado.check_coordinates.html">bordado.check_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Bordado</a></li>
@@ -413,7 +416,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-generation">Coordinate generation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-and-bounding-boxes">Regions and bounding boxes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-points-into-blocks-and-windows">Splitting points into blocks and windows</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-manipulation">Coordinate manipulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-utilities">Other utilities</a></li>
 </ul>
             </nav>
         </div>
@@ -441,6 +444,12 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a>(region, *[, shape, ...])</p></td>
 <td><p>Generate evenly spaced points on an n-dimensional grid.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">profile_coordinates</span></code></a>(beginning, end, *[, ...])</p></td>
+<td><p>Generate evenly spaced coordinates along a straight line between points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.great_circle_coordinates.html#bordado.great_circle_coordinates" title="bordado.great_circle_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">great_circle_coordinates</span></code></a>(beginning, end, *)</p></td>
+<td><p>Generate evenly spaced coordinates along a great circle between points.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -457,9 +466,6 @@ document.write(`
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.pad_region.html#bordado.pad_region" title="bordado.pad_region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_region</span></code></a>(region, pad)</p></td>
 <td><p>Extend the borders of a region by the given amount.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.check_region.html#bordado.check_region" title="bordado.check_region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_region</span></code></a>(region)</p></td>
-<td><p>Check that the given region is valid.</p></td>
 </tr>
 </tbody>
 </table>
@@ -482,12 +488,18 @@ document.write(`
 </table>
 </div>
 </section>
-<section id="coordinate-manipulation">
-<h2>Coordinate manipulation<a class="headerlink" href="#coordinate-manipulation" title="Link to this heading">#</a></h2>
+<section id="other-utilities">
+<h2>Other utilities<a class="headerlink" href="#other-utilities" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.check_coordinates.html#bordado.check_coordinates" title="bordado.check_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_coordinates</span></code></a>(coordinates)</p></td>
-<td><p>Check that coordinate arrays all have the same shape.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.neighbor_distance_statistics.html#bordado.neighbor_distance_statistics" title="bordado.neighbor_distance_statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbor_distance_statistics</span></code></a>(coordinates, ...)</p></td>
+<td><p>Calculate statistics of the distances to the k-nearest neighbors of points.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.spacing_to_size.html#bordado.spacing_to_size" title="bordado.spacing_to_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spacing_to_size</span></code></a>(start, stop, spacing, *[, ...])</p></td>
+<td><p>Convert a spacing to the number of points between start and stop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.shape_to_spacing.html#bordado.shape_to_spacing" title="bordado.shape_to_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape_to_spacing</span></code></a>(region, shape, *[, ...])</p></td>
+<td><p>Calculate the spacing of a regular grid given a region and shape.</p></td>
 </tr>
 </tbody>
 </table>
@@ -543,7 +555,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-generation">Coordinate generation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-and-bounding-boxes">Regions and bounding boxes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-points-into-blocks-and-windows">Splitting points into blocks and windows</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-manipulation">Coordinate manipulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-utilities">Other utilities</a></li>
 </ul>
   </nav></div>
 
@@ -573,7 +585,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 08, 2025.
+  Last updated on May 15, 2025.
   <br/>
 </p>
   </div>

@@ -1,9 +1,9 @@
-bordado.check\_coordinates
+bordado.shape\_to\_spacing
 ==========================
 
 .. currentmodule:: bordado
 
-.. autofunction:: check_coordinates
+.. autofunction:: shape_to_spacing
 
 .. raw:: html
 

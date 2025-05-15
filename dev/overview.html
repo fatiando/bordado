@@ -176,14 +176,17 @@
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.check_region.html">bordado.check_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.check_coordinates.html">bordado.check_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Bordado</a></li>
@@ -387,7 +390,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -403,6 +408,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-the-package">Importing the package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-evenly-spaced-values">Generating evenly spaced values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-grids">Regular grids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-into-blocks">Splitting into blocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-rest">Explore the rest!</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -414,6 +431,446 @@ document.write(`
                   
   <section id="overview">
 <span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>The main purpose of Bordado is to facilitate <strong>generating coordinates for
+evenly spaced points</strong>.
+These could be the coordinates of a regular grid, of points along a line, or of
+a profile.
+While you could do a lot of this with a combination of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linspace</span></code></a>
+and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html#numpy.meshgrid" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.meshgrid</span></code></a>, there are a few problems that Bordado solves:</p>
+<ol class="arabic simple">
+<li><p>What if I want to specify the spacing between points instead of how many
+points?</p></li>
+<li><p>What if the spacing isn’t exactly a multiple of the interval?</p></li>
+<li><p>What was the order of arguments to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html#numpy.meshgrid" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.meshgrid</span></code></a> and what’s the
+difference between the difference indexing types?</p></li>
+<li><p>What if I want points along a straight line or great circle between two
+points?</p></li>
+</ol>
+<p>On top of that, Bordado also offers other utilities like splitting points into
+blocks and rolling windows, calculating some nearest neighbor statistics, and
+more.</p>
+<p><strong>Let’s see how it works!</strong></p>
+<section id="importing-the-package">
+<h2>Importing the package<a class="headerlink" href="#importing-the-package" title="Link to this heading">#</a></h2>
+<p>Everything in Bordado is available through the <a class="reference internal" href="api/index.html#module-bordado" title="bordado"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bordado</span></code></a> module. There are
+no submodules to import. We’ll usually alias the import to <code class="docutils literal notranslate"><span class="pre">bd</span></code>:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">bordado</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Checkout the “<a class="reference internal" href="api/index.html#api"><span class="std std-ref">List of functions and classes (API)</span></a>” for a full list of all that Bordado offers.</p>
+</section>
+<section id="generating-evenly-spaced-values">
+<h2>Generating evenly spaced values<a class="headerlink" href="#generating-evenly-spaced-values" title="Link to this heading">#</a></h2>
+<p>Let’s say we want to generate values between 0 and 10 with an interval of 0.5.
+We can use function <a class="reference internal" href="api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.line_coordinates</span></code></a> to do this by doing some
+maths to figure out that we need 21 points for this (don’t forget the extra one
+because of the end point):</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">line_coordinates</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 0.   0.5  1.   1.5  2.   2.5  3.   3.5  4.   4.5  5.   5.5  6.   6.5
+  7.   7.5  8.   8.5  9.   9.5 10. ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or we could pass the <code class="docutils literal notranslate"><span class="pre">spacing</span></code> argument to <a class="reference internal" href="api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">line_coordinates</span></code></a>
+instead and let Bordado do the maths:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">line_coordinates</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 0.   0.5  1.   1.5  2.   2.5  3.   3.5  4.   4.5  5.   5.5  6.   6.5
+  7.   7.5  8.   8.5  9.   9.5 10. ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also optionally generate values at the middle of the 0.5 wide cells
+instead of at their borders by passing the <code class="docutils literal notranslate"><span class="pre">pixel_register</span></code> argument:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values_pixel</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">line_coordinates</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">pixel_register</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values_pixel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[0.25 0.75 1.25 1.75 2.25 2.75 3.25 3.75 4.25 4.75 5.25 5.75 6.25 6.75
+ 7.25 7.75 8.25 8.75 9.25 9.75]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that when using pixel-registration, there will be one less value because
+we’re calculating the number of intervals instead of the number of borders:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">values_pixel</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>21 20
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another benefit of using Bordado is that it will automatically adjust the
+spacing to make it fit the given interval:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">line_coordinates</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 0.          0.58823529  1.17647059  1.76470588  2.35294118  2.94117647
+  3.52941176  4.11764706  4.70588235  5.29411765  5.88235294  6.47058824
+  7.05882353  7.64705882  8.23529412  8.82352941  9.41176471 10.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This way, you can provide an approximate spacing that you desire without having
+to calculate the exact spacing that would be a multiple of your interval.
+But if the spacing is important and must be preserved, we can ask Bordado do
+adjust the interval (we call it a <em>region</em>) instead:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">line_coordinates</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-0.1  0.5  1.1  1.7  2.3  2.9  3.5  4.1  4.7  5.3  5.9  6.5  7.1  7.7
+  8.3  8.9  9.5 10.1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This same logic also applies to multidimensional sets of values or coordinates,
+for example those belonging to regular grids.</p>
+</section>
+<section id="regular-grids">
+<h2>Regular grids<a class="headerlink" href="#regular-grids" title="Link to this heading">#</a></h2>
+<p>Function <a class="reference internal" href="api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.grid_coordinates</span></code></a> combines
+<a class="reference internal" href="api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">line_coordinates</span></code></a> to generate sets of coordinates for grids.
+For example, this is how we generate coordinates for a 2D grid:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]]
+coordinate 1:
+[[-5. -5. -5. -5. -5. -5.]
+ [-3. -3. -3. -3. -3. -3.]
+ [-1. -1. -1. -1. -1. -1.]
+ [ 1.  1.  1.  1.  1.  1.]
+ [ 3.  3.  3.  3.  3.  3.]
+ [ 5.  5.  5.  5.  5.  5.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first argument to <a class="reference internal" href="api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a> is called a <strong>region</strong>
+in Bordado and it specifies the boundaries of the domain which contains the
+grid.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <strong>region</strong> will always have an even number of elements. Each pair is the
+minimum and maximum value along a dimension of the grid. In our example, the
+first coordinate is between 0 and 10 and the send between -5 and 5.</p>
+</div>
+<p>The coordinates are returned as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of numpy arrays that have
+dimensions compatible with the number of elements in the region.
+We can make multidimensional grids by adding more elements to the region:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]
+
+ [[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]
+
+ [[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]]
+
+coordinate 1:
+[[[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]
+
+ [[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]
+
+ [[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]]
+
+coordinate 2:
+[[[ 6.  6.  6.  6.]
+  [ 6.  6.  6.  6.]
+  [ 6.  6.  6.  6.]]
+
+ [[ 9.  9.  9.  9.]
+  [ 9.  9.  9.  9.]
+  [ 9.  9.  9.  9.]]
+
+ [[12. 12. 12. 12.]
+  [12. 12. 12. 12.]
+  [12. 12. 12. 12.]]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like with <a class="reference internal" href="api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">line_coordinates</span></code></a>, we can pass a spacing that
+isn’t exactly a multiple of the dimensions of the region:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">2.6</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]]
+coordinate 1:
+[[-5.  -5.  -5.  -5.  -5. ]
+ [-2.5 -2.5 -2.5 -2.5 -2.5]
+ [ 0.   0.   0.   0.   0. ]
+ [ 2.5  2.5  2.5  2.5  2.5]
+ [ 5.   5.   5.   5.   5. ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can also adjust the region instead of the spacing:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">2.6</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]]
+coordinate 1:
+[[-5.2 -5.2 -5.2 -5.2 -5.2]
+ [-2.6 -2.6 -2.6 -2.6 -2.6]
+ [ 0.   0.   0.   0.   0. ]
+ [ 2.6  2.6  2.6  2.6  2.6]
+ [ 5.2  5.2  5.2  5.2  5.2]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bordado also offers a lot more than generating coordinates. Let’s see how we
+can use it to split points as well.</p>
+</section>
+<section id="splitting-into-blocks">
+<h2>Splitting into blocks<a class="headerlink" href="#splitting-into-blocks" title="Link to this heading">#</a></h2>
+<p>Bordado has function <a class="reference internal" href="api/generated/bordado.block_split.html#bordado.block_split" title="bordado.block_split"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.block_split</span></code></a> that can provide indices for
+segmenting coordinate arrays according to spatial blocks.
+For example, let’s make some random coordinates with
+<a class="reference internal" href="api/generated/bordado.random_coordinates.html#bordado.random_coordinates" title="bordado.random_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.random_coordinates</span></code></a> and then divide them into blocks of a given
+size:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">random_coordinates</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">44</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">coordinates</span></code> is a tuple with two 1d-arrays, one for each coordinate
+of our 2-dimensional region.</p>
+</div>
+<p>Then we can use <a class="reference internal" href="api/generated/bordado.block_split.html#bordado.block_split" title="bordado.block_split"><code class="xref py py-func docutils literal notranslate"><span class="pre">block_split</span></code></a> to get the indexers that split
+these points into evenly sized blocks:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_coordinates</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">block_split</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[13 12 14  8  5 14  3 13  5  2  1 14  3  4  7  1  2 10  4 13 13  6  4  9
+  3  5 12 10 10  3 13 14  6  6  2  0  5  2  1 13 12  9 13 11  4  9  6  1
+ 13  5  5  0  3 13  3  3  2  7  5  5  3  2 12  8  8 12 12  1  5  7  6 12
+  9 11 10  6 11  8 12  8  8  7  4  5 10  5  3  7  0  2 10  8  2  6  1  3
+ 11  5 10  9  9 13 11 14 13 13 12  1 10  9  7  5 11 12  0 14 13  8  2  3
+ 12  8 10  7 10  7 11  0  5 12 10 14  2  6  2  0 14 12 13 10 12 12  4  2
+  7 11  1  7 12  0  9 14 10  2 10  8 11  3  8  8  0 14  1  0  7 11 14 14
+  1  9  1  7 11 14  5  5 12  9  4  8  4  4  2  6  8  8  6 10 13  6  4 11
+  0  4 10  5 12  9  5  1  3  4  2 10  0  6 10 13  5  7 13 12 10 14 13  3
+  5  0  9 11  6  7  3 14  1  4  0  2  8  5  0  2  4  7  4 14  2  3  5  5
+  4  3 11  2  8  9  3  7 11 12  3  4  2  6 11  3  4 10  0  7 10  4  1  0
+ 14  0  1  0  0  5  0  5  5 12  3 11  6  2 14 14  0 10  6  6 12  7 10  1
+ 12  5  4  5  4  0  4  9  4  4 13 13 13  0 12  7  4  2 11  3  6 10  2  2
+ 11  6  1 11 11  8  6  4  4  7  1  7 14  3  9  2 13  1  8  5  8 14 10  8
+ 10 13  5  9  0 14  9  7  3 13  9 11  2 10  3  0 12 12  2  7 13 13  7  7
+ 14 10 10  5  3 12 13 13  1  4 13  1 11  6 10 10  9  2  6  8  7  9 13  7
+  1  9  8  4  0 14  8 10  2  3 10 12  4  1  2  7  6  4  3  5 14  9  6  4
+  0  4 13 13 10 14 10 11  0  3  0  9  3 10  5  5  3  4  1 14  5 14  4  8
+  8 14 10  0 10  2 13  3  4 10  3  5  6  3 14 13 10  8  5  4  3  0 10 10
+ 14  7  8  8  7  5  4  1 12  8 13  4  5  2  2  2  0 10  1  6  7  8  8  2
+ 12 11 12  6  0 12  7  1  7 12  8 13 13  1 13  7  7  3 11  2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The labels are the number of the block to which each point belongs. For
+example, these are the coordinates of the points that fall inside block 1:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">labels</span><span class="o">==</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[23.70798024 22.27238722 22.26909349 22.88328104 23.03950098 23.01512089
+ 22.72241562 23.31568997 22.30213991 23.17138893 22.90917838 23.10323673
+ 22.86446227 23.10334674 22.84720082 23.73614138 23.6639245  23.28361205
+ 22.88155614 23.33637758 22.70534941 23.76359473 22.95359025 22.38552821
+ 23.01342633 22.78075546 22.25592868 23.16214152]
+[-49.56764512 -48.96203333 -49.00455879 -49.5197043  -49.65134911
+ -49.95611326 -49.31537557 -49.97299925 -48.87443791 -48.22182766
+ -49.17907233 -48.20370025 -49.3819839  -49.71575588 -48.87006815
+ -48.08960529 -49.23854015 -48.23146884 -48.47801296 -49.40082514
+ -49.86115943 -48.81954692 -48.78747139 -49.03812785 -49.24601688
+ -48.07080205 -49.69935986 -48.72827233]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">block_coordinates</span></code> is a tuple with the coordinates of the center of each
+block:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">block_coordinates</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[21.04797324 23.03532303 25.02267282 27.01002262 28.99737241]
+ [21.04797324 23.03532303 25.02267282 27.01002262 28.99737241]
+ [21.04797324 23.03532303 25.02267282 27.01002262 28.99737241]]
+[[-48.99509132 -48.99509132 -48.99509132 -48.99509132 -48.99509132]
+ [-47.0000707  -47.0000707  -47.0000707  -47.0000707  -47.0000707 ]
+ [-45.00505009 -45.00505009 -45.00505009 -45.00505009 -45.00505009]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s use <code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib</span></code> to plot this so we can understand it better. We’ll
+plot the block centers as stars and a scatter of the points colored according
+to which block they belong:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;tab20&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Block number&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">block_coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">block_coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;*k&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/overview_15_0.png" src="_images/overview_15_0.png" />
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The keen-eyed among you might have noticed that the coordinates of the block
+centers are <strong>not spaced by 2</strong> (the block size). This is because by default
+<a class="reference internal" href="api/generated/bordado.block_split.html#bordado.block_split" title="bordado.block_split"><code class="xref py py-func docutils literal notranslate"><span class="pre">block_split</span></code></a> extracts the region that is divided into blocks
+from the input data, which are random and there are no points exactly on the
+region boundaries. You can pass a <code class="docutils literal notranslate"><span class="pre">region</span></code> argument to make this be exact
+if desired.</p>
+</div>
+</section>
+<section id="explore-the-rest">
+<h2>Explore the rest!<a class="headerlink" href="#explore-the-rest" title="Link to this heading">#</a></h2>
+<p>That’s a brief overview of the functionality in Bordado but there’s plenty
+more! Have a look at the “<a class="reference internal" href="api/index.html#api"><span class="std std-ref">List of functions and classes (API)</span></a>” and the documentation for each function.</p>
+<p>If you have any questions, please ask on any of the <a class="reference external" href="https://www.fatiando.org/contact">Fatiando a Terra community
+channels</a>! We’re also always looking for
+more people to get involved in the development. Leave us a message if that’s
+you.</p>
+<p>Oh, and don’t forget to <a class="reference internal" href="citing.html#citing"><span class="std std-ref">cite Bordado</span></a> if you use it in
+a publication!</p>
+</section>
 </section>
 
 
@@ -452,6 +909,25 @@ document.write(`
             
             
               
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-the-package">Importing the package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-evenly-spaced-values">Generating evenly spaced values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-grids">Regular grids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-into-blocks">Splitting into blocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-rest">Explore the rest!</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
             
           </div>
           <footer class="bd-footer-content">
@@ -476,7 +952,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 08, 2025.
+  Last updated on May 15, 2025.
   <br/>
 </p>
   </div>

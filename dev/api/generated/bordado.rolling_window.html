@@ -59,7 +59,7 @@
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="bordado.check_coordinates" href="bordado.check_coordinates.html" />
+    <link rel="next" title="bordado.neighbor_distance_statistics" href="bordado.neighbor_distance_statistics.html" />
     <link rel="prev" title="bordado.expanding_window" href="bordado.expanding_window.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
@@ -176,14 +176,17 @@
 <li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.pad_region.html">bordado.pad_region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.check_region.html">bordado.check_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.rolling_window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.check_coordinates.html">bordado.check_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
@@ -435,8 +438,9 @@ inside a given window.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. The arrays can be
-n-dimensional.</p>
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
+Python lists or any numpy-compatible array type. Arrays can be of any
+shape but must all have the same shape.</p>
 </dd>
 <dt><strong>window_size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The size of the windows. Units should match the units of <em>coordinates</em>.
 In case the window size is not a multiple of the region, either of them
@@ -625,11 +629,11 @@ the same as before:</p>
       </div>
     </a>
     <a class="right-next"
-       href="bordado.check_coordinates.html"
+       href="bordado.neighbor_distance_statistics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">bordado.check_coordinates</p>
+        <p class="prev-next-title">bordado.neighbor_distance_statistics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -679,7 +683,7 @@ the same as before:</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 08, 2025.
+  Last updated on May 15, 2025.
   <br/>
 </p>
   </div>

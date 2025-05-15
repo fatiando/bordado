@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     
-        <title>bordado.random_coordinates | Bordado dev</title>
+        <title>bordado.spacing_to_size | Bordado dev</title>
     
 
   
@@ -55,12 +55,12 @@
     <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.random_coordinates';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.spacing_to_size';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="bordado.grid_coordinates" href="bordado.grid_coordinates.html" />
-    <link rel="prev" title="bordado.line_coordinates" href="bordado.line_coordinates.html" />
+    <link rel="next" title="bordado.shape_to_spacing" href="bordado.shape_to_spacing.html" />
+    <link rel="prev" title="bordado.neighbor_distance_statistics" href="bordado.neighbor_distance_statistics.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -174,7 +174,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
@@ -185,7 +185,7 @@
 <li class="toctree-l2"><a class="reference internal" href="bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.spacing_to_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
@@ -272,7 +272,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.random_coordinates.rst" target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.spacing_to_size.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +289,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.random_coordinates.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.spacing_to_size.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +319,7 @@
       
       
       
-      <li><a href="../../_sources/api/generated/bordado.random_coordinates.rst" target="_blank"
+      <li><a href="../../_sources/api/generated/bordado.spacing_to_size.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,7 +403,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>bordado.random_coordinates</h1>
+    <h1>bordado.spacing_to_size</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -413,7 +413,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.random_coordinates"><code class="docutils literal notranslate"><span class="pre">random_coordinates</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.spacing_to_size"><code class="docutils literal notranslate"><span class="pre">spacing_to_size</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -425,88 +425,60 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="bordado-random-coordinates">
-<h1>bordado.random_coordinates<a class="headerlink" href="#bordado-random-coordinates" title="Link to this heading">#</a></h1>
+  <section id="bordado-spacing-to-size">
+<h1>bordado.spacing_to_size<a class="headerlink" href="#bordado-spacing-to-size" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="bordado.random_coordinates">
-<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">random_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_dimensional_coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_random.html#random_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.random_coordinates" title="Link to this definition">#</a></dt>
-<dd><p>Generate the coordinates for a uniformly random scatter of points.</p>
-<p>The points are drawn from a uniform distribution, independently for each
-dimension of the given region.</p>
+<dt class="sig sig-object py" id="bordado.spacing_to_size">
+<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">spacing_to_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spacing'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_utils.html#spacing_to_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.spacing_to_size" title="Link to this definition">#</a></dt>
+<dd><p>Convert a spacing to the number of points between start and stop.</p>
+<p>Takes into account if the spacing or the interval needs to be adjusted in
+order to fit exactly. This is needed when the interval is not a multiple of
+the spacing.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>, …)</span></dt><dd><p>The boundaries of a given region in Cartesian or geographic
-coordinates. Should have a lower and an upper boundary for each
-dimension of the coordinate system.</p>
+<dt><strong>start</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The starting value of the sequence.</p>
 </dd>
-<dt><strong>size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>The number of points to generate.</p>
+<dt><strong>stop</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The end value of the sequence.</p>
 </dd>
-<dt><strong>random_seed</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.random.Generator</span></code></a></span></dt><dd><p>A seed for a random number generator (RNG) used to generate the
-coordinates. If an integer is given, it will be used as a seed for
-<a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.default_rng" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.random.default_rng</span></code></a> which will then be used as the
-generator. If a <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.random.Generator</span></code></a> is given, it will be
-used. If <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.default_rng" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">default_rng</span></code></a> will be
-used with no seed to create a generator (resulting in different numbers
-with each run). Use a seed to make sure computations are reproducible.
-Default is None.</p>
+<dt><strong>spacing</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The step size (interval) between points in the sequence.</p>
 </dd>
-<dt><strong>non_dimensional_coords</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#arrays-scalars" title="(in NumPy v2.2)"><span class="xref std std-ref">scalar</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">or</span></code> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">scalars</span></code></span></dt><dd><p>If not None, then value(s) of extra non-dimensional coordinates
-(coordinates that aren’t part of the sample dimensions, like height for
-a lat/lon grid). Will generate extra coordinate arrays from these
-values with the same shape of the final coordinates and the constant
-value given here. Use this to generate arrays of constant heights or
-times, for example, which might be needed to accompany a set of points.</p>
+<dt><strong>adjust</strong><span class="classifier">{‘spacing’, ‘region’}</span></dt><dd><p>Whether to adjust the spacing or the interval/region if required.
+Defaults to adjusting the spacing.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">arrays</span></code></span></dt><dd><p>Arrays with coordinates of each point in the grid. Each array contains
-values for a dimension in an order compatible with <em>region</em> followed by
-any extra dimensions given in <em>non_dimensional_coords</em>. All arrays will
-have the specified <em>size</em>.</p>
+<dt><strong>size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>The number of points between start and stop.</p>
+</dd>
+<dt><strong>start</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The end of the interval, which may or may not have been adjusted.</p>
+</dd>
+<dt><strong>stop</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The end of the interval, which may or may not have been adjusted.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<p>We’ll use a seed value to ensure that the same will be generated every
-time:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">easting</span><span class="p">]))</span>
-<span class="go">6.3696, 2.6979, 0.4097, 0.1653</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">northing</span><span class="p">]))</span>
-<span class="go">-1.1867, -1.0872, -1.3934, -1.2705</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="mi">12</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
-<span class="go">[12. 12. 12. 12.]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1986</span><span class="p">],</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
-<span class="go">[12. 12. 12. 12.]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-<span class="go">[1986. 1986. 1986. 1986.]</span>
+<p>If the spacing is a multiple of the interval, then the size is how many
+points fit in the interval and the start and stop values are maintained:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">size</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">spacing_to_size</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
+<span class="go">3 0 1</span>
 </pre></div>
 </div>
-<p>We’re not limited to 2 dimensions:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">easting</span><span class="p">]))</span>
-<span class="go">6.3696, 2.6979, 0.4097, 0.1653</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">northing</span><span class="p">]))</span>
-<span class="go">-1.1867, -1.0872, -1.3934, -1.2705</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">up</span><span class="p">]))</span>
-<span class="go">0.1544, 0.1935, 0.1816, 0.1003</span>
+<p>If the spacing is not a multiple, then it will be adjusted to fit the
+interval by default. In this case, then number of points remains the same:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">size</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">spacing_to_size</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
+<span class="go">3 0 1</span>
+</pre></div>
+</div>
+<p>Alternatively, we can ask it to adjust the region instead of the spacing
+between points:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">size</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">spacing_to_size</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">start</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">stop</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">3 -0.1 1.1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -525,20 +497,20 @@ time:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bordado.line_coordinates.html"
+       href="bordado.neighbor_distance_statistics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">bordado.line_coordinates</p>
+        <p class="prev-next-title">bordado.neighbor_distance_statistics</p>
       </div>
     </a>
     <a class="right-next"
-       href="bordado.grid_coordinates.html"
+       href="bordado.shape_to_spacing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">bordado.grid_coordinates</p>
+        <p class="prev-next-title">bordado.shape_to_spacing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -558,7 +530,7 @@ time:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.random_coordinates"><code class="docutils literal notranslate"><span class="pre">random_coordinates</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.spacing_to_size"><code class="docutils literal notranslate"><span class="pre">spacing_to_size</span></code></a></li>
 </ul>
   </nav></div>
 

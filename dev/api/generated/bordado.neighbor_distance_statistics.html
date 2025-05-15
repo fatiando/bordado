@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     
-        <title>bordado.check_coordinates | Bordado dev</title>
+        <title>bordado.neighbor_distance_statistics | Bordado dev</title>
     
 
   
@@ -55,11 +55,11 @@
     <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.check_coordinates';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.neighbor_distance_statistics';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Citing Bordado" href="../../citing.html" />
+    <link rel="next" title="bordado.spacing_to_size" href="bordado.spacing_to_size.html" />
     <link rel="prev" title="bordado.rolling_window" href="bordado.rolling_window.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
@@ -176,14 +176,17 @@
 <li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.pad_region.html">bordado.pad_region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.check_region.html">bordado.check_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window.html">bordado.rolling_window</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.check_coordinates</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.neighbor_distance_statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
@@ -269,7 +272,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.check_coordinates.rst" target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.neighbor_distance_statistics.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -286,7 +289,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.check_coordinates.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.neighbor_distance_statistics.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -316,7 +319,7 @@
       
       
       
-      <li><a href="../../_sources/api/generated/bordado.check_coordinates.rst" target="_blank"
+      <li><a href="../../_sources/api/generated/bordado.neighbor_distance_statistics.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -400,7 +403,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>bordado.check_coordinates</h1>
+    <h1>bordado.neighbor_distance_statistics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,7 +413,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.check_coordinates"><code class="docutils literal notranslate"><span class="pre">check_coordinates</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.neighbor_distance_statistics"><code class="docutils literal notranslate"><span class="pre">neighbor_distance_statistics</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -422,33 +425,132 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="bordado-check-coordinates">
-<h1>bordado.check_coordinates<a class="headerlink" href="#bordado-check-coordinates" title="Link to this heading">#</a></h1>
+  <section id="bordado-neighbor-distance-statistics">
+<h1>bordado.neighbor_distance_statistics<a class="headerlink" href="#bordado-neighbor-distance-statistics" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="bordado.check_coordinates">
-<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">check_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_coordinates.html#check_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.check_coordinates" title="Link to this definition">#</a></dt>
-<dd><p>Check that coordinate arrays all have the same shape.</p>
+<dt class="sig sig-object py" id="bordado.neighbor_distance_statistics">
+<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">neighbor_distance_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statistic</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_distance.html#neighbor_distance_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.neighbor_distance_statistics" title="Link to this definition">#</a></dt>
+<dd><p>Calculate statistics of the distances to the k-nearest neighbors of points.</p>
+<p>For each point specified in <em>coordinates</em>, calculate the given statistic on
+the Cartesian distance to its <em>k</em> neighbors among the other points in the
+dataset.</p>
+<p>Useful for finding mean/median distances between points, general point
+spread (standard deviation), variability of neighboring distances
+(peak-to-peak), etc.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
-Python lists.</p>
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Should be in an
+order compatible with the order of boundaries in <em>region</em>. Arrays can
+be Python lists. Arrays can be of any shape but must all have the same
+shape.</p>
+</dd>
+<dt><strong>statistic</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Which statistic to calculate for the distances of the k-nearest
+neighbors of each point. Valid values are: <code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code>,  <code class="docutils literal notranslate"><span class="pre">&quot;median&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;std&quot;</span></code> (standard deviation),  <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code> (variance),  <code class="docutils literal notranslate"><span class="pre">&quot;ptp&quot;</span></code>
+(peak-to-peak amplitude).</p>
+</dd>
+<dt><strong>k</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Will calculate the median of the <em>k</em> nearest neighbors of each point. A
+value of 1 will result in the distance to nearest neighbor of each data
+point. Must be &gt;= 1. Default is 1.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of coordinate arrays, converted to numpy arrays if necessary.</p>
+<dt><strong>statistics</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the statistic of the k-nearest neighbor distances of each
+point. The array will have the same shape as the input coordinate
+arrays.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>If the coordinates don’t have the same shape.</p>
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>If <em>k</em> is less than 1, if the <em>statistic</em> is invalid, or if coordinate
+arrays have different shapes.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>To get the average point spacing for sparse uniformly spaced datasets,
+calculating the mean/median using <em>k</em> of 1 is reasonable. Datasets with
+points clustered into tight groups (e.g., densely sampled along a flight
+line or ship track) will have very small distances to the closest
+neighbors, which is not representative of the actual median spacing of
+points because it doesn’t take the spacing between lines into account. In
+these cases, a median of the 10-20 or more nearest neighbors might be more
+representative.</p>
+<p class="rubric">Examples</p>
+<p>Generate a grid of points for an example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">bordado</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">[[ 5.  6.  7.  8.  9. 10.]</span>
+<span class="go"> [ 5.  6.  7.  8.  9. 10.]</span>
+<span class="go"> [ 5.  6.  7.  8.  9. 10.]</span>
+<span class="go"> [ 5.  6.  7.  8.  9. 10.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">[[-20. -20. -20. -20. -20. -20.]</span>
+<span class="go"> [-19. -19. -19. -19. -19. -19.]</span>
+<span class="go"> [-18. -18. -18. -18. -18. -18.]</span>
+<span class="go"> [-17. -17. -17. -17. -17. -17.]]</span>
+</pre></div>
+</div>
+<p>The mean of the distance to 1 nearest neighbor should be the grid spacing:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean_distances</span> <span class="o">=</span> <span class="n">neighbor_distance_statistics</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mean_distances</span><span class="p">)</span>
+<span class="go">[[1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]]</span>
+</pre></div>
+</div>
+<p>The statistics returned have the same shape as the input coordinates:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mean_distances</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(4, 6) (4, 6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_distances</span> <span class="o">=</span> <span class="n">neighbor_distance_statistics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">],</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mean_distances</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(24,)</span>
+</pre></div>
+</div>
+<p>The mean distance to the 2 nearest points should also all be 1 since they
+are the neighbors along the rows and columns of the matrix:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean_distances</span> <span class="o">=</span> <span class="n">neighbor_distance_statistics</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mean_distances</span><span class="p">)</span>
+<span class="go">[[1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]]</span>
+</pre></div>
+</div>
+<p>The distance to the 3 nearest points is 1 but on the corners of the grid,
+the distances are [1, 1, sqrt(2)] which leads to a median of 1:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_distances</span> <span class="o">=</span> <span class="n">neighbor_distance_statistics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">median_distances</span><span class="p">)</span>
+<span class="go">[[1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]</span>
+<span class="go"> [1. 1. 1. 1. 1. 1.]]</span>
+</pre></div>
+</div>
+<p>But using the 4 nearest points leads to distances [1, 1, sqrt(2), 2] at the
+corners, which results in a median of 1.21.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_distances</span> <span class="o">=</span> <span class="n">neighbor_distance_statistics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">median_distances</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]))</span>
+<span class="go">1.21 1.00 1.00 1.00 1.00 1.21</span>
+<span class="go">1.00 1.00 1.00 1.00 1.00 1.00</span>
+<span class="go">1.00 1.00 1.00 1.00 1.00 1.00</span>
+<span class="go">1.21 1.00 1.00 1.00 1.00 1.21</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <div style='clear:both'></div></section>
@@ -474,11 +576,11 @@ Python lists.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../citing.html"
+       href="bordado.spacing_to_size.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Citing Bordado</p>
+        <p class="prev-next-title">bordado.spacing_to_size</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -498,7 +600,7 @@ Python lists.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.check_coordinates"><code class="docutils literal notranslate"><span class="pre">check_coordinates</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.neighbor_distance_statistics"><code class="docutils literal notranslate"><span class="pre">neighbor_distance_statistics</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -528,7 +630,7 @@ Python lists.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 08, 2025.
+  Last updated on May 15, 2025.
   <br/>
 </p>
   </div>

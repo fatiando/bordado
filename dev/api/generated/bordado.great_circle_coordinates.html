@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     
-        <title>bordado.random_coordinates | Bordado dev</title>
+        <title>bordado.great_circle_coordinates | Bordado dev</title>
     
 
   
@@ -55,12 +55,12 @@
     <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.random_coordinates';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.great_circle_coordinates';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="bordado.grid_coordinates" href="bordado.grid_coordinates.html" />
-    <link rel="prev" title="bordado.line_coordinates" href="bordado.line_coordinates.html" />
+    <link rel="next" title="bordado.inside" href="bordado.inside.html" />
+    <link rel="prev" title="bordado.profile_coordinates" href="bordado.profile_coordinates.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -174,10 +174,10 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.great_circle_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.pad_region.html">bordado.pad_region</a></li>
@@ -272,7 +272,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.random_coordinates.rst" target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.great_circle_coordinates.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +289,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.random_coordinates.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.great_circle_coordinates.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +319,7 @@
       
       
       
-      <li><a href="../../_sources/api/generated/bordado.random_coordinates.rst" target="_blank"
+      <li><a href="../../_sources/api/generated/bordado.great_circle_coordinates.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,7 +403,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>bordado.random_coordinates</h1>
+    <h1>bordado.great_circle_coordinates</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -413,7 +413,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.random_coordinates"><code class="docutils literal notranslate"><span class="pre">random_coordinates</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.great_circle_coordinates"><code class="docutils literal notranslate"><span class="pre">great_circle_coordinates</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -425,88 +425,88 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="bordado-random-coordinates">
-<h1>bordado.random_coordinates<a class="headerlink" href="#bordado-random-coordinates" title="Link to this heading">#</a></h1>
+  <section id="bordado-great-circle-coordinates">
+<h1>bordado.great_circle_coordinates<a class="headerlink" href="#bordado-great-circle-coordinates" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="bordado.random_coordinates">
-<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">random_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_dimensional_coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_random.html#random_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.random_coordinates" title="Link to this definition">#</a></dt>
-<dd><p>Generate the coordinates for a uniformly random scatter of points.</p>
-<p>The points are drawn from a uniform distribution, independently for each
-dimension of the given region.</p>
+<dt class="sig sig-object py" id="bordado.great_circle_coordinates">
+<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">great_circle_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beginning</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6370994</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_dimensional_coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_profile.html#great_circle_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.great_circle_coordinates" title="Link to this definition">#</a></dt>
+<dd><p>Generate evenly spaced coordinates along a great circle between points.</p>
+<p>The beginning and end points must be (longitude, latitude) coordinates on
+a sphere. The generated coordinates will be evenly spaced (in physical
+distances, not degrees) and fall along a great circle path between the two
+points. The points can be specified by <em>size</em> (number of points) or their
+<em>spacing</em> (in physical units, like meters).</p>
+<p>Use this function to generates coordinates for sampling along a profile
+when data are in geographic coordinates.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>, …)</span></dt><dd><p>The boundaries of a given region in Cartesian or geographic
-coordinates. Should have a lower and an upper boundary for each
-dimension of the coordinate system.</p>
+<dt><strong>beginning</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">longitude</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">latitude</span></code>)</span></dt><dd><p>The coordinates of the starting point of the profile. Coordinates must
+be single values and not array-like. Units should be decimal degrees.</p>
 </dd>
-<dt><strong>size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>The number of points to generate.</p>
+<dt><strong>end</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">longitude</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">latitude</span></code>)</span></dt><dd><p>The coordinates of the ending point of the profile. Coordinates must be
+single values and not array-like. Units should be decimal degrees.</p>
 </dd>
-<dt><strong>random_seed</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.random.Generator</span></code></a></span></dt><dd><p>A seed for a random number generator (RNG) used to generate the
-coordinates. If an integer is given, it will be used as a seed for
-<a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.default_rng" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.random.default_rng</span></code></a> which will then be used as the
-generator. If a <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.random.Generator</span></code></a> is given, it will be
-used. If <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.default_rng" title="(in NumPy v2.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">default_rng</span></code></a> will be
-used with no seed to create a generator (resulting in different numbers
-with each run). Use a seed to make sure computations are reproducible.
-Default is None.</p>
+<dt><strong>size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a></span></dt><dd><p>The number of points in the profile. If None, <em>spacing</em> must be
+provided.</p>
+</dd>
+<dt><strong>spacing</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a></span></dt><dd><p>The step size (interval) between points in the profile. If None, <em>size</em>
+must be provided. Units should be compatible with <em>radius</em>
+(usually meters).</p>
+</dd>
+<dt><strong>radius</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The radius of the sphere, usually the mean radius of the Earth or other
+body used to scale the distances along the great circle. Units should
+be compatible with <em>spacing</em> (usually meters). Defaults to the mean
+radius of the WGS84 Earth ellipsoid (6,370,994 meters).</p>
 </dd>
 <dt><strong>non_dimensional_coords</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#arrays-scalars" title="(in NumPy v2.2)"><span class="xref std std-ref">scalar</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">or</span></code> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">scalars</span></code></span></dt><dd><p>If not None, then value(s) of extra non-dimensional coordinates
-(coordinates that aren’t part of the sample dimensions, like height for
-a lat/lon grid). Will generate extra coordinate arrays from these
-values with the same shape of the final coordinates and the constant
-value given here. Use this to generate arrays of constant heights or
-times, for example, which might be needed to accompany a set of points.</p>
+(coordinates that aren’t part of the profile dimensions, like height
+for a lat/lon profile). Will generate extra coordinate arrays from
+these values with the same shape of the final profile coordinates and
+the constant value given here. Use this to generate arrays of constant
+heights or times, for example, which might be needed to accompany
+a profile.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">arrays</span></code></span></dt><dd><p>Arrays with coordinates of each point in the grid. Each array contains
-values for a dimension in an order compatible with <em>region</em> followed by
-any extra dimensions given in <em>non_dimensional_coords</em>. All arrays will
-have the specified <em>size</em>.</p>
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">longitude</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">latitude</span></code>, …)</span></dt><dd><p>Arrays with the coordinates of each point in the profile. The first two
+are longitude and latitude. Subsequent arrays are any extra values
+given in <em>non_dimensional_coords</em>. All arrays will be 1-dimensional and
+have the same shape.</p>
+</dd>
+<dt><strong>distances</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>The great circle distances between each point in the profile and the
+beginning point.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<p>We’ll use a seed value to ensure that the same will be generated every
-time:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<p>Generate coordinates between points at the equator for a sphere with a unit
+radius:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spacing</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">),</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">great_circle_coordinates</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">easting</span><span class="p">]))</span>
-<span class="go">6.3696, 2.6979, 0.4097, 0.1653</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">northing</span><span class="p">]))</span>
-<span class="go">-1.1867, -1.0872, -1.3934, -1.2705</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="mi">12</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
-<span class="go">[12. 12. 12. 12.]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1986</span><span class="p">],</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
-<span class="go">[12. 12. 12. 12.]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-<span class="go">[1986. 1986. 1986. 1986.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;longitude:&#39;</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">longitude</span><span class="p">))</span>
+<span class="go">longitude: 0.0, 2.0, 4.0, 6.0, 8.0, 10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;latitude:&#39;</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">latitude</span><span class="p">))</span>
+<span class="go">latitude: 0.0, 0.0, 0.0, 0.0, 0.0, 0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;distance:&#39;</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">distance</span><span class="p">))</span>
+<span class="go">distance: 0.0000, 0.0349, 0.0698, 0.1047, 0.1396, 0.1745</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">distance</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">distance</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">spacing</span><span class="p">))</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>We’re not limited to 2 dimensions:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">easting</span><span class="p">,</span> <span class="n">northing</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">random_coordinates</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">easting</span><span class="p">]))</span>
-<span class="go">6.3696, 2.6979, 0.4097, 0.1653</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">northing</span><span class="p">]))</span>
-<span class="go">-1.1867, -1.0872, -1.3934, -1.2705</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">up</span><span class="p">]))</span>
-<span class="go">0.1544, 0.1935, 0.1816, 0.1003</span>
+<p>It can sometimes be useful to generate an additional array of the same size
+as the coordinates but filled with a single value, for example if  we also
+need a constant height value returned:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">great_circle_coordinates</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+<span class="go">[35. 35. 35. 35. 35. 35. 35. 35. 35. 35. 35.]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -525,20 +525,20 @@ time:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bordado.line_coordinates.html"
+       href="bordado.profile_coordinates.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">bordado.line_coordinates</p>
+        <p class="prev-next-title">bordado.profile_coordinates</p>
       </div>
     </a>
     <a class="right-next"
-       href="bordado.grid_coordinates.html"
+       href="bordado.inside.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">bordado.grid_coordinates</p>
+        <p class="prev-next-title">bordado.inside</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -558,7 +558,7 @@ time:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.random_coordinates"><code class="docutils literal notranslate"><span class="pre">random_coordinates</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.great_circle_coordinates"><code class="docutils literal notranslate"><span class="pre">great_circle_coordinates</span></code></a></li>
 </ul>
   </nav></div>
 

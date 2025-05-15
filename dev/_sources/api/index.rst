@@ -16,6 +16,8 @@ Coordinate generation
    line_coordinates
    random_coordinates
    grid_coordinates
+   profile_coordinates
+   great_circle_coordinates
 
 Regions and bounding boxes
 --------------------------
@@ -26,7 +28,6 @@ Regions and bounding boxes
    inside
    get_region
    pad_region
-   check_region
 
 Splitting points into blocks and windows
 ----------------------------------------
@@ -38,10 +39,12 @@ Splitting points into blocks and windows
    expanding_window
    rolling_window
 
-Coordinate manipulation
------------------------
+Other utilities
+---------------
 
 .. autosummary::
    :toctree: generated/
 
-   check_coordinates
+   neighbor_distance_statistics
+   spacing_to_size
+   shape_to_spacing

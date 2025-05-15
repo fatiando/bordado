@@ -3,6 +3,41 @@
 Changelog
 =========
 
+Version 0.3.0
+-------------
+
+Released on: 2025/05/15
+
+doi: https://doi.org/10.5281/zenodo.15427887
+
+**Breaking changes:**
+
+- Remove validation functions ``check_coordinates``, ``check_region``, and ``check_shape`` from the public API because they will tend to be specific to individual projects, causing compatibility problems for us when our requirements change (`#49 <https://github.com/fatiando/bordado/pull/49>`__)
+
+New functions:
+
+- Add function ``great_circle_coordinates`` to make points at regular distances along a great circle on a sphere (`#50 <https://github.com/fatiando/bordado/pull/50>`__)
+- Add and expand to n-dimenions the function ``profile_coordinates`` from Verde to generate evenly spaced points between two reference points points (`#48 <https://github.com/fatiando/bordado/pull/48>`__)
+- Add function ``neighbor_distance_statistics`` to calculate statistics of the distances to nearest neighbors of points. This is a generalization of the function ``median_distance`` from Verde (`#46 <https://github.com/fatiando/bordado/pull/46>`__)
+- Add and expand function ``shape_to_spacing`` from Verde to convert a shape (numbers of points) to spacings (`#44 <https://github.com/fatiando/bordado/pull/44>`__)
+- Make function ``spacing_to_size`` public in the API instead of private (`#43 <https://github.com/fatiando/bordado/pull/43>`__)
+
+Improvements:
+
+- Add check for invalid size argument in ``line_coordinates`` (`#47 <https://github.com/fatiando/bordado/pull/47>`__)
+
+Documentation:
+
+- Add an Overview page to the documentation that covers basic functionality and explains a bit about what the package does (`#51 <https://github.com/fatiando/bordado/pull/51>`__)
+
+Maintenance:
+
+- Specify coverage source in ``pyproject.toml`` (`#42 <https://github.com/fatiando/bordado/pull/42>`__)
+
+This release contains contributions from:
+
+- Leonardo Uieda
+
 Version 0.2.0
 -------------
 
