@@ -10,7 +10,13 @@ Test the coordinate validation and manipulation functions.
 
 import pytest
 
-from bordado._validation import check_coordinates, check_region, check_shape, check_region_geographic
+from bordado._validation import (
+    check_coordinates,
+    check_overlap,
+    check_region,
+    check_region_geographic,
+    check_shape,
+)
 
 
 @pytest.mark.parametrize(
@@ -141,3 +147,13 @@ def test_check_shape_raises(shape, region):
 def test_check_shape_passes(shape, region):
     "Check that valid regions and shapes don't cause exceptions."
     check_shape(shape, region)
+
+
+@pytest.mark.parametrize(
+    "overlap",
+    [-0.1, 1, 1.1],
+)
+def test_check_overlap(overlap):
+    "Make sure an exception is raised if the overlap is invalid."
+    with pytest.raises(ValueError, match="Invalid overlap"):
+        check_overlap(overlap)
