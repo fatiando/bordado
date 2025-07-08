@@ -10,7 +10,7 @@ Test the coordinate validation and manipulation functions.
 
 import pytest
 
-from bordado._validation import check_coordinates, check_region, check_shape
+from bordado._validation import check_coordinates, check_region, check_shape, check_region_geographic
 
 
 @pytest.mark.parametrize(
@@ -71,6 +71,44 @@ def test_check_region_raises(region, message):
 def test_check_region_passes(region):
     "Check that valid regions don't cause exceptions."
     check_region(region)
+
+
+@pytest.mark.parametrize(
+    ("region", "message"),
+    [
+        ([], "Invalid region .* Must have exactly 4"),
+        ([1, 2, 3, 4, 5, 6], "Invalid region .* Must have exactly 4"),
+        ([1, 2, 3, 4, 5], "Invalid region .* Must have exactly 4"),
+        ([1, 2, 3], "Invalid region .* Must have exactly 4"),
+        ([1, 2], "Invalid region .* Must have exactly 4"),
+        ([3, 2, 3, 4], r"Invalid region .* West boundary"),
+        ([1, 2, 5, 4], r"Invalid region .* South boundary"),
+        ([-181, 1, 3, 4], r"Invalid region .* Longitude range"),
+        ([0, 361, 3, 4], r"Invalid region .* Longitude range"),
+        ([-10, 190, 3, 4], r"Invalid region .* Longitude range"),
+        ([0, 1, -91, 4], r"Invalid region .* Latitude range"),
+        ([0, 1, -90, 91], r"Invalid region .* Latitude range"),
+        ([0, 1, -91, 91], r"Invalid region .* Latitude range"),
+    ],
+)
+def test_check_region_geographic_raises(region, message):
+    "Make sure an exception is raised for bad regions."
+    with pytest.raises(ValueError, match=message):
+        check_region_geographic(region)
+
+
+@pytest.mark.parametrize(
+    "region",
+    [
+        [1, 2, 3, 4],
+        [-2, -1, -5, -4],
+        [0, 360, -90, 90],
+        [-180, 180, -90, 90],
+    ],
+)
+def test_check_region_geographic_passes(region):
+    "Check that valid regions don't cause exceptions."
+    check_region_geographic(region)
 
 
 @pytest.mark.parametrize(
