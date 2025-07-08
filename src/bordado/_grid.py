@@ -11,6 +11,7 @@ Generate coordinates for regular n-dimensional grids.
 import numpy as np
 
 from ._line import line_coordinates
+from ._utils import make_non_dimensional_coordinates
 from ._validation import check_region, check_shape
 
 
@@ -347,7 +348,9 @@ def grid_coordinates(
     # this means we have to reverse the list going in to get the right shape
     # and reverse it coming out to get the right order of coordinates.
     coordinates = list(reversed(np.meshgrid(*reversed(coordinates_1d), indexing="ij")))
-    if non_dimensional_coords is not None:
-        for value in np.atleast_1d(non_dimensional_coords):
-            coordinates.append(np.full_like(coordinates[0], value))
+    coordinates.extend(
+        make_non_dimensional_coordinates(
+            non_dimensional_coords, coordinates[0].shape, coordinates[0].dtype
+        )
+    )
     return tuple(coordinates)
