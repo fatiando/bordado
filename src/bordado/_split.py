@@ -264,9 +264,9 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
     Split points into overlapping windows.
 
     A window of the given size is moved across the region at a given step
-    (specified by *spacing* or *shape*). Returns the indices of points falling
-    inside each window step. You can use the indices to select points falling
-    inside a given window.
+    (specified by the amount of overlap between adjacent windows). Returns the
+    indices of points falling inside each window step. You can use the indices
+    to select points falling inside a given window.
 
     Parameters
     ----------
