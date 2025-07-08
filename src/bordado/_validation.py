@@ -70,7 +70,7 @@ def check_coordinates_geographic(coordinates):
             f" (longitude, latitude), but {len(coordinates)} were given."
         )
         raise ValueError(message)
-    longitude, latitude = coordinates
+    longitude, latitude = (np.atleast_1d(c) for c in coordinates)
     west, east = longitude.min(), longitude.max()
     south, north = latitude.min(), latitude.max()
     if west < -180 or east > 360 or (west < 0 and east > 180):

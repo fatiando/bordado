@@ -63,7 +63,6 @@ def test_check_coordinates_passes(coordinates):
 )
 def test_check_coordinates_geographic_fails(coordinates, message):
     "Make sure the exception is raised for bad coordinates."
-    coordinates = check_coordinates(coordinates)
     with pytest.raises(ValueError, match=message):
         check_coordinates_geographic(coordinates)
 
@@ -79,7 +78,6 @@ def test_check_coordinates_geographic_fails(coordinates, message):
 )
 def test_check_coordinates_geographic_passes(coordinates):
     "Make sure no exception is raised for good coordinates."
-    coordinates = check_coordinates(coordinates)
     check_coordinates_geographic(coordinates)
 
 
