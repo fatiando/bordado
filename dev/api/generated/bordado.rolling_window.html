@@ -432,9 +432,9 @@ document.write(`
 <span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">rolling_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'overlap'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_split.html#rolling_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.rolling_window" title="Link to this definition">#</a></dt>
 <dd><p>Split points into overlapping windows.</p>
 <p>A window of the given size is moved across the region at a given step
-(specified by <em>spacing</em> or <em>shape</em>). Returns the indices of points falling
-inside each window step. You can use the indices to select points falling
-inside a given window.</p>
+(specified by the amount of overlap between adjacent windows). Returns the
+indices of points falling inside each window step. You can use the indices
+to select points falling inside a given window.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -468,7 +468,7 @@ adjusting the overlap.</p>
 number of arrays as the <em>coordinates</em> and each array will have the
 number of dimensions equal to <code class="docutils literal notranslate"><span class="pre">len(coordinates)</span></code>.</p>
 </dd>
-<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the same shape as the <em>window_coordinates</em>. Each element
+<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the same shape as the <em>window_coordinates</em>. Each element
 of the array is a tuple of arrays (with the same length as
 <em>coordinates</em>) corresponding to the indices of the points that fall
 inside that particular window. Use these indices to index the given
@@ -683,7 +683,7 @@ the same as before:</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 15, 2025.
+  Last updated on Jul 08, 2025.
   <br/>
 </p>
   </div>
