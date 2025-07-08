@@ -495,12 +495,17 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
 
 def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
     """
-    Split points into overlapping windows.
+    Split points into overlapping equal area windows on the sphere.
 
-    A window of the given size is moved across the region at a given step
-    (specified by the amount of overlap between adjacent windows). Returns the
-    indices of points falling inside each window step. You can use the indices
-    to select points falling inside a given window.
+    A window of the given latitudinal size is moved across the region at
+    a given step (specified by the amount of overlap between adjacent windows).
+    Windows are not regularly distributed on the sphere and are not "square" in
+    longitude, latitude. They are evenly spaced in latitude but their
+    longitudinal dimension varies to compensate for the convergence of
+    meridians at the polar regions.
+
+    Returns the indices of points falling inside each window step. You can use
+    the indices to select points falling inside a given window.
 
     Parameters
     ----------
@@ -509,36 +514,30 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
         point. Arrays can be Python lists or any numpy-compatible array type.
         Arrays can be of any shape but must all have the same shape.
     window_size : float
-        The size of the windows. Units should match the units of *coordinates*.
-        In case the window size is not a multiple of the region, either of them
-        will be adjusted according to the value of the *adjust* argument.
+        The size of the windows along latitude in decimal degrees. The
+        longitudinal window size is adjusted to retain equal area between
+        windows. The window size may have to be adjusted so that windows fit
+        into the data region.
     overlap : float
         The amount of overlap between adjacent windows. Should be within the
         range 1 > overlap ≥ 0. For example, an overlap of 0.5 means 50%
         overlap. An overlap of 0 will be the same as
         :func:`~bordado.block_split`.
-    region : tuple = (W, E, S, N, ...)
-        The boundaries of a given region in Cartesian or geographic
-        coordinates. If region is not given, will use the bounding region of
-        the given coordinates.
-    adjust : str = "overlap" or "region"
-        Whether to adjust the window overlap or the region, if required.
-        Adjusting the overlap or region is required when the combination of
-        window size and overlap is not a multiple of the region. Defaults to
-        adjusting the overlap.
+    region : tuple = (W, E, S, N)
+        The boundaries of a given region in geographic coordinates. Should have
+        a lower and an upper boundary for each dimension of the coordinate
+        system. If region is not given, will use the bounding region of the
+        given coordinates.
 
     Returns
     -------
     window_coordinates : tuple = (longitude, latitude)
-        ND coordinate arrays for the center of each window. Will have the same
-        number of arrays as the *coordinates* and each array will have the
-        number of dimensions equal to ``len(coordinates)``.
+        1D coordinate arrays for the center of each window.
     indices : array
-        An array with the same shape as the *window_coordinates*. Each element
-        of the array is a tuple of arrays (with the same length as
-        *coordinates*) corresponding to the indices of the points that fall
-        inside that particular window. Use these indices to index the given
-        *coordinates* and select points from a window.
+        1D array with each element of the array being a tuple of 2 arrays
+        corresponding to the indices of the points that fall inside that
+        particular window. Use these indices to index the given *coordinates*
+        and select points from a window.
 
     Notes
     -----
