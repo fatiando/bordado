@@ -10,6 +10,7 @@ Functions for generating random point spreads.
 
 import numpy as np
 
+from ._utils import make_non_dimensional_coordinates
 from ._validation import check_region
 
 
@@ -99,7 +100,27 @@ def random_coordinates(region, size, *, random_seed=None, non_dimensional_coords
     coordinates = []
     for lower, upper in np.reshape(region, (len(region) // 2, 2)):
         coordinates.append(random.uniform(lower, upper, size))
-    if non_dimensional_coords is not None:
-        for value in np.atleast_1d(non_dimensional_coords):
-            coordinates.append(np.full_like(coordinates[0], value))
+    coordinates.extend(
+        make_non_dimensional_coordinates(
+            non_dimensional_coords, coordinates[0].shape, coordinates[0].dtype
+        )
+    )
+    return tuple(coordinates)
+
+
+def random_coordinates_spherical(region, size, *, random_seed=None, non_dimensional_coords=None):
+    random = np.random.default_rng(random_seed)
+    colat_south = np.radians(90 - region[2])
+    colat_north = np.radians(90 - region[3])
+    xmin = (1 + np.cos(colat_north)) / 2
+    xmax = (1 + np.cos(colat_south)) / 2
+    coordinates = [
+        random.uniform(*region[:2], size),
+        90 - np.degrees(np.arccos(2 * random.uniform(xmin, xmax, size) - 1)),
+    ]
+    coordinates.extend(
+        make_non_dimensional_coordinates(
+            non_dimensional_coords, coordinates[0].shape, coordinates[0].dtype
+        )
+    )
     return tuple(coordinates)
