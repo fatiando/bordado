@@ -12,6 +12,7 @@ import pytest
 
 from bordado._validation import (
     check_coordinates,
+    check_coordinates_geographic,
     check_overlap,
     check_region,
     check_region_geographic,
@@ -46,6 +47,40 @@ def test_check_coordinates_fails(coordinates):
 def test_check_coordinates_passes(coordinates):
     "Make sure no exception is raised for good coordinates."
     check_coordinates(coordinates)
+
+
+@pytest.mark.parametrize(
+    ("coordinates", "message"),
+    [
+        (([1, 2], [1, 2], [3, 4]), "Invalid coordinates. Must have exactly 2"),
+        (([1, 2],), "Invalid coordinates. Must have exactly 2"),
+        (([-181, 2], [3, 4]), "Invalid longitude range"),
+        (([-120, 181], [3, 4]), "Invalid longitude range"),
+        (([0, 361], [3, 4]), "Invalid longitude range"),
+        (([0, 360], [-91, 4]), "Invalid latitude range"),
+        (([0, 360], [-9, 91]), "Invalid latitude range"),
+    ],
+)
+def test_check_coordinates_geographic_fails(coordinates, message):
+    "Make sure the exception is raised for bad coordinates."
+    coordinates = check_coordinates(coordinates)
+    with pytest.raises(ValueError, match=message):
+        check_coordinates_geographic(coordinates)
+
+
+@pytest.mark.parametrize(
+    ("coordinates"),
+    [
+        ([1, 2], [3, 4]),
+        ([0, 360], [-90, 90]),
+        ([-180, 180], [-90, 90]),
+        ([-120, 18], [-45, 67]),
+    ],
+)
+def test_check_coordinates_geographic_passes(coordinates):
+    "Make sure no exception is raised for good coordinates."
+    coordinates = check_coordinates(coordinates)
+    check_coordinates_geographic(coordinates)
 
 
 @pytest.mark.parametrize(

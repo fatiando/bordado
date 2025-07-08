@@ -16,6 +16,7 @@ from ._region import get_region, pad_region
 from ._validation import (
     check_adjust,
     check_coordinates,
+    check_coordinates_geographic,
     check_overlap,
     check_region,
     check_region_geographic,
@@ -503,10 +504,10 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
 
     Parameters
     ----------
-    coordinates : tuple = (easting, northing, ...)
-        Tuple of arrays with the coordinates of each point. Arrays can be
-        Python lists or any numpy-compatible array type. Arrays can be of any
-        shape but must all have the same shape.
+    coordinates : tuple = (longitude, latitude)
+        Tuple of arrays with the longitude and latitude coordinates of each
+        point. Arrays can be Python lists or any numpy-compatible array type.
+        Arrays can be of any shape but must all have the same shape.
     window_size : float
         The size of the windows. Units should match the units of *coordinates*.
         In case the window size is not a multiple of the region, either of them
@@ -676,6 +677,7 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
 
     """
     coordinates = check_coordinates(coordinates)
+    check_coordinates_geographic(coordinates)
     check_overlap(overlap)
     if region is None:
         region = get_region(coordinates)

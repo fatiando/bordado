@@ -43,6 +43,50 @@ def check_coordinates(coordinates):
     return coordinates
 
 
+def check_coordinates_geographic(coordinates):
+    """
+    Check if geographic coordinates are within allowed bounds.
+
+    Longitude boundaries should be in range [0, 360] or [-180, 180] and
+    latitude boundaries should be in range [-90, 90].
+
+    Parameters
+    ----------
+    coordinates : tuple = (longitude, latitude)
+        Tuple of arrays with the longitude and latitude coordinates of each
+        point. Arrays can be Python lists or any numpy-compatible array type.
+        Arrays can be of any shape but must all have the same shape.
+
+    Raises
+    ------
+    ValueError
+        If the coordinates are outside their valid ranges or if there aren't
+        exactly two coordinates.
+
+    """
+    if len(coordinates) != 2:
+        message = (
+            "Invalid coordinates. Must have exactly 2 elements"
+            f" (longitude, latitude), but {len(coordinates)} were given."
+        )
+        raise ValueError(message)
+    longitude, latitude = coordinates
+    west, east = longitude.min(), longitude.max()
+    south, north = latitude.min(), latitude.max()
+    if west < -180 or east > 360 or (west < 0 and east > 180):
+        message = (
+            f"Invalid longitude range [{west}, {east}]. "
+            "Longitude range must be [0, 360] or [-180, 180]."
+        )
+        raise ValueError(message)
+    if south < -90 or north > 90:
+        message = (
+            f"Invalid latitude range [{south}, {north}]. "
+            "Latitude range must be [-90, 90]."
+        )
+        raise ValueError(message)
+
+
 def check_region(region):
     """
     Check that the given region is valid.
