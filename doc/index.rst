@@ -104,6 +104,7 @@ functions for splitting coordinates into spatial blocks and more.
 
     api/index.rst
     citing.rst
+    references.rst
     changes.rst
     compatibility.rst
     versions.rst

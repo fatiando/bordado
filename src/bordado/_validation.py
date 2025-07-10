@@ -43,6 +43,50 @@ def check_coordinates(coordinates):
     return coordinates
 
 
+def check_coordinates_geographic(coordinates):
+    """
+    Check if geographic coordinates are within allowed bounds.
+
+    Longitude boundaries should be in range [0, 360] or [-180, 180] and
+    latitude boundaries should be in range [-90, 90].
+
+    Parameters
+    ----------
+    coordinates : tuple = (longitude, latitude)
+        Tuple of arrays with the longitude and latitude coordinates of each
+        point. Arrays can be Python lists or any numpy-compatible array type.
+        Arrays can be of any shape but must all have the same shape.
+
+    Raises
+    ------
+    ValueError
+        If the coordinates are outside their valid ranges or if there aren't
+        exactly two coordinates.
+
+    """
+    if len(coordinates) != 2:
+        message = (
+            "Invalid coordinates. Must have exactly 2 elements"
+            f" (longitude, latitude), but {len(coordinates)} were given."
+        )
+        raise ValueError(message)
+    longitude, latitude = (np.atleast_1d(c) for c in coordinates)
+    west, east = longitude.min(), longitude.max()
+    south, north = latitude.min(), latitude.max()
+    if west < -180 or east > 360 or (west < 0 and east > 180):
+        message = (
+            f"Invalid longitude range [{west}, {east}]. "
+            "Longitude range must be [0, 360] or [-180, 180]."
+        )
+        raise ValueError(message)
+    if south < -90 or north > 90:
+        message = (
+            f"Invalid latitude range [{south}, {north}]. "
+            "Latitude range must be [-90, 90]."
+        )
+        raise ValueError(message)
+
+
 def check_region(region):
     """
     Check that the given region is valid.
@@ -83,6 +127,53 @@ def check_region(region):
             f"Invalid region '{region}'. Lower boundary larger than upper boundary "
             f"in dimension(s): {'; '.join(bad_bounds)}"
         )
+        raise ValueError(message)
+
+
+def check_region_geographic(region):
+    """
+    Check that the given geographic region is valid.
+
+    A region is a bounding box for 2-dimensional coordinates (W, E, S, N).
+    There should be 4 elements and lower boundaries should not be larger than
+    upper boundaries. Longitude boundaries should be in range [0, 360] or
+    [-180, 180] and latitude boundaries should be in range [-90, 90].
+
+    Parameters
+    ----------
+    region : tuple = (W, E, S, N)
+        The boundaries of a given region in geographic coordinates. Should have
+        a lower and an upper boundary for each dimension of the coordinate
+        system.
+
+    Raises
+    ------
+    ValueError
+        If the region doesn't have 4 entries, any lower boundary is larger than
+        the upper boundary, or boundaries are outside their valid ranges.
+
+    """
+    if not region or len(region) != 4:
+        message = (
+            f"Invalid region '{region}'. Must have exactly 4 elements"
+            " (W, E, S, N), a lower and an upper boundary for each dimension."
+        )
+        raise ValueError(message)
+    west, east, south, north = region
+    if west > east:
+        message = f"Invalid region '{region}'. West boundary must be less than east."
+        raise ValueError(message)
+    if south > north:
+        message = f"Invalid region '{region}'. South boundary must be less than north."
+        raise ValueError(message)
+    if west < -180 or east > 360 or (west < 0 and east > 180):
+        message = (
+            f"Invalid region '{region}'. Longitude range must be [0, 360] "
+            "or [-180, 180]."
+        )
+        raise ValueError(message)
+    if south < -90 or north > 90:
+        message = f"Invalid region '{region}'. Latitude range must be [-90, 90]."
         raise ValueError(message)
 
 
@@ -138,4 +229,27 @@ def check_shape(shape, region):
             f"Incompatible shape '{shape}' and region '{region}. "
             "There must be one element in 'shape' of every two elements in 'region'."
         )
+        raise ValueError(message)
+
+
+def check_overlap(overlap):
+    """
+    Check that the overlap argument is valid.
+
+    It should be a decimal percentage in range [0, 1[. 100% overlap is not
+    possible since that would generate infinite windows.
+
+    Parameters
+    ----------
+    overlap : float
+        The amount of overlap between adjacent windows. Should be within the
+        range 1 > overlap ≥ 0.
+
+    Raises
+    ------
+    ValueError
+        In case the overlap is outside the allowed range.
+    """
+    if overlap < 0 or overlap >= 1:
+        message = f"Invalid overlap '{overlap}'. Must be 1 > overlap >= 0."
         raise ValueError(message)
