@@ -552,48 +552,51 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
     visualize the windows:
 
     >>> import bordado as bd
-    >>> coordinates = bd.grid_coordinates((-5, -1, 6, 10), spacing=1)
+    >>> coordinates = bd.grid_coordinates((0, 30, 60, 90), spacing=5)
     >>> print(coordinates[0])
-    [[-5. -4. -3. -2. -1.]
-     [-5. -4. -3. -2. -1.]
-     [-5. -4. -3. -2. -1.]
-     [-5. -4. -3. -2. -1.]
-     [-5. -4. -3. -2. -1.]]
+    [[ 0.  5. 10. 15. 20. 25. 30.]
+     [ 0.  5. 10. 15. 20. 25. 30.]
+     [ 0.  5. 10. 15. 20. 25. 30.]
+     [ 0.  5. 10. 15. 20. 25. 30.]
+     [ 0.  5. 10. 15. 20. 25. 30.]
+     [ 0.  5. 10. 15. 20. 25. 30.]
+     [ 0.  5. 10. 15. 20. 25. 30.]]
     >>> print(coordinates[1])
-    [[ 6.  6.  6.  6.  6.]
-     [ 7.  7.  7.  7.  7.]
-     [ 8.  8.  8.  8.  8.]
-     [ 9.  9.  9.  9.  9.]
-     [10. 10. 10. 10. 10.]]
+    [[60. 60. 60. 60. 60. 60. 60.]
+     [65. 65. 65. 65. 65. 65. 65.]
+     [70. 70. 70. 70. 70. 70. 70.]
+     [75. 75. 75. 75. 75. 75. 75.]
+     [80. 80. 80. 80. 80. 80. 80.]
+     [85. 85. 85. 85. 85. 85. 85.]
+     [90. 90. 90. 90. 90. 90. 90.]]
 
-    Get the coordinates of the centers of rolling windows with 75% overlap and
+    Get the coordinates of the centers of rolling windows with 50% overlap and
     an indexer that allows us to select points from each window:
 
-    >>> window_coords, indices = rolling_window(
-    ...     coordinates, window_size=2, overlap=0.75,
+    >>> window_coords, indices = rolling_window_spherical(
+    ...     coordinates, window_size=10, overlap=0.5,
     ... )
 
-    Window coordinates will be 2D arrays. Their shape is the number of windows
-    in each dimension:
+    Window coordinates will be 1D arrays since the windows aren't regular.
+    Their longitudinal size is calculated to preserve their area. Their shape
+    is the number of windows generated:
 
     >>> print(window_coords[0].shape, window_coords[1].shape)
-    (5, 5) (5, 5)
+    (9,) (9,)
 
     The values of these arrays are the coordinates for the center of each
-    rolling window:
+    rolling window. The latitude coordinates will be all at regular intervals
+    dictated by the window size and the overlap:
+
+    >>> print(window_coords[1])
+    [65. 65. 65. 70. 70. 75. 75. 80. 85.]
+
+    But in longitude, the window sizes (and thus their centers) will spread out
+    as latitude increases to balance the convergence of meridians:
 
     >>> print(window_coords[0])
-    [[-4.  -3.5 -3.  -2.5 -2. ]
-     [-4.  -3.5 -3.  -2.5 -2. ]
-     [-4.  -3.5 -3.  -2.5 -2. ]
-     [-4.  -3.5 -3.  -2.5 -2. ]
-     [-4.  -3.5 -3.  -2.5 -2. ]]
-    >>> print(window_coords[1])
-    [[7.  7.  7.  7.  7. ]
-     [7.5 7.5 7.5 7.5 7.5]
-     [8.  8.  8.  8.  8. ]
-     [8.5 8.5 8.5 8.5 8.5]
-     [9.  9.  9.  9.  9. ]]
+    [-4.5 -3.5 -2.5 -1.5 -4.5 -3.5 -2.5 -1.5 -4.5 -3.5 -2.5 -1.5 -4.5 -3.5
+     -2.5 -1.5]
 
     The indices of points falling on each window will have the same shape as
     the window center coordinates:
@@ -692,7 +695,8 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
     # details. Always adjust the spacing to avoid falling out of valid
     # geographic boundaries.
     bands = line_coordinates(
-        *region[2:],
+        region[2] + window_step / 2,
+        region[3] - window_step / 2,
         spacing=window_step,
         pixel_register=True,
         adjust="spacing",
@@ -714,7 +718,11 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
         # the spacing to make sure windows are evenly distributed across the
         # 360-0 boundary and the region doesn't exceed valid intervals.
         band_longitude = line_coordinates(
-            *region[:2], spacing=window_step_lon, pixel_register=True, adjust="spacing"
+            region[0] + window_step_lon / 2,
+            region[1] - window_step_lon / 2,
+            spacing=window_step_lon,
+            pixel_register=True,
+            adjust="spacing",
         )
         band_latitude = np.full_like(band_longitude, central_latitude)
         # Make a KD tree with points only in this band. This is needed because
