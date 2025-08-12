@@ -20,6 +20,7 @@ from ._validation import (
     check_overlap,
     check_region,
     check_region_geographic,
+    longitude_continuity,
 )
 
 
@@ -683,8 +684,7 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
     check_overlap(overlap)
     if region is None:
         region = get_region(coordinates)
-    # else:
-    #     check_region_geographic(region)
+    check_region_geographic(region)
     coordinates, region = longitude_continuity(coordinates, region)
     if window_size <= 0:
         message = f"Invalid window size '{window_size}'. Must be > 0."
@@ -760,7 +760,9 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
                 central_latitude - window_size / 2,
                 central_latitude + window_size / 2,
             )
-            band_coordinates, first_window = longitude_continuity(band_coordinates, first_window)
+            band_coordinates, first_window = longitude_continuity(
+                band_coordinates, first_window
+            )
             tree = KDTree(np.transpose(band_coordinates))
             in_band_indices = tree.query_ball_point(
                 np.array([[first_window_longitude, central_latitude]]),
@@ -788,92 +790,6 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
         dtype="object",
     )
     return centers, indices
-
-
-def longitude_continuity(coordinates, region):
-    """
-    Modify coordinates and region boundaries to ensure longitude continuity.
-
-    Longitudinal boundaries of the region are moved to the ``[0, 360)`` or
-    ``[-180, 180)`` degrees interval depending which one is better suited for
-    that specific region.
-
-    Parameters
-    ----------
-    coordinates : list or array
-        Set of geographic coordinates that will be moved to the same degrees
-        interval as the one of the modified region.
-    region : list or array
-        List or array containing the boundary coordinates `w`, `e`, `s`, `n` of
-        the region in degrees.
-
-    Returns
-    -------
-    modified_coordinates : array
-        Modified set of extra geographic coordinates.
-    modified_region : array
-        List containing the modified boundary coordinates `w, `e`, `s`, `n` of
-        the region.
-
-    Examples
-    --------
-    >>> # Modify region with west > east
-    >>> w, e, s, n = 350, 10, -10, 10
-    >>> print(longitude_continuity(coordinates=None, region=[w, e, s, n]))
-    [-10  10 -10  10]
-    >>> # Modify region and extra coordinates
-    >>> from verde import grid_coordinates
-    >>> region = [-70, -60, -40, -30]
-    >>> coordinates = grid_coordinates([270, 320, -50, -20], spacing=5)
-    >>> [longitude, latitude], region = longitude_continuity(
-    ...     coordinates, region
-    ... )
-    >>> print(region)
-    [290 300 -40 -30]
-    >>> print(longitude.min(), longitude.max())
-    270.0 320.0
-    >>> # Another example
-    >>> region = [-20, 20, -20, 20]
-    >>> coordinates = grid_coordinates([0, 350, -90, 90], spacing=10)
-    >>> [longitude, latitude], region = longitude_continuity(
-    ...     coordinates, region
-    ... )
-    >>> print(region)
-    [-20  20 -20  20]
-    >>> print(longitude.min(), longitude.max())
-    -180.0 170.0
-    """
-    interval_360 = True
-    if region is not None:
-        # Get longitudinal boundaries and check region
-        w, e, s, n = region
-        # Check if region is defined all around the globe
-        all_globe = np.allclose(abs(e - w), 360)
-        # Move coordinates to [0, 360)
-        w = w % 360
-        e = e % 360
-        # Move west=0 and east=360 if region longitudes goes all around the globe
-        if all_globe:
-            w, e = 0, 360
-        # Check if the [-180, 180) interval is better suited
-        if w > e:
-            interval_360 = False
-            e = ((e + 180) % 360) - 180
-            w = ((w + 180) % 360) - 180
-            # If e = 180 then the above will create e=-180, which is wrong.
-            # This only happens to the east limit and we need to fix it to have
-            # a valid region.
-            if e < w:
-                e *= -1
-        region = (w, e, s, n)
-    if coordinates is not None:
-        # Run sanity checks for coordinates
-        longitude = coordinates[0]
-        longitude = longitude % 360
-        if not interval_360:
-            longitude = ((longitude + 180) % 360) - 180
-        coordinates = (longitude, *coordinates[1:])
-    return coordinates, region
 
 
 def expanding_window(coordinates, center, sizes):
