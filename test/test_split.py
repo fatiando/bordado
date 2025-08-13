@@ -14,7 +14,7 @@ docstrings.
 import pytest
 
 from bordado._grid import grid_coordinates
-from bordado._split import rolling_window
+from bordado._split import rolling_window, rolling_window_spherical
 
 
 def test_rolling_window_size_too_large():
@@ -23,3 +23,13 @@ def test_rolling_window_size_too_large():
     coordinates = grid_coordinates(region, spacing=0.1)
     with pytest.raises(ValueError, match="Invalid window size"):
         rolling_window(coordinates, window_size=1.1, overlap=0.5)
+
+
+def test_rolling_window_spherical_invalid_window_size():
+    "Make sure an exception is raised if the window size is less than 0."
+    region = (0, 1, 2, 4)
+    coordinates = grid_coordinates(region, spacing=0.1)
+    with pytest.raises(ValueError, match="Invalid window size"):
+        rolling_window_spherical(coordinates, window_size=0, overlap=0.5)
+    with pytest.raises(ValueError, match="Invalid window size"):
+        rolling_window_spherical(coordinates, window_size=-0.1, overlap=0.5)
