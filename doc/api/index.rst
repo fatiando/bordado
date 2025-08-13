@@ -15,6 +15,7 @@ Coordinate generation
 
    line_coordinates
    random_coordinates
+   random_coordinates_spherical
    grid_coordinates
    profile_coordinates
    great_circle_coordinates
