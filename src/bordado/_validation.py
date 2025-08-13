@@ -295,6 +295,20 @@ def longitude_continuity(region, *, coordinates=None):
     >>> print(longitude_continuity([w, e, s, n]))
     (-10, 10, -10, 10)
 
+    >>> w, e, s, n = 310, 180, -10, 10
+    >>> print(longitude_continuity([w, e, s, n]))
+    (-50, 180, -10, 10)
+
+    For a global range of longitudes, always prefer the 0-360 range:
+
+    >>> w, e, s, n = 0, 360, -10, 10
+    >>> print(longitude_continuity([w, e, s, n]))
+    (0, 360, -10, 10)
+
+    >>> w, e, s, n = -180, 180, -10, 10
+    >>> print(longitude_continuity([w, e, s, n]))
+    (0, 360, -10, 10)
+
     Modify region and coordinates so that they match:
 
     >>> region = (350, 10, -60, -40)
@@ -306,6 +320,16 @@ def longitude_continuity(region, *, coordinates=None):
     (-10, 10, -60, -40)
     >>> print(longitude)
     [-10  -5   0   5  10]
+
+    >>> region = (310, 180, -10, 10)
+    >>> coordinates = ((310, 0, 180), (-10, 0, 10))
+    >>> region, (longitude, latitude) = longitude_continuity(
+    ...     region, coordinates=coordinates,
+    ... )
+    >>> print(region)
+    (-50, 180, -10, 10)
+    >>> print(longitude)
+    [-50   0 180]
 
     The coordinates and region don't have to be within the same boundaries:
 
@@ -350,7 +374,10 @@ def longitude_continuity(region, *, coordinates=None):
         longitude = coordinates[0]
         longitude = longitude % 360
         if not interval_360:
+            is_180 = np.isclose(longitude, 180)
             longitude = ((longitude + 180) % 360) - 180
+            # Same as above when e < w leading to a -180 instead of 180.
+            longitude[is_180] *= -1
         modified_coordinates = (longitude, *coordinates[1:])
         return modified_region, modified_coordinates
     return modified_region
