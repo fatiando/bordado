@@ -11,9 +11,17 @@ Functions to split points into blocks and windows.
 import numpy as np
 from scipy.spatial import KDTree
 
-from ._grid import grid_coordinates
+from ._grid import grid_coordinates, line_coordinates
 from ._region import get_region, pad_region
-from ._validation import check_adjust, check_coordinates, check_region
+from ._validation import (
+    check_adjust,
+    check_coordinates,
+    check_coordinates_geographic,
+    check_overlap,
+    check_region,
+    check_region_geographic,
+    longitude_continuity,
+)
 
 
 def block_split(
@@ -438,6 +446,7 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
     coordinates = check_coordinates(coordinates)
     adjust_translation = {"overlap": "spacing", "region": "region"}
     check_adjust(adjust, valid=adjust_translation.keys())
+    check_overlap(overlap)
     if region is None:
         region = get_region(coordinates)
     else:
@@ -448,10 +457,6 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
             f"Invalid window size '{window_size}'. Cannot be larger than dimensions of "
             f"the region '{region}'."
         )
-        raise ValueError(message)
-    # Check that the overlap is valid. It should be a percentage < 100%.
-    if overlap < 0 or overlap >= 1:
-        message = f"Invalid overlap '{overlap}'. Must be 1 > overlap >= 0."
         raise ValueError(message)
     # Calculate the region spanning the centers of the rolling windows
     window_region = pad_region(region, -window_size / 2)
@@ -486,6 +491,387 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
         np.unravel_index(np.array(i, dtype="int"), shape=coordinates[0].shape)
         for i in indices1d
     ]
+    return centers, indices
+
+
+def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
+    """
+    Split points into overlapping equal area windows on the sphere.
+
+    A window of the given latitudinal size is moved across the region at
+    a given step (specified by the amount of overlap between adjacent windows).
+    Windows are not regularly distributed on the sphere and are not "square" in
+    longitude, latitude. They are evenly spaced in latitude but their
+    longitudinal dimension varies to compensate for the convergence of
+    meridians at the polar regions. The overlap will also wrap around the 360-0
+    longitude discontinuity (see examples below).
+
+    Returns the indices of points falling inside each window step. You can use
+    the indices to select points falling inside a given window.
+
+    Parameters
+    ----------
+    coordinates : tuple = (longitude, latitude)
+        Tuple of arrays with the longitude and latitude coordinates of each
+        point. Arrays can be Python lists or any numpy-compatible array type.
+        Arrays can be of any shape but must all have the same shape.
+    window_size : float
+        The size of the windows along latitude in decimal degrees. The
+        longitudinal window size is adjusted to retain equal area between
+        windows. Must be > 0.
+    overlap : float
+        The amount of overlap between adjacent windows. Should be within the
+        range 1 > overlap ≥ 0. For example, an overlap of 0.5 means 50%
+        overlap. The overlap may have to be adjusted to make sure windows fit
+        inside the given region exactly.
+    region : tuple = (W, E, S, N)
+        The boundaries of a given region in geographic coordinates. Should have
+        a lower and an upper boundary for each dimension of the coordinate
+        system. If region is not given, will use the bounding region of the
+        given coordinates.
+
+    Returns
+    -------
+    window_coordinates : tuple = (longitude, latitude)
+        1D coordinate arrays for the center of each window.
+    indices : array
+        1D array with each element of the array being a tuple of 2 arrays
+        corresponding to the indices of the points that fall inside that
+        particular window. Use these indices to index the given *coordinates*
+        and select points from a window.
+
+    Notes
+    -----
+    Uses the method of [Malkin2016]_ to divide the region into overlapping
+    windows of equal area. The windows will have the specified window size in
+    latitude but their longitudinal dimensions will be adjusted to account for
+    the convergence of meridians at the poles.
+
+    Examples
+    --------
+    Generate a set of sample coordinates on a grid to make it easier to
+    visualize the windows:
+
+    >>> import bordado as bd
+    >>> import numpy as np
+
+    >>> coordinates = bd.grid_coordinates((0, 40, 60, 90), spacing=5)
+    >>> print(coordinates[0])
+    [[ 0.  5. 10. 15. 20. 25. 30. 35. 40.]
+     [ 0.  5. 10. 15. 20. 25. 30. 35. 40.]
+     [ 0.  5. 10. 15. 20. 25. 30. 35. 40.]
+     [ 0.  5. 10. 15. 20. 25. 30. 35. 40.]
+     [ 0.  5. 10. 15. 20. 25. 30. 35. 40.]
+     [ 0.  5. 10. 15. 20. 25. 30. 35. 40.]
+     [ 0.  5. 10. 15. 20. 25. 30. 35. 40.]]
+    >>> print(coordinates[1])
+    [[60. 60. 60. 60. 60. 60. 60. 60. 60.]
+     [65. 65. 65. 65. 65. 65. 65. 65. 65.]
+     [70. 70. 70. 70. 70. 70. 70. 70. 70.]
+     [75. 75. 75. 75. 75. 75. 75. 75. 75.]
+     [80. 80. 80. 80. 80. 80. 80. 80. 80.]
+     [85. 85. 85. 85. 85. 85. 85. 85. 85.]
+     [90. 90. 90. 90. 90. 90. 90. 90. 90.]]
+
+    Get the coordinates of the centers of rolling windows with 50% overlap and
+    an indexer that allows us to select points from each window:
+
+    >>> window_size = 10  # degrees
+    >>> window_coords, indices = rolling_window_spherical(
+    ...     coordinates, window_size=window_size, overlap=0.5,
+    ... )
+
+    Window coordinates will be 1D arrays since the windows aren't regular.
+    Their longitudinal size is calculated to preserve their area. Their shape
+    is the number of windows generated:
+
+    >>> print(window_coords[0].shape, window_coords[1].shape)
+    (8,) (8,)
+
+    The values of these arrays are the coordinates for the center of each
+    rolling window. The latitude coordinates will be all at regular intervals
+    dictated by the window size and the overlap:
+
+    >>> print(window_coords[1])
+    [65. 65. 70. 70. 75. 75. 80. 85.]
+
+    But in longitude, the window sizes (and thus their centers) will spread out
+    as latitude increases to balance the convergence of meridians. The window
+    size in longitude will be:
+
+    >>> window_size_lon = window_size / np.cos(np.radians(window_coords[1]))
+    >>> print(np.array_str(window_size_lon, precision=1))
+    [ 23.7  23.7  29.2  29.2  38.6  38.6  57.6 114.7]
+
+    Notice that as we get closer to the pole the window size is larger than the
+    region, so in these cases the windows cannot be guaranteed to have equal
+    area. The center of each window will be:
+
+    >>> print(np.array_str(window_coords[0], precision=1))
+    [11.8 28.2 14.6 25.4 19.3 20.7 20.  20. ]
+
+    If you look closely, you'll see that the amount of overlap between the
+    windows isn't exactly 50%. This is because the overlap and window size do
+    not result in multiples of the region. So we have to adjust the overlap to
+    make things fit. This effect is less evident for smaller windows.
+
+    The indices of points falling on each window will have the same shape as
+    the window center coordinates:
+
+    >>> print(indices.shape)
+    (8,)
+
+    Each element of the indices array is a tuple of arrays, one for each
+    element in the ``coordinates``:
+
+    >>> print(len(indices[0]))
+    2
+
+    They are indices of the points that fall inside the selected window (window
+    0). The first element indexes the axis 0 of the coordinate arrays and so
+    forth. So this:
+
+    >>> print(indices[0][0])
+    [0 0 0 0 0 1 1 1 1 1 2 2 2 2 2]
+
+    corresponds to the rows of the coordinate arrays that belong to the first
+    window, and this
+
+    >>> print(indices[0][1])
+    [0 1 2 3 4 0 1 2 3 4 0 1 2 3 4]
+
+    corresponds to the columns of the coordinate arrays that belong to the
+    first window.
+
+    The same can be showed for the second window:
+
+    >>> print(indices[1][0])
+    [0 0 0 0 0 1 1 1 1 1 2 2 2 2 2]
+    >>> print(indices[1][1])
+    [4 5 6 7 8 4 5 6 7 8 4 5 6 7 8]
+
+    and the third window:
+
+    >>> print(indices[-1][0])
+    [4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 6 6 6 6 6 6 6 6 6]
+    >>> print(indices[-1][1])
+    [0 1 2 3 4 5 6 7 8 0 1 2 3 4 5 6 7 8 0 1 2 3 4 5 6 7 8]
+
+    Use these indices to select the coordinates the points that fall inside
+    a window:
+
+    >>> points_window_0 = [c[indices[0]] for c in coordinates]
+    >>> print(points_window_0[0])
+    [ 0.  5. 10. 15. 20.  0.  5. 10. 15. 20.  0.  5. 10. 15. 20.]
+    >>> print(points_window_0[1])
+    [60. 60. 60. 60. 60. 65. 65. 65. 65. 65. 70. 70. 70. 70. 70.]
+
+    >>> points_window_1 = [c[indices[1]] for c in coordinates]
+    >>> print(points_window_1[0])
+    [20. 25. 30. 35. 40. 20. 25. 30. 35. 40. 20. 25. 30. 35. 40.]
+    >>> print(points_window_1[1])
+    [60. 60. 60. 60. 60. 65. 65. 65. 65. 65. 70. 70. 70. 70. 70.]
+
+    If the coordinates are 1D, the indices will also be 1D:
+
+    >>> coordinates1d = [c.ravel() for c in coordinates]
+    >>> window_coords, indices = rolling_window_spherical(
+    ...     coordinates1d, window_size=window_size, overlap=0.5,
+    ... )
+    >>> print(len(indices[0]))
+    1
+
+    In this case, the indices will refer to the raveled coordinate array. The
+    indexer for the first window will be:
+
+    >>> print(indices[0][0])
+    [ 0  1  2  3  4  9 10 11 12 13 18 19 20 21 22]
+
+    And for the second window:
+
+    >>> print(indices[1][0])
+    [ 4  5  6  7  8 13 14 15 16 17 22 23 24 25 26]
+
+    The returned indices can be used in the same way as before to get the same
+    coordinates:
+
+    >>> print(coordinates1d[0][indices[0]])
+    [ 0.  5. 10. 15. 20.  0.  5. 10. 15. 20.  0.  5. 10. 15. 20.]
+    >>> print(coordinates1d[1][indices[0]])
+    [60. 60. 60. 60. 60. 65. 65. 65. 65. 65. 70. 70. 70. 70. 70.]
+
+    By default, the windows will span the entire data region. You can also
+    control the specific region you'd like the windows to cover:
+
+    >>> window_coords, indices = rolling_window_spherical(
+    ...     coordinates,
+    ...     window_size=window_size,
+    ...     overlap=0.5,
+    ...     region=(0, 20, 60, 75),
+    ... )
+
+    The windows will now try to fit the smaller region instead of the full
+    extent of the coordinates:
+
+    >>> print(coordinates[0][indices[0]])
+    [ 0.  5. 10. 15. 20.  0.  5. 10. 15. 20.  0.  5. 10. 15. 20.]
+    >>> print(coordinates[1][indices[0]])
+    [60. 60. 60. 60. 60. 65. 65. 65. 65. 65. 70. 70. 70. 70. 70.]
+
+    >>> print(coordinates[0][indices[1]])
+    [ 0.  5. 10. 15. 20.  0.  5. 10. 15. 20.  0.  5. 10. 15. 20.]
+    >>> print(coordinates[1][indices[1]])
+    [65. 65. 65. 65. 65. 70. 70. 70. 70. 70. 75. 75. 75. 75. 75.]
+
+    If the longitude range is a full 360 degrees, the windows will wrap around
+    the 360-0 discontinuity:
+
+    >>> coordinates = bd.grid_coordinates((0, 360, 0, 0), spacing=30)
+    >>> print(coordinates[0])
+    [[  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]]
+    >>> print(coordinates[1])
+    [[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
+
+    >>> window_coords, indices = rolling_window_spherical(
+    ...     coordinates, window_size=90, overlap=0.5,
+    ... )
+    >>> print(indices.shape)
+    (8,)
+    >>> print(coordinates[0][indices[0]])
+    [  0.  30.  60.  90. 360.]
+
+    The 360 point is there because it's the same as the 0 point and so they are
+    both inside the window.
+
+    The last window will be centered at 0 and will wrap around the 360-0
+    divide:
+
+    >>> print(coordinates[0][indices[-1]])
+    [  0.  30. 330. 360.]
+
+    This way, the windows wrap around the globe and overlap all the way around.
+    """
+    coordinates = check_coordinates(coordinates)
+    check_coordinates_geographic(coordinates)
+    check_overlap(overlap)
+    if region is None:
+        region = get_region(coordinates)
+    check_region_geographic(region)
+    region, coordinates = longitude_continuity(region, coordinates=coordinates)
+    if window_size <= 0:
+        message = f"Invalid window size '{window_size}'. Must be > 0."
+        raise ValueError(message)
+    # Check if longitude goes all the way around
+    longitude_360 = np.allclose(abs(region[1] - region[0]), 360)
+    # Calculate the window step based on the amount of overlap
+    window_step = (1 - overlap) * window_size
+    # We'll have to do this by bands of latitude. Each band will have
+    # a different window size in longitude. See comments below for more
+    # details.
+    if window_size >= (region[3] - region[2]):
+        # If the window size is larger than the region, line_coordinates
+        # will through an error.
+        bands = np.array([(region[3] + region[2]) / 2])
+    else:
+        # Always adjust the spacing to avoid falling out of valid geographic
+        # boundaries.
+        bands = line_coordinates(
+            region[2] + window_size / 2,
+            region[3] - window_size / 2,
+            spacing=window_step,
+            adjust="spacing",
+        )
+    # These will gather the window centers and indices of points inside each
+    # window for each band. Window centers will later be concatenated into
+    # a single array.
+    longitude, latitude, indices1d = [], [], []
+    # Need these so we can map the in-band data indices to the overall data
+    # indices.
+    data_indices = np.arange(coordinates[0].size)
+    for central_latitude in bands:
+        # Figure out the size in longitude that leads to equal area. See Malkin
+        # (2016).
+        window_size_lon = window_size / np.cos(np.radians(central_latitude))
+        # Calculate the step size for longitude
+        window_step_lon = (1 - overlap) * window_size_lon
+        # Generate the longitudes of window centers in this band.
+        if window_size_lon >= (region[1] - region[0]):
+            # If the window size is larger than the region, line_coordinates
+            # will through an error.
+            band_longitude = np.array([(region[1] + region[0]) / 2])
+        else:
+            # Always adjust the spacing to make sure windows are evenly
+            # distributed across the 360-0 boundary and the region doesn't
+            # exceed valid intervals.
+            band_longitude = line_coordinates(
+                region[0] + window_size_lon / 2,
+                region[1] - window_size_lon / 2,
+                spacing=window_step_lon,
+                adjust="spacing",
+            )
+        band_latitude = np.full_like(band_longitude, central_latitude)
+        # Make a KD tree with points only in this band. This is needed because
+        # query_ball_point only works for "square" windows and we'd select too
+        # many points if using window_size_lon (with points out of the latitude
+        # band) or too little if using window_size (since longitude intervals
+        # are larger).
+        latitude_min = central_latitude - window_size / 2
+        latitude_max = central_latitude + window_size / 2
+        in_band = np.logical_and(
+            coordinates[1].ravel() >= latitude_min,
+            coordinates[1].ravel() <= latitude_max,
+        )
+        band_coordinates = [c.ravel()[in_band] for c in coordinates]
+        tree = KDTree(np.transpose(band_coordinates))
+        # Use p=inf (infinity norm) to get square windows instead of circular.
+        in_band_indices = tree.query_ball_point(
+            np.transpose([band_longitude, band_latitude]),
+            r=window_size_lon / 2,
+            p=np.inf,
+        )
+        # Translate the in-band indices to the overall data indices
+        band_indices1d = [data_indices[in_band][i] for i in in_band_indices]
+        # If the longitude goes around the globe, add an extra window to have
+        # continuity around the 360-0 boundary.
+        if longitude_360:
+            true_window_step_lon = band_longitude[1] - band_longitude[0]
+            first_window_longitude = band_longitude[0] - true_window_step_lon
+            first_window = (
+                first_window_longitude - window_size_lon / 2,
+                first_window_longitude + window_size_lon / 2,
+                latitude_min,
+                latitude_max,
+            )
+            first_window, band_coordinates = longitude_continuity(
+                first_window,
+                coordinates=band_coordinates,
+            )
+            tree = KDTree(np.transpose(band_coordinates))
+            in_band_indices = tree.query_ball_point(
+                np.array([[first_window_longitude, central_latitude]]),
+                r=window_size_lon / 2,
+                p=np.inf,
+            )
+            band_indices1d.extend(data_indices[in_band][i] for i in in_band_indices)
+            band_longitude = np.append(band_longitude, first_window_longitude)
+            band_latitude = np.append(band_latitude, central_latitude)
+        latitude.append(band_latitude)
+        longitude.append(band_longitude)
+        indices1d.extend(band_indices1d)
+    # Join results from all bands
+    latitude = np.concatenate(latitude)
+    longitude = np.concatenate(longitude)
+    centers = (longitude, latitude)
+    # Make an indices array for compatibility with the regular rolling window
+    # function. But here the window coordinates cannot be a 2D array since
+    # longitudinal windows are not regular.
+    indices = np.fromiter(
+        [
+            np.unravel_index(np.array(i, dtype="int"), shape=coordinates[0].shape)
+            for i in indices1d
+        ],
+        dtype="object",
+    )
     return centers, indices
 
 
