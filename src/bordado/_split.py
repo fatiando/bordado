@@ -685,7 +685,7 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
     if region is None:
         region = get_region(coordinates)
     check_region_geographic(region)
-    coordinates, region = longitude_continuity(coordinates, region)
+    region, coordinates = longitude_continuity(region, coordinates=coordinates)
     if window_size <= 0:
         message = f"Invalid window size '{window_size}'. Must be > 0."
         raise ValueError(message)
@@ -698,10 +698,9 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
     # details. Always adjust the spacing to avoid falling out of valid
     # geographic boundaries.
     bands = line_coordinates(
-        region[2] + window_step / 2,
-        region[3] - window_step / 2,
+        region[2] + window_size / 2,
+        region[3] - window_size / 2,
         spacing=window_step,
-        pixel_register=True,
         adjust="spacing",
     )
     # These will gather the window centers and indices of points inside each
@@ -757,11 +756,11 @@ def rolling_window_spherical(coordinates, window_size, overlap, *, region=None):
             first_window = (
                 first_window_longitude - window_size_lon / 2,
                 first_window_longitude + window_size_lon / 2,
-                central_latitude - window_size / 2,
-                central_latitude + window_size / 2,
+                latitude_min,
+                latitude_max,
             )
-            band_coordinates, first_window = longitude_continuity(
-                band_coordinates, first_window
+            first_window, band_coordinates = longitude_continuity(
+                first_window, coordinates=band_coordinates,
             )
             tree = KDTree(np.transpose(band_coordinates))
             in_band_indices = tree.query_ball_point(
