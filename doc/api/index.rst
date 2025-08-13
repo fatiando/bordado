@@ -38,6 +38,7 @@ Splitting points into blocks and windows
    block_split
    expanding_window
    rolling_window
+   rolling_window_spherical
 
 Other utilities
 ---------------

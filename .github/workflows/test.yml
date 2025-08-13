@@ -54,7 +54,7 @@ jobs:
 
       # Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # Need to fetch more than the last commit so that setuptools_scm can
           # create the correct version string. If the number of commits since
@@ -143,7 +143,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # The GitHub token is preserved by default but this job doesn't need
           # to be able to push to GitHub.
@@ -164,7 +164,7 @@ jobs:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-coverage
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           pattern: coverage_*
           # If true, the downloaded artifacts will be in the same directory

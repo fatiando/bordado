@@ -64,6 +64,12 @@ def spacing_to_size(start, stop, spacing, *, adjust="spacing"):
     >>> size, start, stop = spacing_to_size(0, 1, 0.6, adjust="region")
     >>> print(f"{size} {start:.1f} {stop:.1f}")
     3 -0.1 1.1
+
+    If the start and stop are the same, only a single point will be generated:
+
+    >>> size, start, stop = spacing_to_size(1e-8, 1e-8, 1e-7)
+    >>> print(f"{size} {start:.1g} {stop:.1g}")
+    1 1e-08 1e-08
     """
     check_adjust(adjust)
     # Add 1 to get the number of nodes, not segments
@@ -73,8 +79,10 @@ def spacing_to_size(start, stop, spacing, *, adjust="spacing"):
     # spacing or the region. To get the appropriate behaviour of decreasing the
     # spacing until it fits the region or increasing the region until it fits
     # at least 1 spacing, we need to always round to at least 1 in the code
-    # above.
-    if size == 1:
+    # above. But this should only be done if the interval stop - start is not
+    # close to zero.
+    if size == 1 and not np.isclose(stop, start):
+        # if size == 1:
         size += 1
     if adjust == "region":
         # The size is the same but we adjust the interval so that the spacing
