@@ -120,7 +120,6 @@ def test_check_region_passes(region):
         ([1, 2, 3, 4, 5], "Invalid region .* Must have exactly 4"),
         ([1, 2, 3], "Invalid region .* Must have exactly 4"),
         ([1, 2], "Invalid region .* Must have exactly 4"),
-        ([3, 2, 3, 4], r"Invalid region .* West boundary"),
         ([1, 2, 5, 4], r"Invalid region .* South boundary"),
         ([-181, 1, 3, 4], r"Invalid region .* Longitude range"),
         ([0, 361, 3, 4], r"Invalid region .* Longitude range"),
@@ -142,6 +141,7 @@ def test_check_region_geographic_raises(region, message):
         [1, 2, 3, 4],
         [-2, -1, -5, -4],
         [0, 360, -90, 90],
+        [340, 20, -90, 90],
         [-180, 180, -90, 90],
     ],
 )

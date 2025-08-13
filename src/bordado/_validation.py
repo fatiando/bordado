@@ -135,9 +135,9 @@ def check_region_geographic(region):
     Check that the given geographic region is valid.
 
     A region is a bounding box for 2-dimensional coordinates (W, E, S, N).
-    There should be 4 elements and lower boundaries should not be larger than
-    upper boundaries. Longitude boundaries should be in range [0, 360] or
-    [-180, 180] and latitude boundaries should be in range [-90, 90].
+    There should be 4 elements and lower latitude boundaries should not be
+    larger than upper boundaries. Longitude boundaries should be in range [0,
+    360] or [-180, 180] and latitude boundaries should be in range [-90, 90].
 
     Parameters
     ----------
@@ -160,9 +160,6 @@ def check_region_geographic(region):
         )
         raise ValueError(message)
     west, east, south, north = region
-    if west > east:
-        message = f"Invalid region '{region}'. West boundary must be less than east."
-        raise ValueError(message)
     if south > north:
         message = f"Invalid region '{region}'. South boundary must be less than north."
         raise ValueError(message)
@@ -255,91 +252,105 @@ def check_overlap(overlap):
         raise ValueError(message)
 
 
-def longitude_continuity(coordinates, region):
+def longitude_continuity(region, *, coordinates=None):
     """
-    Modify coordinates and region boundaries to ensure longitude continuity.
+    Modify region boundaries and coordinates to ensure longitude continuity.
 
     Longitudinal boundaries of the region are moved to the ``[0, 360)`` or
     ``[-180, 180)`` degrees interval depending which one is better suited for
-    that specific region. Coordinates are changed to match the new region.
+    that specific region to ensure that there are no discontinuities in the
+    range. If given, coordinates are changed to match the new region.
+
+    Longitude can be expressed as 0-360 or -180-180 and when specifying
+    a small area, the longitude can have discontinuities in its range. For
+    example, [350, 10] is a valid longitude range but wraps around at 0 instead
+    of decreasing from 350 to 10. This can be problematic for some coordinate
+    generation and manipulation routines.
 
     Parameters
     ----------
-    coordinates : tuple = (longitude, latitude)
-        Tuple of arrays with the coordinates of each point. Arrays can be
-        Python lists or any numpy-compatible array type. Arrays can be of any
-        shape but must all have the same shape.
     region : tuple = (W, E, S, N)
         The boundaries of a given region in geographic coordinates. Should have
         a lower and an upper boundary for each dimension of the coordinate
         system.
+    coordinates : tuple = (longitude, latitude) or None
+        Tuple of arrays with the coordinates of each point. Arrays can be
+        Python lists or any numpy-compatible array type. Arrays can be of any
+        shape but must all have the same shape. If None, we will assume that no
+        coordinates are given.
 
     Returns
     -------
-    modified_coordinates : tuple = (longitude, latitude)
-        Modified set of geographic coordinates with continuous longitude.
     modified_region : tuple = (W, E, S, N)
         The modified boundary of the region.
+    modified_coordinates : tuple = (longitude, latitude)
+        Only returned if coordinates are given. Modified set of geographic
+        coordinates with continuous longitude.
 
     Examples
     --------
-    >>> # Modify region with west > east
+    Modify region with west > east to avoid the 360 discontinuity:
+
     >>> w, e, s, n = 350, 10, -10, 10
-    >>> print(longitude_continuity(coordinates=None, region=[w, e, s, n]))
-    [-10  10 -10  10]
-    >>> # Modify region and extra coordinates
-    >>> from verde import grid_coordinates
-    >>> region = [-70, -60, -40, -30]
-    >>> coordinates = grid_coordinates([270, 320, -50, -20], spacing=5)
-    >>> [longitude, latitude], region = longitude_continuity(
-    ...     coordinates, region
+    >>> print(longitude_continuity([w, e, s, n]))
+    (-10, 10, -10, 10)
+
+    Modify region and coordinates so that they match:
+
+    >>> region = (350, 10, -60, -40)
+    >>> coordinates = ((-10, -5, 0, 5, 10), (-60, -55, -50, -45, -40))
+    >>> region, (longitude, latitude) = longitude_continuity(
+    ...     region, coordinates=coordinates,
     ... )
     >>> print(region)
-    [290 300 -40 -30]
-    >>> print(longitude.min(), longitude.max())
-    270.0 320.0
-    >>> # Another example
-    >>> region = [-20, 20, -20, 20]
-    >>> coordinates = grid_coordinates([0, 350, -90, 90], spacing=10)
-    >>> [longitude, latitude], region = longitude_continuity(
-    ...     coordinates, region
+    (-10, 10, -60, -40)
+    >>> print(longitude)
+    [-10  -5   0   5  10]
+
+    The coordinates and region don't have to be within the same boundaries:
+
+    >>> region = (-20, 20, -20, 20)
+    >>> coordinates = ((0, 100, 200, 300), (-40, 0, 40, 80))
+    >>> region, (longitude, latitude) = longitude_continuity(
+    ...     region, coordinates=coordinates,
     ... )
     >>> print(region)
-    [-20  20 -20  20]
-    >>> print(longitude.min(), longitude.max())
-    -180.0 170.0
+    (-20, 20, -20, 20)
+    >>> print(longitude)
+    [   0  100 -160  -60]
     """
-    coordinates = check_coordinates(coordinates)
-    check_coordinates_geographic(coordinates)
     check_region_geographic(region)
-    interval_360 = True
-    if region is not None:
-        # Get longitudinal boundaries and check region
-        w, e, s, n = region
-        # Check if region is defined all around the globe
-        all_globe = np.allclose(abs(e - w), 360)
-        # Move coordinates to [0, 360)
-        w = w % 360
-        e = e % 360
-        # Move west=0 and east=360 if region longitudes goes all around the globe
-        if all_globe:
-            w, e = 0, 360
-        # Check if the [-180, 180) interval is better suited
-        if w > e:
-            interval_360 = False
-            e = ((e + 180) % 360) - 180
-            w = ((w + 180) % 360) - 180
-            # If e = 180 then the above will create e=-180, which is wrong.
-            # This only happens to the east limit and we need to fix it to have
-            # a valid region.
-            if e < w:
-                e *= -1
-        region = (w, e, s, n)
+    # Get longitudinal boundaries and check region
+    w, e, s, n = region
+    # Check if region is defined all around the globe
+    all_globe = np.allclose(abs(e - w), 360)
+    # Move coordinates to [0, 360)
+    w = w % 360
+    e = e % 360
+    # Move west=0 and east=360 if region longitudes goes all around the globe
+    if all_globe:
+        w, e = 0, 360
+    # Check if the [-180, 180) interval is better suited
+    if w > e:
+        interval_360 = False
+        e = ((e + 180) % 360) - 180
+        w = ((w + 180) % 360) - 180
+        # If e = 180 then the above will create e=-180, which is wrong.
+        # This only happens to the east limit and we need to fix it to have
+        # a valid region.
+        if e < w:
+            e *= -1
+    else:
+        interval_360 = True
+    modified_region = (w, e, s, n)
     if coordinates is not None:
+        coordinates = check_coordinates(coordinates)
+        check_coordinates_geographic(coordinates)
         # Run sanity checks for coordinates
         longitude = coordinates[0]
         longitude = longitude % 360
         if not interval_360:
             longitude = ((longitude + 180) % 360) - 180
-        coordinates = (longitude, *coordinates[1:])
-    return coordinates, region
+        modified_coordinates = (longitude, *coordinates[1:])
+        return modified_region, modified_coordinates
+    return modified_region
