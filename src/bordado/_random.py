@@ -112,7 +112,7 @@ def random_coordinates_spherical(
     region, size, *, random_seed=None, non_dimensional_coords=None
 ):
     """
-    Generate the coordinates for a uniformly random scatter on the sphere.
+    Generate the coordinates for uniformly random points on the sphere.
 
     Points drawn from a simple uniform distribution of longitude and latitude
     will tend to be more concentrated towards the poles. This function accounts
@@ -155,11 +155,10 @@ def random_coordinates_spherical(
 
     Examples
     --------
-    We can generate the random coordinates on the entire surface of a sphere
-    like so:
+    We can generate the random coordinates on a sphere like so:
 
     >>> coordinates = random_coordinates_spherical(
-    ...     region=(0, 360, -90, 90), size=10, random_seed=42,
+    ...     region=(-100, 100, -80, -20), size=10, random_seed=42,
     ... )
 
     We set a seed here to make sure our examples always return the same values.
@@ -171,12 +170,12 @@ def random_coordinates_spherical(
     The first coordinate is the longitude:
 
     >>> print(np.array_str(coordinates[0], precision=1))
-    [278.6 158.  309.1 251.1  33.9 351.2 274.  283.   46.1 162.1]
+    [ 54.8 -12.2  71.7  39.5 -81.2  95.1  52.2  57.2 -74.4  -9.9]
 
     And the second is the latitude:
 
     >>> print(np.array_str(coordinates[1], precision=1))
-    [-15.   58.6  16.7  40.2  -6.5 -33.1   6.3 -60.7  40.9  15.3]
+    [-48.3 -22.9 -34.8 -27.1 -44.4 -57.  -38.9 -70.7 -26.9 -35.4]
 
     To show how this differs from :func:`bordado.random_coordinates`, we can
     generate a large number of points and calculate the point density per
@@ -207,20 +206,42 @@ def random_coordinates_spherical(
     ...     density = points_per_band / areas
     ...     return density
 
-    Now we can calculate the point density:
+    Now we can make a lot of random points using this function and the
+    traditional :func:`bordado.random_coordinates` to compare:
 
+    >>> region = (0, 360, -90, 90)
+    >>> size = 100_000
+    >>> coordinates_cartesian = random_coordinates(
+    ...     region, size, random_seed=42,
+    ... )
+    >>> coordinates_spherical = random_coordinates_spherical(
+    ...     region, size, random_seed=42,
+    ... )
+
+    Finally, we calculate and print the point density per latitude for each
+    set:
+
+    >>> density_cartesian = point_density(coordinates_cartesian, region)
+    >>> print(np.array_str(density_cartesian, precision=0))
+    [57147. 19812. 12159.  8981.  7267.  6107.  5574.  5320.  5151.  5033.
+      5237.  5558.  6138.  7075.  8800. 11967. 19660. 58635.]
+
+    >>> density_spherical = point_density(coordinates_spherical, region)
+    >>> print(np.array_str(density_spherical, precision=0))
+    [8192. 7786. 7683. 8134. 8113. 8112. 7867. 7982. 8029. 7945. 7834. 7901.
+     7931. 7902. 7924. 8037. 7987. 8119.]
+
+    As you can see, for the Cartesian version the density increases towards the
+    poles but for the spherical version it stays roughly the same throughout
+    the globe.
     """
     check_region_geographic(region)
     region = longitude_continuity(region)
     random = np.random.default_rng(random_seed)
     colat_south = np.radians(90 - region[2])
     colat_north = np.radians(90 - region[3])
-    xmin = (1 + np.cos(colat_north)) / 2
-    xmax = (1 + np.cos(colat_south)) / 2
-    # This can happen when using -90, 90 for latitudes. It causes an error in
-    # the uniform sampler.
-    if xmin > xmax:
-        xmin, xmax = xmax, xmin
+    xmax = (1 + np.cos(colat_north)) / 2
+    xmin = (1 + np.cos(colat_south)) / 2
     coordinates = [
         random.uniform(*region[:2], size),
         90 - np.degrees(np.arccos(2 * random.uniform(xmin, xmax, size) - 1)),
