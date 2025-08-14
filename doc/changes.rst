@@ -3,6 +3,30 @@
 Changelog
 =========
 
+Version 0.4.0
+-------------
+
+Released on: 2025/08/14
+
+doi: https://doi.org/10.5281/zenodo.16874959
+
+Bug fixes:
+
+- Fix bug in ``spacing_to_size`` when ``start == stop``. We’d expect that the size returned would be 1 (a single point) but it was returning 2 instead because of a fix to another bug. (`#62 <https://github.com/fatiando/bordado/pull/62>`__)
+
+New functions:
+
+- Add function ``random_coordinates_spherical`` to generate random points on a sphere following a uniform distribution. Using the regular ``random_coordinates`` leads to larger concentration of points at the poles. (`#59 <https://github.com/fatiando/bordado/pull/59>`__)
+- Add function ``rolling_window_spherical`` to generate rolling windows of roughly equal area on a sphere. It accounts for the convergence of longitude lines by increasing the longitudinal size of windows when needed and is able to wrap windows around the 360-0 longitude divide. (`#58 <https://github.com/fatiando/bordado/pull/58>`__)
+
+Documentation:
+
+- Fix description of step in rolling window docs (`#57 <https://github.com/fatiando/bordado/pull/57>`__)
+
+This release contains contributions from:
+
+- Leonardo Uieda
+
 Version 0.3.0
 -------------
 
