@@ -60,7 +60,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="bordado.spacing_to_size" href="bordado.spacing_to_size.html" />
-    <link rel="prev" title="bordado.rolling_window" href="bordado.rolling_window.html" />
+    <link rel="prev" title="bordado.rolling_window_spherical" href="bordado.rolling_window_spherical.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -175,6 +175,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
@@ -184,12 +185,14 @@
 <li class="toctree-l2"><a class="reference internal" href="bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.neighbor_distance_statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
@@ -458,7 +461,7 @@ point. Must be &gt;= 1. Default is 1.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>statistics</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the statistic of the k-nearest neighbor distances of each
+<dt><strong>statistics</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the statistic of the k-nearest neighbor distances of each
 point. The array will have the same shape as the input coordinate
 arrays.</p>
 </dd>
@@ -567,12 +570,12 @@ corners, which results in a median of 1.21.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bordado.rolling_window.html"
+       href="bordado.rolling_window_spherical.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">bordado.rolling_window</p>
+        <p class="prev-next-title">bordado.rolling_window_spherical</p>
       </div>
     </a>
     <a class="right-next"
@@ -630,7 +633,7 @@ corners, which results in a median of 1.21.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 15, 2025.
+  Last updated on Aug 14, 2025.
   <br/>
 </p>
   </div>

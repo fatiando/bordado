@@ -59,7 +59,7 @@
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="bordado.neighbor_distance_statistics" href="bordado.neighbor_distance_statistics.html" />
+    <link rel="next" title="bordado.rolling_window_spherical" href="bordado.rolling_window_spherical.html" />
     <link rel="prev" title="bordado.expanding_window" href="bordado.expanding_window.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
@@ -175,6 +175,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
@@ -184,12 +185,14 @@
 <li class="toctree-l2"><a class="reference internal" href="bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
@@ -432,9 +435,9 @@ document.write(`
 <span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">rolling_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'overlap'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_split.html#rolling_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.rolling_window" title="Link to this definition">#</a></dt>
 <dd><p>Split points into overlapping windows.</p>
 <p>A window of the given size is moved across the region at a given step
-(specified by <em>spacing</em> or <em>shape</em>). Returns the indices of points falling
-inside each window step. You can use the indices to select points falling
-inside a given window.</p>
+(specified by the amount of overlap between adjacent windows). Returns the
+indices of points falling inside each window step. You can use the indices
+to select points falling inside a given window.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -468,7 +471,7 @@ adjusting the overlap.</p>
 number of arrays as the <em>coordinates</em> and each array will have the
 number of dimensions equal to <code class="docutils literal notranslate"><span class="pre">len(coordinates)</span></code>.</p>
 </dd>
-<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the same shape as the <em>window_coordinates</em>. Each element
+<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the same shape as the <em>window_coordinates</em>. Each element
 of the array is a tuple of arrays (with the same length as
 <em>coordinates</em>) corresponding to the indices of the points that fall
 inside that particular window. Use these indices to index the given
@@ -629,11 +632,11 @@ the same as before:</p>
       </div>
     </a>
     <a class="right-next"
-       href="bordado.neighbor_distance_statistics.html"
+       href="bordado.rolling_window_spherical.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">bordado.neighbor_distance_statistics</p>
+        <p class="prev-next-title">bordado.rolling_window_spherical</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -683,7 +686,7 @@ the same as before:</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 15, 2025.
+  Last updated on Aug 14, 2025.
   <br/>
 </p>
   </div>

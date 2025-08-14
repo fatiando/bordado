@@ -60,7 +60,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Version compatibility" href="compatibility.html" />
-    <link rel="prev" title="Citing Bordado" href="citing.html" />
+    <link rel="prev" title="References" href="references.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -175,6 +175,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
@@ -184,12 +185,14 @@
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="versions.html">Documentation for other versions</a></li>
@@ -413,6 +416,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-4-0">Version 0.4.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0">Version 0.3.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-2-0">Version 0.2.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a></li>
@@ -430,6 +434,28 @@ document.write(`
                   
   <section id="changelog">
 <span id="changes"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<section id="version-0-4-0">
+<h2>Version 0.4.0<a class="headerlink" href="#version-0-4-0" title="Link to this heading">#</a></h2>
+<p>Released on: 2025/08/14</p>
+<p>doi: <a class="reference external" href="https://doi.org/10.5281/zenodo.16874959">https://doi.org/10.5281/zenodo.16874959</a></p>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Fix bug in <code class="docutils literal notranslate"><span class="pre">spacing_to_size</span></code> when <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">==</span> <span class="pre">stop</span></code>. We’d expect that the size returned would be 1 (a single point) but it was returning 2 instead because of a fix to another bug. (<a class="reference external" href="https://github.com/fatiando/bordado/pull/62">#62</a>)</p></li>
+</ul>
+<p>New functions:</p>
+<ul class="simple">
+<li><p>Add function <code class="docutils literal notranslate"><span class="pre">random_coordinates_spherical</span></code> to generate random points on a sphere following a uniform distribution. Using the regular <code class="docutils literal notranslate"><span class="pre">random_coordinates</span></code> leads to larger concentration of points at the poles. (<a class="reference external" href="https://github.com/fatiando/bordado/pull/59">#59</a>)</p></li>
+<li><p>Add function <code class="docutils literal notranslate"><span class="pre">rolling_window_spherical</span></code> to generate rolling windows of roughly equal area on a sphere. It accounts for the convergence of longitude lines by increasing the longitudinal size of windows when needed and is able to wrap windows around the 360-0 longitude divide. (<a class="reference external" href="https://github.com/fatiando/bordado/pull/58">#58</a>)</p></li>
+</ul>
+<p>Documentation:</p>
+<ul class="simple">
+<li><p>Fix description of step in rolling window docs (<a class="reference external" href="https://github.com/fatiando/bordado/pull/57">#57</a>)</p></li>
+</ul>
+<p>This release contains contributions from:</p>
+<ul class="simple">
+<li><p>Leonardo Uieda</p></li>
+</ul>
+</section>
 <section id="version-0-3-0">
 <h2>Version 0.3.0<a class="headerlink" href="#version-0-3-0" title="Link to this heading">#</a></h2>
 <p>Released on: 2025/05/15</p>
@@ -548,12 +574,12 @@ for users.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="citing.html"
+       href="references.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Citing Bordado</p>
+        <p class="prev-next-title">References</p>
       </div>
     </a>
     <a class="right-next"
@@ -581,6 +607,7 @@ for users.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-4-0">Version 0.4.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0">Version 0.3.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-2-0">Version 0.2.0</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a></li>
@@ -614,7 +641,7 @@ for users.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 15, 2025.
+  Last updated on Aug 14, 2025.
   <br/>
 </p>
   </div>

@@ -175,6 +175,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
@@ -184,12 +185,14 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../versions.html">Documentation for other versions</a></li>
@@ -441,13 +444,16 @@ document.write(`
 <tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.random_coordinates.html#bordado.random_coordinates" title="bordado.random_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_coordinates</span></code></a>(region, size, *[, ...])</p></td>
 <td><p>Generate the coordinates for a uniformly random scatter of points.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a>(region, *[, shape, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.random_coordinates_spherical.html#bordado.random_coordinates_spherical" title="bordado.random_coordinates_spherical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_coordinates_spherical</span></code></a>(region, size, *)</p></td>
+<td><p>Generate the coordinates for uniformly random points on the sphere.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a>(region, *[, shape, ...])</p></td>
 <td><p>Generate evenly spaced points on an n-dimensional grid.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">profile_coordinates</span></code></a>(beginning, end, *[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">profile_coordinates</span></code></a>(beginning, end, *[, ...])</p></td>
 <td><p>Generate evenly spaced coordinates along a straight line between points.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.great_circle_coordinates.html#bordado.great_circle_coordinates" title="bordado.great_circle_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">great_circle_coordinates</span></code></a>(beginning, end, *)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.great_circle_coordinates.html#bordado.great_circle_coordinates" title="bordado.great_circle_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">great_circle_coordinates</span></code></a>(beginning, end, *)</p></td>
 <td><p>Generate evenly spaced coordinates along a great circle between points.</p></td>
 </tr>
 </tbody>
@@ -483,6 +489,9 @@ document.write(`
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.rolling_window.html#bordado.rolling_window" title="bordado.rolling_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_window</span></code></a>(coordinates, window_size, ...)</p></td>
 <td><p>Split points into overlapping windows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.rolling_window_spherical.html#bordado.rolling_window_spherical" title="bordado.rolling_window_spherical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_window_spherical</span></code></a>(coordinates, ...[, ...])</p></td>
+<td><p>Split points into overlapping equal area windows on the sphere.</p></td>
 </tr>
 </tbody>
 </table>
@@ -585,7 +594,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 15, 2025.
+  Last updated on Aug 14, 2025.
   <br/>
 </p>
   </div>

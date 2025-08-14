@@ -174,6 +174,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
@@ -183,12 +184,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split.html">bordado.block_split</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
@@ -362,7 +365,8 @@ document.write(`
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">._validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_region</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_non_dimensional_coordinates</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_region</span><span class="p">,</span> <span class="n">check_region_geographic</span><span class="p">,</span> <span class="n">longitude_continuity</span>
 
 
 <div class="viewcode-block" id="random_coordinates">
@@ -453,9 +457,160 @@ document.write(`
     <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
         <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">non_dimensional_coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">non_dimensional_coords</span><span class="p">):</span>
-            <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">value</span><span class="p">))</span>
+    <span class="n">coordinates</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="n">make_non_dimensional_coordinates</span><span class="p">(</span>
+            <span class="n">non_dimensional_coords</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="random_coordinates_spherical">
+<a class="viewcode-back" href="../../api/generated/bordado.random_coordinates_spherical.html#bordado.random_coordinates_spherical">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">random_coordinates_spherical</span><span class="p">(</span>
+    <span class="n">region</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate the coordinates for uniformly random points on the sphere.</span>
+
+<span class="sd">    Points drawn from a simple uniform distribution of longitude and latitude</span>
+<span class="sd">    will tend to be more concentrated towards the poles. This function accounts</span>
+<span class="sd">    for that and is able generate a uniformly random distribution on the</span>
+<span class="sd">    surface of a sphere.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    region : tuple = (W, E, S, N)</span>
+<span class="sd">        The boundaries of a given region in geographic coordinates. Should have</span>
+<span class="sd">        a lower and an upper boundary for each dimension of the coordinate</span>
+<span class="sd">        system.</span>
+<span class="sd">    size : int</span>
+<span class="sd">        The number of points to generate.</span>
+<span class="sd">    random_seed : None or int or numpy.random.Generator</span>
+<span class="sd">        A seed for a random number generator (RNG) used to generate the</span>
+<span class="sd">        coordinates. If an integer is given, it will be used as a seed for</span>
+<span class="sd">        :func:`numpy.random.default_rng` which will then be used as the</span>
+<span class="sd">        generator. If a :class:`numpy.random.Generator` is given, it will be</span>
+<span class="sd">        used. If ``None`` is given, :func:`~numpy.random.default_rng` will be</span>
+<span class="sd">        used with no seed to create a generator (resulting in different numbers</span>
+<span class="sd">        with each run). Use a seed to make sure computations are reproducible.</span>
+<span class="sd">        Default is None.</span>
+<span class="sd">    non_dimensional_coords : None, scalar, or tuple of scalars</span>
+<span class="sd">        If not None, then value(s) of extra non-dimensional coordinates</span>
+<span class="sd">        (coordinates that aren&#39;t part of the sample dimensions, like height for</span>
+<span class="sd">        a lat/lon grid). Will generate extra coordinate arrays from these</span>
+<span class="sd">        values with the same shape of the final coordinates and the constant</span>
+<span class="sd">        value given here. Use this to generate arrays of constant heights or</span>
+<span class="sd">        times, for example, which might be needed to accompany a set of points.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    coordinates : tuple of arrays</span>
+<span class="sd">        Arrays with the longitude, latitude, and non-dimensional coordinates,</span>
+<span class="sd">        in order, of each point in the grid. Each array contains values for</span>
+<span class="sd">        a dimension in an order compatible with *region* followed by any extra</span>
+<span class="sd">        dimensions given in *non_dimensional_coords*. All arrays will have the</span>
+<span class="sd">        specified *size*.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    We can generate the random coordinates on a sphere like so:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = random_coordinates_spherical(</span>
+<span class="sd">    ...     region=(-100, 100, -80, -20), size=10, random_seed=42,</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    We set a seed here to make sure our examples always return the same values.</span>
+<span class="sd">    If you need different values every time you run your code, then either omit</span>
+<span class="sd">    ``random_seed`` or set it to ``None``.</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+
+<span class="sd">    The first coordinate is the longitude:</span>
+
+<span class="sd">    &gt;&gt;&gt; print(np.array_str(coordinates[0], precision=1))</span>
+<span class="sd">    [ 54.8 -12.2  71.7  39.5 -81.2  95.1  52.2  57.2 -74.4  -9.9]</span>
+
+<span class="sd">    And the second is the latitude:</span>
+
+<span class="sd">    &gt;&gt;&gt; print(np.array_str(coordinates[1], precision=1))</span>
+<span class="sd">    [-48.3 -22.9 -34.8 -27.1 -44.4 -57.  -38.9 -70.7 -26.9 -35.4]</span>
+
+<span class="sd">    To show how this differs from :func:`bordado.random_coordinates`, we can</span>
+<span class="sd">    generate a large number of points and calculate the point density per</span>
+<span class="sd">    latitude band. We expect the concentration to be uniform since we want</span>
+<span class="sd">    uniformly distributed numbers.</span>
+
+<span class="sd">    First, we&#39;ll define a function that calculates the point density per 10</span>
+<span class="sd">    degree band of latitude:</span>
+
+<span class="sd">    &gt;&gt;&gt; import bordado as bd</span>
+<span class="sd">    &gt;&gt;&gt; def point_density(coordinates, region):</span>
+<span class="sd">    ...     # Define the latitude bands</span>
+<span class="sd">    ...     bands = bd.line_coordinates(*region[2:], spacing=10)</span>
+<span class="sd">    ...     # Calculate the area of each band.</span>
+<span class="sd">    ...     # See https://en.wikipedia.org/wiki/Spherical_cap</span>
+<span class="sd">    ...     areas = 2 * np.pi * abs(</span>
+<span class="sd">    ...         np.sin(np.radians(bands[:-1])) - np.sin(np.radians(bands[1:]))</span>
+<span class="sd">    ...     )</span>
+<span class="sd">    ...     # Figure out how many points are in each band</span>
+<span class="sd">    ...     points_per_band = np.array([</span>
+<span class="sd">    ...         bd.inside(</span>
+<span class="sd">    ...             coordinates,</span>
+<span class="sd">    ...             [*region[:2], bands[i], bands[i + 1]],</span>
+<span class="sd">    ...         ).sum()</span>
+<span class="sd">    ...         for i in range(bands.size - 1)</span>
+<span class="sd">    ...     ])</span>
+<span class="sd">    ...     # Calculate the density</span>
+<span class="sd">    ...     density = points_per_band / areas</span>
+<span class="sd">    ...     return density</span>
+
+<span class="sd">    Now we can make a lot of random points using this function and the</span>
+<span class="sd">    traditional :func:`bordado.random_coordinates` to compare:</span>
+
+<span class="sd">    &gt;&gt;&gt; region = (0, 360, -90, 90)</span>
+<span class="sd">    &gt;&gt;&gt; size = 100_000</span>
+<span class="sd">    &gt;&gt;&gt; coordinates_cartesian = random_coordinates(</span>
+<span class="sd">    ...     region, size, random_seed=42,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; coordinates_spherical = random_coordinates_spherical(</span>
+<span class="sd">    ...     region, size, random_seed=42,</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    Finally, we calculate and print the point density per latitude for each</span>
+<span class="sd">    set:</span>
+
+<span class="sd">    &gt;&gt;&gt; density_cartesian = point_density(coordinates_cartesian, region)</span>
+<span class="sd">    &gt;&gt;&gt; print(np.array_str(density_cartesian, precision=0))</span>
+<span class="sd">    [57147. 19812. 12159.  8981.  7267.  6107.  5574.  5320.  5151.  5033.</span>
+<span class="sd">      5237.  5558.  6138.  7075.  8800. 11967. 19660. 58635.]</span>
+
+<span class="sd">    &gt;&gt;&gt; density_spherical = point_density(coordinates_spherical, region)</span>
+<span class="sd">    &gt;&gt;&gt; print(np.array_str(density_spherical, precision=0))</span>
+<span class="sd">    [8192. 7786. 7683. 8134. 8113. 8112. 7867. 7982. 8029. 7945. 7834. 7901.</span>
+<span class="sd">     7931. 7902. 7924. 8037. 7987. 8119.]</span>
+
+<span class="sd">    As you can see, for the Cartesian version the density increases towards the</span>
+<span class="sd">    poles but for the spherical version it stays roughly the same throughout</span>
+<span class="sd">    the globe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_region_geographic</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">longitude_continuity</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+    <span class="n">random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+    <span class="n">colat_south</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">90</span> <span class="o">-</span> <span class="n">region</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">colat_north</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">90</span> <span class="o">-</span> <span class="n">region</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">colat_north</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">xmin</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">colat_south</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">region</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">size</span><span class="p">),</span>
+        <span class="mi">90</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="n">coordinates</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="n">make_non_dimensional_coordinates</span><span class="p">(</span>
+            <span class="n">non_dimensional_coords</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span></div>
 
 </pre></div>
@@ -501,7 +656,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 15, 2025.
+  Last updated on Aug 14, 2025.
   <br/>
 </p>
   </div>

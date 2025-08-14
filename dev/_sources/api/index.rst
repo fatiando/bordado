@@ -15,6 +15,7 @@ Coordinate generation
 
    line_coordinates
    random_coordinates
+   random_coordinates_spherical
    grid_coordinates
    profile_coordinates
    great_circle_coordinates
@@ -38,6 +39,7 @@ Splitting points into blocks and windows
    block_split
    expanding_window
    rolling_window
+   rolling_window_spherical
 
 Other utilities
 ---------------
