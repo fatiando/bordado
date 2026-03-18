@@ -18,7 +18,7 @@ from bordado._grid import grid_coordinates
 
 def test_grid_coordinates_fails_both_spacing_shape():
     "Check that an error is given when both a spacing and a shape are passed."
-    with pytest.raises(ValueError, match="Both grid shape .* and spacing .*"):
+    with pytest.raises(ValueError, match=r"Both grid shape .* and spacing .*"):
         grid_coordinates((0, 1, 2, 3), spacing=0.1, shape=(5, 4))
 
 
