@@ -98,6 +98,17 @@ functions for splitting coordinates into spatial blocks and more.
     install.rst
 
 .. toctree::
+    :hidden:
+    :maxdepth: 1
+    :caption: Tutorial
+
+    tutorial/line.rst
+    tutorial/profile.rst
+    tutorial/grid.rst
+    tutorial/random.rst
+    tutorial/split.rst
+
+.. toctree::
     :maxdepth: 1
     :hidden:
     :caption: Reference Documentation
