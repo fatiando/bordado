@@ -1,13 +1,14 @@
-<h1 align="center">Bordado</h1>
+<h1><img src="https://github.com/fatiando/bordado/raw/main/doc/_static/readme-banner.png" alt="Bordado"></h1>
 
 <p align="center"><strong>Create, manipulate, and split geographic coordinates</strong></p>
 
 <p align="center">
 <a href="https://www.fatiando.org/bordado"><strong>Documentation</strong> (latest)</a> •
-<a href="https://www.fatiando.org/bordado/dev"><strong>Documentation</strong> (main branch)</a> •
-<a href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md"><strong>Contributing</strong></a> •
+<a href="https://www.fatiando.org/bordado/dev"><strong>Documentation</strong> (development)</a> •
+<a href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md"><strong>Contribute</strong></a> •
 <a href="https://www.fatiando.org/contact/"><strong>Contact</strong></a> •
-<a href="https://github.com/orgs/fatiando/discussions"><strong>Ask a question</strong></a>
+<a href="https://github.com/orgs/fatiando/discussions"><strong>Ask a question</strong></a> •
+<a href="https://www.fatiando.org/bordado/latest/citing.html"><strong>Cite</strong></a>
 </p>
 
 <p align="center">

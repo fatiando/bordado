@@ -1,14 +1,27 @@
 .. title:: Home
 
+.. grid::
+    :gutter: 2 3 3 3
+    :margin: 5 5 0 0
+    :padding: 0 0 0 0
 
-.. raw:: html
+    .. grid-item::
+        :columns: 12 8 8 8
 
-   <h1 class="display-1">Bordado</h1>
+        .. raw:: html
 
-.. div:: sd-fs-3
+            <h1 class="display-1">Bordado</h1>
 
-   Create, manipulate, and split geographic coordinates
+        .. div:: sd-fs-3
 
+            Create, manipulate, and split geographic coordinates
+
+    .. grid-item::
+        :columns: 12 4 4 4
+
+        .. image:: ./_static/bordado-logo.svg
+            :width: 200px
+            :class: sd-m-auto dark-light
 
 **Bordado**  (Portuguese for "embroidery") is a Python package for creating,
 manipulating, and splitting geographic and Cartesian coordinates.
@@ -19,11 +32,11 @@ functions for splitting coordinates into spatial blocks and more.
 
 .. seealso::
 
-   Many of the functions here used to be in
-   `Verde <https://www.fatiando.org/verde/>`__. They were moved to Bordado to
-   make them more accessible without all of the extra dependencies that Verde
-   requires. We have also improved and expanded most of the functions ported
-   from Verde.
+    Many of the functions here used to be in
+    `Verde <https://www.fatiando.org/verde/>`__. They were moved to Bordado to
+    make them more accessible without all of the extra dependencies that Verde
+    requires. We have also improved and expanded most of the functions ported
+    from Verde.
 
 .. grid:: 1 2 1 2
     :margin: 5 5 0 0
