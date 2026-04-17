@@ -71,7 +71,7 @@ Required:
 
 .. note::
 
-    See :ref:`dependency-versions` for the our policy of oldest supported
+    See :ref:`dependency-versions` for our policy of oldest supported
     versions of each dependency.
 
 The examples in documentation also use:
