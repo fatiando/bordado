@@ -1,4 +1,4 @@
-<h1 align="center">Bordado</h1>
+<h1><img src="https://github.com/fatiando/bordado/raw/main/doc/_static/readme-banner.png" alt="Bordado"></h1>
 
 <p align="center"><strong>Create, manipulate, and split geographic coordinates</strong></p>
 
