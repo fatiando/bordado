@@ -116,8 +116,8 @@ functions for splitting coordinates into spatial blocks and more.
     :caption: Tutorial
 
     tutorial/line.rst
-    tutorial/profile.rst
     tutorial/grid.rst
+    tutorial/profile.rst
     tutorial/random.rst
     tutorial/split.rst
 

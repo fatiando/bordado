@@ -71,6 +71,7 @@ interval boundaries are always present:
 
     values = bd.line_coordinates(0, 10, spacing=1.3)
     print("Bordado:", values)
+
     values_arange = np.arange(0, 10, 1.3)
     print("Numpy:", values_arange)
 
