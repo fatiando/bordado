@@ -113,14 +113,9 @@ If the boundaries aren't important, but the exact spacing is, we can also ask
     If the exact spacing is important, but the boundaries are not, then
     ``adjust="region"``.
 
-Let's visualize the difference between these two types of adjustment:
+Let's visualize the difference between these two types of adjustment. To do so, we'll first make two functions to make plotting the coordinates easier. Don't worry too much about them.
 
 .. jupyter-execute::
-
-    region = (0, 10, -5, 5)
-    spacing = 2.6
-    coords_spacing = bd.grid_coordinates(region, spacing=spacing)
-    coords_region = bd.grid_coordinates(region, spacing=spacing, adjust="region")
 
     def plot_region(ax, region):
         "Plot the region as a solid line."
@@ -135,53 +130,55 @@ Let's visualize the difference between these two types of adjustment:
             )
         )
 
-    def plot_grid(ax, coordinates, linestyles="dotted", region=None, pad=50, **kwargs):
+
+    def plot_grid(ax, coordinates, color, s=100, **kwargs):
         "Plot the grid coordinates as dots and lines."
         data_region = bd.get_region(coordinates)
         ax.vlines(
             coordinates[0][0],
             ymin=data_region[2],
             ymax=data_region[3],
-            linestyles=linestyles,
+            linestyles="dotted",
+            color=color,
             zorder=0,
         )
         ax.hlines(
             coordinates[1][:, 1],
             xmin=data_region[0],
             xmax=data_region[1],
-            linestyles=linestyles,
+            linestyles="dotted",
+            color=color,
             zorder=0,
         )
-        ax.scatter(*coordinates, **kwargs)
+        ax.scatter(*coordinates, color=color, s=s, marker="o", **kwargs)
+
+Now we'll make coordinates using both functions and plot them:
+
+.. jupyter-execute::
+
+    region = (0, 10, -5, 5)
+    spacing = 1.8
+    coords_spacing = bd.grid_coordinates(region, spacing=spacing)
+    coords_region = bd.grid_coordinates(region, spacing=spacing, adjust="region")
 
     plt.figure(figsize=(6, 6))
     ax = plt.subplot(111)
     plot_region(ax, region)
     plot_grid(
-        ax=ax,
-        coordinates=coords_region,
-        region=region,
-        label="Adjusted Region Grid Nodes",
-        marker=">",
-        color="blue",
-        alpha=0.75,
-        s=100,
+        ax, coords_region, label="Adjust region", color="blue",
     )
     plot_grid(
-        ax=ax,
-        coordinates=coords_spacing,
-        region=region,
-        label="Adjusted Spacing Grid Nodes",
-        marker=">",
-        color="orange",
-        alpha=0.75,
-        s=100,
+        ax, coords_spacing, label="Adjust spacing", color="orange",
     )
     ax.set_xlabel("Easting")
     ax.set_ylabel("Northing")
-    plt.legend(loc="upper center", bbox_to_anchor=(0.5, 1.18))
+    plt.legend(loc="upper center", ncols=3, bbox_to_anchor=(0.5, 1.08))
     plt.show()
 
+We can see from the plot that when adjusting spacing (orange points), the
+region is respected exactly. But when adjusting the region, it's shifted in all
+directions to accommodate the chosen spacing. The center point is where both
+grids align.
 
 
 Pixel registration
