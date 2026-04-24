@@ -1,7 +1,7 @@
 .. _tutorial_grid:
 
-Coordinates for regular grids and meshes
-========================================
+Regular grids and meshes
+========================
 
 Now that we learned how to make evenly spaced values with
 :func:`bordado.line_coordinates`, we could use :func:`numpy.meshgrid` to
@@ -75,8 +75,8 @@ The order of the arguments is the same as for the ``spacing``. Notice that the
 shape of the coordinate arrays is the same as the input shape.
 
 
-Automatic adjustment of spacing or region
------------------------------------------
+Adjustment of spacing or region
+-------------------------------
 
 Just like with :func:`~bordado.line_coordinates`, we can pass a spacing that
 isn't exactly a multiple of the dimensions of the region. In this case, the
@@ -113,7 +113,9 @@ If the boundaries aren't important, but the exact spacing is, we can also ask
     If the exact spacing is important, but the boundaries are not, then
     ``adjust="region"``.
 
-Let's visualize the difference between these two types of adjustment. To do so, we'll first make two functions to make plotting the coordinates easier. Don't worry too much about them.
+Let's visualize the difference between these two types of adjustment. To do so,
+we'll first make two functions to make plotting the coordinates easier. Don't
+worry too much about them.
 
 .. jupyter-execute::
 
@@ -127,11 +129,12 @@ Let's visualize the difference between these two types of adjustment. To do so, 
                 north - south,
                 fill=None,
                 label="Region bounds",
+                linewidth=3,
             )
         )
 
 
-    def plot_grid(ax, coordinates, color, s=100, **kwargs):
+    def plot_grid(ax, coordinates, color, marker, s=100, **kwargs):
         "Plot the grid coordinates as dots and lines."
         data_region = bd.get_region(coordinates)
         ax.vlines(
@@ -150,7 +153,7 @@ Let's visualize the difference between these two types of adjustment. To do so, 
             color=color,
             zorder=0,
         )
-        ax.scatter(*coordinates, color=color, s=s, marker="o", **kwargs)
+        ax.scatter(*coordinates, color=color, s=s, marker=marker, **kwargs)
 
 Now we'll make coordinates using both functions and plot them:
 
@@ -165,10 +168,10 @@ Now we'll make coordinates using both functions and plot them:
     ax = plt.subplot(111)
     plot_region(ax, region)
     plot_grid(
-        ax, coords_region, label="Adjust region", color="blue",
+        ax, coords_region, label="Adjust region", color="blue", marker="^",
     )
     plot_grid(
-        ax, coords_spacing, label="Adjust spacing", color="orange",
+        ax, coords_spacing, label="Adjust spacing", color="orange", marker="o",
     )
     ax.set_xlabel("Easting")
     ax.set_ylabel("Northing")
@@ -196,10 +199,77 @@ of at their borders (the default) by passing ``pixel_register=True``:
     for i, c in enumerate(coordinates):
        print(f"coordinate {i}:\n{c}\n")
 
-Notice that the region boundary values aren't included, and the first and last
+Notice that the region boundaries values aren't included, and the first and last
 coordinates are half of the spacing away from the boundaries.
 
+Let's make a plot of a normal grid (often called "grid-node registered") and a
+pixel registered grid for comparison:
 
+.. jupyter-execute::
+
+    region = (0, 10, -5, 5)
+    spacing = 1
+    coords_grid = bd.grid_coordinates(region, spacing=spacing)
+    coords_pixel = bd.grid_coordinates(region, spacing=spacing, pixel_register=True)
+
+    plt.figure(figsize=(6, 6))
+    ax = plt.subplot(111)
+    plot_region(ax, region)
+    plot_grid(
+        ax, coords_grid, label="Grid-node registered", color="orange", marker="o",
+    )
+    plot_grid(
+        ax, coords_pixel, label="Pixel registered", color="green", marker="s",
+    )
+    ax.set_xlabel("Easting")
+    ax.set_ylabel("Northing")
+    plt.legend(loc="upper center", ncols=3, bbox_to_anchor=(0.5, 1.08))
+    plt.show()
+
+Automatic adjustment of the spacing or the region also works for pixel registered
+grids:
+
+.. jupyter-execute::
+
+    region = (0, 10, -5, 5)
+    spacing = 2.1
+    coords_pixel_spacing = bd.grid_coordinates(
+        region, spacing=spacing, pixel_register=True, adjust="spacing",
+    )
+    coords_pixel_region = bd.grid_coordinates(
+        region, spacing=spacing, pixel_register=True, adjust="region",
+    )
+
+    print("Adjust the spacing:")
+    for i, c in enumerate(coords_pixel_spacing):
+       print(f"coordinate {i}:\n{c}\n")
+
+    print("Adjust the region:")
+    for i, c in enumerate(coords_pixel_region):
+       print(f"coordinate {i}:\n{c}\n")
+
+Notice that the spacing is adjusted to 2 and in the other case, the region is
+adjusted to keep the spacing as 2.1. Let's make a plot of these two coordinate
+sets:
+
+.. jupyter-execute::
+
+    plt.figure(figsize=(6, 6))
+    ax = plt.subplot(111)
+    plot_region(ax, region)
+    plot_grid(
+        ax, coords_pixel_region, label="Adjust region", color="magenta", marker="v",
+    )
+    plot_grid(
+        ax, coords_pixel_spacing, label="Adjust spacing", color="green", marker="s",
+    )
+    ax.set_xlabel("Easting")
+    ax.set_ylabel("Northing")
+    plt.legend(loc="upper center", ncols=3, bbox_to_anchor=(0.5, 1.08))
+    plt.show()
+
+Just like the case for grid-node registered coordinates, the middle point is the
+same for both grids, but their spacings are different.
 
 Multidimensional grids and meshes
 ---------------------------------
