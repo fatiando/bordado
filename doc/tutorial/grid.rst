@@ -271,13 +271,48 @@ sets:
 Just like the case for grid-node registered coordinates, the middle point is the
 same for both grids, but their spacings are different.
 
+
 Multidimensional grids and meshes
 ---------------------------------
 
-We can make multidimensional grids by adding more elements to the region:
+Function :func:`~bordado.grid_coordinates` can also make grids of higher
+dimensions. The only thing that needs to be done is add more elements to the
+region. For example, a 3D grid will need 6 elements in its region (west, east,
+south, north, bottom, top):
 
 .. jupyter-execute::
 
-    coordinates = bd.grid_coordinates((0, 9, -3, 3, 6, 12), spacing=3)
+    coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), spacing=3)
+
     for i, c in enumerate(coordinates):
        print(f"coordinate {i}:\n{c}\n")
+
+Now there will be 3 output coordinates and each of them will be 3D arrays.
+
+We can also pass a shape instead of a spacing:
+
+.. jupyter-execute::
+
+    coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), shape=(2, 3, 4))
+
+    for i, c in enumerate(coordinates):
+       print(f"coordinate {i}:\n{c}\n")
+
+Everything else also works the same for N-dimensional grids, like pixel
+registration and automatic adjustment in case the spacing is not a multiple of
+the region. For example, this spacing will be rounded up to 3:
+
+.. jupyter-execute::
+
+    coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), spacing=2.8)
+
+    for i, c in enumerate(coordinates):
+       print(f"coordinate {i}:\n{c}\n")
+
+
+What's next
+-----------
+
+Now you know how to generate regular coordinates in 1 or more dimensions. But
+what if we have two points, and we need coordinates for points evenly spaced
+between these two points? Find out how to do that in ":ref:`tutorial_profile`".
