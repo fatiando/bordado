@@ -2,3 +2,12 @@
 
 Random coordinates
 ==================
+
+
+Generating random points
+------------------------
+
+
+
+Random points on the sphere
+---------------------------

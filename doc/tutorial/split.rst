@@ -1,7 +1,24 @@
 .. _tutorial_split:
 
-Splitting into blocks
-=====================
+Splitting points into blocks
+============================
+
+
+Non-overlapping spatial blocks
+------------------------------
+
+
+
+Selecting points inside expanding windows
+-----------------------------------------
+
+
+Splitting points into rolling windows
+-------------------------------------
+
+
+Rolling windows on the sphere
+-----------------------------
 
 .. jupyter-execute::
 
