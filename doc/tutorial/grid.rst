@@ -29,7 +29,7 @@ For example, this is how we generate coordinates for a 2D grid:
     coordinates = bd.grid_coordinates(region=(0, 10, -5, 5), spacing=2)
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 The first argument to :func:`~bordado.grid_coordinates` is called a **region**
 in Bordado. It specifies the boundaries of the domain which contains the
@@ -55,7 +55,7 @@ a tuple or list as the ``spacing`` argument:
     coordinates = bd.grid_coordinates(region=(0, 10, -5, 5), spacing=(2.5, 2))
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 The order of the ``spacing`` argument is the **reversed order of the arguments in
 the region**. This is done for compatibility with how numpy specifies the ``shape``
@@ -69,7 +69,7 @@ instead of the spacing:
     coordinates = bd.grid_coordinates(region=(0, 10, -5, 5), shape=(6, 11))
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i} (shape = {c.shape}):\n{c}\n")
+        print(f"coordinate {i} (shape = {c.shape}):\n{c}\n")
 
 The order of the arguments is the same as for the ``spacing``. Notice that the
 shape of the coordinate arrays is the same as the input shape.
@@ -87,7 +87,7 @@ spacing will be automatically adjusted to fit the given region exactly:
     coordinates = bd.grid_coordinates(region=(0, 10, -5, 5), spacing=2.6)
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 This is very useful when the exact spacing is not too important, but the
 boundaries of the region must be preserved.
@@ -101,7 +101,7 @@ If the boundaries aren't important, but the exact spacing is, we can also ask
     )
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 .. admonition:: When to ``adjust="region"``?
     :class: note
@@ -197,7 +197,7 @@ of at their borders (the default) by passing ``pixel_register=True``:
     )
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 Notice that the region boundaries values aren't included, and the first and last
 coordinates are half of the spacing away from the boundaries.
@@ -242,11 +242,11 @@ grids:
 
     print("Adjust the spacing:")
     for i, c in enumerate(coords_pixel_spacing):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
     print("Adjust the region:")
     for i, c in enumerate(coords_pixel_region):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 Notice that the spacing is adjusted to 2 and in the other case, the region is
 adjusted to keep the spacing as 2.1. Let's make a plot of these two coordinate
@@ -285,7 +285,7 @@ south, north, bottom, top):
     coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), spacing=3)
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 Now there will be 3 output coordinates and each of them will be 3D arrays.
 
@@ -296,7 +296,7 @@ We can also pass a shape instead of a spacing:
     coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), shape=(2, 3, 4))
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 Everything else also works the same for N-dimensional grids, like pixel
 registration and automatic adjustment in case the spacing is not a multiple of
@@ -307,7 +307,7 @@ the region. For example, this spacing will be rounded up to 3:
     coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), spacing=2.8)
 
     for i, c in enumerate(coordinates):
-       print(f"coordinate {i}:\n{c}\n")
+        print(f"coordinate {i}:\n{c}\n")
 
 
 What's next
