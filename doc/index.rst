@@ -143,4 +143,5 @@ functions for splitting coordinates into spatial blocks and more.
     How to contribute <https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md>
     Code of Conduct <https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md>
     Source code on GitHub <https://github.com/fatiando/bordado>
+    Authors <https://github.com/fatiando/bordado/blob/main/AUTHORS.md>
     The Fatiando a Terra project <https://www.fatiando.org>
