@@ -9,14 +9,13 @@ maintainers = [
   {name = "Leonardo Uieda", email = "leo@uieda.com"}
 ]
 readme = "README.md"
-license = {text = "BSD-3-Clause"}
+license = "BSD-3-Clause"
 keywords = ["geoscience", "geophysics"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
-    "License :: OSI Approved :: BSD License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
