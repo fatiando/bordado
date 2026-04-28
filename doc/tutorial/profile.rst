@@ -202,3 +202,9 @@ We can now create points along profiles with both Cartesian and geographic
 coordinates! Another task you may have, particularly when sampling or generating
 synthetic data, is to create a random spread of points. See how this can be done
 with Bordado in ":ref:`tutorial_random`".
+
+.. admonition:: Have questions?
+
+    Please ask on any of the `Fatiando a Terra community channels
+    <https://www.fatiando.org/contact>`__!
+

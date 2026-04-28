@@ -127,3 +127,9 @@ What's next
 Now that we can make some synthetic data with random points, let's see how
 we can split and segment the data based on spatial blocks and windows in
 ":ref:`tutorial_split`".
+
+.. admonition:: Have questions?
+
+    Please ask on any of the `Fatiando a Terra community channels
+    <https://www.fatiando.org/contact>`__!
+

@@ -123,3 +123,9 @@ What's next
 
 Now that you know how to make evenly spaced values in one dimension, let's see
 how to apply that logic to multiple dimensions in ":ref:`tutorial_grid`".
+
+.. admonition:: Have questions?
+
+    Please ask on any of the `Fatiando a Terra community channels
+    <https://www.fatiando.org/contact>`__!
+

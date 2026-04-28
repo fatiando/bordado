@@ -316,3 +316,9 @@ What's next
 Now you know how to generate regular coordinates in 1 or more dimensions. But
 what if we have two points, and we need coordinates for points evenly spaced
 between these two points? Find out how to do that in ":ref:`tutorial_profile`".
+
+.. admonition:: Have questions?
+
+    Please ask on any of the `Fatiando a Terra community channels
+    <https://www.fatiando.org/contact>`__!
+
