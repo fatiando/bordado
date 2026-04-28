@@ -297,6 +297,14 @@ To get around this, use :func:`bordado.rolling_window_spherical`:
     ax.set_title("Standard rolling windows")
     fig.show()
 
+.. tip::
+
+    The windows now don't have a fixed 30° x 30° size to compensate for the
+    convergence of the meridians. This means that the ``window_size`` argument of
+    :func:`~bordado.rolling_window_spherical` refers to the latitudinal size of
+    the windows. The longitudinal size will vary depending on the latitude band
+    of the window.
+
 In this case, the window centers don't get closer towards the poles. But there
 is still the 360° - 0° gap. This happens because the region isn't exactly
 360° in longitude and so the code doesn't know that it should wrap around the
@@ -319,30 +327,82 @@ range:
     )
     fig.show()
 
-Let's plot some of the windows TODO.
+This time, since the window centers aren't on a regular grid anymore, both the
+``window_coordinates`` and ``indices`` are 1D arrays:
+
+.. jupyter-execute::
+
+    print(f"Coordinate shapes:", end=" ")
+    for c in window_coordinates:
+        print(c.shape, end=" ")
+    print("\nIndices shape:", indices.shape)
+
+Let's plot the points from some of the windows:
+
+.. jupyter-execute::
+
+    window = [c[indices[0]] for c in coordinates]
+
+    fig = pygmt.Figure()
+    fig.coast(land="#cccccc", region="g", projection="W0/20c", frame="afg")
+    fig.plot(
+        x=window[0].ravel(), y=window[1].ravel(), style="c0.1c", fill="seagreen",
+    )
+    fig.plot(
+        x=window_coordinates[0].ravel(),
+        y=window_coordinates[1].ravel(),
+        style="a0.3c",
+        fill="orange",
+    )
+    fig.show()
+
+.. jupyter-execute::
+
+    window = [c[indices[5]] for c in coordinates]
+
+    fig = pygmt.Figure()
+    fig.coast(land="#cccccc", region="g", projection="W0/20c", frame="afg")
+    fig.plot(
+        x=window[0].ravel(), y=window[1].ravel(), style="c0.1c", fill="seagreen",
+    )
+    fig.plot(
+        x=window_coordinates[0].ravel(),
+        y=window_coordinates[1].ravel(),
+        style="a0.3c",
+        fill="orange",
+    )
+    fig.show()
+
+.. note::
+
+    Notice that there is an overlap between the two windows plotted above that
+    crosses the 360° - 0° line.
 
 Making the same points per window calculation as before, we can check if it
 actually works:
 
 .. jupyter-execute::
 
-    points_per_window = [coordinates[0][i].size for i in indices.ravel()]
-    window_latitude = window_coordinates[1].ravel()
+    points_per_window_spherical = [coordinates[0][i].size for i in indices.ravel()]
+    window_latitude_spherical = window_coordinates[1].ravel()
 
     fig, ax = plt.subplots(1, 1, figsize=(8, 5), layout="constrained")
-    ax.plot(window_latitude, points_per_window, ".")
+    ax.plot(window_latitude, points_per_window, ".", label="Regular")
+    ax.plot(window_latitude_spherical, points_per_window_spherical, "*", label="Spherical")
+    ax.legend()
     ax.set_xlabel("Window latitude")
     ax.set_ylabel("Points per window")
-    ax.set_title("Spherical rolling windows")
     ax.grid()
     plt.show()
 
 Now the distribution is much more uniform!
 
+
 What's next
 -----------
 
-With this, we've finished our tutorial! To learn more about Bordado, take a look at the detailed documentation for each function in ":ref:`api`".
+With this, we've finished our tutorial! To learn more about Bordado, take a look
+at the detailed documentation for each function in ":ref:`api`".
 
 Please remember to :ref:`cite Bordado <citing>` if you use it in
 a publication, thesis, report, etc. It helps us justify the effort that goes
