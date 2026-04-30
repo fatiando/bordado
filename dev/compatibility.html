@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     
         <title>Version compatibility | Bordado dev</title>
@@ -167,8 +167,16 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorial/line.html">Making evenly spaced values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/grid.html">Regular grids and meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/profile.html">Profiles between two points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/random.html">Random coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/split.html">Splitting points into blocks</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="current nav bd-sidenav">
@@ -203,6 +211,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -444,13 +453,15 @@ Users can upgrade minor versions without changing their code.</p></li>
 <li><p>Bug fix releases fix errors in a previous release without adding new
 functionality. Users can upgrade minor versions without changing their code.</p></li>
 </ul>
-<p>We will add <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> messages about deprecations ahead of making any
+<p><strong>We aim for Bordado to be backwards compatible whenever possible and will make
+major releases sparingly and with ample warning.</strong>
+We will add <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> messages about deprecations ahead of making any
 breaking changes to give users a chance to upgrade.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The above does not apply to versions &lt; <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>. All <code class="docutils literal notranslate"><span class="pre">0.*</span></code> versions may
 deprecate, remove, or change functionality between releases. Proper
-warnings will be raised and any breaking changes will be marked as such in
+warnings may be raised, and any breaking changes will be marked as such in
 the <a class="reference internal" href="changes.html#changes"><span class="std std-ref">Changelog</span></a>.</p>
 </div>
 </section>
@@ -465,15 +476,21 @@ In short, we support <strong>all minor releases of our dependencies from the pre
 older ones are still working without causing problems.
 Whenever support for a version is dropped, we will include a note in the
 <a class="reference internal" href="changes.html#changes"><span class="std std-ref">Changelog</span></a>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Exact version constraints on our dependencies can be found in the
+<a class="reference external" href="https://github.com/fatiando/bordado/blob/main/pyproject.toml">pyproject.toml file</a>.</p>
+</div>
 </section>
 <section id="supported-python-versions">
 <span id="python-versions"></span><h2>Supported Python versions<a class="headerlink" href="#supported-python-versions" title="Link to this heading">#</a></h2>
-<p>If you require support for older Python versions, please pin Bordado to the
+<p>Bordado supports Python versions greater than the ones listed below.
+If you require support for older Python versions, please pin Bordado to the
 following releases to ensure compatibility:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 40.0%" />
-<col style="width: 60.0%" />
+<col style="width: 40%" />
+<col style="width: 60%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><strong>Python version</strong></p></td>
@@ -553,7 +570,7 @@ following releases to ensure compatibility:</p>
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -562,7 +579,7 @@ following releases to ensure compatibility:</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Apr 30, 2026.
   <br/>
 </p>
   </div>

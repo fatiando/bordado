@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    
+        <title>Profiles between two points | Bordado dev</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=12168cd1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/profile';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Random coordinates" href="random.html" />
+    <link rel="prev" title="Regular grids and meshes" href="grid.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bordado <span class="project-version">dev</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Why use Bordado?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="line.html">Making evenly spaced values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grid.html">Regular grids and meshes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Profiles between two points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Random coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="split.html">Splitting points into blocks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.inside.html">bordado.inside</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.get_region.html">bordado.get_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/tutorial/profile.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Ftutorial/profile.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorial/profile.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Profiles between two points</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-between-two-points-in-2d">Coordinates between two points in 2D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-in-more-dimensions">Coordinates in more dimensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-along-a-great-circle-path">Coordinates along a great circle path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s next</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="profiles-between-two-points">
+<span id="tutorial-profile"></span><h1>Profiles between two points<a class="headerlink" href="#profiles-between-two-points" title="Link to this heading">#</a></h1>
+<p>It’s common to need evenly spaced coordinate values between two points
+to extract or interpolate profiles from regular grid data. However,
+generating such points is not always trivial, particularly when we
+want to take the curvature of the Earth into account or want to specify
+the spacing between points instead of the number of points. Bordado
+offers functions <a class="reference internal" href="../api/generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.profile_coordinates</span></code></a> (Cartesian) and
+<a class="reference internal" href="../api/generated/bordado.great_circle_coordinates.html#bordado.great_circle_coordinates" title="bordado.great_circle_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.great_circle_coordinates</span></code></a> (spherical) to generate these
+coordinates. Let’s see how we can use them!</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">bordado</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pygmt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="coordinates-between-two-points-in-2d">
+<h2>Coordinates between two points in 2D<a class="headerlink" href="#coordinates-between-two-points-in-2d" title="Link to this heading">#</a></h2>
+<p>Let’s say we have the 2D coordinates (think easting and northing, for example) for two
+points:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beginning</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># easting, northing</span>
+<span class="n">end</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Make a region for plotting later</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">pad_region</span><span class="p">(</span><span class="n">bd</span><span class="o">.</span><span class="n">get_region</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">beginning</span><span class="p">,</span> <span class="n">end</span><span class="p">))),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(-2, 12, -2, 7)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Functions <a class="reference internal" href="../api/generated/bordado.get_region.html#bordado.get_region" title="bordado.get_region"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.get_region</span></code></a> and <a class="reference internal" href="../api/generated/bordado.pad_region.html#bordado.pad_region" title="bordado.pad_region"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.pad_region</span></code></a>
+are very useful to extracting and modifying region information for plotting,
+interpolation, and more!</p>
+</div>
+<p>We can use <a class="reference internal" href="../api/generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.profile_coordinates</span></code></a> to make coordinates for
+evenly spaced points between them like so:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">profile_coordinates</span><span class="p">(</span>
+    <span class="n">beginning</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The function returns the coordinates of the points as a tuple of two arrays:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[ 0.          0.45454545  0.90909091  1.36363636  1.81818182  2.27272727
+  2.72727273  3.18181818  3.63636364  4.09090909  4.54545455  5.
+  5.45454545  5.90909091  6.36363636  6.81818182  7.27272727  7.72727273
+  8.18181818  8.63636364  9.09090909  9.54545455 10.        ]
+
+coordinate 1:
+[0.         0.22727273 0.45454545 0.68181818 0.90909091 1.13636364
+ 1.36363636 1.59090909 1.81818182 2.04545455 2.27272727 2.5
+ 2.72727273 2.95454545 3.18181818 3.40909091 3.63636364 3.86363636
+ 4.09090909 4.31818182 4.54545455 4.77272727 5.        ]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the two reference points and the profile points:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">beginning</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Beginning&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;End&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Profile&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">region</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">*</span><span class="n">region</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Easting&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Northing&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/profile_4_0.png" src="../_images/profile_4_0.png" />
+</div>
+</div>
+<p>The second argument that is returned is an array with the distances between
+points along the profile:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 0.          0.50819727  1.01639454  1.5245918   2.03278907  2.54098634
+  3.04918361  3.55738087  4.06557814  4.57377541  5.08197268  5.59016994
+  6.09836721  6.60656448  7.11476175  7.62295901  8.13115628  8.63935355
+  9.14755082  9.65574808 10.16394535 10.67214262 11.18033989]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that they are not exactly multiples of the spacing because the length of
+the profile was a not a multiple of it, and so the spacing was adjusted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There’s no option to adjust the region here since that would mean moving the
+beginning and end points of the profile.</p>
+</div>
+</section>
+<section id="coordinates-in-more-dimensions">
+<h2>Coordinates in more dimensions<a class="headerlink" href="#coordinates-in-more-dimensions" title="Link to this heading">#</a></h2>
+<p>We can also generate these profile points in more than 2 dimensions. To do so,
+we just have to specify the coordinates of the beginning and end points with
+more than 2 dimensions:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beginning</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># easting, northing, upward</span>
+<span class="n">end</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">coordinates</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">profile_coordinates</span><span class="p">(</span>
+    <span class="n">beginning</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distances:</span><span class="se">\n</span><span class="si">{</span><span class="n">distances</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[ 0.          0.38461538  0.76923077  1.15384615  1.53846154  1.92307692
+  2.30769231  2.69230769  3.07692308  3.46153846  3.84615385  4.23076923
+  4.61538462  5.          5.38461538  5.76923077  6.15384615  6.53846154
+  6.92307692  7.30769231  7.69230769  8.07692308  8.46153846  8.84615385
+  9.23076923  9.61538462 10.        ]
+
+coordinate 1:
+[0.         0.19230769 0.38461538 0.57692308 0.76923077 0.96153846
+ 1.15384615 1.34615385 1.53846154 1.73076923 1.92307692 2.11538462
+ 2.30769231 2.5        2.69230769 2.88461538 3.07692308 3.26923077
+ 3.46153846 3.65384615 3.84615385 4.03846154 4.23076923 4.42307692
+ 4.61538462 4.80769231 5.        ]
+
+coordinate 2:
+[0.         0.26923077 0.53846154 0.80769231 1.07692308 1.34615385
+ 1.61538462 1.88461538 2.15384615 2.42307692 2.69230769 2.96153846
+ 3.23076923 3.5        3.76923077 4.03846154 4.30769231 4.57692308
+ 4.84615385 5.11538462 5.38461538 5.65384615 5.92307692 6.19230769
+ 6.46153846 6.73076923 7.        ]
+
+distances:
+[ 0.          0.50734254  1.01468507  1.52202761  2.02937015  2.53671268
+  3.04405522  3.55139776  4.05874029  4.56608283  5.07342537  5.58076791
+  6.08811044  6.59545298  7.10279552  7.61013805  8.11748059  8.62482313
+  9.13216566  9.6395082  10.14685074 10.65419327 11.16153581 11.66887835
+ 12.17622088 12.68356342 13.19090596]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that now we have 3 coordinate arrays in the output, each starting and
+finishing at the corresponding values of the beginning and end points. The
+spacing was also adjusted to match the length of the 3D vector between the two
+points.</p>
+</section>
+<section id="coordinates-along-a-great-circle-path">
+<h2>Coordinates along a great circle path<a class="headerlink" href="#coordinates-along-a-great-circle-path" title="Link to this heading">#</a></h2>
+<p>If our coordinates are geographic longitude and latitude (angles
+in degrees or radians), we probably don’t want to use them with
+<a class="reference internal" href="../api/generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.profile_coordinates</span></code></a> since that would assume that they are
+Cartesian coordinates. In these cases, we generally want the <strong>shortest path
+along the surface of a sphere</strong>. This is called a <strong>great circle</strong> and we can
+generate coordinates along one using <a class="reference internal" href="../api/generated/bordado.great_circle_coordinates.html#bordado.great_circle_coordinates" title="bordado.great_circle_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.great_circle_coordinates</span></code></a>.</p>
+<p>Let’s set up our two points on the sphere with coordinates in degrees and plot
+them on a map with <code class="xref py py-mod docutils literal notranslate"><span class="pre">pygmt</span></code>:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">são_paulo</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">46.7011</span><span class="p">,</span> <span class="o">-</span><span class="mf">23.5604</span><span class="p">)</span>  <span class="c1"># longitude, latitude (degrees)</span>
+<span class="n">luanda</span> <span class="o">=</span> <span class="p">(</span><span class="mf">13.2559</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8549</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span><span class="n">land</span><span class="o">=</span><span class="s2">&quot;#cccccc&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;G-20/0/20c&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s2">&quot;afg&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">são_paulo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">são_paulo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;i0.5c&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;seagreen&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;São Paulo&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">luanda</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">luanda</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;t0.5c&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Luanda&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s2">&quot;jTR+l2p&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/profile_7_0.png" src="../_images/profile_7_0.png" />
+</div>
+</div>
+<p>Now we can make a great circle path between them with points at every 100 km
+(100,000 meters) like so:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">great_circle_coordinates</span><span class="p">(</span>
+    <span class="n">são_paulo</span><span class="p">,</span> <span class="n">luanda</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The coordinates are a tuple of two arrays with the longitude and latitude of the
+points in degrees:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;longitude:</span><span class="se">\n</span><span class="si">{</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;latitude:</span><span class="se">\n</span><span class="si">{</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>longitude:
+[-46.7011     -45.72837693 -44.75661443 -43.78589683 -42.81630691
+ -41.84792574 -40.88083262 -39.91510497 -38.95081818 -37.98804559
+ -37.02685833 -36.0673253  -35.10951303 -34.15348567 -33.19930485
+ -32.2470297  -31.29671674 -30.34841984 -29.40219018 -28.45807624
+ -27.51612372 -26.57637554 -25.63887184 -24.70364992 -23.77074426
+ -22.8401865  -21.91200546 -20.98622712 -20.06287466 -19.14196842
+ -18.223526   -17.3075622  -16.39408908 -15.48311602 -14.57464968
+ -13.66869411 -12.76525074 -11.86431843 -10.96589353 -10.06996991
+  -9.17653901  -8.28558987  -7.39710924  -6.51108156  -5.62748907
+  -4.7463118   -3.86752771  -2.99111268  -2.11704057  -1.24528333
+  -0.37581098   0.49140826   1.35640797   2.21922344   3.07989161
+   3.93845105   4.79494187   5.64940568   6.50188551   7.35242581
+   8.20107234   9.04787214   9.89287349  10.73612584  11.57767977
+  12.41758693  13.2559    ]
+
+latitude:
+[-23.5604     -23.49831292 -23.4301933  -23.35606696 -23.27596186
+ -23.18990815 -23.09793803 -23.00008582 -22.89638782 -22.78688234
+ -22.6716096  -22.55061174 -22.42393271 -22.29161827 -22.15371592
+ -22.01027483 -21.86134583 -21.70698131 -21.5472352  -21.3821629
+ -21.21182124 -21.03626839 -20.85556384 -20.66976834 -20.47894381
+ -20.28315335 -20.08246112 -19.87693232 -19.66663313 -19.45163068
+ -19.23199293 -19.00778872 -18.77908764 -18.54595999 -18.30847678
+ -18.06670963 -17.82073078 -17.57061298 -17.31642949 -17.05825406
+ -16.79616081 -16.53022429 -16.26051936 -15.98712122 -15.71010532
+ -15.42954737 -15.1455233  -14.8581092  -14.56738133 -14.27341607
+ -13.97628993 -13.67607947 -13.37286132 -13.06671215 -12.75770864
+ -12.44592749 -12.13144536 -11.8143389  -11.4946847  -11.17255929
+ -10.84803915 -10.52120067 -10.19212013  -9.86087376  -9.52753763
+  -9.19218776  -8.8549    ]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that both arrays start at the coordinates for São Paulo and end at the
+coordinates for Luanda.</p>
+<p>The distances are the great circle distances between points in the profile and the starting point (São Paulo) in meters:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[      0.           99408.54874711  198817.09749421  298225.64624132
+  397634.19498842  497042.74373553  596451.29248264  695859.84122974
+  795268.38997685  894676.93872395  994085.48747106 1093494.03621817
+ 1192902.58496527 1292311.13371238 1391719.68245949 1491128.23120659
+ 1590536.7799537  1689945.3287008  1789353.87744791 1888762.42619502
+ 1988170.97494212 2087579.52368923 2186988.07243633 2286396.62118344
+ 2385805.16993055 2485213.71867765 2584622.26742476 2684030.81617186
+ 2783439.36491897 2882847.91366608 2982256.46241318 3081665.01116029
+ 3181073.55990739 3280482.1086545  3379890.65740161 3479299.20614871
+ 3578707.75489582 3678116.30364293 3777524.85239003 3876933.40113714
+ 3976341.94988424 4075750.49863135 4175159.04737846 4274567.59612556
+ 4373976.14487267 4473384.69361977 4572793.24236688 4672201.79111399
+ 4771610.33986109 4871018.8886082  4970427.4373553  5069835.98610241
+ 5169244.53484952 5268653.08359662 5368061.63234373 5467470.18109084
+ 5566878.72983794 5666287.27858505 5765695.82733215 5865104.37607926
+ 5964512.92482637 6063921.47357347 6163330.02232058 6262738.57106768
+ 6362147.11981479 6461555.6685619  6560964.217309  ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, notice that these are approximately the chosen spacing but not exactly
+since they had to be adjusted to fit the length of the path between points.</p>
+<p>Let’s now plot the profile and also a version of the profile created with
+<a class="reference internal" href="../api/generated/bordado.profile_coordinates.html#bordado.profile_coordinates" title="bordado.profile_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">profile_coordinates</span></code></a> for comparison:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The spacing here is in degrees, but the path is not a great circle</span>
+<span class="n">coordinates_wrong</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">profile_coordinates</span><span class="p">(</span>
+    <span class="n">são_paulo</span><span class="p">,</span> <span class="n">luanda</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span><span class="n">land</span><span class="o">=</span><span class="s2">&quot;#cccccc&quot;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;G-20/0/20c&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s2">&quot;afg&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">são_paulo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">são_paulo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;i0.5c&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;seagreen&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;São Paulo&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">luanda</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">luanda</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;t0.5c&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Luanda&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&quot;2p,slateblue2&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Great circle&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates_wrong</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates_wrong</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&quot;2p,coral,-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Not great circle&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s2">&quot;jTR+l2p&quot;</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">pygmt</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/profile_11_0.png" src="../_images/profile_11_0.png" />
+</div>
+</div>
+<p>We can clearly see in the plot that the two profiles take different paths, which
+is why you should always use <a class="reference internal" href="../api/generated/bordado.great_circle_coordinates.html#bordado.great_circle_coordinates" title="bordado.great_circle_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">great_circle_coordinates</span></code></a> when
+dealing with longitude and latitude!</p>
+</section>
+<section id="what-s-next">
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Link to this heading">#</a></h2>
+<p>We can now create points along profiles with both Cartesian and geographic
+coordinates! Another task you may have, particularly when sampling or generating
+synthetic data, is to create a random spread of points. See how this can be done
+with Bordado in “<a class="reference internal" href="random.html#tutorial-random"><span class="std std-ref">Random coordinates</span></a>”.</p>
+<div class="admonition-have-questions admonition">
+<p class="admonition-title">Have questions?</p>
+<p>Please ask on any of the <a class="reference external" href="https://www.fatiando.org/contact">Fatiando a Terra community channels</a>!</p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="grid.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Regular grids and meshes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="random.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random coordinates</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-between-two-points-in-2d">Coordinates between two points in 2D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-in-more-dimensions">Coordinates in more dimensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-along-a-great-circle-path">Coordinates along a great circle path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, The Bordado Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Apr 30, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

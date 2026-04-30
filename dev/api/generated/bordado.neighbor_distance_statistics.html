@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     
         <title>bordado.neighbor_distance_statistics | Bordado dev</title>
@@ -167,8 +167,16 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/line.html">Making evenly spaced values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/grid.html">Regular grids and meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/profile.html">Profiles between two points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/random.html">Random coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/split.html">Splitting points into blocks</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="current nav bd-sidenav">
@@ -203,6 +211,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -443,17 +452,17 @@ spread (standard deviation), variability of neighboring distances
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Should be in an
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Should be in an
 order compatible with the order of boundaries in <em>region</em>. Arrays can
 be Python lists. Arrays can be of any shape but must all have the same
 shape.</p>
 </dd>
-<dt><strong>statistic</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Which statistic to calculate for the distances of the k-nearest
+<dt><strong>statistic</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Which statistic to calculate for the distances of the k-nearest
 neighbors of each point. Valid values are: <code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code>,  <code class="docutils literal notranslate"><span class="pre">&quot;median&quot;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&quot;std&quot;</span></code> (standard deviation),  <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code> (variance),  <code class="docutils literal notranslate"><span class="pre">&quot;ptp&quot;</span></code>
 (peak-to-peak amplitude).</p>
 </dd>
-<dt><strong>k</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Will calculate the median of the <em>k</em> nearest neighbors of each point. A
+<dt><strong>k</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Will calculate the median of the <em>k</em> nearest neighbors of each point. A
 value of 1 will result in the distance to nearest neighbor of each data
 point. Must be &gt;= 1. Default is 1.</p>
 </dd>
@@ -461,7 +470,7 @@ point. Must be &gt;= 1. Default is 1.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>statistics</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the statistic of the k-nearest neighbor distances of each
+<dt><strong>statistics</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>An array with the statistic of the k-nearest neighbor distances of each
 point. The array will have the same shape as the input coordinate
 arrays.</p>
 </dd>
@@ -469,7 +478,7 @@ arrays.</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>If <em>k</em> is less than 1, if the <em>statistic</em> is invalid, or if coordinate
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>If <em>k</em> is less than 1, if the <em>statistic</em> is invalid, or if coordinate
 arrays have different shapes.</p>
 </dd>
 </dl>
@@ -624,7 +633,7 @@ corners, which results in a median of 1.21.</p>
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -633,7 +642,7 @@ corners, which results in a median of 1.21.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Apr 30, 2026.
   <br/>
 </p>
   </div>

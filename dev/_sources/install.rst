@@ -3,43 +3,48 @@
 Installing
 ==========
 
-Which Python?
--------------
+There are different ways to install Bordado:
 
-You'll need **Python 3.9 or greater**.
-See :ref:`python-versions` if you require support for older versions.
+.. tab-set::
 
+    .. tab-item:: conda/mamba
 
-Dependencies
-------------
+        Using the `conda <https://conda.io/>`__ package manager (or ``mamba``)
+        that comes with the Anaconda, Miniconda, or Miniforge distributions:
 
-The required dependencies should be installed automatically when you install
-Bordado using ``conda`` or ``pip``. Optional dependencies have to be
-installed manually.
+        .. code:: bash
 
-.. note::
+            conda install bordado --channel conda-forge
 
-    See :ref:`dependency-versions` for the our policy of oldest supported
-    versions of each dependency.
+    .. tab-item:: pip
 
-Required:
+        Using the `pip <https://pypi.org/project/pip/>`__ package manager:
 
-* `numpy <http://www.numpy.org/>`__
-* `scipy <https://https://docs.scipy.org/doc/scipy/>`__
+        .. code:: bash
 
-The examples in documentation also use:
+            python -m pip install bordado
 
-* `matplotlib <https://matplotlib.org/>`__ for plotting
+    .. tab-item:: Development version
 
-Installing with conda
----------------------
+        You can use ``pip`` to install the latest **unreleased** version from
+        GitHub (**not recommended** in most situations):
 
-You can install Bordado using the `conda package manager
-<https://conda.io/>`__ that comes with the Anaconda distribution::
+        .. code:: bash
 
-    conda install bordado --channel conda-forge
+            python -m pip install --upgrade git+https://github.com/fatiando/bordado
 
 .. tip::
+
+    The commands above should be executed in a terminal. On Windows, use the
+    ``cmd.exe`` or the "Anaconda Prompt" / "Miniforge Prompt" app if you're using
+    Anaconda / Miniforge.
+
+.. admonition:: Which Python?
+    :class: tip
+
+    See :ref:`python-versions` for a list of supported Python versions.
+
+.. note::
 
    We recommend using the
    `Miniforge distribution <https://conda-forge.org/download/>`__
@@ -49,25 +54,26 @@ You can install Bordado using the `conda package manager
    It's also much smaller than the Anaconda distribution and is less likely to
    break when installing new software.
 
-Installing with pip
--------------------
 
-Alternatively, you can also use the `pip package manager
-<https://pypi.org/project/pip/>`__::
+.. _dependencies:
 
-    python -m pip install bordado
+Dependencies
+------------
 
+The required dependencies should be installed automatically when you install
+Bordado using ``conda`` or ``pip``. Optional dependencies have to be
+installed manually.
 
-Installing the latest development version
------------------------------------------
+Required:
 
-You can use ``pip`` to install the latest source from Github::
+* `numpy <http://www.numpy.org/>`__
+* `scipy <https://https://docs.scipy.org/doc/scipy/>`__
 
-    python -m pip install https://github.com/fatiando/bordado/archive/main.zip
+.. note::
 
-Alternatively, you can clone the git repository locally and install from
-there::
+    See :ref:`dependency-versions` for our policy of oldest supported
+    versions of each dependency.
 
-    git clone https://github.com/fatiando/bordado.git
-    cd bordado
-    python -m pip install .
+The examples in documentation also use:
+
+* `matplotlib <https://matplotlib.org/>`__ for plotting

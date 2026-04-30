@@ -1,0 +1,1140 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    
+        <title>Regular grids and meshes | Bordado dev</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=12168cd1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/grid';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Profiles between two points" href="profile.html" />
+    <link rel="prev" title="Making evenly spaced values" href="line.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bordado <span class="project-version">dev</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Why use Bordado?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="line.html">Making evenly spaced values</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regular grids and meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profile.html">Profiles between two points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Random coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="split.html">Splitting points into blocks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.inside.html">bordado.inside</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.get_region.html">bordado.get_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/tutorial/grid.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Ftutorial/grid.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorial/grid.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regular grids and meshes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-for-2d-grids">Coordinates for 2D grids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjustment-of-spacing-or-region">Adjustment of spacing or region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pixel-registration">Pixel registration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-grids-and-meshes">Multidimensional grids and meshes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s next</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="regular-grids-and-meshes">
+<span id="tutorial-grid"></span><h1>Regular grids and meshes<a class="headerlink" href="#regular-grids-and-meshes" title="Link to this heading">#</a></h1>
+<p>Now that we learned how to make evenly spaced values with
+<a class="reference internal" href="../api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.line_coordinates</span></code></a>, we could use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html#numpy.meshgrid" title="(in NumPy v2.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.meshgrid</span></code></a> to
+generate multidimensional arrays of values for things like coordinates of
+regular grids and regular meshes. However, there are a few important details
+that may be overlooked when doing so. Bordado can handle all of this for us
+using function <a class="reference internal" href="../api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.grid_coordinates</span></code></a>. Let’s see how it’s used to make
+coordinates for regular grids in 2 or more dimensions.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">bordado</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="coordinates-for-2d-grids">
+<h2>Coordinates for 2D grids<a class="headerlink" href="#coordinates-for-2d-grids" title="Link to this heading">#</a></h2>
+<p>Function <a class="reference internal" href="../api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.grid_coordinates</span></code></a> combines
+<a class="reference internal" href="../api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">line_coordinates</span></code></a> to generate sets of coordinates for grids.
+For example, this is how we generate coordinates for a 2D grid:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]]
+
+coordinate 1:
+[[-5. -5. -5. -5. -5. -5.]
+ [-3. -3. -3. -3. -3. -3.]
+ [-1. -1. -1. -1. -1. -1.]
+ [ 1.  1.  1.  1.  1.  1.]
+ [ 3.  3.  3.  3.  3.  3.]
+ [ 5.  5.  5.  5.  5.  5.]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first argument to <a class="reference internal" href="../api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a> is called a <strong>region</strong>
+in Bordado. It specifies the boundaries of the domain which contains the
+grid. The number of elements in the region specifies the number of dimensions
+of the output. There should be 2 values in the region per dimension of the grid.
+So 4 values in <code class="docutils literal notranslate"><span class="pre">region</span></code> means we’re making a 2D grid. Hence, a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>
+of two 2D numpy arrays with the coordinates is returned.</p>
+<div class="hint admonition">
+<p class="admonition-title">What is a region?</p>
+<p>The <strong>region</strong> will always have an even number of elements. Each pair is the
+minimum and maximum value along a dimension of the grid. In our example, the
+first coordinate is between 0 and 10 and the second between -5 and 5. For
+geographic coordinates (longitude, latitude), the region would represent
+the <strong>west, east, south, and north</strong> boundaries of the domain.</p>
+</div>
+<p>We can also specify different spacings for each dimension of the grid by passing
+a tuple or list as the <code class="docutils literal notranslate"><span class="pre">spacing</span></code> argument:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]
+ [ 0.  2.  4.  6.  8. 10.]]
+
+coordinate 1:
+[[-5.  -5.  -5.  -5.  -5.  -5. ]
+ [-2.5 -2.5 -2.5 -2.5 -2.5 -2.5]
+ [ 0.   0.   0.   0.   0.   0. ]
+ [ 2.5  2.5  2.5  2.5  2.5  2.5]
+ [ 5.   5.   5.   5.   5.   5. ]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The order of the <code class="docutils literal notranslate"><span class="pre">spacing</span></code> argument is the <strong>reversed order of the arguments in
+the region</strong>. This is done for compatibility with how numpy specifies the <code class="docutils literal notranslate"><span class="pre">shape</span></code>
+parameter of arrays.</p>
+<p>Speaking of which, we can also specify the shape of the desired coordinate arrays
+instead of the spacing:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> (shape = </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">):</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0 (shape = (6, 11)):
+[[ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+ [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+ [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+ [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+ [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+ [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]]
+
+coordinate 1 (shape = (6, 11)):
+[[-5. -5. -5. -5. -5. -5. -5. -5. -5. -5. -5.]
+ [-3. -3. -3. -3. -3. -3. -3. -3. -3. -3. -3.]
+ [-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.]
+ [ 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.]
+ [ 3.  3.  3.  3.  3.  3.  3.  3.  3.  3.  3.]
+ [ 5.  5.  5.  5.  5.  5.  5.  5.  5.  5.  5.]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The order of the arguments is the same as for the <code class="docutils literal notranslate"><span class="pre">spacing</span></code>. Notice that the
+shape of the coordinate arrays is the same as the input shape.</p>
+</section>
+<section id="adjustment-of-spacing-or-region">
+<h2>Adjustment of spacing or region<a class="headerlink" href="#adjustment-of-spacing-or-region" title="Link to this heading">#</a></h2>
+<p>Just like with <a class="reference internal" href="../api/generated/bordado.line_coordinates.html#bordado.line_coordinates" title="bordado.line_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">line_coordinates</span></code></a>, we can pass a spacing that
+isn’t exactly a multiple of the dimensions of the region. In this case, the
+spacing will be automatically adjusted to fit the given region exactly:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">2.6</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]
+ [ 0.   2.5  5.   7.5 10. ]]
+
+coordinate 1:
+[[-5.  -5.  -5.  -5.  -5. ]
+ [-2.5 -2.5 -2.5 -2.5 -2.5]
+ [ 0.   0.   0.   0.   0. ]
+ [ 2.5  2.5  2.5  2.5  2.5]
+ [ 5.   5.   5.   5.   5. ]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is very useful when the exact spacing is not too important, but the
+boundaries of the region must be preserved.
+If the boundaries aren’t important, but the exact spacing is, we can also ask
+<a class="reference internal" href="../api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a> to adjust the region instead of the spacing:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span>
+   <span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">2.6</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]
+ [-0.2  2.4  5.   7.6 10.2]]
+
+coordinate 1:
+[[-5.2 -5.2 -5.2 -5.2 -5.2]
+ [-2.6 -2.6 -2.6 -2.6 -2.6]
+ [ 0.   0.   0.   0.   0. ]
+ [ 2.6  2.6  2.6  2.6  2.6]
+ [ 5.2  5.2  5.2  5.2  5.2]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">When to <code class="docutils literal notranslate"><span class="pre">adjust=&quot;region&quot;</span></code>?</p>
+<p>If the boundaries are important (for example, longitude should not be more
+than 360), then <code class="docutils literal notranslate"><span class="pre">adjust=&quot;spacing&quot;</span></code> (the default). But in this case the
+spacing may not be exactly what you asked for.</p>
+<p>If the exact spacing is important, but the boundaries are not, then
+<code class="docutils literal notranslate"><span class="pre">adjust=&quot;region&quot;</span></code>.</p>
+</div>
+<p>Let’s visualize the difference between these two types of adjustment. To do so,
+we’ll first make two functions to make plotting the coordinates easier. Don’t
+worry too much about them.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_region</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">region</span><span class="p">):</span>
+    <span class="s2">&quot;Plot the region as a solid line.&quot;</span>
+    <span class="n">west</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">north</span> <span class="o">=</span> <span class="n">region</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">west</span><span class="p">,</span> <span class="n">south</span><span class="p">),</span>
+            <span class="n">east</span> <span class="o">-</span> <span class="n">west</span><span class="p">,</span>
+            <span class="n">north</span> <span class="o">-</span> <span class="n">south</span><span class="p">,</span>
+            <span class="n">fill</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Region bounds&quot;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">marker</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="s2">&quot;Plot the grid coordinates as dots and lines.&quot;</span>
+    <span class="n">data_region</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">get_region</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+        <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">ymin</span><span class="o">=</span><span class="n">data_region</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+        <span class="n">ymax</span><span class="o">=</span><span class="n">data_region</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+        <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span>
+        <span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">xmin</span><span class="o">=</span><span class="n">data_region</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">xmax</span><span class="o">=</span><span class="n">data_region</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+        <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Now we’ll make coordinates using both functions and plot them:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="mf">1.8</span>
+<span class="n">coords_spacing</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">)</span>
+<span class="n">coords_region</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plot_region</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+<span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">coords_region</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Adjust region&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">coords_spacing</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Adjust spacing&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Easting&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Northing&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/grid_7_0.png" src="../_images/grid_7_0.png" />
+</div>
+</div>
+<p>We can see from the plot that when adjusting spacing (orange points), the
+region is respected exactly. But when adjusting the region, it’s shifted in all
+directions to accommodate the chosen spacing. The center point is where both
+grids align.</p>
+</section>
+<section id="pixel-registration">
+<h2>Pixel registration<a class="headerlink" href="#pixel-registration" title="Link to this heading">#</a></h2>
+<p>We can also generate coordinate values at the center of the intervals instead
+of at their borders (the default) by passing <code class="docutils literal notranslate"><span class="pre">pixel_register=True</span></code>:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span>
+    <span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pixel_register</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]]
+
+coordinate 1:
+[[-4. -4. -4. -4. -4.]
+ [-2. -2. -2. -2. -2.]
+ [ 0.  0.  0.  0.  0.]
+ [ 2.  2.  2.  2.  2.]
+ [ 4.  4.  4.  4.  4.]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the region boundaries values aren’t included, and the first and last
+coordinates are half of the spacing away from the boundaries.</p>
+<p>Let’s make a plot of a normal grid (often called “grid-node registered”) and a
+pixel registered grid for comparison:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">coords_grid</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">)</span>
+<span class="n">coords_pixel</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">pixel_register</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plot_region</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+<span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">coords_grid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Grid-node registered&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">coords_pixel</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Pixel registered&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Easting&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Northing&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/grid_9_0.png" src="../_images/grid_9_0.png" />
+</div>
+</div>
+<p>Automatic adjustment of the spacing or the region also works for pixel registered
+grids:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="mf">2.1</span>
+<span class="n">coords_pixel_spacing</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span>
+    <span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">pixel_register</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;spacing&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">coords_pixel_region</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span>
+    <span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">pixel_register</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjust the spacing:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coords_pixel_spacing</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjust the region:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coords_pixel_region</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Adjust the spacing:
+coordinate 0:
+[[1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]
+ [1. 3. 5. 7. 9.]]
+
+coordinate 1:
+[[-4. -4. -4. -4. -4.]
+ [-2. -2. -2. -2. -2.]
+ [ 0.  0.  0.  0.  0.]
+ [ 2.  2.  2.  2.  2.]
+ [ 4.  4.  4.  4.  4.]]
+
+Adjust the region:
+coordinate 0:
+[[0.8 2.9 5.  7.1 9.2]
+ [0.8 2.9 5.  7.1 9.2]
+ [0.8 2.9 5.  7.1 9.2]
+ [0.8 2.9 5.  7.1 9.2]
+ [0.8 2.9 5.  7.1 9.2]]
+
+coordinate 1:
+[[-4.20000000e+00 -4.20000000e+00 -4.20000000e+00 -4.20000000e+00
+  -4.20000000e+00]
+ [-2.10000000e+00 -2.10000000e+00 -2.10000000e+00 -2.10000000e+00
+  -2.10000000e+00]
+ [ 2.22044605e-16  2.22044605e-16  2.22044605e-16  2.22044605e-16
+   2.22044605e-16]
+ [ 2.10000000e+00  2.10000000e+00  2.10000000e+00  2.10000000e+00
+   2.10000000e+00]
+ [ 4.20000000e+00  4.20000000e+00  4.20000000e+00  4.20000000e+00
+   4.20000000e+00]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the spacing is adjusted to 2 and in the other case, the region is
+adjusted to keep the spacing as 2.1. Let’s make a plot of these two coordinate
+sets:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plot_region</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+<span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">coords_pixel_region</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Adjust region&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;magenta&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">coords_pixel_spacing</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Adjust spacing&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Easting&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Northing&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/grid_11_0.png" src="../_images/grid_11_0.png" />
+</div>
+</div>
+<p>Just like the case for grid-node registered coordinates, the middle point is the
+same for both grids, but their spacings are different.</p>
+</section>
+<section id="multidimensional-grids-and-meshes">
+<h2>Multidimensional grids and meshes<a class="headerlink" href="#multidimensional-grids-and-meshes" title="Link to this heading">#</a></h2>
+<p>Function <a class="reference internal" href="../api/generated/bordado.grid_coordinates.html#bordado.grid_coordinates" title="bordado.grid_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_coordinates</span></code></a> can also make grids of higher
+dimensions. The only thing that needs to be done is add more elements to the
+region. For example, a 3D grid will need 6 elements in its region (west, east,
+south, north, bottom, top):</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]
+
+ [[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]]
+
+coordinate 1:
+[[[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]
+
+ [[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]]
+
+coordinate 2:
+[[[6. 6. 6. 6.]
+  [6. 6. 6. 6.]
+  [6. 6. 6. 6.]]
+
+ [[9. 9. 9. 9.]
+  [9. 9. 9. 9.]
+  [9. 9. 9. 9.]]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now there will be 3 output coordinates and each of them will be 3D arrays.</p>
+<p>We can also pass a shape instead of a spacing:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]
+
+ [[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]]
+
+coordinate 1:
+[[[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]
+
+ [[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]]
+
+coordinate 2:
+[[[6. 6. 6. 6.]
+  [6. 6. 6. 6.]
+  [6. 6. 6. 6.]]
+
+ [[9. 9. 9. 9.]
+  [9. 9. 9. 9.]
+  [9. 9. 9. 9.]]]
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Everything else also works the same for N-dimensional grids, like pixel
+registration and automatic adjustment in case the spacing is not a multiple of
+the region. For example, this spacing will be rounded up to 3:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">2.8</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>coordinate 0:
+[[[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]
+
+ [[0. 3. 6. 9.]
+  [0. 3. 6. 9.]
+  [0. 3. 6. 9.]]]
+
+coordinate 1:
+[[[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]
+
+ [[-3. -3. -3. -3.]
+  [ 0.  0.  0.  0.]
+  [ 3.  3.  3.  3.]]]
+
+coordinate 2:
+[[[6. 6. 6. 6.]
+  [6. 6. 6. 6.]
+  [6. 6. 6. 6.]]
+
+ [[9. 9. 9. 9.]
+  [9. 9. 9. 9.]
+  [9. 9. 9. 9.]]]
+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-s-next">
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Link to this heading">#</a></h2>
+<p>Now you know how to generate regular coordinates in 1 or more dimensions. But
+what if we have two points, and we need coordinates for points evenly spaced
+between these two points? Find out how to do that in “<a class="reference internal" href="profile.html#tutorial-profile"><span class="std std-ref">Profiles between two points</span></a>”.</p>
+<div class="admonition-have-questions admonition">
+<p class="admonition-title">Have questions?</p>
+<p>Please ask on any of the <a class="reference external" href="https://www.fatiando.org/contact">Fatiando a Terra community channels</a>!</p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="line.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Making evenly spaced values</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="profile.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Profiles between two points</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-for-2d-grids">Coordinates for 2D grids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjustment-of-spacing-or-region">Adjustment of spacing or region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pixel-registration">Pixel registration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-grids-and-meshes">Multidimensional grids and meshes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, The Bordado Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Apr 30, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
