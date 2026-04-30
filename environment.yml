@@ -24,7 +24,9 @@ dependencies:
   - sphinx-copybutton==0.5.*
   - sphinx-design==0.5.*
   - jupyter-sphinx==0.5.*
-  - matplotlib
+  - matplotlib==3.10.*
+  - pygmt==0.18.*
+  - gmt==6.6.*
   # Style
   - ruff
   - zizmor
