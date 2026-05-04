@@ -15,7 +15,6 @@ dependencies:
   - pytest
   - pytest-cov
   - coverage
-  - pandas
   - xarray
   # Documentation
   - sphinx==7.2.*
@@ -27,6 +26,8 @@ dependencies:
   - matplotlib==3.10.*
   - pygmt==0.18.*
   - gmt==6.6.*
+  - pandas==3.0.*
+  - ensaio==0.7.*
   # Style
   - ruff
   - zizmor

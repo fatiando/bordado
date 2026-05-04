@@ -77,3 +77,5 @@ Required:
 The examples in documentation also use:
 
 * `matplotlib <https://matplotlib.org/>`__ for plotting
+* `pygmt <https://www.pygmt.org/>`__ for map making
+* `ensaio <https://www.fatiando.org/ensaio>`__ for downloading sample data
