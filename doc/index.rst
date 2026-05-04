@@ -122,6 +122,13 @@ functions for splitting coordinates into spatial blocks and more.
     tutorial/split.rst
 
 .. toctree::
+    :hidden:
+    :maxdepth: 1
+    :caption: How To
+
+    how-to/get-region.rst
+
+.. toctree::
     :maxdepth: 1
     :hidden:
     :caption: Reference Documentation
