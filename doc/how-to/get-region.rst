@@ -15,7 +15,8 @@ South, and North values. Bordado offers :func:`bordado.get_region` to do this.
     import bordado as bd
 
 To demonstrate, we'll use :func:`ensaio.fetch_southern_africa_gravity` to get a
-sample dataset of ground-based gravity observation across Southern Africa. The dataset is a CSV file, which we'll load using :func:`pandas.read_csv`:
+sample dataset of ground-based gravity observation across Southern Africa. The
+dataset is a CSV file, which we'll load using :func:`pandas.read_csv`:
 
 .. jupyter-execute::
 
@@ -39,7 +40,9 @@ the South and North latitude.
 
 .. note::
 
-    We tend to always use "longitude" or "easting" and then "latitude" or "northing" as the order of coordinates. But Bordado can work with whatever order you choose:
+    We tend to always use "longitude" or "easting" and then "latitude" or
+    "northing" as the order of coordinates. But Bordado can work with whatever
+    order you choose:
 
     .. jupyter-execute::
 
