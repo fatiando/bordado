@@ -16,6 +16,7 @@ the ":ref:`tutorial`" first.
     :caption: Contents
 
     get-region.rst
+    pad-region.rst
 
 .. seealso::
 
