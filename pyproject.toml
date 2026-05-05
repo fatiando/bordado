@@ -12,7 +12,7 @@ readme = "README.md"
 license = "BSD-3-Clause"
 keywords = ["geoscience", "geophysics"]
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",

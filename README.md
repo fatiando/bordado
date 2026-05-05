@@ -47,9 +47,12 @@ functions for splitting coordinates into spatial blocks and more.
 
 ## Project status
 
-**Bordado is in early stages of development** but is already functional. We
-only caution that we may still make changes to the API so things may break
-between releases.
+**Bordado is ready for use but still changing**.
+This means that we are still adding a lot of new features, and sometimes we make
+changes to the ones we already have while we try to improve the software based
+on users' experience, test new ideas, take better design decisions, etc. Some of
+these changes could be **backwards incompatible**. Keep that in mind before you
+update Harmonica to a newer version.
 
 **We welcome feedback and ideas!** This is a great time to bring new ideas on
 how we can improve the project.
@@ -77,7 +80,7 @@ By participating in this project you agree to abide by its terms.
 > head that is telling you that you're not ready, that you aren't skilled
 > enough to contribute. We assure you that the little voice in your head is
 > wrong. Most importantly, **there are many valuable ways to contribute besides
-> writing code**.
+> writing code** (giving feedback, teaching, writing documentation, and more).
 >
 > *This disclaimer was adapted from the*
 > [MetPy project](https://github.com/Unidata/MetPy).
