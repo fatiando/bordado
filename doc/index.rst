@@ -166,20 +166,10 @@ file.
 .. toctree::
     :hidden:
     :maxdepth: 1
-    :caption: Tutorial
+    :caption: User Guide
 
-    tutorial/line.rst
-    tutorial/grid.rst
-    tutorial/profile.rst
-    tutorial/random.rst
-    tutorial/split.rst
-
-.. toctree::
-    :hidden:
-    :maxdepth: 1
-    :caption: How To
-
-    how-to/get-region.rst
+    tutorial/index.rst
+    how-to/index.rst
 
 .. toctree::
     :maxdepth: 1
