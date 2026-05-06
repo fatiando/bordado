@@ -38,7 +38,8 @@ html: api
 	@echo "Building HTML files."
 	@echo
 	# Set PYGMT_USE_EXTERNAL_DISPLAY to "false" to disable external display
-	PYGMT_USE_EXTERNAL_DISPLAY="false" $(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	# Tell Ensaio to download from GitHub to avoid spamming data repositories on CI
+	ENSAIO_DATA_FROM_GITHUB="true" PYGMT_USE_EXTERNAL_DISPLAY="false" $(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
