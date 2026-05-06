@@ -103,8 +103,16 @@ jobs:
       - name: Install the package
         run: python -m pip install --no-deps dist/*.whl
 
+      - name: Cache the Ensaio datasets
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/cache/ensaio
+          key: ensaio-data
+
       - name: Build the documentation
         run: make -C doc clean all
+        env:
+          ENSAIO_DATA_DIR: ${{ runner.temp }}/cache/ensaio
 
       # Store the docs as a build artifact so we can deploy it later
       - name: Upload HTML documentation as an artifact
