@@ -111,6 +111,8 @@ jobs:
 
       - name: Build the documentation
         run: make -C doc clean all
+        env:
+          ENSAIO_DATA_DIR: ${{ runner.temp }}/cache/ensaio
 
       # Store the docs as a build artifact so we can deploy it later
       - name: Upload HTML documentation as an artifact
