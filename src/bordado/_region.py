@@ -191,3 +191,71 @@ def inside(coordinates, region):
         )
         are_inside = np.logical_and(are_inside, in_dimension, out=are_inside)
     return are_inside
+
+def rescale_coordinates(coordinates, region):
+    """
+    Rescale the coordinate values to fit the given region.
+
+    Adjusts the spacing between points proportionally to the new boundaries.
+    If the data forms a straight line (a diff of zero in one or more dimensions), 
+    the function infers the proportion from the non-zero dimensions to reach 
+    the new limits.
+
+    Parameters
+    ----------
+    coordinates : tuple = (easting, northing, ...)
+        Tuple of arrays with the coordinates of each point. Should be in an
+        order compatible with the order of boundaries in *region*. Arrays can
+        be Python lists. Arrays can be of any shape but must all have the same
+        shape.
+    region : tuple = (W, E, S, N, ...)
+        The new boundaries for the region in Cartesian or geographic
+        coordinates. Should have a lower and an upper boundary for each
+        dimension of the coordinate system.
+
+    Returns
+    -------
+    rescaled_coordinates : tuple
+        A tuple of arrays containing the rescaled coordinates. The returned
+        arrays will have the same shape as the input coordinate arrays.
+    """
+    check_region(region)
+    coordinates = check_coordinates(coordinates)
+    
+    ndims = len(region) // 2
+    if len(coordinates) != ndims:
+        message = (
+            f"Invalid coordinates. Expected {ndims} coordinates for region '{region}' "
+            f"but got {len(coordinates)} instead."
+        )
+        raise ValueError(message)
+
+    old_region = vd.get_region(coordinates)
+    new_coordinates = []
+
+    for coord_array, bounds_old, bounds_new in zip(
+        coordinates, 
+        np.reshape(old_region, (ndims, 2)), 
+        np.reshape(region, (ndims, 2))
+    ):
+        
+        min_old, max_old = bounds_old[0], bounds_old[1]
+        min_new, max_new = bounds_new[0], bounds_new[1]
+
+        diff_old = max_old - min_old
+        diff_new = max_new - min_new
+
+        if diff_old == 0 and diff_new !=0:
+            message = (
+                f"Invalid value: diff_old is 0. Cannot divide by zero to rescale "
+                f"this dimension."
+            )
+            raise ValueError(message)
+        elif diff_old == 0 == diff_new:
+            scale = 0
+        else:
+            scale = diff_new / diff_old
+        new_coord = min_new + ((coord_array - min_old) * scale)
+        new_coordinates.append(new_coord)
+
+    return tuple(new_coordinates)
