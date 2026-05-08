@@ -196,10 +196,9 @@ def rescale_coordinates(coordinates, region):
     """
     Rescale the coordinate values to fit the given region.
 
-    Adjusts the spacing between points proportionally to the new boundaries.
-    If the data forms a straight line (a diff of zero in one or more dimensions), 
-    the function infers the proportion from the non-zero dimensions to reach 
-    the new limits.
+    Linearly transforms the input coordinates so that their minimum and maximum
+    values match the lower and upper bounds of the provided *region*. The
+    scaling is applied independently to each dimension.
 
     Parameters
     ----------
