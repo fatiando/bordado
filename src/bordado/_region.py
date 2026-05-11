@@ -192,6 +192,7 @@ def inside(coordinates, region):
         are_inside = np.logical_and(are_inside, in_dimension, out=are_inside)
     return are_inside
 
+
 def rescale_coordinates(coordinates, region):
     """
     Rescale the coordinate values to fit the given region.
@@ -217,10 +218,57 @@ def rescale_coordinates(coordinates, region):
     rescaled_coordinates : tuple
         A tuple of arrays containing the rescaled coordinates. The returned
         arrays will have the same shape as the input coordinate arrays.
+
+    Examples:
+    -------
+    >>> import bordado as bd
+    >>> import numpy as np
+    >>> # 2D coordinate system using 1D-arrays (scatter points)
+    >>> east = [0, 5, 10]
+    >>> north = [0, 10, 20]
+    >>> region_2d = (0, 100, 0, 50)
+    >>> rescaled_coordinates = rescale_coordinates((east, north), region_2d)
+    >>> print(rescaled_coordinates)
+    (array([  0.,  50., 100.]), array([ 0., 25., 50.]))
+
+    >>> # 2D coordinate system using 2D-arrays (line of coordinates)
+    >>> beginning = (1, 1)
+    >>> end = (5, 2)
+    >>> coordinates, distances = bd.profile_coordinates(beginning, end, spacing=0.5)
+    >>> region_2d = (10, 20, 20, 50)
+    >>> rescaled_coordinates = rescale_coordinates(coordinates, region_2d)
+    >>> print(rescaled_coordinates)
+    (array([10.  , 11.25, 12.5 , 13.75, 15.  , 16.25, 17.5 , 18.75, 20.  ]), array([20.  , 23.75, 27.5 , 31.25, 35.  , 38.75, 42.5 , 46.25, 50.  ]))
+
+    >>> # 1. Generate a 2D grid in an initial region (e.g., 3x3 points)
+    >>> old_region = (0, 10, 0, 20)
+    >>> east, north = bd.grid_coordinates(region=old_region, shape=(3, 3))
+    >>>
+    >>> # 2. Rescale the generated coordinates to a new target region
+    >>> new_region = (0, 100, 0, 50)
+    >>> new_east, new_north = rescale_coordinates((east, north), new_region)
+    >>>
+    >>> # 3. Generate the expected grid directly in the new region for comparison
+    >>> expected_east, expected_north = bd.grid_coordinates(region=new_region, shape=(3, 3))
+    >>>
+    >>> # 4. Verify if the rescaled coordinates perfectly match the expected ones
+    >>> print(np.allclose(new_east, expected_east))
+    True
+    >>> print(np.allclose(new_north, expected_north))
+    True
+
+    The function handles exceptions when trying to rescale a constant
+    dimension (range = 0) into a region that requires a non-zero range:
+
+    >>> east_flat = np.full_like(east, 5.0) # Constant array, range is 0
+    >>> rescale_coordinates((east_flat, north), new_region)
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid value: diff_old is 0. Cannot divide by zero to rescale this dimension.
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
-    
+
     ndims = len(region) // 2
     if len(coordinates) != ndims:
         message = (
@@ -229,22 +277,19 @@ def rescale_coordinates(coordinates, region):
         )
         raise ValueError(message)
 
-    old_region = vd.get_region(coordinates)
-    new_coordinates = []
+    old_region = get_region(coordinates)
+    rescaled_coordinates = []
 
     for coord_array, bounds_old, bounds_new in zip(
-        coordinates, 
-        np.reshape(old_region, (ndims, 2)), 
-        np.reshape(region, (ndims, 2))
+        coordinates, np.reshape(old_region, (ndims, 2)), np.reshape(region, (ndims, 2))
     ):
-        
         min_old, max_old = bounds_old[0], bounds_old[1]
         min_new, max_new = bounds_new[0], bounds_new[1]
 
         diff_old = max_old - min_old
         diff_new = max_new - min_new
 
-        if diff_old == 0 and diff_new !=0:
+        if diff_old == 0 and diff_new != 0:
             message = (
                 f"Invalid value: diff_old is 0. Cannot divide by zero to rescale "
                 f"this dimension."
@@ -255,6 +300,6 @@ def rescale_coordinates(coordinates, region):
         else:
             scale = diff_new / diff_old
         new_coord = min_new + ((coord_array - min_old) * scale)
-        new_coordinates.append(new_coord)
+        rescaled_coordinates.append(new_coord)
 
-    return tuple(new_coordinates)
+    return tuple(rescaled_coordinates)
