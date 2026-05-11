@@ -381,3 +381,44 @@ def longitude_continuity(region, *, coordinates=None):
         modified_coordinates = (longitude, *coordinates[1:])
         return modified_region, modified_coordinates
     return modified_region
+
+def check_dimensions(coordinates, region):
+    """
+    Check if region and coordinates match dimensions.
+
+    Parameters
+    ----------
+    coordinates : tuple = (easting, northing, ...)
+        Tuple of arrays with the coordinates of each point. Arrays can be
+        Python lists or any numpy-compatible array type. Arrays can be of any
+        shape but must all have the same shape.
+
+    region : tuple = (W, E, S, N, ...)
+        The boundaries of a given region in Cartesian or geographic
+        coordinates. Should have a lower and an upper boundary for each
+        dimension of the coordinate system.
+
+    Returns
+    -------
+    coordinates : tuple = (easting, northing, ...)
+        Tuple of coordinate arrays, converted to numpy arrays if necessary.
+
+    region : tuple = (W, E, S, N, ...)
+        The boundaries that contain the coordinates. The order of lower and
+        upper boundaries returned follows the order of *coordinates*.
+
+    Raises
+    ------
+    ValueError
+        If the coordinate and region don't match dimensions.
+    """
+    
+    ndims = len(region) // 2
+    if len(coordinates) != ndims:
+        message = (
+            f"Invalid coordinates. Expected {ndims} coordinates for region '{region}' "
+            f"but got {len(coordinates)} instead."
+        )
+        raise ValueError(message)
+
+    return coordinates, region
