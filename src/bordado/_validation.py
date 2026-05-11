@@ -420,5 +420,3 @@ def check_dimensions(coordinates, region):
             f"but got {len(coordinates)} instead."
         )
         raise ValueError(message)
-
-    return coordinates, region
