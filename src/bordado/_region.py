@@ -10,7 +10,7 @@ Functions for dealing with regions and bounding boxes.
 
 import numpy as np
 
-from ._validation import check_coordinates, check_region
+from ._validation import check_coordinates, check_region, check_dimensions
 
 
 def pad_region(region, pad):
@@ -219,19 +219,16 @@ def rescale_coordinates(coordinates, region):
         A tuple of arrays containing the rescaled coordinates. The returned
         arrays will have the same shape as the input coordinate arrays.
 
-    Examples:
-    -------
+Examples
+    --------
     >>> import bordado as bd
-    >>> import numpy as np
-    >>> # 2D coordinate system using 1D-arrays (scatter points)
-    >>> east = [0, 5, 10]
-    >>> north = [0, 10, 20]
-    >>> region_2d = (0, 100, 0, 50)
-    >>> rescaled_coordinates = rescale_coordinates((east, north), region_2d)
+    >>> # 1D coordinate system
+    >>> east = (0,5, 10)
+    >>> region_1d = [0, 100]
+    >>> rescaled_coordinates = rescale_coordinates((east,), region_1d)
     >>> print(rescaled_coordinates)
-    (array([  0.,  50., 100.]), array([ 0., 25., 50.]))
-
-    >>> # 2D coordinate system using 2D-arrays (line of coordinates)
+    (array([  0.,  50., 100.]),)
+    >>> # This also works for 2D coordinate system using 2D-arrays
     >>> beginning = (1, 1)
     >>> end = (5, 2)
     >>> coordinates, distances = bd.profile_coordinates(beginning, end, spacing=0.5)
@@ -239,19 +236,15 @@ def rescale_coordinates(coordinates, region):
     >>> rescaled_coordinates = rescale_coordinates(coordinates, region_2d)
     >>> print(rescaled_coordinates)
     (array([10.  , 11.25, 12.5 , 13.75, 15.  , 16.25, 17.5 , 18.75, 20.  ]), array([20.  , 23.75, 27.5 , 31.25, 35.  , 38.75, 42.5 , 46.25, 50.  ]))
-
-    >>> # 1. Generate a 2D grid in an initial region (e.g., 3x3 points)
+    >>> # Generate a 2D grid in an initial region (e.g., 3x3 points)
     >>> old_region = (0, 10, 0, 20)
     >>> east, north = bd.grid_coordinates(region=old_region, shape=(3, 3))
-    >>>
-    >>> # 2. Rescale the generated coordinates to a new target region
+    >>> # Rescale the generated coordinates to a new target region
     >>> new_region = (0, 100, 0, 50)
     >>> new_east, new_north = rescale_coordinates((east, north), new_region)
-    >>>
-    >>> # 3. Generate the expected grid directly in the new region for comparison
+    >>> # Generate the expected grid directly in the new region for comparison
     >>> expected_east, expected_north = bd.grid_coordinates(region=new_region, shape=(3, 3))
-    >>>
-    >>> # 4. Verify if the rescaled coordinates perfectly match the expected ones
+    >>> # Verify if the rescaled coordinates perfectly match the expected ones
     >>> print(np.allclose(new_east, expected_east))
     True
     >>> print(np.allclose(new_north, expected_north))
@@ -268,14 +261,9 @@ def rescale_coordinates(coordinates, region):
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
+    check_dimensions(coordinates, region)
 
     ndims = len(region) // 2
-    if len(coordinates) != ndims:
-        message = (
-            f"Invalid coordinates. Expected {ndims} coordinates for region '{region}' "
-            f"but got {len(coordinates)} instead."
-        )
-        raise ValueError(message)
 
     old_region = get_region(coordinates)
     rescaled_coordinates = []
