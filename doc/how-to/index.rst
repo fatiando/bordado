@@ -1,4 +1,4 @@
-.. _how-to:
+.. _how_to:
 
 How To
 ======
@@ -17,6 +17,7 @@ the ":ref:`tutorial`" first.
 
     get-region.rst
     pad-region.rst
+    inside.rst
 
 .. seealso::
 
