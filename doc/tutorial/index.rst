@@ -20,5 +20,5 @@ the project**, this is the perfect place to start.
 
 .. seealso::
 
-    Looking for something more direct? Check out ":ref:`how-to`" for
+    Looking for something more direct? Check out ":ref:`how_to`" for
     self-contained examples of solving problems with Bordado.

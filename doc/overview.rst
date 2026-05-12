@@ -97,7 +97,7 @@ Explore the rest!
 
 That's a brief overview of the functionality in Bordado, but there's plenty
 more! We recommend going through our :ref:`tutorial` first.
-Then take a look at the ":ref:`how-to`" and also the ":ref:`api`" for
+Then take a look at the ":ref:`how_to`" and also the ":ref:`api`" for
 documentation for each function.
 
 Oh, and don't forget to :ref:`cite Bordado <citing>` if you use it in
