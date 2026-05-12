@@ -11,6 +11,7 @@ A large number of the unit tests are done as doctests in the function
 docstrings.
 """
 
+import numpy as np
 import pytest
 
 from bordado._grid import grid_coordinates
@@ -23,6 +24,17 @@ def test_rolling_window_size_too_large():
     coordinates = grid_coordinates(region, spacing=0.1)
     with pytest.raises(ValueError, match="Invalid window size"):
         rolling_window(coordinates, window_size=1.1, overlap=0.5)
+
+
+def test_rolling_window_size_too_large_higher_dim():
+    "Window size check should apply to all region dimensions, not just the first two."
+    coordinates = (
+        np.array([-2.0, 0.0, 2.0]),
+        np.array([-2.0, 0.0, 2.0]),
+        np.array([-0.5, 0.0, 0.5]),
+    )
+    with pytest.raises(ValueError, match="Invalid window size"):
+        rolling_window(coordinates, window_size=2, overlap=0.5)
 
 
 def test_rolling_window_spherical_invalid_window_size():
