@@ -452,7 +452,11 @@ def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="ov
     else:
         check_region(region)
     # Check if window size is bigger than the minimum dimension of the region
-    if window_size > min(region[1] - region[0], region[3] - region[2]):
+    # across all dimensions (region pairs), not just the first two.
+    region_dimensions = [
+        region[2 * i + 1] - region[2 * i] for i in range(len(region) // 2)
+    ]
+    if window_size > min(region_dimensions):
         message = (
             f"Invalid window size '{window_size}'. Cannot be larger than dimensions of "
             f"the region '{region}'."
