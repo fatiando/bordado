@@ -29,6 +29,7 @@ Regions and bounding boxes
    inside
    get_region
    pad_region
+   rescale_coordinates
 
 Splitting points into blocks and windows
 ----------------------------------------
