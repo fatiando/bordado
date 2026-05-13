@@ -230,10 +230,10 @@ def rescale_coordinates(coordinates, region):
     >>> print(rescaled_coordinates)
     (array([  0.,  50., 100.]),)
 
-    This also works for 2D coordinate arrays. Note that if the original and 
-    new regions share the same dimensions, the rescaling simply acts as a pure 
+    This also works for 2D coordinate arrays. Note that if the original and
+    new regions share the same dimensions, the rescaling simply acts as a pure
     translation of the points:
-    
+
     >>> beginning = (0, 0)
     >>> end = (10, 0)
     >>> coordinates, distances = bd.profile_coordinates(beginning, end, spacing=2)
