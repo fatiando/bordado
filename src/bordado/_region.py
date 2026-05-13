@@ -292,8 +292,9 @@ def rescale_coordinates(coordinates, region):
 
         if diff_old == 0 and diff_new != 0:
             message = (
-                "Invalid value: diff_old is 0. Cannot divide by zero to rescale "
-                "this dimension."
+                "Cannot rescale coordinates: the original data has a range "
+                "of 0 in this dimension (all values are identical), "
+                "but the target region requires a non-zero range."
             )
             raise ValueError(message)
         scale = 0 if diff_old == 0 == diff_new else diff_new / diff_old
