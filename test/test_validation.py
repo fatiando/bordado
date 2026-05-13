@@ -13,6 +13,7 @@ import pytest
 from bordado._validation import (
     check_coordinates,
     check_coordinates_geographic,
+    check_dimensions,
     check_overlap,
     check_region,
     check_region_geographic,
@@ -190,3 +191,33 @@ def test_check_overlap(overlap):
     "Make sure an exception is raised if the overlap is invalid."
     with pytest.raises(ValueError, match="Invalid overlap"):
         check_overlap(overlap)
+
+
+@pytest.mark.parametrize(
+    ("coordinates", "region"),
+    [
+        (([1], [2]), [1, 2]),
+        (([1],), [1, 2, 3, 4]),
+        (([1], [2]), [1, 2, 3, 4, 5, 6]),
+    ],
+)
+def test_check_dimensions_fails(coordinates, region):
+    "Check if an exception is raised when, region and coordinates didn't match"
+    match = "Invalid coordinates. Expected"
+    f"coordinates for region '{region}' "
+    f"but got {len(coordinates)} instead."
+    with pytest.raises(ValueError, match=match):
+        check_dimensions(coordinates, region)
+
+
+@pytest.mark.parametrize(
+    ("coordinates", "region"),
+    [
+        (([1],), [1, 2]),
+        (([[1], [2]]), [1, 2, 3, 4]),
+        (([1], [2], [3]), [1, 2, 3, 4, 5, 6]),
+    ],
+)
+def test_check_dimensions_passes(coordinates, region):
+    "Check that valid regions and coordinates don't cause exceptions."
+    check_dimensions(coordinates, region)
