@@ -295,11 +295,8 @@ easier to see, we'll color the points by their third coordinate (which we call
 
 .. jupyter-execute::
 
-
-    fig, ax = plt.subplots(
-        figsize=(8, 7),
-        subplot_kw={"projection": "3d"},
-    )
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(projection="3d")
     ax.scatter(
         coordinates[0],
         coordinates[1],
@@ -311,9 +308,10 @@ easier to see, we'll color the points by their third coordinate (which we call
     ax.set_xlabel("easting")
     ax.set_ylabel("northing")
     ax.set_zlabel("upward")
-    ax.view_init(elev=15, azim=-55, roll=0)
-    ax.set_proj_type('persp', focal_length=0.2)
+    ax.view_init(elev=10, azim=-60, roll=0)
+    ax.set_proj_type('persp', focal_length=0.3)
     ax.set_aspect("equal")
+    ax.set_box_aspect(None, zoom=0.9)
     plt.show()
 
 
