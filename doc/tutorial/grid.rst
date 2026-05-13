@@ -282,12 +282,40 @@ south, north, bottom, top):
 
 .. jupyter-execute::
 
-    coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 9), spacing=3)
+    coordinates = bd.grid_coordinates(region=(0, 9, -3, 3, 6, 12), spacing=3)
 
     for i, c in enumerate(coordinates):
         print(f"coordinate {i}:\n{c}\n")
 
 Now there will be 3 output coordinates and each of them will be 3D arrays.
+
+Let's make a 3D plot of this grid to see what it looks like. To make it
+easier to see, we'll color the points by their third coordinate (which we call
+"upward" here):
+
+.. jupyter-execute::
+
+
+    fig, ax = plt.subplots(
+        figsize=(8, 7),
+        subplot_kw={"projection": "3d"},
+    )
+    ax.scatter(
+        coordinates[0],
+        coordinates[1],
+        coordinates[2],
+        c=coordinates[2],
+        depthshade=False,
+        s=30,
+    )
+    ax.set_xlabel("easting")
+    ax.set_ylabel("northing")
+    ax.set_zlabel("upward")
+    ax.view_init(elev=15, azim=-55, roll=0)
+    ax.set_proj_type('persp', focal_length=0.2)
+    ax.set_aspect("equal")
+    plt.show()
+
 
 We can also pass a shape instead of a spacing:
 
