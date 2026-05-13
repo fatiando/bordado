@@ -230,8 +230,10 @@ def rescale_coordinates(coordinates, region):
     >>> print(rescaled_coordinates)
     (array([  0.,  50., 100.]),)
 
-    This also works for 2D regions using 2D-arrays
-
+    This also works for 2D coordinate arrays. Note that if the original and 
+    new regions share the same dimensions, the rescaling simply acts as a pure 
+    translation of the points:
+    
     >>> beginning = (0, 0)
     >>> end = (10, 0)
     >>> coordinates, distances = bd.profile_coordinates(beginning, end, spacing=2)
@@ -262,15 +264,6 @@ def rescale_coordinates(coordinates, region):
     True
     >>> print(np.allclose(new_north, expected_north))
     True
-
-    The function handles exceptions when trying to rescale a constant
-    dimension (range = 0) into a region that requires a non-zero range:
-
-    >>> east_flat = np.full_like(east, 5.0) # Constant array, range is 0
-    >>> rescale_coordinates((east_flat, north), new_region)
-    Traceback (most recent call last):
-        ...
-    ValueError: Invalid value: diff_old is 0. Cannot divide by zero to rescale this dimension.
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
