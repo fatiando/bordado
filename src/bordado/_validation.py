@@ -406,7 +406,8 @@ def check_dimensions(coordinates, region):
     ndims = len(region) // 2
     if len(coordinates) != ndims:
         message = (
-            f"Invalid coordinates. Expected {ndims} coordinates for region '{region}' "
+            f"Invalid coordinates. Expected {ndims}"
+            f"coordinates for region '{region}' "
             f"but got {len(coordinates)} instead."
         )
         raise ValueError(message)
