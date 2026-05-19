@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+      - docs-deploy-permission
   release:
     types:
       - published
@@ -23,10 +24,12 @@ defaults:
     shell: bash -e -l {0}
 
 jobs:
-  #############################################################################
-  # Build the docs
-  build:
+
+  deploy:
     runs-on: ubuntu-latest
+    # Grant write permissions so that we can push to gh-pages
+    permissions:
+      contents: write
     env:
       REQUIREMENTS: env/requirements-docs.txt env/requirements-build.txt
       PYTHON: "3.14"
