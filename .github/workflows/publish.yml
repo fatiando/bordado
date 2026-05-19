@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - docs-deploy-permission
   release:
     types:
       - published
