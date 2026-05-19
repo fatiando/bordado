@@ -35,7 +35,7 @@ Supported dependency versions
 -----------------------------
 
 Bordado follows the recommendations in
-`NEP29 <https://numpy.org/neps/nep-0029-deprecation_policy.html>`__ for setting
+`SPEC 0 <https://scientific-python.org/specs/spec-0000/>`__ for setting
 the minimum required version of our dependencies.
 In short, we support **all minor releases of our dependencies from the previous
 24 months** before a Bordado release with a minimum of 2 minor releases.
