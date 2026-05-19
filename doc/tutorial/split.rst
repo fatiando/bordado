@@ -401,8 +401,9 @@ Now the distribution is much more uniform!
 What's next
 -----------
 
-With this, we've finished our tutorial! To learn more about Bordado, take a look
-at the detailed documentation for each function in ":ref:`api`".
+**With this, we've finished our tutorial!** To learn more about Bordado, take
+a look at the detailed documentation for each function in ":ref:`api`" and
+examples of how to solve specific problems in ":ref:`how_to`".
 
 Please remember to :ref:`cite Bordado <citing>` if you use it in
 a publication, thesis, report, etc. It helps us justify the effort that goes
