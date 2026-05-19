@@ -23,10 +23,15 @@ defaults:
     shell: bash -e -l {0}
 
 jobs:
-  #############################################################################
-  # Build the docs
-  build:
+
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      # Grant write permissions so that we can push to gh-pages
+      contents: write
+      # This permission allows trusted publishing to PyPI (without an API token)
+      id-token: write
+    environment: pypi
     env:
       REQUIREMENTS: env/requirements-docs.txt env/requirements-build.txt
       PYTHON: "3.14"
