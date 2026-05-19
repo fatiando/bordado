@@ -10,9 +10,6 @@ on:
   push:
     branches:
       - main
-  release:
-    types:
-      - published
 
 permissions: {}
 
@@ -113,6 +110,13 @@ jobs:
       - name: List installed packages
         run: python -m pip freeze
 
+      - name: Build source and wheel distributions
+        run: make build
+
+      - name: Check the archives
+        run: twine check dist/*
+
+      # Do this instead of using the wheel so we can get proper coverage reports
       - name: Install the package in editable mode
         run: python -m pip install --no-deps --editable .
 
