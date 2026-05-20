@@ -10,8 +10,6 @@ updates:
     directory: "env/"
     schedule:
       interval: "weekly"
-    ignore:
-      - dependency-name: "*"
     allow:
       - dependency-name: "zizmor"
         update-types:
