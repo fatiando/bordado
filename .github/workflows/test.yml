@@ -1,12 +1,21 @@
 # Configuration for running tests with GitHub Actions
 #
+# NOTE: Pin actions to a specific commit to avoid having the authentication
+# token stolen if the Action is compromised. See the comments and links here:
+# https://github.com/pypa/gh-action-pypi-publish/issues/27
+#
 name: test
 
-# Only build PRs, the main branch, and releases. Pushes to branches will only
-# be built when a PR is opened. This avoids duplicated buids in PRs comming
-# from branches in the origin repository (1 for PR and 1 for push).
+# Only run on main or when relevant sources where edited.
 on:
   pull_request:
+    paths:
+      - src
+      - test
+      - pyproject.toml
+      - env/requirements-build.txt
+      - env/requirements-test.txt
+      - .github/workflows/test.yml
   push:
     branches:
       - main
