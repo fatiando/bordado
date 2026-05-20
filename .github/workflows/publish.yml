@@ -1,5 +1,9 @@
 # Build and publish packages to PyPI and documentation to GitHub Pages
 #
+# NOTE: Pin actions to a specific commit to avoid having the authentication
+# token stolen if the Action is compromised. See the comments and links here:
+# https://github.com/pypa/gh-action-pypi-publish/issues/27
+#
 name: publish
 
 # Only pushed to the main branch and releases.
@@ -20,10 +24,9 @@ defaults:
     # But this breaks on MacOS if using actions/setup-python:
     # https://github.com/actions/setup-python/issues/132
     # -e makes sure builds fail if any command fails
-    shell: bash -e -l {0}
+    shell: bash -e -o pipefail -l {0}
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     permissions:
