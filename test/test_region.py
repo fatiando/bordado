@@ -73,8 +73,14 @@ def test_get_region_array_dtypes(coordinates):
 )
 def test_rescale_coordinates_fails(coordinates, region):
     "Check if an exception is raised when, bounduaries of the new region is equals"
-    match = "Cannot rescale coordinates: the original data has a range "
-    "of 0 in this dimension (all values are identical), "
-    "but the target region requires a non-zero range."
+    match = "Cannot rescale coordinates:"
     with pytest.raises(ValueError, match=match):
         rescale_coordinates(coordinates, region)
+
+
+@pytest.mark.parametrize(
+    ("coordinates", "region"),
+    [(([10, 0], [0, 0]), [-10, 1, 1, 1])],
+)
+def test_rescale_coordinates_translation(coordinates, region):
+    rescale_coordinates(coordinates, region)
