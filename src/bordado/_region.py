@@ -221,30 +221,29 @@ def rescale_coordinates(coordinates, region):
 
     Examples
     --------
-    Let's make 1D region with some points in it
+    Let's demonstrate first using a single coordinate array:
 
     >>> import bordado as bd
-    >>> east = (0,5, 10)
-    >>> region_1d = [0, 100]
-    >>> rescaled_coordinates = rescale_coordinates((east,), region_1d)
+    >>> coordinates = [(0,5, 10),]
+
+    These values can be stretched to a new range by providing a region
+    like so:
+
+    >>> rescaled_coordinates = rescale_coordinates(coordinates, [0, 100])
     >>> print(rescaled_coordinates)
     (array([  0.,  50., 100.]),)
 
-    This also works for 2D coordinate arrays. Note that if the original and
+    We can also translate coordinates. Note that if the original and
     new regions share the same dimensions, the rescaling simply acts as a pure
     translation of the points:
 
-    >>> beginning = (0, 0)
-    >>> end = (10, 0)
-    >>> coordinates, distances = bd.profile_coordinates(beginning, end, spacing=2)
-    >>> region_2d = (-10, 1, 1, 1)
-    >>> rescaled_coordinates = rescale_coordinates(coordinates, region_2d)
+    >>> region = [10, 20]
+    >>> rescaled_coordinates = rescale_coordinates(coordinates, region)
     >>> print(rescaled_coordinates[0])
-    [-10.   -7.8  -5.6  -3.4  -1.2   1. ]
-    >>> print(rescaled_coordinates[1])
-    [1. 1. 1. 1. 1. 1.]
+    [10. 15. 20.]
 
-    Generate a 2D grid in an initial region (e.g., 3x3 points)
+    This also works for 2D coordinate arrays.
+    Let's generate a 2D grid in an initial region (e.g., 3x3 points)
 
     >>> old_region = (0, 10, 0, 20)
     >>> east, north = bd.grid_coordinates(region=old_region, shape=(3, 3))
@@ -260,38 +259,48 @@ def rescale_coordinates(coordinates, region):
 
     Verify if the rescaled coordinates perfectly match the expected ones
 
-    >>> print(np.allclose(new_east, expected_east))
-    True
-    >>> print(np.allclose(new_north, expected_north))
-    True
+    >>> print(new_east)
+    [[  0.  50. 100.]
+     [  0.  50. 100.]
+     [  0.  50. 100.]]
+    >>> print(expected_east)
+    [[  0.  50. 100.]
+     [  0.  50. 100.]
+     [  0.  50. 100.]]
+
+    >>> print(new_north)
+    [[ 0.  0.  0.]
+     [25. 25. 25.]
+     [50. 50. 50.]]
+    >>> print(expected_north)
+    [[ 0.  0.  0.]
+     [25. 25. 25.]
+     [50. 50. 50.]]
+
+    Note that the both east and north matches perfectely with the expected
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
     check_dimensions(coordinates, region)
-
     ndims = len(region) // 2
-
     old_region = get_region(coordinates)
     rescaled_coordinates = []
-
     for coord_array, bounds_old, bounds_new in zip(
         coordinates, np.reshape(old_region, (ndims, 2)), np.reshape(region, (ndims, 2))
     ):
         min_old, max_old = bounds_old
         min_new, max_new = bounds_new
-
         diff_old = max_old - min_old
         diff_new = max_new - min_new
-
         if diff_old == 0 and diff_new != 0:
             message = (
-                "Cannot rescale coordinates: the original data has a range "
-                "of 0 in this dimension (all values are identical), "
-                "but the target region requires a non-zero range."
+                "Cannot rescale coordinates:"
+                f"the original data has a range of {(bounds_old)}"
+                f"of 0 in this dimensions: {ndims} (all values are identical), "
+                f"but the target region requires a range of {(bounds_new)}."
             )
             raise ValueError(message)
         scale = 0 if diff_old == 0 == diff_new else diff_new / diff_old
         new_coord = min_new + ((coord_array - min_old) * scale)
         rescaled_coordinates.append(new_coord)
-
     return tuple(rescaled_coordinates)
