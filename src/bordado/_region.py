@@ -224,7 +224,7 @@ def rescale_coordinates(coordinates, region):
     Let's demonstrate first using a single coordinate array:
 
     >>> import bordado as bd
-    >>> coordinates = [(0,5, 10),]
+    >>> coordinates = ([0, 5, 10],)
 
     These values can be stretched to a new range by providing a region
     like so:
@@ -285,9 +285,9 @@ def rescale_coordinates(coordinates, region):
     ndims = len(region) // 2
     old_region = get_region(coordinates)
     rescaled_coordinates = []
-    for coord_array, bounds_old, bounds_new in zip(
+    for i, (coord_array, bounds_old, bounds_new) in enumerate(zip(
         coordinates, np.reshape(old_region, (ndims, 2)), np.reshape(region, (ndims, 2))
-    ):
+    )):
         min_old, max_old = bounds_old
         min_new, max_new = bounds_new
         diff_old = max_old - min_old
@@ -298,7 +298,10 @@ def rescale_coordinates(coordinates, region):
                 f"the original data has a range of {(bounds_old)}"
                 f"of 0 in this dimensions: {ndims} (all values are identical), "
                 f"but the target region requires a range of {(bounds_new)}."
-            )
+                "Cannot rescale coordinate {i}. "
+                f"The original data has a range of 0 (bounds = {bounds_old}) "
+                f"but the target region requires a range of {diff_new} "
+                f"(bounds = {bounds_new}), which is impossible to achieve."
             raise ValueError(message)
         scale = 0 if diff_old == 0 == diff_new else diff_new / diff_old
         new_coord = min_new + ((coord_array - min_old) * scale)

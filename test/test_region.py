@@ -73,7 +73,7 @@ def test_get_region_array_dtypes(coordinates):
 )
 def test_rescale_coordinates_fails(coordinates, region):
     "Check if an exception is raised when, bounduaries of the new region is equals"
-    match = "Cannot rescale coordinates:"
+    match = "Cannot rescale coordinate"
     with pytest.raises(ValueError, match=match):
         rescale_coordinates(coordinates, region)
 

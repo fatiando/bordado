@@ -204,8 +204,6 @@ def test_check_overlap(overlap):
 def test_check_dimensions_fails(coordinates, region):
     "Check if an exception is raised when, region and coordinates didn't match"
     match = "Invalid coordinates. Expected"
-    f"coordinates for region '{region}' "
-    f"but got {len(coordinates)} instead."
     with pytest.raises(ValueError, match=match):
         check_dimensions(coordinates, region)
 
