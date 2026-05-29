@@ -199,7 +199,7 @@ def rescale_coordinates(coordinates, region):
 
     Linearly transforms the input coordinates so that their minimum and maximum
     values match the lower and upper bounds of the provided *region*. The
-    scaling is applied independently to each dimension.
+    scaling is applied independently to each coordinate.
 
     Parameters
     ----------
@@ -221,63 +221,53 @@ def rescale_coordinates(coordinates, region):
 
     Examples
     --------
-    Let's demonstrate first using a single coordinate array:
+    Let's demonstrate first using a single coordinate array. The coordinates
+    must be specified as a tuple of arrays.
 
     >>> import bordado as bd
     >>> coordinates = ([0, 5, 10],)
 
-    These values can be stretched to a new range by providing a region
-    like so:
+    These values can be stretched to a new range by providing a region like so:
 
     >>> rescaled_coordinates = rescale_coordinates(coordinates, [0, 100])
     >>> print(rescaled_coordinates)
     (array([  0.,  50., 100.]),)
 
-    We can also translate coordinates. Note that if the original and
-    new regions share the same dimensions, the rescaling simply acts as a pure
-    translation of the points:
+    We can also translate coordinates. Note that if the original and new regions
+    share the same length, the rescaling simply acts as a pure translation of
+    the points:
 
     >>> region = [10, 20]
     >>> rescaled_coordinates = rescale_coordinates(coordinates, region)
-    >>> print(rescaled_coordinates[0])
-    [10. 15. 20.]
+    >>> print(rescaled_coordinates)
+    (array([10., 15., 20.]),)
 
-    This also works for 2D coordinate arrays.
-    Let's generate a 2D grid in an initial region (e.g., 3x3 points)
+    This also works for 2D coordinate arrays (or any number of dimensions).
+    Let's generate coordinates for a 2D grid:
 
-    >>> old_region = (0, 10, 0, 20)
-    >>> east, north = bd.grid_coordinates(region=old_region, shape=(3, 3))
-
-    Rescale the generated coordinates to a new target region
-
-    >>> new_region = (0, 100, 0, 50)
-    >>> new_east, new_north = rescale_coordinates((east, north), new_region)
-
-    Generate the expected grid directly in the new region for comparison
-
-    >>> expected_east, expected_north = bd.grid_coordinates(region=new_region, shape=(3, 3))
-
-    Verify if the rescaled coordinates perfectly match the expected ones
-
-    >>> print(new_east)
-    [[  0.  50. 100.]
-     [  0.  50. 100.]
-     [  0.  50. 100.]]
-    >>> print(expected_east)
-    [[  0.  50. 100.]
-     [  0.  50. 100.]
-     [  0.  50. 100.]]
-
-    >>> print(new_north)
+    >>> coordinates = bd.grid_coordinates(region=(0, 10, 0, 20), shape=(3, 3))
+    >>> print(coordinates[0])
+    [[ 0.  5. 10.]
+     [ 0.  5. 10.]
+     [ 0.  5. 10.]]
+    >>> print(coordinates[1])
     [[ 0.  0.  0.]
-     [25. 25. 25.]
-     [50. 50. 50.]]
-    >>> print(expected_north)
+     [10. 10. 10.]
+     [20. 20. 20.]]
+
+    Rescale the generated coordinates to a new target region happens for each
+    coordinate independently:
+
+    >>> rescaled = rescale_coordinates(coordinates, (0, 100, 0, 50))
+    >>> print(rescaled[0])
+    [[  0.  50. 100.]
+     [  0.  50. 100.]
+     [  0.  50. 100.]]
+    >>> print(rescaled[1])
     [[ 0.  0.  0.]
      [25. 25. 25.]
      [50. 50. 50.]]
 
-    Note that the both east and north matches perfectly with the expected
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
