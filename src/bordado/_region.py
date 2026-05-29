@@ -168,13 +168,8 @@ def inside(coordinates, region):
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
+    check_dimensions(coordinates, region)
     ndims = len(region) // 2
-    if len(coordinates) != ndims:
-        message = (
-            f"Invalid coordinates. Expected {ndims} coordinates for region '{region}' "
-            f"but got {len(coordinates)} instead."
-        )
-        raise ValueError(message)
     region_pairs = np.reshape(region, (ndims, 2))
     shape = coordinates[0].shape
     # Allocate temporary arrays to minimize memory allocation overhead
