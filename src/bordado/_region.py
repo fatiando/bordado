@@ -277,33 +277,30 @@ def rescale_coordinates(coordinates, region):
      [25. 25. 25.]
      [50. 50. 50.]]
 
-    Note that the both east and north matches perfectely with the expected
+    Note that the both east and north matches perfectly with the expected
     """
     check_region(region)
     coordinates = check_coordinates(coordinates)
     check_dimensions(coordinates, region)
     ndims = len(region) // 2
-    old_region = get_region(coordinates)
+    # Reshape the region so we can iterate over min,max pairs
+    region = np.reshape(region, (ndims, 2))
+    region_old = np.reshape(get_region(coordinates), (ndims, 2))
     rescaled_coordinates = []
-    for i, (coord_array, bounds_old, bounds_new) in enumerate(zip(
-        coordinates, np.reshape(old_region, (ndims, 2)), np.reshape(region, (ndims, 2))
-    )):
-        min_old, max_old = bounds_old
-        min_new, max_new = bounds_new
+    for i in range(ndims):
+        min_old, max_old = region_old[i]
+        min_new, max_new = region[i]
         diff_old = max_old - min_old
         diff_new = max_new - min_new
         if diff_old == 0 and diff_new != 0:
             message = (
-                "Cannot rescale coordinates:"
-                f"the original data has a range of {(bounds_old)}"
-                f"of 0 in this dimensions: {ndims} (all values are identical), "
-                f"but the target region requires a range of {(bounds_new)}."
-                "Cannot rescale coordinate {i}. "
-                f"The original data has a range of 0 (bounds = {bounds_old}) "
+                f"Cannot rescale coordinate {i}. "
+                f"The original data has a range of 0 (bounds = ({min_old}, {max_old})) "
                 f"but the target region requires a range of {diff_new} "
-                f"(bounds = {bounds_new}), which is impossible to achieve."
+                f"(bounds = ({min_new}, {max_new})), which is impossible to achieve."
+            )
             raise ValueError(message)
         scale = 0 if diff_old == 0 == diff_new else diff_new / diff_old
-        new_coord = min_new + ((coord_array - min_old) * scale)
+        new_coord = min_new + ((coordinates[i] - min_old) * scale)
         rescaled_coordinates.append(new_coord)
     return tuple(rescaled_coordinates)
