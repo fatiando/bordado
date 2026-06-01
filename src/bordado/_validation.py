@@ -174,7 +174,7 @@ def check_region_geographic(region):
         raise ValueError(message)
 
 
-def check_adjust(adjust, valid=("spacing", "region")):
+def check_adjust(adjust, *, valid=("spacing", "region")):
     """
     Check if the adjust argument is valid.
 
