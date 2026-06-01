@@ -48,6 +48,7 @@ def test_rescale_coordinates_translation(coordinates, region):
 @pytest.mark.parametrize(
     "coordinates",
     [
+        (),
         ([1, 2, 3],),
         ([[1, 2], [3, 4]],),
         ([1, 2, 3], [4, 5, 6], [7, 8, 9]),
@@ -58,3 +59,18 @@ def test_rotate_coordinates_invalid_ndims(coordinates):
     "Check that an error is raised for invalid number of coordinates"
     with pytest.raises(ValueError, match="Cannot rotate"):
         rotate_coordinates(coordinates, angle=20)
+
+
+@pytest.mark.parametrize(
+    "rotation_center",
+    [
+        (),
+        (1,),
+        (1, 2, 3),
+        (1, 2, 3, 4),
+    ],
+)
+def test_rotate_coordinates_invalid_rotation_center(rotation_center):
+    "Check that an error is raised for invalid rotation center"
+    with pytest.raises(ValueError, match="Invalid rotation center"):
+        rotate_coordinates(([1, 2], [3, 4]), angle=20, rotation_center=rotation_center)

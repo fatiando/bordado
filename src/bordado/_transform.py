@@ -117,13 +117,14 @@ def rescale_coordinates(coordinates, region):
     return tuple(rescaled_coordinates)
 
 
-def rotate_coordinates(coordinates, angle):
+def rotate_coordinates(coordinates, angle, rotation_center=(0, 0)):
     r"""
     Rotate coordinates in 2-dimensional space.
 
     Apply a `rotation matrix <https://en.wikipedia.org/wiki/Rotation_matrix>`__`
     to the vectors defined by the given coordinates in a 2D space. The rotation
-    is **counterclockwise**.
+    is **counterclockwise** and performed around the origin of the coordinate
+    system or optionally around a specified point (see *rotation_center* below).
 
     Parameters
     ----------
@@ -133,6 +134,10 @@ def rotate_coordinates(coordinates, angle):
         must all have the same shape.
     angle : float
         The angle of rotation in degrees.
+    rotation_center : tuple = (easting, northing)
+        The center of the rotation, represented by a tuple of 2 floats. By
+        default, rotate around the origin of the coordinate system at point
+        (0, 0).
 
     Returns
     -------
@@ -163,6 +168,17 @@ def rotate_coordinates(coordinates, angle):
     >>> print("Second coordinate:", ", ".join(f"{x:.2f}" for x in rotated[1]))
     Second coordinate: -1.00, -2.00, -3.00
 
+    By default, the rotation is done around the origin. But we can also specify
+    a custom rotation center:
+
+    >>> rotated = rotate_coordinates(
+    ...     coordinates, angle=90, rotation_center=(2, 0),
+    ... )
+    >>> print("First coordinate:", ", ".join(f"{x:.2f}" for x in rotated[0]))
+    First coordinate: 2.00, 2.00, 2.00
+    >>> print("Second coordinate:", ", ".join(f"{x:.2f}" for x in rotated[1]))
+    Second coordinate: -1.00, 0.00, 1.00
+
     The coordinates can have any shape but there can only be 2 of them:
 
     >>> coordinates = ([[1, 2], [3, 4]], [[0, 0], [0, 0]])
@@ -178,18 +194,24 @@ def rotate_coordinates(coordinates, angle):
 
     """
     coordinates = check_coordinates(coordinates)
-    ndims = len(coordinates)
-    if ndims != 2:
+    if len(coordinates) != 2:
         message = (
-            f"Cannot rotate {ndims} coordinates. "
+            f"Cannot rotate {len(coordinates)} coordinates. "
             "Only works in 2D and hence can only take 2 coordinate arrays."
+        )
+        raise ValueError(message)
+    if len(rotation_center) != 2:
+        message = (
+            f"Invalid rotation center {rotation_center}. Must be a tuple of 2 numbers."
         )
         raise ValueError(message)
     angle = np.radians(angle)
     cos = np.cos(angle)
     sin = np.sin(angle)
-    rotated = (
-        cos * coordinates[0] - sin * coordinates[1],
-        sin * coordinates[0] + cos * coordinates[1],
+    shifted = [c - o for c, o in zip(coordinates, rotation_center)]
+    rotated_shifted = (
+        cos * shifted[0] - sin * shifted[1],
+        sin * shifted[0] + cos * shifted[1],
     )
+    rotated = tuple([c + o for c, o in zip(rotated_shifted, rotation_center)])
     return rotated
