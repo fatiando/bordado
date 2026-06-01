@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 import xarray as xr
 
-from bordado._region import get_region, inside, pad_region, rescale_coordinates
+from bordado._region import get_region, inside, pad_region
 
 
 @pytest.mark.parametrize(
@@ -65,22 +65,3 @@ def test_get_region_array_dtypes(coordinates):
     "Make sure the region has floats and not arrays or numpy dtypes"
     region = get_region(coordinates)
     assert all(isinstance(i, float) for i in region)
-
-
-@pytest.mark.parametrize(
-    ("coordinates", "region"),
-    [(([10, 10], [0, 0]), [-10, 1, 1, 1])],
-)
-def test_rescale_coordinates_fails(coordinates, region):
-    "Check if an exception is raised when, bounduaries of the new region is equals"
-    match = "Cannot rescale coordinate"
-    with pytest.raises(ValueError, match=match):
-        rescale_coordinates(coordinates, region)
-
-
-@pytest.mark.parametrize(
-    ("coordinates", "region"),
-    [(([10, 0], [0, 0]), [-10, 1, 1, 1])],
-)
-def test_rescale_coordinates_translation(coordinates, region):
-    rescale_coordinates(coordinates, region)

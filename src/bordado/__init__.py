@@ -13,13 +13,14 @@ from ._grid import grid_coordinates
 from ._line import line_coordinates
 from ._profile import great_circle_coordinates, profile_coordinates
 from ._random import random_coordinates, random_coordinates_spherical
-from ._region import get_region, inside, pad_region, rescale_coordinates
+from ._region import get_region, inside, pad_region
 from ._split import (
     block_split,
     expanding_window,
     rolling_window,
     rolling_window_spherical,
 )
+from ._transform import rescale_coordinates
 from ._utils import shape_to_spacing, spacing_to_size
 from ._version import __version__
 
