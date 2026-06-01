@@ -10,3 +10,4 @@ pygmt==0.18.*
 gmt==6.6.*
 ensaio==0.7.*
 pandas==3.0.*
+pyproj==3.7.*
