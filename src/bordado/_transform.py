@@ -117,7 +117,7 @@ def rescale_coordinates(coordinates, region):
     return tuple(rescaled_coordinates)
 
 
-def rotate_coordinates(coordinates, angle, rotation_center=(0, 0)):
+def rotate_coordinates(coordinates, angle, *, rotation_center=(0, 0)):
     r"""
     Rotate coordinates in 2-dimensional space.
 
