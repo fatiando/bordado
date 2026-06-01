@@ -18,6 +18,7 @@ the ":ref:`tutorial`" first.
     get-region.rst
     pad-region.rst
     inside.rst
+    rotate.rst
 
 .. seealso::
 

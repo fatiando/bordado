@@ -28,6 +28,7 @@ dependencies:
   - gmt==6.6.*
   - pandas==3.0.*
   - ensaio==0.7.*
+  - pyproj==3.7.*
   # Style
   - ruff
   - zizmor

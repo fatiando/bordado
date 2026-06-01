@@ -16,7 +16,7 @@ do this for you in n-dimensions.
     import pandas as pd
     import bordado as bd
 
-Let's illustrate this using a  sample dataset of ground-based
+Let's illustrate this using a sample dataset of ground-based
 gravity observations across Southern Africa which we'll download with
 :func:`ensaio.fetch_southern_africa_gravity` and open with :func:`pandas.read_csv`:
 
