@@ -118,8 +118,64 @@ def rescale_coordinates(coordinates, region):
 
 
 def rotate_coordinates(coordinates, angle):
-    """
-    Rotate the basis for 2D coordinates counter-clockwise.
+    r"""
+    Rotate coordinates in 2-dimensional space.
+
+    Apply a `rotation matrix <https://en.wikipedia.org/wiki/Rotation_matrix>`__`
+    to the vectors defined by the given coordinates in a 2D space. The rotation
+    is **counterclockwise**.
+
+    Parameters
+    ----------
+    coordinates : tuple = (easting, northing)
+        Tuple of arrays with the coordinates of each point. Should have **2
+        elements**. Arrays can be Python lists. Arrays can be of any shape but
+        must all have the same shape.
+    angle : float
+        The angle of rotation in degrees.
+
+    Returns
+    -------
+    rotated_coordinates : tuple
+        A tuple of arrays containing the rotated coordinates. The returned
+        arrays will have the same shape as the input coordinate arrays.
+
+    Examples
+    --------
+    Let's say we have points that fall on a line along the first dimension:
+
+    >>> coordinates = ([1, 2, 3], [0, 0, 0])
+
+    Rotating these points by 90° should align them with the second dimension:
+
+    >>> rotated = rotate_coordinates(coordinates, angle=90)
+    >>> print("First coordinate:", ", ".join(f"{x:.2f}" for x in rotated[0]))
+    First coordinate: 0.00, 0.00, 0.00
+    >>> print("Second coordinate:", ", ".join(f"{x:.2f}" for x in rotated[1]))
+    Second coordinate: 1.00, 2.00, 3.00
+
+    And rotating them clockwise (-90°) should align them with the negative part
+    of the second dimension:
+
+    >>> rotated = rotate_coordinates(coordinates, angle=-90)
+    >>> print("First coordinate:", ", ".join(f"{x:.2f}" for x in rotated[0]))
+    First coordinate: 0.00, 0.00, 0.00
+    >>> print("Second coordinate:", ", ".join(f"{x:.2f}" for x in rotated[1]))
+    Second coordinate: -1.00, -2.00, -3.00
+
+    The coordinates can have any shape but there can only be 2 of them:
+
+    >>> coordinates = ([[1, 2], [3, 4]], [[0, 0], [0, 0]])
+    >>> rotated = rotate_coordinates(coordinates, angle=90)
+    >>> for line in rotated[0]:
+    ...     print(", ".join(f"{x:.2f}" for x in line))
+    0.00, 0.00
+    0.00, 0.00
+    >>> for line in rotated[1]:
+    ...     print(", ".join(f"{x:.2f}" for x in line))
+    1.00, 2.00
+    3.00, 4.00
+
     """
     coordinates = check_coordinates(coordinates)
     ndims = len(coordinates)
@@ -130,3 +186,10 @@ def rotate_coordinates(coordinates, angle):
         )
         raise ValueError(message)
     angle = np.radians(angle)
+    cos = np.cos(angle)
+    sin = np.sin(angle)
+    rotated = (
+        cos * coordinates[0] - sin * coordinates[1],
+        sin * coordinates[0] + cos * coordinates[1],
+    )
+    return rotated

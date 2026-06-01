@@ -12,7 +12,7 @@ import numpy.testing as npt
 import pytest
 
 from bordado._region import get_region
-from bordado._transform import rescale_coordinates
+from bordado._transform import rescale_coordinates, rotate_coordinates
 
 
 @pytest.mark.parametrize(
@@ -43,3 +43,18 @@ def test_rescale_coordinates_translation(coordinates, region):
     rescaled = rescale_coordinates(coordinates, region)
     rescaled_region = get_region(rescaled)
     npt.assert_allclose(region, rescaled_region)
+
+
+@pytest.mark.parametrize(
+    "coordinates",
+    [
+        ([1, 2, 3],),
+        ([[1, 2], [3, 4]],),
+        ([1, 2, 3], [4, 5, 6], [7, 8, 9]),
+        ([[1, 2], [3, 4]], [[1, 2], [3, 4]], [[1, 2], [3, 4]]),
+    ],
+)
+def test_rotate_coordinates_invalid_ndims(coordinates):
+    "Check that an error is raised for invalid number of coordinates"
+    with pytest.raises(ValueError, match="Cannot rotate"):
+        rotate_coordinates(coordinates, angle=20)

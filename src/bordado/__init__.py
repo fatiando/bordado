@@ -20,7 +20,7 @@ from ._split import (
     rolling_window,
     rolling_window_spherical,
 )
-from ._transform import rescale_coordinates
+from ._transform import rescale_coordinates, rotate_coordinates
 from ._utils import shape_to_spacing, spacing_to_size
 from ._version import __version__
 
