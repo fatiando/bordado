@@ -121,7 +121,7 @@ def rotate_coordinates(coordinates, angle, rotation_center=(0, 0)):
     r"""
     Rotate coordinates in 2-dimensional space.
 
-    Apply a `rotation matrix <https://en.wikipedia.org/wiki/Rotation_matrix>`__`
+    Apply a `rotation matrix <https://en.wikipedia.org/wiki/Rotation_matrix>`__
     to the vectors defined by the given coordinates in a 2D space. The rotation
     is **counterclockwise** and performed around the origin of the coordinate
     system or optionally around a specified point (see *rotation_center* below).
