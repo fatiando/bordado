@@ -72,8 +72,8 @@ def block_split(
     block_coordinates : tuple = (easting, northing, ...)
         ND arrays with the coordinates of the center of each block.
     labels : array
-        Array with the same shape as the block coordinates. Contains the
-        integer label for each data point. The label is the index of the block
+        Array with the same shape as the input coordinates. Contains an integer
+        label assigned to each data point. The label is the index of the block
         to which that point belongs.
 
     Examples
