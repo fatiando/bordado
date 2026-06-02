@@ -15,7 +15,11 @@ import numpy as np
 import pytest
 
 from bordado._grid import grid_coordinates
-from bordado._split import rolling_window, rolling_window_spherical
+from bordado._split import (
+    block_split_spherical,
+    rolling_window,
+    rolling_window_spherical,
+)
 
 
 def test_rolling_window_size_too_large():
@@ -45,3 +49,11 @@ def test_rolling_window_spherical_invalid_window_size():
         rolling_window_spherical(coordinates, window_size=0, overlap=0.5)
     with pytest.raises(ValueError, match="Invalid window size"):
         rolling_window_spherical(coordinates, window_size=-0.1, overlap=0.5)
+
+
+@pytest.mark.parametrize("block_size", [0, -10])
+def test_block_split_spherical_invalid_block_size(block_size):
+    "Check that an error is raised for invalid block_size"
+    coordinates = grid_coordinates(region=(0, 360, -90, 90), spacing=10)
+    with pytest.raises(ValueError, match="Invalid block size"):
+        block_split_spherical(coordinates, block_size)

@@ -72,8 +72,8 @@ def block_split(
     block_coordinates : tuple = (easting, northing, ...)
         ND arrays with the coordinates of the center of each block.
     labels : array
-        Array with the same shape as the block coordinates. Contains the
-        integer label for each data point. The label is the index of the block
+        Array with the same shape as the input coordinates. Contains an integer
+        label assigned to each data point. The label is the index of the block
         to which that point belongs.
 
     Examples
@@ -265,6 +265,247 @@ def block_split(
     tree = KDTree(np.transpose([c.ravel() for c in block_coordinates]))
     labels = tree.query(np.transpose([c.ravel() for c in coordinates]))[1]
     return block_coordinates, labels.reshape(coordinates[0].shape)
+
+
+def block_split_spherical(coordinates, block_size, *, region=None):
+    """
+    Split a geographic region into blocks and label points according blocks.
+
+    The blocks have a fixed size in latitude but their longitudinal size is
+    adjusted to keep the area of each block constant. This compensates the
+    decrease in area as meridians converge towards the poles. This means that
+    **the blocks are not evenly distributed on the sphere**.
+
+    The labels are integers corresponding to the index of the block. Also
+    returns the coordinates of the center of each block (following the same
+    index as the labels).
+
+    Uses :class:`scipy.spatial.KDTree` to nearest neighbor lookup during the
+    splitting process.
+
+    Parameters
+    ----------
+    coordinates : tuple = (longitude, latitude)
+        Tuple of arrays with the longitude and latitude coordinates of each
+        point. Arrays can be Python lists or any numpy-compatible array type.
+        Arrays can be of any shape but must all have the same shape.
+    block_size : float
+        The latitudinal block size in decimal degrees. The longitudinal block
+        size is adjusted to retain equal area between blocks. Must be > 0.
+    region : tuple = (W, E, S, N)
+        The boundaries of a given region in geographic coordinates. Should have
+        a lower and an upper boundary for each dimension of the coordinate
+        system. If region is not given, will use the bounding region of the
+        given coordinates.
+
+    Returns
+    -------
+    block_coordinates : tuple = (longitude, latitude)
+        1D arrays with the coordinates of the center of each block.
+    labels : array
+        Array with the same shape as the input coordinates. Contains the
+        integer block label for each data point. The label is the index of the
+        block to which that point belongs.
+
+    Notes
+    -----
+    Uses the method of [Malkin2016]_ to divide the region into blocks of equal
+    area. The blocks will have the specified *block_size* in latitude but their
+    longitudinal dimensions will be adjusted to account for the convergence of
+    meridians at the poles.
+
+    Examples
+    --------
+    Let's make some points along a 2D grid spanning the entire globe to try
+    splitting (the points don't have to be on a grid but this makes it easier
+    to explain):
+
+    >>> import bordado as bd
+    >>> coordinates = bd.grid_coordinates((0, 360, -90, 90), spacing=30)
+    >>> print(coordinates[0].shape)
+    (7, 13)
+    >>> print(coordinates[0])
+    [[  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]
+     [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]
+     [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]
+     [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]
+     [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]
+     [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]
+     [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]]
+    >>> print(coordinates[1])
+    [[-90. -90. -90. -90. -90. -90. -90. -90. -90. -90. -90. -90. -90.]
+     [-60. -60. -60. -60. -60. -60. -60. -60. -60. -60. -60. -60. -60.]
+     [-30. -30. -30. -30. -30. -30. -30. -30. -30. -30. -30. -30. -30.]
+     [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.]
+     [ 30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.]
+     [ 60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.]
+     [ 90.  90.  90.  90.  90.  90.  90.  90.  90.  90.  90.  90.  90.]]
+
+    We can split into blocks of equal area on the sphere by specifying the
+    latitudinal block size in degrees:
+
+    >>> block_coords, labels = block_split_spherical(coordinates, block_size=60)
+
+    The first argument is a tuple of coordinates for the center of each block:
+
+    >>> print(len(block_coords))
+    2
+    >>> print("Longitude:", block_coords[0])
+    Longitude: [ 60. 180. 300.  30.  90. 150. 210. 270. 330.  60. 180. 300.]
+    >>> print("Latitude:", block_coords[1])
+    Latitude: [-60. -60. -60.   0.   0.   0.   0.   0.   0.  60.  60.  60.]
+
+    Notice that there are more blocks on the band centered at 0 latitude than
+    at the bands at -60 and 60. This is to take into account the convergence of
+    meridians towards the poles. Increasing the longitudinal size of the blocks
+    towards the poles keeps the area of each block roughly equal.
+
+    The labels are an array of the same shape as the coordinates and has the
+    index of the block each point belongs to:
+
+    >>> print(labels)
+    [[ 0  0  0  0  0  1  1  1  1  2  2  2  0]
+     [ 0  0  0  0  0  1  1  1  1  2  2  2  0]
+     [ 0  0  0  0  0  1  1  1  1  2  2  2  0]
+     [ 3  3  3  4  4  5  5  6  6  7  7  8  3]
+     [ 3  3  3  4  4  5  5  6  6  7  7  8  3]
+     [ 9  9  9  9  9 10 10 10 10 11 11 11  9]
+     [ 9  9  9  9  9 10 10 10 10 11 11 11  9]]
+
+    Notice that the blocks of the last column are the same as the first column.
+    This is because our grid has repeated points at 0 and 360 longitude (which
+    are the same point).
+
+    Use the labels to index the coordinates, for example to get all points that
+    fall inside the block with index 5:
+
+    >>> block_5 = [c[labels == 5] for c in coordinates]
+    >>> print(block_5[0])
+    [150. 180. 150. 180.]
+    >>> print(block_5[1])
+    [ 0.  0. 30. 30.]
+
+    The region is extracted from the input coordinates by default. This can be
+    a problem in some cases, for example if our input grid is
+    :ref:`pixel registered <pixel_registration>`:
+
+    >>> coordinates = bd.grid_coordinates(
+    ...     (0, 360, -90, 90), spacing=30, pixel_register=True,
+    ... )
+    >>> print(coordinates[0].shape)
+    (6, 12)
+    >>> print(coordinates[0])
+    [[ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]
+     [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]
+     [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]
+     [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]
+     [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]
+     [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]]
+    >>> print(coordinates[1])
+    [[-75. -75. -75. -75. -75. -75. -75. -75. -75. -75. -75. -75.]
+     [-45. -45. -45. -45. -45. -45. -45. -45. -45. -45. -45. -45.]
+     [-15. -15. -15. -15. -15. -15. -15. -15. -15. -15. -15. -15.]
+     [ 15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.]
+     [ 45.  45.  45.  45.  45.  45.  45.  45.  45.  45.  45.  45.]
+     [ 75.  75.  75.  75.  75.  75.  75.  75.  75.  75.  75.  75.]]
+
+    Splitting these points with the default arguments would lead to block
+    coordinates that don't span the entire globe:
+
+    >>> block_coords, labels = block_split_spherical(coordinates, block_size=60)
+    >>> print("Longitude:", block_coords[0])
+    Longitude: [ 56.25 138.75 221.25 303.75  56.25 138.75 221.25 303.75]
+    >>> print("Latitude:", block_coords[1])
+    Latitude: [-37.5 -37.5 -37.5 -37.5  37.5  37.5  37.5  37.5]
+
+    The latitudinal block sizes had to be adjusted to fit the data region, which
+    leads to these uneven coordinates even when our grid spacing and block size
+    are multiples of 180.
+
+    To keep the blocks in the entire global range, we can pass the ``region``
+    argument:
+
+    >>> block_coords, labels = block_split_spherical(
+    ...     coordinates, block_size=60, region=(0, 360, -90, 90),
+    ... )
+    >>> print("Longitude:", block_coords[0])
+    Longitude: [ 60. 180. 300.  30.  90. 150. 210. 270. 330.  60. 180. 300.]
+    >>> print("Latitude:", block_coords[1])
+    Latitude: [-60. -60. -60.   0.   0.   0.   0.   0.   0.  60.  60.  60.]
+    >>> print(labels)
+    [[ 0  0  0  0  1  1  1  1  2  2  2  2]
+     [ 0  0  0  0  1  1  1  1  2  2  2  2]
+     [ 3  3  4  4  5  5  6  6  7  7  8  8]
+     [ 3  3  4  4  5  5  6  6  7  7  8  8]
+     [ 9  9  9  9 10 10 10 10 11 11 11 11]
+     [ 9  9  9  9 10 10 10 10 11 11 11 11]]
+
+    This way, the blocks span the entire globe and the labels show that the
+    split is nice and even inside the latitudinal bands.
+    """
+    if block_size <= 0:
+        message = f"Invalid block size '{block_size}'. Must be > 0."
+        raise ValueError(message)
+    coordinates = check_coordinates(coordinates)
+    check_coordinates_geographic(coordinates)
+    if region is None:
+        region = get_region(coordinates)
+    check_region_geographic(region)
+    region, coordinates = longitude_continuity(region, coordinates=coordinates)
+    # Centers of the latitudinal bands
+    bands = line_coordinates(
+        region[2],
+        region[3],
+        spacing=block_size,
+        adjust="spacing",
+        pixel_register=True,
+    )
+    # Store the block coordinates to concatenate them later.
+    longitude, latitude = [], []
+    # Keep track of which points are used to avoid having duplicates at the
+    # edges of bands.
+    used = np.full(coordinates[0].shape, False)
+    # Allocate the labels so we can fill it out in the right order.
+    labels = np.empty(coordinates[0].shape, dtype="int")
+    for central_latitude in bands:
+        # Figure out the size in longitude that leads to equal area. See Malkin
+        # (2016).
+        block_size_lon = block_size / np.cos(np.radians(central_latitude))
+        band_longitude = line_coordinates(
+            region[0],
+            region[1],
+            spacing=block_size_lon,
+            adjust="spacing",
+            pixel_register=True,
+        )
+        band_latitude = np.full_like(band_longitude, central_latitude)
+        # Make a KD tree with points only in this band. Since blocks are
+        # different sizes in longitude, using all bands in the same KD tree
+        # wouldn't work because points would be wrongly assigned to blocks at
+        # lower latitudes.
+        latitude_min = central_latitude - block_size / 2
+        latitude_max = central_latitude + block_size / 2
+        in_band = np.logical_and(
+            np.logical_not(used),
+            np.logical_and(
+                coordinates[1] >= latitude_min,
+                coordinates[1] <= latitude_max,
+            ),
+        )
+        in_band_coordinates = [c[in_band].ravel() for c in coordinates]
+        tree = KDTree(np.transpose([band_longitude, band_latitude]))
+        in_band_labels = tree.query(np.transpose(in_band_coordinates))[1]
+        # Shift the labels so they account for previous bands
+        in_band_labels += sum(len(i) for i in longitude)
+        labels[in_band] = in_band_labels
+        longitude.append(band_longitude)
+        latitude.append(band_latitude)
+        used += in_band
+    # Join results from all bands
+    latitude = np.concatenate(latitude)
+    longitude = np.concatenate(longitude)
+    block_coordinates = (longitude, latitude)
+    return block_coordinates, labels
 
 
 def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="overlap"):

@@ -120,8 +120,8 @@ The indexing is useful for calculating things like block means and other statist
     print(points_per_block)
 
 
-Splitting into overlapping windows
-----------------------------------
+Splitting into overlapping (rolling) windows
+--------------------------------------------
 
 In case we split points into blocks, but we want the blocks to overlap, the
 operation is called a **rolling window**. Bordado implements this operation in
@@ -217,10 +217,10 @@ Notice that there is overlap and 50% (the chosen ``overlap``) of the points
 belong to both windows.
 
 
-Rolling windows on the sphere
------------------------------
+Spatial blocks on the sphere
+----------------------------
 
-The rolling window strategy won't work well for geographic data since windows
+The splitting strategies we've seen so far won't work well for geographic data since blocks and windows
 will get smaller and smaller towards the poles because of the convergence of
 meridians.
 To demonstrate this, let's first make some random points that are uniformly distributed on the sphere with :func:`bordado.random_coordinates_spherical`:
@@ -235,8 +235,144 @@ To demonstrate this, let's first make some random points that are uniformly dist
     fig.plot(x=coordinates[0], y=coordinates[1], style="c0.1c", fill="seagreen")
     fig.show()
 
-Now, we'll split them into 30° windows with 50% overlap using the standard
-:func:`~bordado.rolling_window` and plot the window centers:
+Now we can split them into 30° blocks in both longitude and latitude using the
+standard :func:`bordado.block_split`:
+
+.. jupyter-execute::
+
+    block_coordinates, labels = bd.block_split(coordinates, block_size=30)
+
+    fig = pygmt.Figure()
+    fig.coast(land="#cccccc", region="g", projection="W0/20c")
+    fig.plot(
+        x=coordinates[0],
+        y=coordinates[1],
+        style="c0.1c",
+        fill=labels,
+        cmap="gmt/categorical",
+    )
+    fig.plot(
+        x=block_coordinates[0].ravel(),
+        y=block_coordinates[1].ravel(),
+        style="a0.5c",
+        fill="black",
+        frame="af",
+    )
+    fig.show()
+
+Notice that the blocks get closer together as we go from the equator to the
+poles. This means that the number of points in each block is not equal. Let's
+calculate the number of points per block and plot that against the block
+latitude to illustrate:
+
+.. jupyter-execute::
+
+    points_per_block = [
+        coordinates[0][labels == i].size
+        for i in range(block_coordinates[0].size)
+    ]
+    block_latitude = block_coordinates[1].ravel()
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 5), layout="constrained")
+    ax.plot(block_latitude, points_per_block, ".")
+    ax.set_xlabel("Block latitude")
+    ax.set_ylabel("Points per block")
+    ax.grid()
+    plt.show()
+
+Remember that the points are evenly distributed on the sphere so we don't expect
+any trend towards the poles. But what we see is exactly that. There are fewer
+points per block towards the poles.
+
+To get around this, we can increase the longitudinal block size as a function of
+the latitude to counteract the convergence of the meridians.
+That's what :func:`bordado.block_split_spherical` does!
+
+.. jupyter-execute::
+
+    block_coordinates, labels = bd.block_split_spherical(
+        coordinates, block_size=30,
+    )
+    print(labels)
+
+The output is very similar to the standard :func:`~bordado.block_split`. The
+labels correspond to the index of the block to which that data point belongs.
+But this time, the block coordinates will always be 1D arrays since they are not
+regularly distributed:
+
+.. jupyter-execute::
+
+    print("Block longitudes:", block_coordinates[0])
+    print("Block latitudes:", block_coordinates[1])
+
+.. note::
+
+    Notice that the latitudinal spacing between block centers isn't exactly
+    30°. This is because the region that is split into blocks is inferred from
+    the ``coordinates`` (using :func:`bordado.get_region`) and the block size
+    ended up getting adjusted to fit the region. To get exactly global coverage
+    or a particular region, pass the ``region`` argument.
+
+Plotting the points and their labels for comparison yields:
+
+.. jupyter-execute::
+
+    fig = pygmt.Figure()
+    fig.coast(land="#cccccc", region="g", projection="W0/20c")
+    fig.plot(
+        x=coordinates[0],
+        y=coordinates[1],
+        style="c0.1c",
+        fill=labels,
+        cmap="gmt/categorical",
+    )
+    fig.plot(
+        x=block_coordinates[0],
+        y=block_coordinates[1],
+        style="a0.5c",
+        fill="black",
+        frame="af",
+    )
+    fig.show()
+
+We can see that the block coordinates are no longer converging towards the poles
+and that there are fewer blocks than the standard version. To help quantify
+this, we can do the same points-per-block calculation from earlier and compare
+both methods:
+
+.. jupyter-execute::
+
+    points_per_block_spherical = [
+        coordinates[0][labels == i].size
+        for i in range(block_coordinates[0].size)
+    ]
+    block_latitude_spherical = block_coordinates[1].ravel()
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 5), layout="constrained")
+    ax.plot(block_latitude, points_per_block, ".", label="Regular")
+    ax.plot(
+        block_latitude_spherical,
+        points_per_block_spherical,
+        "*",
+        label="Spherical",
+    )
+    ax.set_xlabel("Block latitude")
+    ax.set_ylabel("Points per block")
+    ax.grid()
+    ax.legend()
+    plt.show()
+
+Notice that the spherical version keeps the points per block relatively constant
+with latitude, which is what we wanted.
+
+
+Rolling windows on the sphere
+-----------------------------
+
+The same logic from splitting into spherical blocks can be applied to the
+rolling windows.
+Let's first split our random data into 30° windows with 50% overlap using the
+standard :func:`~bordado.rolling_window` and plot the window centers:
 
 .. jupyter-execute::
 

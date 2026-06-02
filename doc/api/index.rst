@@ -46,6 +46,7 @@ Splitting points into blocks and windows
     :toctree: generated/
 
     block_split
+    block_split_spherical
     expanding_window
     rolling_window
     rolling_window_spherical
