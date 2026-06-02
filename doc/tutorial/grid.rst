@@ -184,6 +184,8 @@ directions to accommodate the chosen spacing. The center point is where both
 grids align.
 
 
+.. _pixel_registration:
+
 Pixel registration
 ------------------
 
