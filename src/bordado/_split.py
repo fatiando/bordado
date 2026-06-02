@@ -307,6 +307,13 @@ def block_split_spherical(coordinates, block_size, *, region=None):
         integer block label for each data point. The label is the index of the
         block to which that point belongs.
 
+    Notes
+    -----
+    Uses the method of [Malkin2016]_ to divide the region into blocks of equal
+    area. The blocks will have the specified *block_size* in latitude but their
+    longitudinal dimensions will be adjusted to account for the convergence of
+    meridians at the poles.
+
     Examples
     --------
     Let's make some points along a 2D grid spanning the entire globe to try
