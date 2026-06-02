@@ -267,6 +267,118 @@ def block_split(
     return block_coordinates, labels.reshape(coordinates[0].shape)
 
 
+def block_split_spherical(coordinates, block_size, *, region=None):
+    """
+    Split a geographic region into blocks and label points according blocks.
+
+    The blocks have a fixed size in latitude but their longitudinal size is
+    adjusted to keep the area of each block constant. This compensates the
+    decrease in area as meridians converge towards the poles. This means that
+    **the blocks are not evenly distributed on the sphere**.
+
+    The labels are integers corresponding to the index of the block. Also
+    returns the coordinates of the center of each block (following the same
+    index as the labels).
+
+    Uses :class:`scipy.spatial.KDTree` to nearest neighbor lookup during the
+    splitting process.
+
+    Parameters
+    ----------
+    coordinates : tuple = (longitude, latitude)
+        Tuple of arrays with the longitude and latitude coordinates of each
+        point. Arrays can be Python lists or any numpy-compatible array type.
+        Arrays can be of any shape but must all have the same shape.
+    block_size : float
+        The latitudinal block size in decimal degrees. The longitudinal block
+        size is adjusted to retain equal area between blocks. Must be > 0.
+    region : tuple = (W, E, S, N)
+        The boundaries of a given region in geographic coordinates. Should have
+        a lower and an upper boundary for each dimension of the coordinate
+        system. If region is not given, will use the bounding region of the
+        given coordinates.
+
+    Returns
+    -------
+    block_coordinates : tuple = (longitude, latitude)
+        1D arrays with the coordinates of the center of each block.
+    labels : array
+        Array with the same shape as the input coordinates. Contains the
+        integer block label for each data point. The label is the index of the
+        block to which that point belongs.
+
+    Examples
+    --------
+    Let's make some points along a 2D grid to try splitting (the points don't
+    have to be on a grid but this makes it easier to explain):
+
+
+    """
+    if block_size <= 0:
+        message = f"Invalid block size '{block_size}'. Must be > 0."
+        raise ValueError(message)
+    coordinates = check_coordinates(coordinates)
+    check_coordinates_geographic(coordinates)
+    if region is None:
+        region = get_region(coordinates)
+    check_region_geographic(region)
+    region, coordinates = longitude_continuity(region, coordinates=coordinates)
+    # Centers of the latitudinal bands
+    bands = line_coordinates(
+        region[2],
+        region[3],
+        spacing=block_size,
+        adjust="spacing",
+        pixel_register=True,
+    )
+    # Store the block coordinates to concatenate them later.
+    longitude, latitude = [], []
+    # Keep track of which points are used to avoid having duplicates at the
+    # edges of bands.
+    used = np.full(coordinates[0].shape, False)
+    # Allocate the labels so we can fill it out in the right order.
+    labels = np.empty(coordinates[0].shape, dtype="int")
+    for central_latitude in bands:
+        # Figure out the size in longitude that leads to equal area. See Malkin
+        # (2016).
+        block_size_lon = block_size / np.cos(np.radians(central_latitude))
+        band_longitude = line_coordinates(
+            region[0],
+            region[1],
+            spacing=block_size_lon,
+            adjust="spacing",
+            pixel_register=True,
+        )
+        band_latitude = np.full_like(band_longitude, central_latitude)
+        # Make a KD tree with points only in this band. Since blocks are
+        # different sizes in longitude, using all bands in the same KD tree
+        # wouldn't work because points would be wrongly assigned to blocks at
+        # lower latitudes.
+        latitude_min = central_latitude - block_size / 2
+        latitude_max = central_latitude + block_size / 2
+        in_band = np.logical_and(
+            np.logical_not(used),
+            np.logical_and(
+                coordinates[1].ravel() >= latitude_min,
+                coordinates[1].ravel() <= latitude_max,
+            ),
+        )
+        in_band_coordinates = [c.ravel()[in_band] for c in coordinates]
+        tree = KDTree(np.transpose([band_longitude, band_latitude]))
+        in_band_labels = tree.query(np.transpose(in_band_coordinates))[1]
+        # Shift the labels so they account for previous bands
+        in_band_labels += sum(len(i) for i in longitude)
+        labels[in_band] = in_band_labels
+        longitude.append(band_longitude)
+        latitude.append(band_latitude)
+        used += in_band
+    # Join results from all bands
+    latitude = np.concatenate(latitude)
+    longitude = np.concatenate(longitude)
+    block_coordinates = (longitude, latitude)
+    return block_coordinates, labels
+
+
 def rolling_window(coordinates, window_size, overlap, *, region=None, adjust="overlap"):
     """
     Split points into overlapping windows.

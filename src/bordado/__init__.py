@@ -16,6 +16,7 @@ from ._random import random_coordinates, random_coordinates_spherical
 from ._region import get_region, inside, pad_region
 from ._split import (
     block_split,
+    block_split_spherical,
     expanding_window,
     rolling_window,
     rolling_window_spherical,
