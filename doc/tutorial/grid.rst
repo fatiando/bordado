@@ -273,6 +273,12 @@ sets:
 Just like the case for grid-node registered coordinates, the middle point is the
 same for both grids, but their spacings are different.
 
+.. seealso::
+
+    Grid registration is an important parameter to know when dealing with real
+    data since it affects plotting and calculations. Read more about it in
+    `this NOAA tutorial <https://www.ncei.noaa.gov/products/grid-cell-registration>`__.
+
 
 Multidimensional grids and meshes
 ---------------------------------
