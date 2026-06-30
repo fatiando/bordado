@@ -10,6 +10,8 @@ nuances to this. Let's see all the different ways it can be done.
 .. jupyter-execute::
 
     import bordado as bd
+    import numpy as np
+    import matplotlib.pyplot as plt
 
 
 Specifying the number of values
@@ -71,12 +73,26 @@ adjust the region instead:
 
 .. jupyter-execute::
 
-    values = bd.line_coordinates(0, 10, spacing=0.6, adjust="region")
+    values_region = bd.line_coordinates(0, 10, spacing=0.6, adjust="region")
     print(values)
 
 This same logic also applies to multidimensional sets of values or coordinates,
 for example those belonging to :ref:`regular grids <tutorial_grid>`.
 
+Let's make a quick plot of both sets of numbers so we can see what the
+difference is:
+
+.. jupyter-execute::
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 3), layout="constrained")
+    ax.plot(values, np.full_like(values, -1), "^")
+    ax.plot(values_region, np.full_like(values_region, 1), "v")
+    ax.set_ylim(-4, 4)
+    ax.set_yticks([-1, 1])
+    ax.set_yticklabels(["Spacing", "Region"])
+    ax.set_xticks(np.arange(0, 10.01, 0.5))
+    ax.grid(axis="x", linestyle="--")
+    plt.show()
 
 Pixel registration
 ------------------
@@ -98,6 +114,20 @@ we're calculating the number of intervals instead of the number of borders:
 .. jupyter-execute::
 
     print(values.size, values_pixel.size)
+
+Putting both arrays in a plot looks like this:
+
+.. jupyter-execute::
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 3), layout="constrained")
+    ax.plot(values, np.full_like(values, -1), "^")
+    ax.plot(values_pixel, np.full_like(values_pixel, 1), "v")
+    ax.set_ylim(-4, 4)
+    ax.set_yticks([-1, 1])
+    ax.set_yticklabels(["Regular", "Pixel"])
+    ax.set_xticks(np.arange(0, 10.01, 0.5))
+    ax.grid(axis="x", linestyle="--")
+    plt.show()
 
 The logic for adjusting the region or the spacing remains the same for pixel
 registration:
