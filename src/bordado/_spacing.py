@@ -10,7 +10,7 @@ Functions to extract and manipulate point spacing information.
 
 import numpy as np
 
-from ._validation import check_adjust, check_region, check_shape, check_coordinates
+from ._validation import check_adjust, check_coordinates, check_region, check_shape
 
 
 def get_spacing(coordinates, tol=1e-5):
@@ -61,8 +61,20 @@ def get_spacing(coordinates, tol=1e-5):
         )
         raise ValueError(message)
     spacing = []
-    for coord in coordinates:
-
+    for i, coordinate in enumerate(reversed(coordinates)):
+        difference = np.diff(coordinate, axis=i)
+        this_spacing = difference.ravel()[0]
+        if np.allclose(difference, this_spacing, atol=0, rtol=tol):
+            spacing.append(this_spacing)
+        else:
+            message = (
+                f"Coordinates along axis {i} of coordinate {i} are not evenly "
+                f"spaced within tolerance {tol}."
+            )
+            raise ValueError(message)
+    if np.allclose(spacing, spacing[0], atol=0, rtol=tol):
+        spacing = spacing[0]
+    return spacing
 
 
 def spacing_to_size(start, stop, spacing, *, adjust="spacing"):
