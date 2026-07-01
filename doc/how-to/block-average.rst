@@ -41,7 +41,7 @@ touching the data.
         bd.get_region((data.longitude, data.latitude)),
         pad=(5 / 3600, 3 / 3600),
     )
-    region
+    print(region)
 
 Let's plot the data with :mod:`pygmt` to see what we've got:
 

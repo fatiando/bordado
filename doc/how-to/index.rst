@@ -19,6 +19,7 @@ the ":ref:`tutorial`" first.
     pad-region.rst
     inside.rst
     rotate.rst
+    rescale.rst
     block-average.rst
 
 .. seealso::
