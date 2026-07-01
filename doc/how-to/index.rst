@@ -16,6 +16,7 @@ the ":ref:`tutorial`" first.
     :caption: Contents
 
     get-region.rst
+    median-distance.rst
     pad-region.rst
     inside.rst
     rotate.rst
