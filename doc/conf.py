@@ -45,6 +45,7 @@ intersphinx_mapping = {
     "matplotlib": ("https://matplotlib.org/stable/", None),
     "pygmt": ("https://www.pygmt.org/latest/", None),
     "ensaio": ("https://www.fatiando.org/ensaio/latest/", None),
+    "verde": ("https://www.fatiando.org/verde/latest/", None),
     "pandas": ("https://pandas.pydata.org/docs/", None),
 }
 
