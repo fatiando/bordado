@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     
         <title>bordado.expanding_window | Bordado dev</title>
@@ -60,7 +60,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="bordado.rolling_window" href="bordado.rolling_window.html" />
-    <link rel="prev" title="bordado.block_split" href="bordado.block_split.html" />
+    <link rel="prev" title="bordado.block_split_spherical" href="bordado.block_split_spherical.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -167,8 +167,28 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="current nav bd-sidenav">
@@ -179,16 +199,20 @@
 <li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
@@ -203,6 +227,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -440,14 +465,14 @@ have to be expanding in size (the sizes can be in any order).</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
 Python lists or any numpy-compatible array type. Arrays can be of any
 shape but must all have the same shape.</p>
 </dd>
-<dt><strong>center</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>The coordinates of the center of the window. Must have the same number
+<dt><strong>center</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>The coordinates of the center of the window. Must have the same number
 of elements as <em>coordinates</em>. Coordinates <strong>cannot be arrays</strong>.</p>
 </dd>
-<dt><strong>sizes</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>The sizes of the windows. Does not have to be in any particular order.
+<dt><strong>sizes</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>The sizes of the windows. Does not have to be in any particular order.
 The order of indices returned will match the order of window sizes
 given. Units should match the units of <em>coordinates</em> and <em>center</em>.</p>
 </dd>
@@ -455,7 +480,7 @@ given. Units should match the units of <em>coordinates</em> and <em>center</em>.
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></span></dt><dd><p>Each element of the list corresponds to the indices of points falling
+<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></span></dt><dd><p>Each element of the list corresponds to the indices of points falling
 inside a window. Use them to index the coordinates for each window. The
 indices will depend on the number of dimensions in the input
 coordinates. For example, if the coordinates are 2D arrays, each window
@@ -636,12 +661,12 @@ still in a tuple, though):</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bordado.block_split.html"
+       href="bordado.block_split_spherical.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">bordado.block_split</p>
+        <p class="prev-next-title">bordado.block_split_spherical</p>
       </div>
     </a>
     <a class="right-next"
@@ -690,7 +715,7 @@ still in a tuple, though):</p>
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -699,7 +724,7 @@ still in a tuple, though):</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Jul 02, 2026.
   <br/>
 </p>
   </div>

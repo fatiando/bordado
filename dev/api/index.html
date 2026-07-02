@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     
         <title>List of functions and classes (API) | Bordado dev</title>
@@ -60,7 +60,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="bordado.line_coordinates" href="generated/bordado.line_coordinates.html" />
-    <link rel="prev" title="Installing" href="../install.html" />
+    <link rel="prev" title="6. Calculate data averages in blocks" href="../how-to/block-average.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -167,8 +167,28 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="current nav bd-sidenav">
@@ -179,16 +199,20 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing Bordado</a></li>
@@ -203,6 +227,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -417,9 +442,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-generation">Coordinate generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-transformation">Coordinate transformation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-and-bounding-boxes">Regions and bounding boxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-and-mesh-point-spacing">Grid and mesh point spacing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-points-into-blocks-and-windows">Splitting points into blocks and windows</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-utilities">Other utilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-operations">Distance operations</a></li>
 </ul>
             </nav>
         </div>
@@ -460,6 +487,20 @@ document.write(`
 </table>
 </div>
 </section>
+<section id="coordinate-transformation">
+<h2>Coordinate transformation<a class="headerlink" href="#coordinate-transformation" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.rescale_coordinates.html#bordado.rescale_coordinates" title="bordado.rescale_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rescale_coordinates</span></code></a>(coordinates, region)</p></td>
+<td><p>Rescale the coordinate values to fit the given region.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.rotate_coordinates.html#bordado.rotate_coordinates" title="bordado.rotate_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_coordinates</span></code></a>(coordinates, angle, *[, ...])</p></td>
+<td><p>Rotate coordinates in 2-dimensional space.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="regions-and-bounding-boxes">
 <h2>Regions and bounding boxes<a class="headerlink" href="#regions-and-bounding-boxes" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
@@ -477,6 +518,23 @@ document.write(`
 </table>
 </div>
 </section>
+<section id="grid-and-mesh-point-spacing">
+<h2>Grid and mesh point spacing<a class="headerlink" href="#grid-and-mesh-point-spacing" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.get_spacing.html#bordado.get_spacing" title="bordado.get_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spacing</span></code></a>(coordinates[, tol])</p></td>
+<td><p>Determine the point spacing from a set of coordinates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.spacing_to_size.html#bordado.spacing_to_size" title="bordado.spacing_to_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spacing_to_size</span></code></a>(start, stop, spacing, *[, ...])</p></td>
+<td><p>Convert a spacing to the number of points between start and stop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.shape_to_spacing.html#bordado.shape_to_spacing" title="bordado.shape_to_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape_to_spacing</span></code></a>(region, shape, *[, ...])</p></td>
+<td><p>Calculate the spacing of a regular grid given a region and shape.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="splitting-points-into-blocks-and-windows">
 <h2>Splitting points into blocks and windows<a class="headerlink" href="#splitting-points-into-blocks-and-windows" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
@@ -484,31 +542,28 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.block_split.html#bordado.block_split" title="bordado.block_split"><code class="xref py py-obj docutils literal notranslate"><span class="pre">block_split</span></code></a>(coordinates, *[, region, ...])</p></td>
 <td><p>Split a region into blocks and label points according to where they fall.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.expanding_window.html#bordado.expanding_window" title="bordado.expanding_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding_window</span></code></a>(coordinates, center, sizes)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.block_split_spherical.html#bordado.block_split_spherical" title="bordado.block_split_spherical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">block_split_spherical</span></code></a>(coordinates, block_size, *)</p></td>
+<td><p>Split a geographic region into blocks and label points according blocks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.expanding_window.html#bordado.expanding_window" title="bordado.expanding_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding_window</span></code></a>(coordinates, center, sizes)</p></td>
 <td><p>Select points on windows of expanding size around a center point.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.rolling_window.html#bordado.rolling_window" title="bordado.rolling_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_window</span></code></a>(coordinates, window_size, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.rolling_window.html#bordado.rolling_window" title="bordado.rolling_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_window</span></code></a>(coordinates, window_size, ...)</p></td>
 <td><p>Split points into overlapping windows.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.rolling_window_spherical.html#bordado.rolling_window_spherical" title="bordado.rolling_window_spherical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_window_spherical</span></code></a>(coordinates, ...[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.rolling_window_spherical.html#bordado.rolling_window_spherical" title="bordado.rolling_window_spherical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling_window_spherical</span></code></a>(coordinates, ...[, ...])</p></td>
 <td><p>Split points into overlapping equal area windows on the sphere.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="other-utilities">
-<h2>Other utilities<a class="headerlink" href="#other-utilities" title="Link to this heading">#</a></h2>
+<section id="distance-operations">
+<h2>Distance operations<a class="headerlink" href="#distance-operations" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.neighbor_distance_statistics.html#bordado.neighbor_distance_statistics" title="bordado.neighbor_distance_statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbor_distance_statistics</span></code></a>(coordinates, ...)</p></td>
 <td><p>Calculate statistics of the distances to the k-nearest neighbors of points.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/bordado.spacing_to_size.html#bordado.spacing_to_size" title="bordado.spacing_to_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spacing_to_size</span></code></a>(start, stop, spacing, *[, ...])</p></td>
-<td><p>Convert a spacing to the number of points between start and stop.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/bordado.shape_to_spacing.html#bordado.shape_to_spacing" title="bordado.shape_to_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape_to_spacing</span></code></a>(region, shape, *[, ...])</p></td>
-<td><p>Calculate the spacing of a regular grid given a region and shape.</p></td>
 </tr>
 </tbody>
 </table>
@@ -528,12 +583,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../install.html"
+       href="../how-to/block-average.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Installing</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Calculate data averages in blocks</p>
       </div>
     </a>
     <a class="right-next"
@@ -562,9 +617,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-generation">Coordinate generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-transformation">Coordinate transformation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regions-and-bounding-boxes">Regions and bounding boxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-and-mesh-point-spacing">Grid and mesh point spacing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-points-into-blocks-and-windows">Splitting points into blocks and windows</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-utilities">Other utilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-operations">Distance operations</a></li>
 </ul>
   </nav></div>
 
@@ -585,7 +642,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -594,7 +651,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Jul 02, 2026.
   <br/>
 </p>
   </div>

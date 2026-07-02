@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    
+        <title>bordado.block_split_spherical | Bordado dev</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12168cd1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/bordado.block_split_spherical';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bordado.expanding_window" href="bordado.expanding_window.html" />
+    <link rel="prev" title="bordado.block_split" href="bordado.block_split.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bordado <span class="project-version">dev</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">List of functions and classes (API)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bordado.line_coordinates.html">bordado.line_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.inside.html">bordado.inside</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.get_region.html">bordado.get_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">bordado.block_split_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.expanding_window.html">bordado.expanding_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/edit/main/doc/api/generated/bordado.block_split_spherical.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2Fapi/generated/bordado.block_split_spherical.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/api/generated/bordado.block_split_spherical.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>bordado.block_split_spherical</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.block_split_spherical"><code class="docutils literal notranslate"><span class="pre">block_split_spherical</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="bordado-block-split-spherical">
+<h1>bordado.block_split_spherical<a class="headerlink" href="#bordado-block-split-spherical" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="bordado.block_split_spherical">
+<span class="sig-prename descclassname"><span class="pre">bordado.</span></span><span class="sig-name descname"><span class="pre">block_split_spherical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/bordado/_split.html#block_split_spherical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bordado.block_split_spherical" title="Link to this definition">#</a></dt>
+<dd><p>Split a geographic region into blocks and label points according blocks.</p>
+<p>The blocks have a fixed size in latitude but their longitudinal size is
+adjusted to keep the area of each block constant. This compensates the
+decrease in area as meridians converge towards the poles. This means that
+<strong>the blocks are not evenly distributed on the sphere</strong>.</p>
+<p>The labels are integers corresponding to the index of the block. Also
+returns the coordinates of the center of each block (following the same
+index as the labels).</p>
+<p>Uses <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.KDTree.html#scipy.spatial.KDTree" title="(in SciPy v1.18.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.spatial.KDTree</span></code></a> to nearest neighbor lookup during the
+splitting process.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">longitude</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">latitude</span></code>)</span></dt><dd><p>Tuple of arrays with the longitude and latitude coordinates of each
+point. Arrays can be Python lists or any numpy-compatible array type.
+Arrays can be of any shape but must all have the same shape.</p>
+</dd>
+<dt><strong>block_size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The latitudinal block size in decimal degrees. The longitudinal block
+size is adjusted to retain equal area between blocks. Must be &gt; 0.</p>
+</dd>
+<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>)</span></dt><dd><p>The boundaries of a given region in geographic coordinates. Should have
+a lower and an upper boundary for each dimension of the coordinate
+system. If region is not given, will use the bounding region of the
+given coordinates.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>block_coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">longitude</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">latitude</span></code>)</span></dt><dd><p>1D arrays with the coordinates of the center of each block.</p>
+</dd>
+<dt><strong>labels</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>Array with the same shape as the input coordinates. Contains the
+integer block label for each data point. The label is the index of the
+block to which that point belongs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Uses the method of <a class="reference internal" href="../../references.html#malkin2016" id="id1"><span>[Malkin2016]</span></a> to divide the region into blocks of equal
+area. The blocks will have the specified <em>block_size</em> in latitude but their
+longitudinal dimensions will be adjusted to account for the convergence of
+meridians at the poles.</p>
+<p class="rubric">Examples</p>
+<p>Let’s make some points along a 2D grid spanning the entire globe to try
+splitting (the points don’t have to be on a grid but this makes it easier
+to explain):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">bordado</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(7, 13)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">[[  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]</span>
+<span class="go"> [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]</span>
+<span class="go"> [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]</span>
+<span class="go"> [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]</span>
+<span class="go"> [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]</span>
+<span class="go"> [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]</span>
+<span class="go"> [  0.  30.  60.  90. 120. 150. 180. 210. 240. 270. 300. 330. 360.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">[[-90. -90. -90. -90. -90. -90. -90. -90. -90. -90. -90. -90. -90.]</span>
+<span class="go"> [-60. -60. -60. -60. -60. -60. -60. -60. -60. -60. -60. -60. -60.]</span>
+<span class="go"> [-30. -30. -30. -30. -30. -30. -30. -30. -30. -30. -30. -30. -30.]</span>
+<span class="go"> [  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.]</span>
+<span class="go"> [ 30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.  30.]</span>
+<span class="go"> [ 60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.  60.]</span>
+<span class="go"> [ 90.  90.  90.  90.  90.  90.  90.  90.  90.  90.  90.  90.  90.]]</span>
+</pre></div>
+</div>
+<p>We can split into blocks of equal area on the sphere by specifying the
+latitudinal block size in degrees:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">block_coords</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">block_split_spherical</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first argument is a tuple of coordinates for the center of each block:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">block_coords</span><span class="p">))</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Longitude:&quot;</span><span class="p">,</span> <span class="n">block_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">Longitude: [ 60. 180. 300.  30.  90. 150. 210. 270. 330.  60. 180. 300.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Latitude:&quot;</span><span class="p">,</span> <span class="n">block_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">Latitude: [-60. -60. -60.   0.   0.   0.   0.   0.   0.  60.  60.  60.]</span>
+</pre></div>
+</div>
+<p>Notice that there are more blocks on the band centered at 0 latitude than
+at the bands at -60 and 60. This is to take into account the convergence of
+meridians towards the poles. Increasing the longitudinal size of the blocks
+towards the poles keeps the area of each block roughly equal.</p>
+<p>The labels are an array of the same shape as the coordinates and has the
+index of the block each point belongs to:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="go">[[ 0  0  0  0  0  1  1  1  1  2  2  2  0]</span>
+<span class="go"> [ 0  0  0  0  0  1  1  1  1  2  2  2  0]</span>
+<span class="go"> [ 0  0  0  0  0  1  1  1  1  2  2  2  0]</span>
+<span class="go"> [ 3  3  3  4  4  5  5  6  6  7  7  8  3]</span>
+<span class="go"> [ 3  3  3  4  4  5  5  6  6  7  7  8  3]</span>
+<span class="go"> [ 9  9  9  9  9 10 10 10 10 11 11 11  9]</span>
+<span class="go"> [ 9  9  9  9  9 10 10 10 10 11 11 11  9]]</span>
+</pre></div>
+</div>
+<p>Notice that the blocks of the last column are the same as the first column.
+This is because our grid has repeated points at 0 and 360 longitude (which
+are the same point).</p>
+<p>Use the labels to index the coordinates, for example to get all points that
+fall inside the block with index 5:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">block_5</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">block_5</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">[150. 180. 150. 180.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">block_5</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">[ 0.  0. 30. 30.]</span>
+</pre></div>
+</div>
+<p>The region is extracted from the input coordinates by default. This can be
+a problem in some cases, for example if our input grid is
+<a class="reference internal" href="../../tutorial/grid.html#pixel-registration"><span class="std std-ref">pixel registered</span></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">grid_coordinates</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">pixel_register</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(6, 12)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">[[ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]</span>
+<span class="go"> [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]</span>
+<span class="go"> [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]</span>
+<span class="go"> [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]</span>
+<span class="go"> [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]</span>
+<span class="go"> [ 15.  45.  75. 105. 135. 165. 195. 225. 255. 285. 315. 345.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">[[-75. -75. -75. -75. -75. -75. -75. -75. -75. -75. -75. -75.]</span>
+<span class="go"> [-45. -45. -45. -45. -45. -45. -45. -45. -45. -45. -45. -45.]</span>
+<span class="go"> [-15. -15. -15. -15. -15. -15. -15. -15. -15. -15. -15. -15.]</span>
+<span class="go"> [ 15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.  15.]</span>
+<span class="go"> [ 45.  45.  45.  45.  45.  45.  45.  45.  45.  45.  45.  45.]</span>
+<span class="go"> [ 75.  75.  75.  75.  75.  75.  75.  75.  75.  75.  75.  75.]]</span>
+</pre></div>
+</div>
+<p>Splitting these points with the default arguments would lead to block
+coordinates that don’t span the entire globe:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">block_coords</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">block_split_spherical</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Longitude:&quot;</span><span class="p">,</span> <span class="n">block_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">Longitude: [ 56.25 138.75 221.25 303.75  56.25 138.75 221.25 303.75]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Latitude:&quot;</span><span class="p">,</span> <span class="n">block_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">Latitude: [-37.5 -37.5 -37.5 -37.5  37.5  37.5  37.5  37.5]</span>
+</pre></div>
+</div>
+<p>The latitudinal block sizes had to be adjusted to fit the data region, which
+leads to these uneven coordinates even when our grid spacing and block size
+are multiples of 180.</p>
+<p>To keep the blocks in the entire global range, we can pass the <code class="docutils literal notranslate"><span class="pre">region</span></code>
+argument:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">block_coords</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">block_split_spherical</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">coordinates</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Longitude:&quot;</span><span class="p">,</span> <span class="n">block_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">Longitude: [ 60. 180. 300.  30.  90. 150. 210. 270. 330.  60. 180. 300.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Latitude:&quot;</span><span class="p">,</span> <span class="n">block_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">Latitude: [-60. -60. -60.   0.   0.   0.   0.   0.   0.  60.  60.  60.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="go">[[ 0  0  0  0  1  1  1  1  2  2  2  2]</span>
+<span class="go"> [ 0  0  0  0  1  1  1  1  2  2  2  2]</span>
+<span class="go"> [ 3  3  4  4  5  5  6  6  7  7  8  8]</span>
+<span class="go"> [ 3  3  4  4  5  5  6  6  7  7  8  8]</span>
+<span class="go"> [ 9  9  9  9 10 10 10 10 11 11 11 11]</span>
+<span class="go"> [ 9  9  9  9 10 10 10 10 11 11 11 11]]</span>
+</pre></div>
+</div>
+<p>This way, the blocks span the entire globe and the labels show that the
+split is nice and even inside the latitudinal bands.</p>
+</dd></dl>
+
+<div style='clear:both'></div></section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bordado.block_split.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">bordado.block_split</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bordado.expanding_window.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">bordado.expanding_window</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bordado.block_split_spherical"><code class="docutils literal notranslate"><span class="pre">block_split_spherical</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, The Bordado Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 02, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

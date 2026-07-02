@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>bordado._transform | Bordado dev</title>
+    
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=12168cd1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/bordado/_transform';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <!-- Plausible analytics for anonymous usage statistics -->
+    <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bordado <span class="project-version">dev</span></p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/index.html">List of functions and classes (API)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.line_coordinates.html">bordado.line_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.random_coordinates.html">bordado.random_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.random_coordinates_spherical.html">bordado.random_coordinates_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.inside.html">bordado.inside</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_region.html">bordado.get_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Version compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Documentation for other versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="http://contact.fatiando.org">Join the community</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2F_modules/bordado/_transform.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for bordado._transform</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2025 The Bordado Developers.</span>
+<span class="c1"># Distributed under the terms of the BSD 3-Clause License.</span>
+<span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
+<span class="c1">#</span>
+<span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions for transforming coordinates.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._region</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_region</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_coordinates</span><span class="p">,</span> <span class="n">check_dimensions</span><span class="p">,</span> <span class="n">check_region</span>
+
+
+<div class="viewcode-block" id="rescale_coordinates">
+<a class="viewcode-back" href="../../api/generated/bordado.rescale_coordinates.html#bordado.rescale_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rescale_coordinates</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">region</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rescale the coordinate values to fit the given region.</span>
+
+<span class="sd">    Linearly transforms the input coordinates so that their minimum and maximum</span>
+<span class="sd">    values match the lower and upper bounds of the provided *region*. The</span>
+<span class="sd">    scaling is applied independently to each coordinate.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coordinates : tuple = (easting, northing, ...)</span>
+<span class="sd">        Tuple of arrays with the coordinates of each point. Should be in an</span>
+<span class="sd">        order compatible with the order of boundaries in *region*. Arrays can</span>
+<span class="sd">        be Python lists. Arrays can be of any shape but must all have the same</span>
+<span class="sd">        shape.</span>
+<span class="sd">    region : tuple = (W, E, S, N, ...)</span>
+<span class="sd">        The new boundaries for the region in Cartesian or geographic</span>
+<span class="sd">        coordinates. Should have a lower and an upper boundary for each</span>
+<span class="sd">        dimension of the coordinate system.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rescaled_coordinates : tuple</span>
+<span class="sd">        A tuple of arrays containing the rescaled coordinates. The returned</span>
+<span class="sd">        arrays will have the same shape as the input coordinate arrays.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Let&#39;s demonstrate first using a single coordinate array. The coordinates</span>
+<span class="sd">    must be specified as a tuple of arrays.</span>
+
+<span class="sd">    &gt;&gt;&gt; import bordado as bd</span>
+<span class="sd">    &gt;&gt;&gt; coordinates = ([0, 5, 10],)</span>
+
+<span class="sd">    These values can be stretched to a new range by providing a region like so:</span>
+
+<span class="sd">    &gt;&gt;&gt; rescaled_coordinates = rescale_coordinates(coordinates, [0, 100])</span>
+<span class="sd">    &gt;&gt;&gt; print(rescaled_coordinates)</span>
+<span class="sd">    (array([  0.,  50., 100.]),)</span>
+
+<span class="sd">    We can also translate coordinates. Note that if the original and new regions</span>
+<span class="sd">    share the same length, the rescaling simply acts as a pure translation of</span>
+<span class="sd">    the points:</span>
+
+<span class="sd">    &gt;&gt;&gt; region = [10, 20]</span>
+<span class="sd">    &gt;&gt;&gt; rescaled_coordinates = rescale_coordinates(coordinates, region)</span>
+<span class="sd">    &gt;&gt;&gt; print(rescaled_coordinates)</span>
+<span class="sd">    (array([10., 15., 20.]),)</span>
+
+<span class="sd">    This also works for 2D coordinate arrays (or any number of dimensions).</span>
+<span class="sd">    Let&#39;s generate coordinates for a 2D grid:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = bd.grid_coordinates(region=(0, 10, 0, 20), shape=(3, 3))</span>
+<span class="sd">    &gt;&gt;&gt; print(coordinates[0])</span>
+<span class="sd">    [[ 0.  5. 10.]</span>
+<span class="sd">     [ 0.  5. 10.]</span>
+<span class="sd">     [ 0.  5. 10.]]</span>
+<span class="sd">    &gt;&gt;&gt; print(coordinates[1])</span>
+<span class="sd">    [[ 0.  0.  0.]</span>
+<span class="sd">     [10. 10. 10.]</span>
+<span class="sd">     [20. 20. 20.]]</span>
+
+<span class="sd">    Rescale the generated coordinates to a new target region happens for each</span>
+<span class="sd">    coordinate independently:</span>
+
+<span class="sd">    &gt;&gt;&gt; rescaled = rescale_coordinates(coordinates, (0, 100, 0, 50))</span>
+<span class="sd">    &gt;&gt;&gt; print(rescaled[0])</span>
+<span class="sd">    [[  0.  50. 100.]</span>
+<span class="sd">     [  0.  50. 100.]</span>
+<span class="sd">     [  0.  50. 100.]]</span>
+<span class="sd">    &gt;&gt;&gt; print(rescaled[1])</span>
+<span class="sd">    [[ 0.  0.  0.]</span>
+<span class="sd">     [25. 25. 25.]</span>
+<span class="sd">     [50. 50. 50.]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_region</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="n">check_coordinates</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="n">check_dimensions</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+    <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="c1"># Reshape the region so we can iterate over min,max pairs</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">(</span><span class="n">ndims</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">region_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">get_region</span><span class="p">(</span><span class="n">coordinates</span><span class="p">),</span> <span class="p">(</span><span class="n">ndims</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">rescaled_coordinates</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="p">):</span>
+        <span class="n">min_old</span><span class="p">,</span> <span class="n">max_old</span> <span class="o">=</span> <span class="n">region_old</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">min_new</span><span class="p">,</span> <span class="n">max_new</span> <span class="o">=</span> <span class="n">region</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">diff_old</span> <span class="o">=</span> <span class="n">max_old</span> <span class="o">-</span> <span class="n">min_old</span>
+        <span class="n">diff_new</span> <span class="o">=</span> <span class="n">max_new</span> <span class="o">-</span> <span class="n">min_new</span>
+        <span class="k">if</span> <span class="n">diff_old</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">diff_new</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot rescale coordinate </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;The original data has a range of 0 (bounds = (</span><span class="si">{</span><span class="n">min_old</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">max_old</span><span class="si">}</span><span class="s2">)) &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;but the target region requires a range of </span><span class="si">{</span><span class="n">diff_new</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(bounds = (</span><span class="si">{</span><span class="n">min_new</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">max_new</span><span class="si">}</span><span class="s2">)), which is impossible to achieve.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">diff_old</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">diff_new</span> <span class="k">else</span> <span class="n">diff_new</span> <span class="o">/</span> <span class="n">diff_old</span>
+        <span class="n">new_coord</span> <span class="o">=</span> <span class="n">min_new</span> <span class="o">+</span> <span class="p">((</span><span class="n">coordinates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_old</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="n">rescaled_coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_coord</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">rescaled_coordinates</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="rotate_coordinates">
+<a class="viewcode-back" href="../../api/generated/bordado.rotate_coordinates.html#bordado.rotate_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rotate_coordinates</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rotation_center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rotate coordinates in 2-dimensional space.</span>
+
+<span class="sd">    Apply a `rotation matrix &lt;https://en.wikipedia.org/wiki/Rotation_matrix&gt;`__</span>
+<span class="sd">    to the vectors defined by the given coordinates in a 2D space. The rotation</span>
+<span class="sd">    is **counterclockwise** and performed around the origin of the coordinate</span>
+<span class="sd">    system or optionally around a specified point (see *rotation_center* below).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coordinates : tuple = (easting, northing)</span>
+<span class="sd">        Tuple of arrays with the coordinates of each point. Should have **2</span>
+<span class="sd">        elements**. Arrays can be Python lists. Arrays can be of any shape but</span>
+<span class="sd">        must all have the same shape.</span>
+<span class="sd">    angle : float</span>
+<span class="sd">        The angle of rotation in degrees.</span>
+<span class="sd">    rotation_center : tuple = (easting, northing)</span>
+<span class="sd">        The center of the rotation, represented by a tuple of 2 floats. By</span>
+<span class="sd">        default, rotate around the origin of the coordinate system at point</span>
+<span class="sd">        (0, 0).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rotated_coordinates : tuple</span>
+<span class="sd">        A tuple of arrays containing the rotated coordinates. The returned</span>
+<span class="sd">        arrays will have the same shape as the input coordinate arrays.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Let&#39;s say we have points that fall on a line along the first dimension:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = ([1, 2, 3], [0, 0, 0])</span>
+
+<span class="sd">    Rotating these points by 90° should align them with the second dimension:</span>
+
+<span class="sd">    &gt;&gt;&gt; rotated = rotate_coordinates(coordinates, angle=90)</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;First coordinate:&quot;, &quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in rotated[0]))</span>
+<span class="sd">    First coordinate: 0.00, 0.00, 0.00</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;Second coordinate:&quot;, &quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in rotated[1]))</span>
+<span class="sd">    Second coordinate: 1.00, 2.00, 3.00</span>
+
+<span class="sd">    And rotating them clockwise (-90°) should align them with the negative part</span>
+<span class="sd">    of the second dimension:</span>
+
+<span class="sd">    &gt;&gt;&gt; rotated = rotate_coordinates(coordinates, angle=-90)</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;First coordinate:&quot;, &quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in rotated[0]))</span>
+<span class="sd">    First coordinate: 0.00, 0.00, 0.00</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;Second coordinate:&quot;, &quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in rotated[1]))</span>
+<span class="sd">    Second coordinate: -1.00, -2.00, -3.00</span>
+
+<span class="sd">    By default, the rotation is done around the origin. But we can also specify</span>
+<span class="sd">    a custom rotation center:</span>
+
+<span class="sd">    &gt;&gt;&gt; rotated = rotate_coordinates(</span>
+<span class="sd">    ...     coordinates, angle=90, rotation_center=(2, 0),</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;First coordinate:&quot;, &quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in rotated[0]))</span>
+<span class="sd">    First coordinate: 2.00, 2.00, 2.00</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;Second coordinate:&quot;, &quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in rotated[1]))</span>
+<span class="sd">    Second coordinate: -1.00, 0.00, 1.00</span>
+
+<span class="sd">    The coordinates can have any shape but there can only be 2 of them:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = ([[1, 2], [3, 4]], [[0, 0], [0, 0]])</span>
+<span class="sd">    &gt;&gt;&gt; rotated = rotate_coordinates(coordinates, angle=90)</span>
+<span class="sd">    &gt;&gt;&gt; for line in rotated[0]:</span>
+<span class="sd">    ...     print(&quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in line))</span>
+<span class="sd">    0.00, 0.00</span>
+<span class="sd">    0.00, 0.00</span>
+<span class="sd">    &gt;&gt;&gt; for line in rotated[1]:</span>
+<span class="sd">    ...     print(&quot;, &quot;.join(f&quot;{x:.2f}&quot; for x in line))</span>
+<span class="sd">    1.00, 2.00</span>
+<span class="sd">    3.00, 4.00</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="n">check_coordinates</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Cannot rotate </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span><span class="si">}</span><span class="s2"> coordinates. &quot;</span>
+            <span class="s2">&quot;Only works in 2D and hence can only take 2 coordinate arrays.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rotation_center</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid rotation center </span><span class="si">{</span><span class="n">rotation_center</span><span class="si">}</span><span class="s2">. Must be a tuple of 2 numbers.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">cos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">shifted</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="n">o</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">rotation_center</span><span class="p">)]</span>
+    <span class="n">rotated_shifted</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">cos</span> <span class="o">*</span> <span class="n">shifted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">sin</span> <span class="o">*</span> <span class="n">shifted</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">sin</span> <span class="o">*</span> <span class="n">shifted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cos</span> <span class="o">*</span> <span class="n">shifted</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">rotated</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">c</span> <span class="o">+</span> <span class="n">o</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rotated_shifted</span><span class="p">,</span> <span class="n">rotation_center</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">rotated</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, The Bordado Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 02, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

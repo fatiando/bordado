@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     
         <title>Bordado dev</title>
@@ -59,7 +59,7 @@
     <link rel="icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="overview.html" />
+    <link rel="next" title="Why use Bordado?" href="overview.html" />
     <!-- Plausible analytics for anonymous usage statistics -->
     <script defer data-domain="fatiando.org" src="https://plausible.io/js/plausible.js"></script>
 
@@ -168,8 +168,28 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="nav bd-sidenav">
@@ -180,16 +200,20 @@
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Bordado</a></li>
@@ -204,6 +228,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -407,7 +432,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Home</h1>
+    <h1>Project status</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -417,6 +442,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Project status</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-involved">Getting involved</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a><ul class="visible nav section-nav flex-column">
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -429,10 +459,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1 class="display-1">Bordado</h1><div class="sd-fs-3 docutils">
+  <div class="sd-container-fluid sd-sphinx-override sd-mt-5 sd-mb-5 sd-ml-0 sd-mr-0 sd-pt-0 sd-pb-0 sd-pl-0 sd-pr-0 docutils">
+<div class="sd-row sd-g-2 sd-g-xs-2 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<h1 class="display-1">Bordado</h1><div class="sd-fs-3 docutils">
 <p>Create, manipulate, and split geographic coordinates</p>
 </div>
-<p><strong>Bordado</strong>  (Portuguese for “embroidery”) is a Python package for creating,
+</div>
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<a class="sd-m-auto dark-light reference internal image-reference" href="_images/bordado-logo.svg"><img alt="_images/bordado-logo.svg" class="sd-m-auto dark-light" src="_images/bordado-logo.svg" width="200px" /></a>
+</div>
+</div>
+</div>
+<p><strong>Bordado</strong> (Portuguese for “embroidery”) is a Python package for creating,
 manipulating, and splitting geographic and Cartesian coordinates.
 It can generate coordinates at regular intervals by specifying the number of
 points or the spacing between points. Bordado takes care of adjusting the
@@ -440,11 +479,8 @@ spacing to make sure it matches the specified domain/region. It also contains
 functions for splitting coordinates into spatial blocks and more.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>Many of the functions here used to be in
-<a class="reference external" href="https://www.fatiando.org/verde/">Verde</a>. They were moved to Bordado to
-make them more accessible without all of the extra dependencies that Verde
-requires. We have also improved and expanded most of the functions ported
-from Verde.</p>
+<p>Bordado is a part of the
+<a class="reference external" href="https://www.fatiando.org/">Fatiando a Terra</a> project.</p>
 </div>
 <div class="sd-container-fluid sd-sphinx-override sd-mt-5 sd-mb-5 sd-ml-0 sd-mr-0 sd-pt-0 sd-pb-0 sd-pl-0 sd-pr-0 docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-1 sd-row-cols-lg-2 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
@@ -454,7 +490,7 @@ from Verde.</p>
 <div class="sd-card-title sd-font-weight-bold sd-fs-5 docutils">
 <svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-rocket" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M14.064 0a8.75 8.75 0 00-6.187 2.563l-.459.458c-.314.314-.616.641-.904.979H3.31a1.75 1.75 0 00-1.49.833L.11 7.607a.75.75 0 00.418 1.11l3.102.954c.037.051.079.1.124.145l2.429 2.428c.046.046.094.088.145.125l.954 3.102a.75.75 0 001.11.418l2.774-1.707a1.75 1.75 0 00.833-1.49V9.485c.338-.288.665-.59.979-.904l.458-.459A8.75 8.75 0 0016 1.936V1.75A1.75 1.75 0 0014.25 0h-.186zM10.5 10.625c-.088.06-.177.118-.266.175l-2.35 1.521.548 1.783 1.949-1.2a.25.25 0 00.119-.213v-2.066zM3.678 8.116L5.2 5.766c.058-.09.117-.178.176-.266H3.309a.25.25 0 00-.213.119l-1.2 1.95 1.782.547zm5.26-4.493A7.25 7.25 0 0114.063 1.5h.186a.25.25 0 01.25.25v.186a7.25 7.25 0 01-2.123 5.127l-.459.458a15.21 15.21 0 01-2.499 2.02l-2.317 1.5-2.143-2.143 1.5-2.317a15.25 15.25 0 012.02-2.5l.458-.458h.002zM12 5a1 1 0 11-2 0 1 1 0 012 0zm-8.44 9.56a1.5 1.5 0 10-2.12-2.12c-.734.73-1.047 2.332-1.15 3.003a.23.23 0 00.265.265c.671-.103 2.273-.416 3.005-1.148z"></path></svg> Getting started</div>
 <p class="sd-card-text">New to Bordado? Start here!</p>
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-outline-primary sd-stretched-link reference internal" href="overview.html"><span class="doc">Overview</span></a></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-outline-primary sd-stretched-link reference internal" href="overview.html"><span class="doc">Why use Bordado?</span></a></span></p>
 </div>
 </div>
 </div>
@@ -490,17 +526,66 @@ from Verde.</p>
 </div>
 </div>
 </div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Bordado is a part of the
-<a class="reference external" href="https://www.fatiando.org/">Fatiando a Terra</a> project.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Look familiar?</p>
+<p>Many of the functions here used to be in
+<a class="reference external" href="https://www.fatiando.org/verde/">Verde</a>. They were moved to Bordado to
+make them more accessible without all the extra dependencies that Verde
+requires. We have also improved and expanded most of the functions ported
+from Verde.</p>
 </div>
+<hr class="docutils" />
+<section id="project-status">
+<h1>Project status<a class="headerlink" href="#project-status" title="Link to this heading">#</a></h1>
+<p><strong>Bordado is ready for use but still changing</strong>. This means that we are
+still adding a lot of new features, and sometimes we make changes to the
+ones we already have while we try to improve the software based on
+users’ experience, test new ideas, take better design decisions, etc.
+Some of these changes could be <strong>backwards incompatible</strong>. Keep that in
+mind before you update Harmonica to a newer version.</p>
+<p><strong>We welcome feedback and ideas!</strong> This is a great time to bring new
+ideas on how we can improve the project. <a class="reference external" href="https://www.fatiando.org/contact">Join the
+conversation</a> or submit <a class="reference external" href="https://github.com/fatiando/bordado/issues">issues on
+GitHub</a>.</p>
+</section>
+<section id="getting-involved">
+<h1>Getting involved<a class="headerlink" href="#getting-involved" title="Link to this heading">#</a></h1>
+<p>🗨️ <strong>Contact us:</strong> Find out more about how to reach us at
+<a class="reference external" href="https://www.fatiando.org/contact/">fatiando.org/contact</a>.</p>
+<p>👩🏾‍💻 <strong>Contributing to project development:</strong> Please read our
+<a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">Contributing
+Guide</a>
+to see how you can help and give feedback.</p>
+<p>🧑🏾‍🤝‍🧑🏼 <strong>Code of conduct:</strong> This project is released with a <a class="reference external" href="https://github.com/fatiando/community/blob/main/CODE_OF_CONDUCT.md">Code of
+Conduct</a>.
+By participating in this project you agree to abide by its terms.</p>
+<blockquote>
+<div><p><strong>Imposter syndrome disclaimer:</strong> We want your help. <strong>No, really.</strong> There
+may be a little voice inside your head that is telling you that you’re
+not ready, that you aren’t skilled enough to contribute. We assure you
+that the little voice in your head is wrong. Most importantly, <strong>there are
+many valuable ways to contribute besides writing code</strong> (giving feedback,
+teaching, writing documentation, and more).</p>
+<p><em>This disclaimer was adapted from the</em> <a class="reference external" href="https://github.com/Unidata/MetPy">MetPy
+project</a>.</p>
+</div></blockquote>
+</section>
+<section id="license">
+<h1>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h1>
+<p>This is free software: you can redistribute it and/or modify it under
+the terms of the <strong>BSD 3-clause License</strong>. A copy of this license is
+provided in the
+<a class="reference external" href="https://github.com/fatiando/bordado/blob/main/LICENSE.txt">LICENSE.txt</a>
+file.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 
 
                 </article>
@@ -518,7 +603,7 @@ from Verde.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">Why use Bordado?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -538,6 +623,11 @@ from Verde.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Project status</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-involved">Getting involved</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a><ul class="visible nav section-nav flex-column">
+</ul>
+</li>
 </ul>
 
   </nav></div>
@@ -559,7 +649,7 @@ from Verde.</p>
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -568,7 +658,7 @@ from Verde.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Jul 02, 2026.
   <br/>
 </p>
   </div>

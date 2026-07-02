@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>bordado._utils | Bordado dev</title>
+        <title>bordado._spacing | Bordado dev</title>
     
 
   
@@ -54,7 +54,7 @@
     <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/bordado/_utils';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/bordado/_spacing';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -166,8 +166,28 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="nav bd-sidenav">
@@ -178,16 +198,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
@@ -202,6 +226,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -274,7 +299,7 @@
       
       
       
-      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2F_modules/bordado/_utils.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fatiando/bordado/issues/new?title=Issue%20on%20page%20%2F_modules/bordado/_spacing.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -352,7 +377,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for bordado._utils</h1><div class="highlight"><pre>
+  <h1>Source code for bordado._spacing</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright (c) 2025 The Bordado Developers.</span>
 <span class="c1"># Distributed under the terms of the BSD 3-Clause License.</span>
 <span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
@@ -360,12 +385,148 @@ document.write(`
 <span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
 <span class="c1">#</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Functions for validating and manipulation coordinate arrays.</span>
+<span class="sd">Functions to extract and manipulate point spacing information.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">._validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_adjust</span><span class="p">,</span> <span class="n">check_region</span><span class="p">,</span> <span class="n">check_shape</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_adjust</span><span class="p">,</span> <span class="n">check_coordinates</span><span class="p">,</span> <span class="n">check_region</span><span class="p">,</span> <span class="n">check_shape</span>
+
+
+<div class="viewcode-block" id="get_spacing">
+<a class="viewcode-back" href="../../api/generated/bordado.get_spacing.html#bordado.get_spacing">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_spacing</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the point spacing from a set of coordinates.</span>
+
+<span class="sd">    Tries to infer the spacing between adjacent points for cases where the</span>
+<span class="sd">    coordinates describe regularly spaced points. If points are not regularly</span>
+<span class="sd">    spaced, an exception will be raised.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coordinates : tuple = (easting, northing, ...)</span>
+<span class="sd">        Tuple of arrays with the coordinates of each point. Arrays can be Python</span>
+<span class="sd">        lists or any numpy-compatible array type. Arrays must all have the</span>
+<span class="sd">        same shape. The number of dimensions of each array must be equal to the</span>
+<span class="sd">        number of arrays in the tuple. For example, 2D grids require 2 arrays</span>
+<span class="sd">        and each array must be 2D.</span>
+<span class="sd">    tol : float</span>
+<span class="sd">        The relative tolerance used to check if the spacing is uniform and if</span>
+<span class="sd">        the spacing is equal in all dimensions. Floating point checks cannot</span>
+<span class="sd">        be done with equality so a tolerance is always necessary. Should be</span>
+<span class="sd">        a positive float and can be interpreted as a decimal percentage of</span>
+<span class="sd">        difference that is tolerated.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    spacing : float, tuple = (..., space_SN, space_WE), or None</span>
+<span class="sd">        The spacing in each direction of the given coordinates, in reverse</span>
+<span class="sd">        order. A single value means that the spacing is equal in all directions</span>
+<span class="sd">        (within the given tolerance). If a tuple, will have one value per</span>
+<span class="sd">        coordinate. The order of arguments is the opposite of the order of the</span>
+<span class="sd">        coordinates for compatibility with the *shape* argument of functions</span>
+<span class="sd">        like :func:`~bordado.grid_coordinates`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Let&#39;s say we have the following sequence of values:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = ([1, 2, 3, 4],)</span>
+
+<span class="sd">    The spacing between them is clearly 1 and it&#39;s constant. This won&#39;t be easy</span>
+<span class="sd">    to tell for most datasets, though. To get the spacing information, we can do</span>
+<span class="sd">    this instead:</span>
+
+<span class="sd">    &gt;&gt;&gt; spacing = get_spacing(coordinates)</span>
+<span class="sd">    &gt;&gt;&gt; print(f&quot;{spacing:.1f}&quot;)</span>
+<span class="sd">    1.0</span>
+
+<span class="sd">    If the spacing isn&#39;t constant, an exception will be raised:</span>
+
+<span class="sd">    &gt;&gt;&gt; get_spacing(([1, 2, 3, 5],))</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    ...</span>
+<span class="sd">    ValueError: Coordinate 0 is not evenly spaced along axis 0...</span>
+
+<span class="sd">    The same works for multidimensional coordinates. In this case,</span>
+<span class="sd">    2D coordinates must describe a regular grid as produced by</span>
+<span class="sd">    :func:`bordado.grid_coordinates`. All coordinates must be 2D arrays, the</span>
+<span class="sd">    first varying along axis 1 and the second along axis 0:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = (</span>
+<span class="sd">    ...     [[1.0, 1.5, 2.0],</span>
+<span class="sd">    ...      [1.0, 1.5, 2.0],</span>
+<span class="sd">    ...      [1.0, 1.5, 2.0]],</span>
+<span class="sd">    ...     [[-6.0, -6.0, -6.0],</span>
+<span class="sd">    ...      [-5.5, -5.5, -5.5],</span>
+<span class="sd">    ...      [-5.0, -5.0, -5.0]]</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; spacing = get_spacing(coordinates)</span>
+<span class="sd">    &gt;&gt;&gt; print(f&quot;{spacing:.1f}&quot;)</span>
+<span class="sd">    0.5</span>
+
+<span class="sd">    Multidimensional coordinates may be evenly spaced by the spacing may</span>
+<span class="sd">    vary between each dimension. In this case, the returned value will be a</span>
+<span class="sd">    tuple with the spacing along each dimension in the opposite order of the</span>
+<span class="sd">    coordinates:</span>
+
+<span class="sd">    &gt;&gt;&gt; coordinates = (</span>
+<span class="sd">    ...     [[1.0, 1.5, 2.0],</span>
+<span class="sd">    ...      [1.0, 1.5, 2.0],</span>
+<span class="sd">    ...      [1.0, 1.5, 2.0]],</span>
+<span class="sd">    ...     [[-6.0, -6.0, -6.0],</span>
+<span class="sd">    ...      [-4.5, -4.5, -4.5],</span>
+<span class="sd">    ...      [-3.0, -3.0, -3.0]]</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; spacing = get_spacing(coordinates)</span>
+<span class="sd">    &gt;&gt;&gt; print(len(spacing))</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;, &quot;.join([f&quot;{s:.1f}&quot; for s in spacing]))</span>
+<span class="sd">    1.5, 0.5</span>
+
+<span class="sd">    The checks that the spacing is regular cannot be exact because of floating</span>
+<span class="sd">    point rounding errors. So they are done within a specified relative</span>
+<span class="sd">    tolerance. For example, this should fail with the default tolerance:</span>
+
+<span class="sd">    &gt;&gt;&gt; spacing = get_spacing(([1, 2, 3.0001, 4],))</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    ...</span>
+<span class="sd">    ValueError: Coordinate 0 is not evenly spaced along axis 0...</span>
+
+<span class="sd">    But if we increase the tolerance to 1%, it could be made to pass.</span>
+
+<span class="sd">    &gt;&gt;&gt; spacing = get_spacing(([1, 2, 3.0001, 4],), tol=0.01)</span>
+<span class="sd">    &gt;&gt;&gt; print(f&quot;{spacing:.3f}&quot;)</span>
+<span class="sd">    1.000</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="n">check_coordinates</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ndims</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Cannot extract spacing information from </span><span class="si">{</span><span class="n">ndims</span><span class="si">}</span><span class="s2"> coordinate(s) &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;with shape </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">. The number of dimensions of each array must &quot;</span>
+            <span class="s2">&quot;be the same as the number of arrays.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">spacing</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coordinate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)):</span>
+        <span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">coordinate</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">this_spacing</span> <span class="o">=</span> <span class="n">difference</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">difference</span><span class="p">,</span> <span class="n">this_spacing</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">tol</span><span class="p">):</span>
+            <span class="n">spacing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_spacing</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Coordinate </span><span class="si">{</span><span class="n">ndims</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> is not evenly spaced along axis </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;within tolerance of </span><span class="si">{</span><span class="n">tol</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">spacing</span><span class="p">,</span> <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">tol</span><span class="p">):</span>
+        <span class="n">spacing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">spacing</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">spacing</span></div>
+
 
 
 <div class="viewcode-block" id="spacing_to_size">
@@ -542,65 +703,6 @@ document.write(`
         <span class="n">spacing</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">region</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">region</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">n_points</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">spacing</span><span class="p">))</span></div>
 
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">make_non_dimensional_coordinates</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Make a list of arrays with the given values of non-dimensional coordinates.</span>
-
-<span class="sd">    These are coordinates that are not part of the dimensions of a grid or</span>
-<span class="sd">    spread of points. Think of them as extra coordinates.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    values : None or float or list or array</span>
-<span class="sd">        The values of the non-dimensional coordinates. If None, an empty list</span>
-<span class="sd">        will be returned. If a float, will generate one array of the desired</span>
-<span class="sd">        shape with this value as the fill. If a list or array, will generate</span>
-<span class="sd">        one array of the given shape per value in the list or array.</span>
-<span class="sd">    shape : tuple</span>
-<span class="sd">        The shape of the desired array(s).</span>
-<span class="sd">    dtype : str</span>
-<span class="sd">        A numpy compatible dtype used for the output array.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    coordinates : list</span>
-<span class="sd">        List of arrays generated. Even if a single value is passed, the output</span>
-<span class="sd">        will still be a list with a single array.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    Generating a single array:</span>
-
-<span class="sd">    &gt;&gt;&gt; make_non_dimensional_coordinates(10, (2,), dtype=&quot;int&quot;)</span>
-<span class="sd">    [array([10, 10])]</span>
-<span class="sd">    &gt;&gt;&gt; make_non_dimensional_coordinates(10, (2, 2), dtype=&quot;int&quot;)</span>
-<span class="sd">    [array([[10, 10],</span>
-<span class="sd">           [10, 10]])]</span>
-
-<span class="sd">    To generate multiple arrays:</span>
-
-<span class="sd">    &gt;&gt;&gt; make_non_dimensional_coordinates([10, 20], (2,), dtype=&quot;int&quot;)</span>
-<span class="sd">    [array([10, 10]), array([20, 20])]</span>
-<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; make_non_dimensional_coordinates(np.array([10, 20]), (2,), dtype=&quot;int&quot;)</span>
-<span class="sd">    [array([10, 10]), array([20, 20])]</span>
-<span class="sd">    &gt;&gt;&gt; make_non_dimensional_coordinates(</span>
-<span class="sd">    ...     np.array([[10], [20]]), (2,), dtype=&quot;int&quot;,</span>
-<span class="sd">    ... )</span>
-<span class="sd">    [array([10, 10]), array([20, 20])]</span>
-
-<span class="sd">    If None is given:</span>
-
-<span class="sd">    &gt;&gt;&gt; make_non_dimensional_coordinates(None, (2,), dtype=&quot;int&quot;)</span>
-<span class="sd">    []</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
-            <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">coordinates</span>
 </pre></div>
 
                 </article>
@@ -635,7 +737,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -644,7 +746,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Jul 02, 2026.
   <br/>
 </p>
   </div>
