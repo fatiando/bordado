@@ -39,6 +39,16 @@ Regions and bounding boxes
     get_region
     pad_region
 
+Grid and mesh point spacing
+---------------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    get_spacing
+    spacing_to_size
+    shape_to_spacing
+
 Splitting points into blocks and windows
 ----------------------------------------
 
@@ -51,12 +61,10 @@ Splitting points into blocks and windows
     rolling_window
     rolling_window_spherical
 
-Other utilities
----------------
+Distance operations
+-------------------
 
 .. autosummary::
     :toctree: generated/
 
     neighbor_distance_statistics
-    spacing_to_size
-    shape_to_spacing

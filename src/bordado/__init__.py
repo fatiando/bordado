@@ -14,6 +14,7 @@ from ._line import line_coordinates
 from ._profile import great_circle_coordinates, profile_coordinates
 from ._random import random_coordinates, random_coordinates_spherical
 from ._region import get_region, inside, pad_region
+from ._spacing import get_spacing, shape_to_spacing, spacing_to_size
 from ._split import (
     block_split,
     block_split_spherical,
@@ -22,7 +23,6 @@ from ._split import (
     rolling_window_spherical,
 )
 from ._transform import rescale_coordinates, rotate_coordinates
-from ._utils import shape_to_spacing, spacing_to_size
 from ._version import __version__
 
 # Append a leading "v" to the generated version by setuptools_scm

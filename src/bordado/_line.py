@@ -10,7 +10,7 @@ Generate regular coordinates along lines and grids.
 
 import numpy as np
 
-from ._utils import spacing_to_size
+from ._spacing import spacing_to_size
 
 
 def line_coordinates(
