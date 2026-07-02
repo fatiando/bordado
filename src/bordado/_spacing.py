@@ -84,7 +84,7 @@ def get_spacing(coordinates, tol=1e-5):
     >>> print(f"{spacing:.1f}")
     0.5
 
-    Multidimensional coordinates may be evenly spaced by the spacing may
+    Multidimensional coordinates may be evenly spaced but the spacing may
     vary between each dimension. In this case, the returned value will be a
     tuple with the spacing along each dimension in the opposite order of the
     coordinates:
@@ -185,7 +185,7 @@ def spacing_to_size(start, stop, spacing, *, adjust="spacing"):
     3 0 1
 
     If the spacing is not a multiple, then it will be adjusted to fit the
-    interval by default. In this case, then number of points remains the same:
+    interval by default. In this case, the number of points remains the same:
 
     >>> size, start, stop = spacing_to_size(0, 1, 0.6)
     >>> print(size, start, stop)
