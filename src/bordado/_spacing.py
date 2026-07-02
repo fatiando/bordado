@@ -15,7 +15,7 @@ from ._validation import check_adjust, check_coordinates, check_region, check_sh
 
 def get_spacing(coordinates, tol=1e-5):
     """
-    Get the point spacing from regularly-spaced points.
+    Determine the point spacing from a set of coordinates.
 
     Tries to infer the spacing between adjacent points for cases where the
     coordinates describe regularly spaced points. If points are not regularly
@@ -48,7 +48,76 @@ def get_spacing(coordinates, tol=1e-5):
 
     Examples
     --------
-    Meh
+    Let's say we have the following sequence of values:
+
+    >>> coordinates = ([1, 2, 3, 4],)
+
+    The spacing between them is clearly 1 and it's constant. This won't be easy
+    to tell for most datasets, though. To get the spacing information, we can do
+    this instead:
+
+    >>> spacing = get_spacing(coordinates)
+    >>> print(f"{spacing:.1f}")
+    1.0
+
+    If the spacing isn't constant, an exception will be raised:
+
+    >>> get_spacing(([1, 2, 3, 5],))
+    Traceback (most recent call last):
+    ...
+    ValueError: Coordinate 0 is not evenly spaced along axis 0...
+
+    The same works for multidimensional coordinates. In this case,
+    2D coordinates must describe a regular grid as produced by
+    :func:`bordado.grid_coordinates`. All coordinates must be 2D arrays, the
+    first varying along axis 1 and the second along axis 0:
+
+    >>> coordinates = (
+    ...     [[1.0, 1.5, 2.0],
+    ...      [1.0, 1.5, 2.0],
+    ...      [1.0, 1.5, 2.0]],
+    ...     [[-6.0, -6.0, -6.0],
+    ...      [-5.5, -5.5, -5.5],
+    ...      [-5.0, -5.0, -5.0]]
+    ... )
+    >>> spacing = get_spacing(coordinates)
+    >>> print(f"{spacing:.1f}")
+    0.5
+
+    Multidimensional coordinates may be evenly spaced by the spacing may
+    vary between each dimension. In this case, the returned value will be a
+    tuple with the spacing along each dimension in the opposite order of the
+    coordinates:
+
+    >>> coordinates = (
+    ...     [[1.0, 1.5, 2.0],
+    ...      [1.0, 1.5, 2.0],
+    ...      [1.0, 1.5, 2.0]],
+    ...     [[-6.0, -6.0, -6.0],
+    ...      [-4.5, -4.5, -4.5],
+    ...      [-3.0, -3.0, -3.0]]
+    ... )
+    >>> spacing = get_spacing(coordinates)
+    >>> print(len(spacing))
+    2
+    >>> print(", ".join([f"{s:.1f}" for s in spacing]))
+    1.5, 0.5
+
+    The checks that the spacing is regular cannot be exact because of floating
+    point rounding errors. So they are done within a specified relative
+    tolerance. For example, this should fail with the default tolerance:
+
+    >>> spacing = get_spacing(([1, 2, 3.0001, 4],))
+    Traceback (most recent call last):
+    ...
+    ValueError: Coordinate 0 is not evenly spaced along axis 0...
+
+    But if we increase the tolerance to 1%, it could be made to pass.
+
+    >>> spacing = get_spacing(([1, 2, 3.0001, 4],), tol=0.01)
+    >>> print(f"{spacing:.3f}")
+    1.000
+
     """
     coordinates = check_coordinates(coordinates)
     shape = coordinates[0].shape
@@ -68,12 +137,12 @@ def get_spacing(coordinates, tol=1e-5):
             spacing.append(this_spacing)
         else:
             message = (
-                f"Coordinates along axis {i} of coordinate {i} are not evenly "
-                f"spaced within tolerance {tol}."
+                f"Coordinate {ndims - i - 1} is not evenly spaced along axis {i} "
+                f"within tolerance of {tol}."
             )
             raise ValueError(message)
     if np.allclose(spacing, spacing[0], atol=0, rtol=tol):
-        spacing = spacing[0]
+        spacing = np.median(spacing)
     return spacing
 
 
