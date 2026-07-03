@@ -56,9 +56,9 @@ locate it:
         shorelines=True,
         water="royalblue4",
         area_thresh=1e4,
-        frame=["af", "+tOriginal data"],
+        frame="af",
     )
-    fig.colorbar(frame=["af", "y+lmGal"])
+    fig.colorbar(frame=["af+lOriginal data", "y+lmGal"])
     fig.show()
 
 The dataset covers the entire Southern tip of Africa in point.
@@ -97,9 +97,9 @@ data on a map to visualize:
         shorelines=True,
         water="royalblue4",
         area_thresh=1e4,
-        frame=["afg", "+tRescaled data"],
+        frame="afg",
     )
-    fig.colorbar(frame=["af", "y+lmGal"])
+    fig.colorbar(frame=["af+lRescaled data", "y+lmGal"])
     fig.show()
 
 Notice how the general survey layout is retained, but the coordinates

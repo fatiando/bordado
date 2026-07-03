@@ -21,6 +21,7 @@ the ":ref:`tutorial`" first.
     rotate.rst
     rescale.rst
     block-average.rst
+    rolling-average.rst
 
 .. seealso::
 

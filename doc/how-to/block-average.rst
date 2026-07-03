@@ -60,9 +60,9 @@ Let's plot the data with :mod:`pygmt` to see what we've got:
         style="c0.01c",
         projection="M15c",
         region=region,
-        frame=["afg", "+tOriginal topography"],
+        frame="afg",
     )
-    fig.colorbar(frame=["af", "y+lm"])
+    fig.colorbar(frame=["af+lOriginal topography", "y+lm"])
     fig.show()
 
 Notice that the sampling is not uniform, with areas of denser sampling
@@ -116,9 +116,9 @@ block. The reduced dataset looks like this:
         style="c0.01c",
         projection="M15c",
         region=region,
-        frame=["afg", "+tBlock average topography"],
+        frame="afg",
     )
-    fig.colorbar(frame=["af", "y+lm"])
+    fig.colorbar(frame=["af+lBlock average topography", "y+lm"])
     fig.show()
 
 Notice that now the points are more uniformly spaced and there are no

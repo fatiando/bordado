@@ -47,7 +47,7 @@ Let's plot the data with :mod:`pygmt` to see what we've got:
         region=region,
         frame=True,
     )
-    fig.colorbar(frame='af+l"bathymetry [m]"')
+    fig.colorbar(frame=["af+lBathymetry", "y+lm"])
     fig.coast(land="#666666")
     fig.show()
 
@@ -99,7 +99,7 @@ And plot the selected data:
         region=region,
         frame=True,
     )
-    fig.colorbar(frame='af+l"bathymetry [m]"')
+    fig.colorbar(frame=["af+lBathymetry", "y+lm"])
     fig.coast(land="#666666")
     fig.show()
 
