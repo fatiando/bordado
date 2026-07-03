@@ -4,4 +4,5 @@ The following people have made contributions to the project (in alphabetical
 order by last name) and are considered "The Bordado Developers":
 
 * [Arthur Siqueira-Macedo](https://github.com/arthursmacedo) - Universidade de São Paulo, Brazil (ORCID: [0009-0006-5106-4356](https://orcid.org/0009-0006-5106-4356))
+* [Matthew Tankersley](https://github.com/mdtanker) - Kiel University, Germany (ORCID: [0000-0003-4266-8554](https://orcid.org/0000-0003-4266-8554))
 * [Leonardo Uieda](https://github.com/leouieda) - Universidade de São Paulo, Brazil (ORCID: [0000-0001-6123-9515](https://www.orcid.org/0000-0001-6123-9515))
