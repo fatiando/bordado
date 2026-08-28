@@ -166,8 +166,29 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rolling-average.html">7. Calculate a rolling average of scattered point data</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="nav bd-sidenav">
@@ -178,16 +199,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
@@ -202,6 +227,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -359,9 +385,9 @@ document.write(`
 <span class="c1">#</span>
 <span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
 <span class="c1">#</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Functions to generate points along a segment between two points.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -373,7 +399,7 @@ document.write(`
 <span class="k">def</span><span class="w"> </span><span class="nf">profile_coordinates</span><span class="p">(</span>
     <span class="n">beginning</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Generate evenly spaced coordinates along a straight line between points.</span>
 
 <span class="sd">    The generated coordinates specify points along a straight line in Cartesian</span>
@@ -398,7 +424,7 @@ document.write(`
 <span class="sd">        must be provided.</span>
 <span class="sd">    non_dimensional_coords : None, scalar, or tuple of scalars</span>
 <span class="sd">        If not None, then value(s) of extra non-dimensional coordinates</span>
-<span class="sd">        (coordinates that aren&#39;t part of the profile dimensions, like height</span>
+<span class="sd">        (coordinates that aren't part of the profile dimensions, like height</span>
 <span class="sd">        for a lat/lon profile). Will generate extra coordinate arrays from</span>
 <span class="sd">        these values with the same shape of the final profile coordinates and</span>
 <span class="sd">        the constant value given here. Use this to generate arrays of constant</span>
@@ -421,21 +447,21 @@ document.write(`
 <span class="sd">    Generate a profile between two points with 11 points in it:</span>
 
 <span class="sd">    &gt;&gt;&gt; (east, north), dist = profile_coordinates((1, 10), (1, 20), size=11)</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;easting:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in east))</span>
+<span class="sd">    &gt;&gt;&gt; print('easting:', ', '.join(f'{i:.1f}' for i in east))</span>
 <span class="sd">    easting: 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;northing:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in north))</span>
+<span class="sd">    &gt;&gt;&gt; print('northing:', ', '.join(f'{i:.1f}' for i in north))</span>
 <span class="sd">    northing: 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;distance:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in dist))</span>
+<span class="sd">    &gt;&gt;&gt; print('distance:', ', '.join(f'{i:.1f}' for i in dist))</span>
 <span class="sd">    distance: 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0</span>
 
 <span class="sd">    We can equally specify the point spacing instead of the number of points:</span>
 
 <span class="sd">    &gt;&gt;&gt; (east, north), dist = profile_coordinates((1, 10), (1, 20), spacing=1)</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;easting:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in east))</span>
+<span class="sd">    &gt;&gt;&gt; print('easting:', ', '.join(f'{i:.1f}' for i in east))</span>
 <span class="sd">    easting: 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;northing:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in north))</span>
+<span class="sd">    &gt;&gt;&gt; print('northing:', ', '.join(f'{i:.1f}' for i in north))</span>
 <span class="sd">    northing: 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;distance:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in dist))</span>
+<span class="sd">    &gt;&gt;&gt; print('distance:', ', '.join(f'{i:.1f}' for i in dist))</span>
 <span class="sd">    distance: 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0</span>
 
 <span class="sd">    The points can also be more than 2-dimensional. The number of returned</span>
@@ -444,13 +470,13 @@ document.write(`
 <span class="sd">    &gt;&gt;&gt; (east, north, up), dist = profile_coordinates(</span>
 <span class="sd">    ...     (1, 10, 5), (1, 20, 5), spacing=1,</span>
 <span class="sd">    ... )</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;easting:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in east))</span>
+<span class="sd">    &gt;&gt;&gt; print('easting:', ', '.join(f'{i:.1f}' for i in east))</span>
 <span class="sd">    easting: 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;northing:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in north))</span>
+<span class="sd">    &gt;&gt;&gt; print('northing:', ', '.join(f'{i:.1f}' for i in north))</span>
 <span class="sd">    northing: 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;upward:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in up))</span>
+<span class="sd">    &gt;&gt;&gt; print('upward:', ', '.join(f'{i:.1f}' for i in up))</span>
 <span class="sd">    upward: 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;distance:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in dist))</span>
+<span class="sd">    &gt;&gt;&gt; print('distance:', ', '.join(f'{i:.1f}' for i in dist))</span>
 <span class="sd">    distance: 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0</span>
 
 <span class="sd">    It can sometimes be useful to generate an additional array of the same size</span>
@@ -471,18 +497,18 @@ document.write(`
 <span class="sd">    [35. 35. 35. 35. 35. 35. 35. 35. 35. 35. 35.]</span>
 <span class="sd">    &gt;&gt;&gt; print(time)</span>
 <span class="sd">    [0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">beginning</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">end</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;Beginning and end points of the profile must have the same number of &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;coordinates. Given </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">beginning</span><span class="p">)</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="si">}</span><span class="s2">, respectively.&quot;</span>
+            <span class="s2">"Beginning and end points of the profile must have the same number of "</span>
+            <span class="sa">f</span><span class="s2">"coordinates. Given </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">beginning</span><span class="p">)</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="si">}</span><span class="s2">, respectively."</span>
         <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
     <span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">beginning</span><span class="p">)</span>
     <span class="n">point_separation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">difference</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="n">directional_vetor</span> <span class="o">=</span> <span class="n">difference</span> <span class="o">/</span> <span class="n">point_separation</span>
     <span class="n">distances</span> <span class="o">=</span> <span class="n">line_coordinates</span><span class="p">(</span>
-        <span class="mi">0</span><span class="p">,</span> <span class="n">point_separation</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;spacing&quot;</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">point_separation</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="s2">"spacing"</span>
     <span class="p">)</span>
     <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">x</span> <span class="o">+</span> <span class="n">distances</span> <span class="o">*</span> <span class="n">direction</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">direction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">beginning</span><span class="p">,</span> <span class="n">directional_vetor</span><span class="p">)</span>
@@ -505,7 +531,7 @@ document.write(`
     <span class="n">radius</span><span class="o">=</span><span class="mi">6_370_994</span><span class="p">,</span>
     <span class="n">non_dimensional_coords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Generate evenly spaced coordinates along a great circle between points.</span>
 
 <span class="sd">    The beginning and end points must be (longitude, latitude) coordinates on</span>
@@ -539,7 +565,7 @@ document.write(`
 <span class="sd">        radius of the WGS84 Earth ellipsoid (6,370,994 meters).</span>
 <span class="sd">    non_dimensional_coords : None, scalar, or tuple of scalars</span>
 <span class="sd">        If not None, then value(s) of extra non-dimensional coordinates</span>
-<span class="sd">        (coordinates that aren&#39;t part of the profile dimensions, like height</span>
+<span class="sd">        (coordinates that aren't part of the profile dimensions, like height</span>
 <span class="sd">        for a lat/lon profile). Will generate extra coordinate arrays from</span>
 <span class="sd">        these values with the same shape of the final profile coordinates and</span>
 <span class="sd">        the constant value given here. Use this to generate arrays of constant</span>
@@ -567,11 +593,11 @@ document.write(`
 <span class="sd">    &gt;&gt;&gt; (longitude, latitude), distance = great_circle_coordinates(</span>
 <span class="sd">    ...     (0, 0), (10, 0), spacing=spacing, radius=1,</span>
 <span class="sd">    ... )</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;longitude:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in longitude))</span>
+<span class="sd">    &gt;&gt;&gt; print('longitude:', ', '.join(f'{i:.1f}' for i in longitude))</span>
 <span class="sd">    longitude: 0.0, 2.0, 4.0, 6.0, 8.0, 10.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;latitude:&#39;, &#39;, &#39;.join(f&#39;{i:.1f}&#39; for i in latitude))</span>
+<span class="sd">    &gt;&gt;&gt; print('latitude:', ', '.join(f'{i:.1f}' for i in latitude))</span>
 <span class="sd">    latitude: 0.0, 0.0, 0.0, 0.0, 0.0, 0.0</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;distance:&#39;, &#39;, &#39;.join(f&#39;{i:.4f}&#39; for i in distance))</span>
+<span class="sd">    &gt;&gt;&gt; print('distance:', ', '.join(f'{i:.4f}' for i in distance))</span>
 <span class="sd">    distance: 0.0000, 0.0349, 0.0698, 0.1047, 0.1396, 0.1745</span>
 <span class="sd">    &gt;&gt;&gt; print(np.allclose(distance[1:] - distance[0:-1], spacing))</span>
 <span class="sd">    True</span>
@@ -584,12 +610,12 @@ document.write(`
 <span class="sd">    ...     (1, 10), (1, 20), size=11, non_dimensional_coords=35)</span>
 <span class="sd">    &gt;&gt;&gt; print(height)</span>
 <span class="sd">    [35. 35. 35. 35. 35. 35. 35. 35. 35. 35. 35.]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">beginning</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;Beginning and end points of a great circle profile must have two &quot;</span>
-            <span class="s2">&quot;coordinates (longitude and latitude). &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Given </span><span class="si">{</span><span class="n">beginning</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">, respectively.&quot;</span>
+            <span class="s2">"Beginning and end points of a great circle profile must have two "</span>
+            <span class="s2">"coordinates (longitude and latitude). "</span>
+            <span class="sa">f</span><span class="s2">"Given </span><span class="si">{</span><span class="n">beginning</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">, respectively."</span>
         <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
     <span class="n">lon1</span><span class="p">,</span> <span class="n">lat1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">beginning</span><span class="p">)</span>
@@ -633,7 +659,7 @@ document.write(`
             <span class="n">great_circle_distance</span> <span class="o">*</span> <span class="n">radius</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
             <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
-            <span class="n">adjust</span><span class="o">=</span><span class="s2">&quot;spacing&quot;</span><span class="p">,</span>
+            <span class="n">adjust</span><span class="o">=</span><span class="s2">"spacing"</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="o">/</span> <span class="n">radius</span>
     <span class="p">)</span>
@@ -699,7 +725,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -708,7 +734,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Aug 28, 2026.
   <br/>
 </p>
   </div>

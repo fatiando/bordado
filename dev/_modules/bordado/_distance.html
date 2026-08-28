@@ -166,8 +166,29 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Why use Bordado?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/line.html">1. Making evenly spaced values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/grid.html">2. Regular grids and meshes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/profile.html">3. Profiles between two points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/random.html">4. Random coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/split.html">5. Splitting points into blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../how-to/index.html">How To</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/get-region.html">1. Get the region (bounding box) of a set of points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/pad-region.html">2. Extend a region on all sides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/inside.html">3. Select points that fall inside a region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rotate.html">4. Rotate coordinates in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rescale.html">5. Rescale coordinates to a different region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/block-average.html">6. Calculate data averages in blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../how-to/rolling-average.html">7. Calculate a rolling average of scattered point data</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Documentation</span></p>
 <ul class="nav bd-sidenav">
@@ -178,16 +199,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.grid_coordinates.html">bordado.grid_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.profile_coordinates.html">bordado.profile_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.great_circle_coordinates.html">bordado.great_circle_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rescale_coordinates.html">bordado.rescale_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rotate_coordinates.html">bordado.rotate_coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.inside.html">bordado.inside</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_region.html">bordado.get_region</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.pad_region.html">bordado.pad_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.get_spacing.html">bordado.get_spacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split.html">bordado.block_split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.block_split_spherical.html">bordado.block_split_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.expanding_window.html">bordado.expanding_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window.html">bordado.rolling_window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.rolling_window_spherical.html">bordado.rolling_window_spherical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.neighbor_distance_statistics.html">bordado.neighbor_distance_statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.spacing_to_size.html">bordado.spacing_to_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/generated/bordado.shape_to_spacing.html">bordado.shape_to_spacing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing Bordado</a></li>
@@ -202,6 +227,7 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">How to contribute</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado">Source code on GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/fatiando/bordado/blob/main/AUTHORS.md">Authors</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.fatiando.org">The Fatiando a Terra project</a></li>
 </ul>
 
@@ -359,9 +385,9 @@ document.write(`
 <span class="c1">#</span>
 <span class="c1"># This code is part of the Fatiando a Terra project (https://www.fatiando.org)</span>
 <span class="c1">#</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Functions to calculate the distances between neighbors.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.spatial</span>
@@ -372,7 +398,7 @@ document.write(`
 <div class="viewcode-block" id="neighbor_distance_statistics">
 <a class="viewcode-back" href="../../api/generated/bordado.neighbor_distance_statistics.html#bordado.neighbor_distance_statistics">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">neighbor_distance_statistics</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">statistic</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Calculate statistics of the distances to the k-nearest neighbors of points.</span>
 
 <span class="sd">    For each point specified in *coordinates*, calculate the given statistic on</span>
@@ -392,8 +418,8 @@ document.write(`
 <span class="sd">        shape.</span>
 <span class="sd">    statistic : str</span>
 <span class="sd">        Which statistic to calculate for the distances of the k-nearest</span>
-<span class="sd">        neighbors of each point. Valid values are: ``&quot;mean&quot;``,  ``&quot;median&quot;``,</span>
-<span class="sd">        ``&quot;std&quot;`` (standard deviation),  ``&quot;var&quot;`` (variance),  ``&quot;ptp&quot;``</span>
+<span class="sd">        neighbors of each point. Valid values are: ``"mean"``,  ``"median"``,</span>
+<span class="sd">        ``"std"`` (standard deviation),  ``"var"`` (variance),  ``"ptp"``</span>
 <span class="sd">        (peak-to-peak amplitude).</span>
 <span class="sd">    k : int</span>
 <span class="sd">        Will calculate the median of the *k* nearest neighbors of each point. A</span>
@@ -420,7 +446,7 @@ document.write(`
 <span class="sd">    points clustered into tight groups (e.g., densely sampled along a flight</span>
 <span class="sd">    line or ship track) will have very small distances to the closest</span>
 <span class="sd">    neighbors, which is not representative of the actual median spacing of</span>
-<span class="sd">    points because it doesn&#39;t take the spacing between lines into account. In</span>
+<span class="sd">    points because it doesn't take the spacing between lines into account. In</span>
 <span class="sd">    these cases, a median of the 10-20 or more nearest neighbors might be more</span>
 <span class="sd">    representative.</span>
 
@@ -443,7 +469,7 @@ document.write(`
 
 <span class="sd">    The mean of the distance to 1 nearest neighbor should be the grid spacing:</span>
 
-<span class="sd">    &gt;&gt;&gt; mean_distances = neighbor_distance_statistics(coordinates, &quot;mean&quot;, k=1)</span>
+<span class="sd">    &gt;&gt;&gt; mean_distances = neighbor_distance_statistics(coordinates, "mean", k=1)</span>
 <span class="sd">    &gt;&gt;&gt; print(mean_distances)</span>
 <span class="sd">    [[1. 1. 1. 1. 1. 1.]</span>
 <span class="sd">     [1. 1. 1. 1. 1. 1.]</span>
@@ -455,7 +481,7 @@ document.write(`
 <span class="sd">    &gt;&gt;&gt; print(mean_distances.shape, coordinates[0].shape)</span>
 <span class="sd">    (4, 6) (4, 6)</span>
 <span class="sd">    &gt;&gt;&gt; mean_distances = neighbor_distance_statistics(</span>
-<span class="sd">    ...     [c.ravel() for c in coordinates], &quot;mean&quot;, k=1,</span>
+<span class="sd">    ...     [c.ravel() for c in coordinates], "mean", k=1,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; print(mean_distances.shape)</span>
 <span class="sd">    (24,)</span>
@@ -463,7 +489,7 @@ document.write(`
 <span class="sd">    The mean distance to the 2 nearest points should also all be 1 since they</span>
 <span class="sd">    are the neighbors along the rows and columns of the matrix:</span>
 
-<span class="sd">    &gt;&gt;&gt; mean_distances = neighbor_distance_statistics(coordinates, &quot;mean&quot;, k=2)</span>
+<span class="sd">    &gt;&gt;&gt; mean_distances = neighbor_distance_statistics(coordinates, "mean", k=2)</span>
 <span class="sd">    &gt;&gt;&gt; print(mean_distances)</span>
 <span class="sd">    [[1. 1. 1. 1. 1. 1.]</span>
 <span class="sd">     [1. 1. 1. 1. 1. 1.]</span>
@@ -474,7 +500,7 @@ document.write(`
 <span class="sd">    the distances are [1, 1, sqrt(2)] which leads to a median of 1:</span>
 
 <span class="sd">    &gt;&gt;&gt; median_distances = neighbor_distance_statistics(</span>
-<span class="sd">    ...     coordinates, &quot;median&quot;, k=3,</span>
+<span class="sd">    ...     coordinates, "median", k=3,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; print(median_distances)</span>
 <span class="sd">    [[1. 1. 1. 1. 1. 1.]</span>
@@ -486,38 +512,38 @@ document.write(`
 <span class="sd">    corners, which results in a median of 1.21.</span>
 
 <span class="sd">    &gt;&gt;&gt; median_distances = neighbor_distance_statistics(</span>
-<span class="sd">    ...     coordinates, &quot;median&quot;, k=4,</span>
+<span class="sd">    ...     coordinates, "median", k=4,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; for line in median_distances:</span>
-<span class="sd">    ...     print(&quot; &quot;.join([f&quot;{i:.2f}&quot; for i in line]))</span>
+<span class="sd">    ...     print(" ".join([f"{i:.2f}" for i in line]))</span>
 <span class="sd">    1.21 1.00 1.00 1.00 1.00 1.21</span>
 <span class="sd">    1.00 1.00 1.00 1.00 1.00 1.00</span>
 <span class="sd">    1.00 1.00 1.00 1.00 1.00 1.00</span>
 <span class="sd">    1.21 1.00 1.00 1.00 1.00 1.21</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">coordinates</span> <span class="o">=</span> <span class="n">check_coordinates</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Invalid number of neighbors &#39;k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&#39;. Must be &gt;= 1.&quot;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Invalid number of neighbors 'k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">'. Must be &gt;= 1."</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
     <span class="n">statistics</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
-        <span class="s2">&quot;median&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">,</span>
-        <span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
-        <span class="s2">&quot;ptp&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">,</span>
+        <span class="s2">"mean"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+        <span class="s2">"median"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">,</span>
+        <span class="s2">"std"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
+        <span class="s2">"ptp"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="k">if</span> <span class="n">statistic</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">statistics</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Invalid statistic &#39;</span><span class="si">{</span><span class="n">statistic</span><span class="si">}</span><span class="s2">&#39;. Must be one of: </span><span class="si">{</span><span class="n">statistics</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Invalid statistic '</span><span class="si">{</span><span class="n">statistic</span><span class="si">}</span><span class="s2">'. Must be one of: </span><span class="si">{</span><span class="n">statistics</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">."</span>
         <span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="o">*</span><span class="n">coordinates</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">transposed_coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">])</span>
     <span class="n">tree</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">KDTree</span><span class="p">(</span><span class="n">transposed_coordinates</span><span class="p">)</span>
     <span class="c1"># The k=1 nearest point is going to be the point itself (with a distance of</span>
-    <span class="c1"># zero) because we don&#39;t remove each point from the dataset in turn. We</span>
-    <span class="c1"># don&#39;t care about that distance so start with the second closest. Only get</span>
+    <span class="c1"># zero) because we don't remove each point from the dataset in turn. We</span>
+    <span class="c1"># don't care about that distance so start with the second closest. Only get</span>
     <span class="c1"># the first element returned (the distance) and ignore the rest (the</span>
     <span class="c1"># neighbor indices).</span>
     <span class="n">k_distances</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">transposed_coordinates</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">:]</span>
@@ -558,7 +584,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2025, The Bordado Developers.
+      © Copyright 2026, The Bordado Developers.
       <br/>
     
   </p>
@@ -567,7 +593,7 @@ document.write(`
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Aug 14, 2025.
+  Last updated on Aug 28, 2026.
   <br/>
 </p>
   </div>
