@@ -8,14 +8,15 @@
 Configuration for sphinx https://www.sphinx-doc.org
 """
 
-import datetime
+import datetime as dt
 
 import bordado
 
 # Project information
 # -----------------------------------------------------------------------------
 project = "Bordado"
-copyright = f"{datetime.date.today().year}, The {project} Developers"
+year = dt.datetime.now(tz=dt.timezone.utc).date().year
+copyright = f"{year}, The {project} Developers"
 is_dev_version = len(bordado.__version__.split(".")) > 3
 version = "dev" if is_dev_version else bordado.__version__
 
