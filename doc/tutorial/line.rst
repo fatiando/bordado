@@ -74,7 +74,7 @@ adjust the region instead:
 .. jupyter-execute::
 
     values_region = bd.line_coordinates(0, 10, spacing=0.6, adjust="region")
-    print(values)
+    print(values_region)
 
 This same logic also applies to multidimensional sets of values or coordinates,
 for example those belonging to :ref:`regular grids <tutorial_grid>`.
