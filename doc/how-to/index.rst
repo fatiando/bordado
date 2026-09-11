@@ -22,6 +22,7 @@ the ":ref:`tutorial`" first.
     rescale.rst
     block-average.rst
     rolling-average.rst
+    median-distance.rst
 
 .. seealso::
 
