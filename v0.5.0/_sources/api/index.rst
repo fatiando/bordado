@@ -1,0 +1,70 @@
+.. _api:
+
+List of functions and classes (API)
+===================================
+
+.. automodule:: bordado
+
+.. currentmodule:: bordado
+
+Coordinate generation
+---------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    line_coordinates
+    random_coordinates
+    random_coordinates_spherical
+    grid_coordinates
+    profile_coordinates
+    great_circle_coordinates
+
+Coordinate transformation
+-------------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    rescale_coordinates
+    rotate_coordinates
+
+Regions and bounding boxes
+--------------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    inside
+    get_region
+    pad_region
+
+Grid and mesh point spacing
+---------------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    get_spacing
+    spacing_to_size
+    shape_to_spacing
+
+Splitting points into blocks and windows
+----------------------------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    block_split
+    block_split_spherical
+    expanding_window
+    rolling_window
+    rolling_window_spherical
+
+Distance operations
+-------------------
+
+.. autosummary::
+    :toctree: generated/
+
+    neighbor_distance_statistics
