@@ -3,6 +3,71 @@
 Changelog
 =========
 
+Version 0.5.0
+-------------
+
+Released on: 2026/09/11
+
+doi: https://doi.org/10.5281/zenodo.22712877
+
+Bug fixes:
+
+- Fix sanity check in ``rolling_window`` for the ``window_size`` parameter in higher dimensions (`#110 <https://github.com/fatiando/bordado/pull/110>`__)
+
+New features:
+
+- Add function ``block_split_spherical`` to split points into equal area blocks on the sphere (`#132 <https://github.com/fatiando/bordado/pull/132>`__)
+- Add function ``get_spacing`` to extract spacing information from coordinates, assuming that they are from a regular grid (`#144 <https://github.com/fatiando/bordado/pull/144>`__)
+- Add function ``rotate_coordinates`` to rotate coordinates in 2D space around a given point (`#128 <https://github.com/fatiando/bordado/pull/128>`__)
+- Add function ``rescale_coordinates`` to translate and stretch coordinates to a new region (`#108 <https://github.com/fatiando/bordado/pull/108>`__)
+
+Documentation
+
+- Add a logo for Bordado (`#81 <https://github.com/fatiando/bordado/pull/81>`__)
+- Add a tutorial for Bordado (`#80 <https://github.com/fatiando/bordado/pull/80>`__)
+- Add a How To about calculating neighbor distances (`#158 <https://github.com/fatiando/bordado/pull/158>`__)
+- Fix printing wrong variable in the line coordinates tutorial (`#157 <https://github.com/fatiando/bordado/pull/157>`__)
+- Add a How To about calculating rolling averages (`#147 <https://github.com/fatiando/bordado/pull/147>`__)
+- Fix docstring typos in the ``get_spacing`` function (`#145 <https://github.com/fatiando/bordado/pull/145>`__)
+- Add a How To about rescaling coordinates to different region (`#143 <https://github.com/fatiando/bordado/pull/143>`__)
+- Add a How To about calculating block averages on scattered data (`#142 <https://github.com/fatiando/bordado/pull/142>`__)
+- Add plots to the line_coordinates tutorial to make it clearer (`#141 <https://github.com/fatiando/bordado/pull/141>`__)
+- Add link to the NOAA grid registration page in our Tutorial (`#136 <https://github.com/fatiando/bordado/pull/136>`__)
+- Replace NEP29 link with SPEC 0 in compatibility docs (`#114 <https://github.com/fatiando/bordado/pull/114>`__)
+- Add a link to the How To page at the end of the tutorial (`#113 <https://github.com/fatiando/bordado/pull/113>`__)
+- Add a 3D plot for multidimensional grids in the tutorial (`#112 <https://github.com/fatiando/bordado/pull/112>`__)
+- Add a How To about selecting points inside a region (`#111 <https://github.com/fatiando/bordado/pull/111>`__)
+- Add a How To about padding a region (`#105 <https://github.com/fatiando/bordado/pull/105>`__)
+- Gather pages from tutorial and how to in the docs table of contents (`#103 <https://github.com/fatiando/bordado/pull/103>`__)
+- Make a How To guide about getting the region of coordinates (`#98 <https://github.com/fatiando/bordado/pull/98>`__)
+- Add link to the AUTHORS file in the docs navigation (`#86 <https://github.com/fatiando/bordado/pull/86>`__)
+- Fix typo in Install page (`#85 <https://github.com/fatiando/bordado/pull/85>`__)
+- General improvements to install and version compatibility pages (`#84 <https://github.com/fatiando/bordado/pull/84>`__)
+- Add link to citation page in the README (`#82 <https://github.com/fatiando/bordado/pull/82>`__)
+
+Maintenance:
+
+- Add testing and support for Python 3.14 (`#89 <https://github.com/fatiando/bordado/pull/89>`__)
+- Pin the version of our code linters and formatters and use Dependabot for updates (`#120 <https://github.com/fatiando/bordado/pull/120>`__, `#127 <https://github.com/fatiando/bordado/pull/127>`__, `#124 <https://github.com/fatiando/bordado/pull/124>`__, `#123 <https://github.com/fatiando/bordado/pull/123>`__, `#122 <https://github.com/fatiando/bordado/pull/122>`__, `#121 <https://github.com/fatiando/bordado/pull/121>`__)
+- Revise Actions workflows to only run when necessary, saving resources and time (`#119 <https://github.com/fatiando/bordado/pull/119>`__)
+- Don’t use version number pinning in Actions even for official ones, use hashes instead (`#118 <https://github.com/fatiando/bordado/pull/118>`__)
+- Fix deprecation warnings in push to PyPI GitHub Action (`#117 <https://github.com/fatiando/bordado/pull/117>`__)
+- Fix missing write permission in publish Actions workflow (`#116 <https://github.com/fatiando/bordado/pull/116>`__)
+- Fix cache poisoning vulnerability in GitHub Actions (`#115 <https://github.com/fatiando/bordado/pull/115>`__)
+- Fetch Ensaio data from GitHub when building the docs (`#106 <https://github.com/fatiando/bordado/pull/106>`__)
+- Update development status to beta (ready for use but in dev) (`#102 <https://github.com/fatiando/bordado/pull/102>`__)
+- Fix license specification in pyproject.toml (`#88 <https://github.com/fatiando/bordado/pull/88>`__)
+- Fix broken clean target in the Makefile (`#87 <https://github.com/fatiando/bordado/pull/87>`__)
+- Remove the top-level CITATION file (`#83 <https://github.com/fatiando/bordado/pull/83>`__)
+
+This release contains contributions from:
+
+- Sai Asish Y
+- Arthur Siqueira-Macedo
+- Santiago Soler
+- Matt Tankersley
+- Leonardo Uieda
+
 Version 0.4.0
 -------------
 
