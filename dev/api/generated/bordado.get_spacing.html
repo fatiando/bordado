@@ -467,13 +467,13 @@ spaced, an exception will be raised.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be Python
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be Python
 lists or any numpy-compatible array type. Arrays must all have the
 same shape. The number of dimensions of each array must be equal to the
 number of arrays in the tuple. For example, 2D grids require 2 arrays
 and each array must be 2D.</p>
 </dd>
-<dt><strong>tol</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The relative tolerance used to check if the spacing is uniform and if
+<dt><strong>tol</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The relative tolerance used to check if the spacing is uniform and if
 the spacing is equal in all dimensions. Floating point checks cannot
 be done with equality so a tolerance is always necessary. Should be
 a positive float and can be interpreted as a decimal percentage of
@@ -483,7 +483,7 @@ difference that is tolerated.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>spacing</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (…, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_SN</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_WE</span></code>), <code class="xref py py-obj docutils literal notranslate"><span class="pre">or</span></code> <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a></span></dt><dd><p>The spacing in each direction of the given coordinates, in reverse
+<dt><strong>spacing</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (…, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_SN</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_WE</span></code>), <code class="xref py py-obj docutils literal notranslate"><span class="pre">or</span></code> <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a></span></dt><dd><p>The spacing in each direction of the given coordinates, in reverse
 order. A single value means that the spacing is equal in all directions
 (within the given tolerance). If a tuple, will have one value per
 coordinate. The order of arguments is the opposite of the order of the
@@ -643,7 +643,7 @@ tolerance. For example, this should fail with the default tolerance:</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 02, 2026.
   <br/>
 </p>
   </div>

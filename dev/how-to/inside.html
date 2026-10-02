@@ -449,7 +449,7 @@ document.write(`
 <span id="how-to-inside"></span><h1><span class="section-number">3. </span>Select points that fall inside a region<a class="headerlink" href="#select-points-that-fall-inside-a-region" title="Link to this heading">#</a></h1>
 <p>When we have irregularly sampled data, it can be tedious to select the
 points that fall inside a given region (bounding box). It can be done with
-<a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> or <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v3.0.5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a> boolean indexing, of course. But Bordado offers
+<a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> or <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v3.0.6)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a> boolean indexing, of course. But Bordado offers
 <a class="reference internal" href="../api/generated/bordado.inside.html#bordado.inside" title="bordado.inside"><code class="xref py py-func docutils literal notranslate"><span class="pre">bordado.inside</span></code></a> to make this easier and generalizable to n-dimensions.
 Let’s see how it works on a real dataset!</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -466,7 +466,7 @@ Let’s see how it works on a real dataset!</p>
 </div>
 <p>We’ll use <a class="reference external" href="https://www.fatiando.org/ensaio/latest/api/generated/ensaio.fetch_caribbean_bathymetry.html#ensaio.fetch_caribbean_bathymetry" title="(in Ensaio vv0.7.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ensaio.fetch_caribbean_bathymetry</span></code></a> to fetch some bathymetry
 data from the Caribbean. The dataset is a CSV file, which can be loaded with
-<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v3.0.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv</span></code></a>:</p>
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v3.0.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv</span></code></a>:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="n">ensaio</span><span class="o">.</span><span class="n">fetch_caribbean_bathymetry</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -857,7 +857,7 @@ longitude and then latitude.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 02, 2026.
   <br/>
 </p>
   </div>

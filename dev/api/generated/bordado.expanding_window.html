@@ -467,11 +467,11 @@ have to be expanding in size (the sizes can be in any order).</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
 Python lists or any numpy-compatible array type. Arrays can be of any
 shape but must all have the same shape.</p>
 </dd>
-<dt><strong>center</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>The coordinates of the center of the window. Must have the same number
+<dt><strong>center</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>The coordinates of the center of the window. Must have the same number
 of elements as <em>coordinates</em>. Coordinates <strong>cannot be arrays</strong>.</p>
 </dd>
 <dt><strong>sizes</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a></span></dt><dd><p>The sizes of the windows. Does not have to be in any particular order.
@@ -482,7 +482,7 @@ given. Units should match the units of <em>coordinates</em> and <em>center</em>.
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></span></dt><dd><p>Each element of the list corresponds to the indices of points falling
+<dt><strong>indices</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></span></dt><dd><p>Each element of the list corresponds to the indices of points falling
 inside a window. Use them to index the coordinates for each window. The
 indices will depend on the number of dimensions in the input
 coordinates. For example, if the coordinates are 2D arrays, each window
@@ -726,7 +726,7 @@ still in a tuple, though):</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 02, 2026.
   <br/>
 </p>
   </div>

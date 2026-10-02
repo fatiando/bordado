@@ -470,17 +470,17 @@ spread (standard deviation), variability of neighboring distances
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Should be in an
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Should be in an
 order compatible with the order of boundaries in <em>region</em>. Arrays can
 be Python lists. Arrays can be of any shape but must all have the same
 shape.</p>
 </dd>
-<dt><strong>statistic</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Which statistic to calculate for the distances of the k-nearest
+<dt><strong>statistic</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Which statistic to calculate for the distances of the k-nearest
 neighbors of each point. Valid values are: <code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code>,  <code class="docutils literal notranslate"><span class="pre">&quot;median&quot;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&quot;std&quot;</span></code> (standard deviation),  <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code> (variance),  <code class="docutils literal notranslate"><span class="pre">&quot;ptp&quot;</span></code>
 (peak-to-peak amplitude).</p>
 </dd>
-<dt><strong>k</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Will calculate the median of the <em>k</em> nearest neighbors of each point. A
+<dt><strong>k</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Will calculate the median of the <em>k</em> nearest neighbors of each point. A
 value of 1 will result in the distance to nearest neighbor of each data
 point. Must be &gt;= 1. Default is 1.</p>
 </dd>
@@ -496,7 +496,7 @@ arrays.</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>If <em>k</em> is less than 1, if the <em>statistic</em> is invalid, or if coordinate
+<dt><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>If <em>k</em> is less than 1, if the <em>statistic</em> is invalid, or if coordinate
 arrays have different shapes.</p>
 </dd>
 </dl>
@@ -660,7 +660,7 @@ corners, which results in a median of 1.21.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 02, 2026.
   <br/>
 </p>
   </div>

@@ -466,16 +466,16 @@ between directions.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>, …)</span></dt><dd><p>The boundaries of a given region in Cartesian or geographic
+<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>, …)</span></dt><dd><p>The boundaries of a given region in Cartesian or geographic
 coordinates. Should have a lower and an upper boundary for each
 dimension of the coordinate system.</p>
 </dd>
-<dt><strong>shape</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (…, <code class="xref py py-obj docutils literal notranslate"><span class="pre">size_SN</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">size_WE</span></code>)</span></dt><dd><p>The number of points in each direction of the given region, in reverse
+<dt><strong>shape</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (…, <code class="xref py py-obj docutils literal notranslate"><span class="pre">size_SN</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">size_WE</span></code>)</span></dt><dd><p>The number of points in each direction of the given region, in reverse
 order. Must have one integer value per dimension of the region. The
 order of arguments is the opposite of the order of the region for
 compatibility with numpy’s <code class="docutils literal notranslate"><span class="pre">.shape</span></code> attribute.</p>
 </dd>
-<dt><strong>pixel_register</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></span></dt><dd><p>If True, the coordinates will refer to the center of each grid pixel
+<dt><strong>pixel_register</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></span></dt><dd><p>If True, the coordinates will refer to the center of each grid pixel
 instead of the grid lines. In practice, this means that there will be
 one less element per dimension of the grid when compared to grid line
 registered. Default is False.</p>
@@ -484,7 +484,7 @@ registered. Default is False.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>spacing</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (…, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_SN</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_WE</span></code>)</span></dt><dd><p>The grid spacing in each direction of the given region, in reverse
+<dt><strong>spacing</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (…, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_SN</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">space_WE</span></code>)</span></dt><dd><p>The grid spacing in each direction of the given region, in reverse
 order. Has one value per dimension of the region. The order of
 arguments is the opposite of the order of the region for compatibility
 with <em>shape</em>.</p>
@@ -615,7 +615,7 @@ with <em>shape</em>.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 02, 2026.
   <br/>
 </p>
   </div>

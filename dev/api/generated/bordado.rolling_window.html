@@ -468,24 +468,24 @@ to select points falling inside a given window.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
+<dt><strong>coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>Tuple of arrays with the coordinates of each point. Arrays can be
 Python lists or any numpy-compatible array type. Arrays can be of any
 shape but must all have the same shape.</p>
 </dd>
-<dt><strong>window_size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The size of the windows. Units should match the units of <em>coordinates</em>.
+<dt><strong>window_size</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The size of the windows. Units should match the units of <em>coordinates</em>.
 In case the window size is not a multiple of the region, either of them
 will be adjusted according to the value of the <em>adjust</em> argument.</p>
 </dd>
-<dt><strong>overlap</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The amount of overlap between adjacent windows. Should be within the
+<dt><strong>overlap</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>The amount of overlap between adjacent windows. Should be within the
 range 1 &gt; overlap ≥ 0. For example, an overlap of 0.5 means 50%
 overlap. An overlap of 0 will be the same as
 <a class="reference internal" href="bordado.block_split.html#bordado.block_split" title="bordado.block_split"><code class="xref py py-func docutils literal notranslate"><span class="pre">block_split</span></code></a>.</p>
 </dd>
-<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>, …)</span></dt><dd><p>The boundaries of a given region in Cartesian or geographic
+<dt><strong>region</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">W</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">E</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">S</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code>, …)</span></dt><dd><p>The boundaries of a given region in Cartesian or geographic
 coordinates. If region is not given, will use the bounding region of
 the given coordinates.</p>
 </dd>
-<dt><strong>adjust</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a> = “overlap” or “region”</span></dt><dd><p>Whether to adjust the window overlap or the region, if required.
+<dt><strong>adjust</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a> = “overlap” or “region”</span></dt><dd><p>Whether to adjust the window overlap or the region, if required.
 Adjusting the overlap or region is required when the combination of
 window size and overlap is not a multiple of the region. Defaults to
 adjusting the overlap.</p>
@@ -494,7 +494,7 @@ adjusting the overlap.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>window_coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>ND coordinate arrays for the center of each window. Will have the same
+<dt><strong>window_coordinates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> = (<code class="xref py py-obj docutils literal notranslate"><span class="pre">easting</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">northing</span></code>, …)</span></dt><dd><p>ND coordinate arrays for the center of each window. Will have the same
 number of arrays as the <em>coordinates</em> and each array will have the
 number of dimensions equal to <code class="docutils literal notranslate"><span class="pre">len(coordinates)</span></code>.</p>
 </dd>
@@ -713,7 +713,7 @@ the same as before:</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 02, 2026.
   <br/>
 </p>
   </div>
