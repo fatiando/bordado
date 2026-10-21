@@ -26,17 +26,17 @@ project.
 
 ## About
 
-**Bordado**  (Portuguese for "embroidery") is a Python package for creating,
-manipulating, and splitting geographic and Cartesian coordinates.
+**Bordado** (Portuguese for "embroidery") is a Python package for creating,
+manipulating, transforming, and splitting geographic and Cartesian coordinates.
 It can generate coordinates at regular intervals by specifying the number of
-points or the spacing between points. Bordado takes care of adjusting the
-spacing to make sure it matches the specified domain/region. It also contains
-functions for splitting coordinates into spatial blocks and more.
+points or the spacing between points, generate coordinates for straight-line
+and great circle profiles, split points along spacial windows on a plain or a
+sphere, and transform coordinates through rotations and translations.
 
-> Many of these functions used to be in
-> [Verde](https://www.fatiando.org/verde/) but were moved to Bordado to make
-> them more accessible without all of the extra dependencies that Verde
-> requires.
+> Some of these functions used to be in [Verde](https://www.fatiando.org/verde/)
+> but were moved to Bordado to make them more accessible without all the extra
+> dependencies that Verde requires. They were also improved and many now support
+> n-dimensional coordinates.
 
 ## Project goals
 
