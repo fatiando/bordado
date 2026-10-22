@@ -474,11 +474,11 @@ document.write(`
 </div>
 </div>
 <p><strong>Bordado</strong> (Portuguese for “embroidery”) is a Python package for creating,
-manipulating, and splitting geographic and Cartesian coordinates.
+manipulating, transforming, and splitting geographic and Cartesian coordinates.
 It can generate coordinates at regular intervals by specifying the number of
-points or the spacing between points. Bordado takes care of adjusting the
-spacing to make sure it matches the specified domain/region. It also contains
-functions for splitting coordinates into spatial blocks and more.</p>
+points or the spacing between points, generate coordinates for straight-line
+and great circle profiles, split points along spacial windows on a plain or a
+sphere, and transform coordinates through rotations and translations.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>Bordado is a part of the
@@ -530,11 +530,9 @@ functions for splitting coordinates into spatial blocks and more.</p>
 </div>
 <div class="seealso admonition">
 <p class="admonition-title">Look familiar?</p>
-<p>Many of the functions here used to be in
-<a class="reference external" href="https://www.fatiando.org/verde/">Verde</a>. They were moved to Bordado to
-make them more accessible without all the extra dependencies that Verde
-requires. We have also improved and expanded most of the functions ported
-from Verde.</p>
+<p>Some of the functions in Bordado used to be in <a class="reference external" href="https://www.fatiando.org/verde/">Verde</a>. They were moved to here to make them
+more accessible without all the extra  dependencies that Verde requires.
+They were also improved and many now support  n-dimensional coordinates.</p>
 </div>
 <hr class="docutils" />
 <section id="project-status">
@@ -558,6 +556,9 @@ GitHub</a>.</p>
 <a class="reference external" href="https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md">Contributing
 Guide</a>
 to see how you can help and give feedback.</p>
+<p>🤖 <strong>Policy on AI usage:</strong>
+Please read our
+<a class="reference external" href="https://github.com/fatiando/community/blob/main/AI.md">AI Usage Policy</a>.</p>
 <p>🧑🏾‍🤝‍🧑🏼 <strong>Code of conduct:</strong> This project is released with a <a class="reference external" href="https://github.com/fatiando/community/blob/main/CODE_OF_CONDUCT.md">Code of
 Conduct</a>.
 By participating in this project you agree to abide by its terms.</p>
@@ -660,7 +661,7 @@ file.</p>
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Sep 11, 2026.
+  Last updated on Oct 22, 2026.
   <br/>
 </p>
   </div>
