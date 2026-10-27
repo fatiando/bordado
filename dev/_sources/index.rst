@@ -24,11 +24,11 @@
             :class: sd-m-auto dark-light
 
 **Bordado** (Portuguese for "embroidery") is a Python package for creating,
-manipulating, and splitting geographic and Cartesian coordinates.
+manipulating, transforming, and splitting geographic and Cartesian coordinates.
 It can generate coordinates at regular intervals by specifying the number of
-points or the spacing between points. Bordado takes care of adjusting the
-spacing to make sure it matches the specified domain/region. It also contains
-functions for splitting coordinates into spatial blocks and more.
+points or the spacing between points, generate coordinates for straight-line
+and great circle profiles, split points along spacial windows on a plain or a
+sphere, and transform coordinates through rotations and translations.
 
 .. seealso::
 
@@ -97,11 +97,10 @@ functions for splitting coordinates into spatial blocks and more.
 .. admonition:: Look familiar?
     :class: seealso
 
-    Many of the functions here used to be in
-    `Verde <https://www.fatiando.org/verde/>`__. They were moved to Bordado to
-    make them more accessible without all the extra dependencies that Verde
-    requires. We have also improved and expanded most of the functions ported
-    from Verde.
+    Some of the functions in Bordado used to be in `Verde
+    <https://www.fatiando.org/verde/>`__. They were moved to here to make them
+    more accessible without all the extra  dependencies that Verde requires.
+    They were also improved and many now support  n-dimensional coordinates.
 
 ----
 
@@ -130,6 +129,10 @@ Getting involved
 `Contributing
 Guide <https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md>`__
 to see how you can help and give feedback.
+
+🤖 **Policy on AI usage:**
+Please read our
+`AI Usage Policy <https://github.com/fatiando/community/blob/main/AI.md>`__.
 
 🧑🏾‍🤝‍🧑🏼 **Code of conduct:** This project is released with a `Code of
 Conduct <https://github.com/fatiando/community/blob/main/CODE_OF_CONDUCT.md>`__.
