@@ -5,10 +5,10 @@ sphinx-book-theme==1.1.*
 sphinx-copybutton==0.5.*
 sphinx-design==0.5.*
 jupyter-sphinx==0.5.*
-matplotlib==3.10.*
-pygmt==0.18.*
-gmt==6.6.*
+matplotlib==3.11.*
+pygmt==0.19.*
+gmt==6.7.*
 ensaio==0.7.*
 pandas==3.0.*
-pyproj==3.7.*
+pyproj==3.8.*
 xarray==2026.04.*
