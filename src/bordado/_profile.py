@@ -128,7 +128,8 @@ def profile_coordinates(
         0, point_separation, size=size, spacing=spacing, adjust="spacing"
     )
     coordinates = [
-        x + distances * direction for x, direction in zip(beginning, directional_vetor)
+        x + distances * direction
+        for x, direction in zip(beginning, directional_vetor, strict=True)
     ]
     if non_dimensional_coords is not None:
         for value in np.atleast_1d(non_dimensional_coords):

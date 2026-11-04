@@ -208,10 +208,12 @@ def rotate_coordinates(coordinates, angle, *, rotation_center=(0, 0)):
     angle = np.radians(angle)
     cos = np.cos(angle)
     sin = np.sin(angle)
-    shifted = [c - o for c, o in zip(coordinates, rotation_center)]
+    shifted = [c - o for c, o in zip(coordinates, rotation_center, strict=True)]
     rotated_shifted = (
         cos * shifted[0] - sin * shifted[1],
         sin * shifted[0] + cos * shifted[1],
     )
-    rotated = tuple([c + o for c, o in zip(rotated_shifted, rotation_center)])
+    rotated = tuple(
+        [c + o for c, o in zip(rotated_shifted, rotation_center, strict=True)]
+    )
     return rotated
