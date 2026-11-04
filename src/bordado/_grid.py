@@ -332,7 +332,9 @@ def grid_coordinates(
     check_shape(shape, region)
     region_pairs = np.reshape(region, (len(region) // 2, 2))
     coordinates_1d = []
-    for size, space, (low, up) in zip(reversed(shape), reversed(spacing), region_pairs):
+    for size, space, (low, up) in zip(
+        reversed(shape), reversed(spacing), region_pairs, strict=True
+    ):
         coordinates_1d.append(
             line_coordinates(
                 low,

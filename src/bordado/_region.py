@@ -58,7 +58,10 @@ def pad_region(region, pad):
         )
         raise ValueError(message)
     region_pairs = np.reshape(region, (len(region) // 2, 2))
-    padded = [[lower - p, upper + p] for p, (lower, upper) in zip(pad, region_pairs)]
+    padded = [
+        [lower - p, upper + p]
+        for p, (lower, upper) in zip(pad, region_pairs, strict=True)
+    ]
     return tuple(np.ravel(padded).tolist())
 
 
@@ -175,7 +178,7 @@ def inside(coordinates, region):
     # Allocate temporary arrays to minimize memory allocation overhead
     tmp = tuple(np.empty(shape, dtype=bool) for i in range(2))
     are_inside = np.full(shape, True)
-    for coordinate, (lower, upper) in zip(coordinates, region_pairs):
+    for coordinate, (lower, upper) in zip(coordinates, region_pairs, strict=True):
         # Using the logical functions is a lot faster than & > < for some reason.
         # Plus, this way avoids repeated allocation of intermediate arrays by using
         # the "out" argument.
