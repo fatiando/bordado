@@ -65,3 +65,5 @@ following releases to ensure compatibility:
 
     * - **Python version**
       - **Last compatible release**
+    * - 3.9
+      - 0.5.0
