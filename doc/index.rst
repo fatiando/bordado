@@ -1,27 +1,11 @@
 .. title:: Home
 
-.. grid::
-    :gutter: 2 3 3 3
-    :margin: 5 5 0 0
-    :padding: 0 0 0 0
+Bordado
+=======
 
-    .. grid-item::
-        :columns: 12 8 8 8
+.. div:: sd-fs-3
 
-        .. raw:: html
-
-            <h1 class="display-1">Bordado</h1>
-
-        .. div:: sd-fs-3
-
-            Create, manipulate, and split geographic coordinates
-
-    .. grid-item::
-        :columns: 12 4 4 4
-
-        .. image:: ./_static/bordado-logo.svg
-            :width: 200px
-            :class: sd-m-auto dark-light
+    Create, manipulate, and split geographic coordinates
 
 **Bordado** (Portuguese for "embroidery") is a Python package for creating,
 manipulating, transforming, and splitting geographic and Cartesian coordinates.
@@ -34,6 +18,14 @@ sphere, and transform coordinates through rotations and translations.
 
     Bordado is a part of the
     `Fatiando a Terra <https://www.fatiando.org/>`_ project.
+
+.. admonition:: Look familiar?
+    :class: seealso
+
+    Some of the functions in Bordado used to be in `Verde
+    <https://www.fatiando.org/verde/>`__. They were moved to here to make them
+    more accessible without all the extra  dependencies that Verde requires.
+    They were also improved and many now support  n-dimensional coordinates.
 
 .. grid:: 1 2 1 2
     :margin: 5 5 0 0
@@ -93,14 +85,6 @@ sphere, and transform coordinates through rotations and translations.
             :color: primary
             :outline:
             :expand:
-
-.. admonition:: Look familiar?
-    :class: seealso
-
-    Some of the functions in Bordado used to be in `Verde
-    <https://www.fatiando.org/verde/>`__. They were moved to here to make them
-    more accessible without all the extra  dependencies that Verde requires.
-    They were also improved and many now support  n-dimensional coordinates.
 
 ----
 
@@ -188,13 +172,22 @@ file.
 
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
     :hidden:
     :caption: Community
 
-    Join the community <http://contact.fatiando.org>
+    Join our community <https://www.fatiando.org/contact>
     How to contribute <https://github.com/fatiando/bordado/blob/main/CONTRIBUTING.md>
     Code of Conduct <https://github.com/fatiando/bordado/blob/main/CODE_OF_CONDUCT.md>
-    Source code on GitHub <https://github.com/fatiando/bordado>
     Authors <https://github.com/fatiando/bordado/blob/main/AUTHORS.md>
     The Fatiando a Terra project <https://www.fatiando.org>
+
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+    :caption: Code and packages
+
+    GitHub <https://github.com/fatiando/bordado>
+    PyPI <https://pypi.python.org/pypi/bordado>
+    conda-forge <https://github.com/conda-forge/bordado-feedstock>
+    Zenodo <https://doi.org/10.5281/zenodo.15051755>
