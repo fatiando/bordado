@@ -131,3 +131,10 @@ source = [
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.pytest.ini_options]
+addopts = "--cov --doctest-modules --verbose"
+testpaths = [
+    "test",
+    "src",
+]

@@ -1,6 +1,5 @@
 # Build, package, test, and clean
-PROJECT=bordado
-CHECK_STYLE=src/$(PROJECT) doc test
+CHECK_STYLE=src doc test
 GITHUB_ACTIONS=.github/workflows
 
 .PHONY: help build install test format check check-format check-style check-actions clean
@@ -23,7 +22,7 @@ install:
 	python -m pip install --no-deps --editable .
 
 test:
-	pytest --cov-report=term-missing --cov --doctest-modules --verbose test src/$(PROJECT)
+	pytest
 
 format:
 	ruff check --select I --fix $(CHECK_STYLE) # fix isort errors
@@ -40,11 +39,13 @@ check-style:
 	ruff check $(CHECK_STYLE)
 
 check-actions:
-	zizmor $(GITHUB_ACTIONS)
+	zizmor .github/workflows
 
 clean:
-	find . -name "*.orig" -exec rm -v {} \;
-	find . -name ".coverage.*" -exec rm -v {} \;
-	find . -depth -name "__pycache__" -exec rm -rfv {} \;
-	find . -depth -name "*.egg-info" -exec rm -rfv {} \;
-	rm -rvf build dist MANIFEST .coverage .cache .pytest_cache src/$(PROJECT)/_version.py
+	find . -name "*.pyc" -exec rm -v "{}" \;
+	find . -name "*.orig" -exec rm -v "{}" \;
+	find . -name ".coverage.*" -exec rm -v "{}" \;
+	find . -name "_version.py" -exec rm -v "{}" \;
+	find . -name "*.egg-info" -type d -exec rm -vr "{}" \; -prune
+	find . -name "__pycache__" -type d -exec rm -vr "{}" \; -prune
+	rm -rvf build dist MANIFEST .coverage .cache .pytest_cache
