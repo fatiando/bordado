@@ -23,6 +23,7 @@ def grid_coordinates(
     adjust="spacing",
     pixel_register=False,
     non_dimensional_coords=None,
+    meshgrid=True,
 ):
     """
     Generate evenly spaced points on an n-dimensional grid.
@@ -75,14 +76,22 @@ def grid_coordinates(
         constant value given here. Use this to generate arrays of constant
         heights or times, for example, which might be needed to accompany
         a grid.
+    meshgrid : bool
+        If True (default) the coordinates are run through :func:`numpy.meshgrid`
+        to get n-dimensional arrays as output. If False, then will skip the
+        meshgrid and return the 1D coordinate arrays (which won't necessarily
+        have the same shape). The non-dimensional coordinates are always
+        returned as n-dimensional.
 
     Returns
     -------
     coordinates : tuple of arrays
         Arrays with coordinates of each point in the grid. Each array contains
         values for a dimension in the order of the given region, and any extra
-        values given in *non_dimensional_coords*. All arrays will have the same
-        shape.
+        values given in *non_dimensional_coords*. If ``meshgrid`` is True,
+        all arrays will have the same n-dimensional shape. If it's False, then
+        dimensional coordinates will be 1D and non-dimensional coordinates will
+        be n-dimensional.
 
     Examples
     --------
@@ -304,6 +313,30 @@ def grid_coordinates(
      [0.1 0.1 0.1]
      [0.1 0.1 0.1]]
 
+    Optionally, the output dimensional coordinates can be returned as 1D arrays
+    containing only the unique values:
+
+    >>> east, north, height = grid_coordinates(
+    ...     region=(0, 5, 0, 10),
+    ...     spacing=2.5,
+    ...     non_dimensional_coords=57,
+    ...     meshgrid=False,
+    ... )
+    >>> print(east.shape, north.shape, height.shape)
+    (3,) (5,) (5, 3)
+    >>> print(east)
+    [0.  2.5 5. ]
+    >>> print(north)
+    [ 0.   2.5  5.   7.5 10. ]
+    >>> print(height)
+    [[57. 57. 57.]
+     [57. 57. 57.]
+     [57. 57. 57.]
+     [57. 57. 57.]
+     [57. 57. 57.]]
+
+    Notice that the non-dimensional coordinates are always returned as
+    n-dimensional arrays.
     """
     check_region(region)
     ndims = len(region) // 2
@@ -345,14 +378,22 @@ def grid_coordinates(
                 pixel_register=pixel_register,
             )
         )
-    # Use the ij indexing in meshgrid because the default xy works for 2D
-    # arrays fine but mixes the order of coordinates for 3D and beyond. But
-    # this means we have to reverse the list going in to get the right shape
-    # and reverse it coming out to get the right order of coordinates.
-    coordinates = list(reversed(np.meshgrid(*reversed(coordinates_1d), indexing="ij")))
+    shape = tuple(c.size for c in reversed(coordinates_1d))
+    if meshgrid:
+        # Use the ij indexing in meshgrid because the default xy works for 2D
+        # arrays fine but mixes the order of coordinates for 3D and beyond. But
+        # this means we have to reverse the list going in to get the right shape
+        # and reverse it coming out to get the right order of coordinates.
+        coordinates = list(
+            reversed(np.meshgrid(*reversed(coordinates_1d), indexing="ij"))
+        )
+    else:
+        coordinates = coordinates_1d
     coordinates.extend(
         make_non_dimensional_coordinates(
-            non_dimensional_coords, coordinates[0].shape, coordinates[0].dtype
+            non_dimensional_coords,
+            shape,
+            float,
         )
     )
     return tuple(coordinates)
